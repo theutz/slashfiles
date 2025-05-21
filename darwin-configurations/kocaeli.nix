@@ -4,6 +4,7 @@
   environment.systemPackages = [
     pkgs.vim
     pkgs.lazygit
+    pkgs.just
   ];
 
   nix.settings.experimental-features = "nix-command flakes";
