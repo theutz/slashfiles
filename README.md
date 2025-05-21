@@ -1,1 +1,1 @@
-# slashfiles
+# /slashfiles: .dotfiles{everywhere}
