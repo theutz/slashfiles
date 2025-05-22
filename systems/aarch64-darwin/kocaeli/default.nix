@@ -1,18 +1,22 @@
-{
-	namespace,
-	lib,
-	...
-}: {
-	imports = lib.pipe ./. [
-		lib.filesystem.listFilesRecursive
-		(lib.filter (f: f != ./default.nix))
-	];
-
-	"${namespace}" = {
-          system.enable = true;
-	# 	home-manager.enable = true;
-	# 	nix.enable = true;
+{ pkgs, ...  }: {
+	environment = {
+		systemPackages = with pkgs; [
+			lazygit
+			just
+		];
 	};
 
-	programs.zsh.enable = true;
+	programs = {
+		zsh = {
+			enable = true;
+		};
+
+		fish = {
+			enable = true;
+		};
+	};
+
+	system = {
+		stateVersion = 5;
+	};
 }
