@@ -2,7 +2,8 @@
 	description = "/slashfiles: .dotfiles{everywhere}";
 
 	inputs = {
-		nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-24.11-darwin";
+		nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-25.05-darwin";
+                unstable.url = "github:nixos/nixpkgs/nixpkgs-unstable";
 
 		snowfall-lib = {
 			 url = "github:snowfallorg/lib";
@@ -10,18 +11,18 @@
 		};
 
 		home-manager = {
-			url = "github:nix-community/home-manager/release-24.11";
+			url = "github:nix-community/home-manager/release-25.05";
 			inputs.nixpkgs.follows =  "nixpkgs";
 		};
 
 		darwin = {
-			url = "github:nix-darwin/nix-darwin/nix-darwin-24.11";
+			url = "github:nix-darwin/nix-darwin/nix-darwin-25.05";
 			inputs.nixpkgs.follows = "nixpkgs";
 		};
 
 		nvf = {
-			url = "github:NotAShelf/nvf";
-			inputs.nixpkgs.follows = "nixpkgs";
+			url = "github:notashelf/nvf";
+			inputs.nixpkgs.follows = "unstable";
 		};
 	};
 
@@ -32,5 +33,9 @@
 		};
 	in lib.mkFlake {
 		channels-config = { allowUnfree = true; };
+
+		homes.modules = with inputs; [
+			nvf.homeManagerModules.default
+		];
 	};
 }
