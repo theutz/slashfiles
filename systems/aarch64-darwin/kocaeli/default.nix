@@ -21,6 +21,8 @@
 			mask
                         ripgrep
                         fd
+                        fzf
+                        yazi
 		];
 	};
 
