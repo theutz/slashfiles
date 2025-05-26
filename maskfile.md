@@ -5,8 +5,8 @@
 > Watch for changes, and switch them!
 
 ```bash
-sudo -v
-watchexec -- mask switch
+mprocs  \
+    "watchexec --wrap-process none -- mask switch"
 ```
 
 ## switch

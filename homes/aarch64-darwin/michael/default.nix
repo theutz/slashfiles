@@ -1,38 +1,79 @@
 { config, pkgs, lib, ... }: {
         home = {
                 activation = {
-                        reloadTmux = lib.hm.dag.entryAfter ["writeBoundary"] /* bash */ ''
+                        reloadTmux = let
+                                tmux = lib.getExe pkgs.tmux;
+                                file = lib.concatStringsSep "/" [config.xdg.configHome "tmux" "tmux.conf"];
+                        in lib.hm.dag.entryAfter ["writeBoundary"] /* bash */ ''
                                 export TERM="xterm-256color"
-                                tmux="${lib.getExe pkgs.tmux}"
-                                file="${lib.concatStringsSep "/" [config.xdg.configHome "tmux" "tmux.conf"]}"
-
-                                echo "Reloading tmux..."
                                 if
-                                        run "$tmux" source-file "$file"
+                                        run ${tmux} ls &>/dev/null
                                 then
-                                        echo "Tmux config reloaded!"
-                                        run "$tmux" display-message -d 5000 "Config reloaded by nix-darwin!"
+                                        verboseEcho "Reloading tmux..."
+                                        if
+                                                run ${tmux} source-file "${file}"
+                                        then
+                                                verboseEcho "Tmux config reloaded!"
+                                                run ${tmux} display-message -d 5000 "Config reloaded by nix-darwin!" &!
+                                        else
+                                                echo "ERROR: Could not reload tmux config."
+                                                run ${tmux} display-message -d 5000 "Failed to reload config!" &!
+                                        fi
                                 else
-                                        echo "ERROR: Could not reload tmux config."
-                                        run "$tmux" display-message -d 5000 "Failed to reload config!"
+                                        verboseEcho "No tmux running"
                                 fi
+
                         '';
                 };
+                packages = with pkgs; [
+                        delta
+                ];
                 preferXdgDirectories = true;
                 shell = {
                         # Enables in all shells
                         enableShellIntegration = true;
                 };
+                shellAliases = {
+                        lg = "lazygit";
+                };
 	        stateVersion = "25.05";
         };
         programs = {
+                bat = {
+                        enable = true;
+                        config = {
+                                theme = "Dracula";
+                        };
+                };
                 bash = {
                         enable = true;
+                };
+                eza = {
+                        enable = true;
+                        enableBashIntegration = true;
+                        enableZshIntegration = true;
+                        enableFishIntegration = true;
+                        enableNushellIntegration = true;
                 };
                 fish = {
                         enable = true;
                 };
+                ghostty = {
+                        enable = true;
+                        package = if pkgs.stdenv.hostPlatform.isDarwin then null else pkgs.ghostty;
+                        enableBashIntegration = true;
+                        enableZshIntegration = true;
+                        enableFishIntegration = true;
+                };
+                git = {
+                        delta = {
+                                enable = true;
+                        };
+                };
                 home-manager = {
+                        enable = true;
+                };
+                lazygit = {
                         enable = true;
                 };
                 nushell = {
@@ -62,10 +103,12 @@
                                         keymaps = let
                                                 inherit (lib.nvf.nvim.binds) mkKeymap;
                                         in [
+                                                (mkKeymap "n" "<leader>," "<cmd>FzfLua buffers<cr>" {desc="Open buffers...";})
                                                 (mkKeymap ["n" "i"] "C-s" ":w<cr>" { desc= "Save current file"; })
                                                 (mkKeymap "n" "<leader>qq" ":xa<cr>" { desc = "Save all and quit."; })
-                                                (mkKeymap "n" "<cmd>Oil<cr>" "<leader>e" { desc = "Open file explorer"; })
-                                                (mkKeymap "n" "<cmd>FzfLua files<cr>" "<leader> " { desc = "Open files..."; })
+                                                (mkKeymap "n" "<leader>e" "<cmd>Oil<cr>" { desc = "Open file explorer"; })
+                                                (mkKeymap "n" "<leader> " "<cmd>FzfLua files<cr>" { desc = "Open files..."; })
+                                                (mkKeymap "n" "<esc><esc>" "<cmd>nohlsearch<bar>diffupdate<bar>normal! <C-l><cr>" { desc = "Clear search highlighting"; silent = true; })
                                         ];
                                         session = {
                                                 nvim-session-manager = {
@@ -124,7 +167,7 @@
                         aggressiveResize = true;
                         baseIndex = 1;
                         clock24 = true;
-                        customPaneNavigationAndResize = true;
+                        # customPaneNavigationAndResize = true;
                         enable = true;
                         escapeTime = 0;
                         extraConfig = /* tmux */ ''
@@ -134,6 +177,7 @@
                                 set -g default-terminal "xterm-256color"
                                 set -g extended-keys always
                                 set -g terminal-overrides ",xterm*:Tc"
+                                set -sa terminal-features "xterm*:extkeys"
                                 set -ga update-environment TERM
                                 set -ga update-environment TERM_PROGRAM
                         '';
@@ -147,6 +191,23 @@
                         ];
                         prefix = "M-m";
                 };
+                wezterm = {
+                        enable = true;
+                        enableBashIntegration = true;
+                        enableZshIntegration = true;
+                        extraConfig = let
+                                fish = lib.getExe pkgs.fish;
+                        in /* lua */ ''
+                                local config = wezterm.config_builder()
+
+                                config.font_size = 16
+                                config.color_scheme = "Dracula"
+                                config.default_prog = { "${fish}" }
+                                -- For compatibility with mprocs https://github.com/pvolok/mprocs/issues/165
+                                -- config.enable_csi_u_key_encoding = true
+                                return config
+                        '';
+                };
                 yazi = {
                         enable = true;
                         enableBashIntegration = true;
@@ -159,6 +220,10 @@
                         enableBashIntegration = true;
                         enableFishIntegration = true;
                         enableZshIntegration = true;
+                        enableNushellIntegration = true;
+                };
+                zsh = {
+                        enable = true;
                 };
         };
         xdg = {

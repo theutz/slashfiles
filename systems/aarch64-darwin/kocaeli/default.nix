@@ -6,8 +6,10 @@
                         gf = "git fetch";
                         gfm = "git pull";
                         gpp = "git pull && git push";
-                        gwS = "git status";
                         gws = "git status --short";
+                        gwS = "git status";
+                        nr = "sudo darwin-rebuild";
+                        nrs = "sudo darwin-rebuild switch";
                 };
 
                 shells = with pkgs; [
@@ -17,14 +19,20 @@
                 ];
 
 		systemPackages = with pkgs; [
-			lazygit
-			mask
                         ripgrep
-                        fd
-                        fzf
-                        yazi
 		];
 	};
+
+        homebrew = {
+                enable = true;
+                brews = [];
+                casks = [];
+                onActivation = {
+                        autoUpdate = false; # default
+                        cleanup = "zap";
+                };
+                taps = [];
+        };
 
 	home-manager = {
 		backupFileExtension = "bak";
@@ -80,15 +88,26 @@
 		};
 	};
 
+        security = {
+                pam = {
+                        services = {
+                                sudo_local = {
+                                        touchIdAuth = true;
+                                };
+                        };
+                };
+        };
+
 	services = {
 	};
 
 	system = {
-		stateVersion = 5;
 		checks = {
 			verifyBuildUsers = true;
 			verifyNixPath = false; # not useful with flakes
 		};
+                primaryUser = "michael";
+		stateVersion = 5;
 	};
 
 	users = {
