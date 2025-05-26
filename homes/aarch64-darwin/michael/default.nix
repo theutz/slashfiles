@@ -26,7 +26,12 @@
                         '';
                 };
                 packages = with pkgs; [
+                        coreutils
                         delta
+                        fd
+                        lazygit
+                        procs
+                        ripgrep
                 ];
                 preferXdgDirectories = true;
                 shell = {

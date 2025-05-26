@@ -26,7 +26,7 @@
         homebrew = {
                 enable = true;
                 brews = [];
-                casks = [];
+                casks = ["vivaldi" "karabiner-elements"];
                 onActivation = {
                         autoUpdate = false; # default
                         cleanup = "zap";
@@ -99,6 +99,12 @@
         };
 
 	services = {
+                aerospace = {
+                        enable = true;
+                };
+                karabiner-elements = {
+                        enable = false;
+                };
 	};
 
 	system = {
