@@ -15,12 +15,22 @@
                         bashInteractive
                         fish
                         zsh
+                        nushell
                 ];
 		systemPackages = (with pkgs; [
                         ripgrep
+                        pam-reattach
 		]) ++ (with pkgs.${namespace}; [
                         nvim
                 ]);
+                etc = {
+                        "pam.d/sudo_local" = {
+                                text = ''
+                                        auth    optional        ${pkgs.pam-reattach}/lib/pam/pam_reattach.so
+                                        auth    sufficient      pam_tid.so
+                                '';
+                        };
+                };
 	};
         homebrew = {
                 enable = true;

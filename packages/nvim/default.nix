@@ -13,8 +13,10 @@
                                 fzf-lua.enable = true;
                                 keymaps = let
                                         inherit (lib.nvf.nvim.binds) mkKeymap;
+                                        normal = key: action: desc: mkKeymap "n" key action { inherit desc; };
                                 in [
-                                        (mkKeymap "n" "<leader>," "<cmd>FzfLua buffers<cr>" {desc="Open buffers...";})
+                                        (normal "<leader>," "<cmd>FzfLua buffers<cr>" "Open buffers...")
+                                        #(mkKeymap "n" "<leader>," "<cmd>FzfLua buffers<cr>" {desc="Open buffers...";})
                                         (mkKeymap ["n" "i"] "C-s" ":w<cr>" { desc= "Save current file"; })
                                         (mkKeymap "n" "<leader>qq" ":xa<cr>" { desc = "Save all and quit."; })
                                         (mkKeymap "n" "<leader>e" "<cmd>Oil<cr>" { desc = "Open file explorer"; })
