@@ -1,0 +1,1 @@
+- [ ] Create idea stack app

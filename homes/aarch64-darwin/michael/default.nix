@@ -1,4 +1,4 @@
-{ config, pkgs, lib, ... }: {
+{ config, pkgs, lib, namespace, ... }: {
         home = {
                 activation = {
                         reloadTmux = let
@@ -85,84 +85,12 @@
                         enable = true;
                 };
                 nvf = {
-                        enable = true;
+                        enable = false;
                         enableManpages = true;
-                        settings = {
-                                vim = {
-                                        binds = {
-                                                whichKey = {
-                                                        enable = true;
-                                                };
-                                        };
-                                        fzf-lua = {
-                                                enable = true;
-                                        };
-                                        languages = {
-                                                nix = {
-                                                        enable = true;
-                                                };
-                                        };
-                                        lsp = {
-                                                enable = true;
-                                        };
-                                        keymaps = let
-                                                inherit (lib.nvf.nvim.binds) mkKeymap;
-                                        in [
-                                                (mkKeymap "n" "<leader>," "<cmd>FzfLua buffers<cr>" {desc="Open buffers...";})
-                                                (mkKeymap ["n" "i"] "C-s" ":w<cr>" { desc= "Save current file"; })
-                                                (mkKeymap "n" "<leader>qq" ":xa<cr>" { desc = "Save all and quit."; })
-                                                (mkKeymap "n" "<leader>e" "<cmd>Oil<cr>" { desc = "Open file explorer"; })
-                                                (mkKeymap "n" "<leader> " "<cmd>FzfLua files<cr>" { desc = "Open files..."; })
-                                                (mkKeymap "n" "<esc><esc>" "<cmd>nohlsearch<bar>diffupdate<bar>normal! <C-l><cr>" { desc = "Clear search highlighting"; silent = true; })
-                                        ];
-                                        session = {
-                                                nvim-session-manager = {
-                                                        enable = true;
-                                                };
-                                        };
-                                        statusline = {
-                                                lualine = {
-                                                        enable = true;
-                                                };
-                                        };
-                                        theme = {
-                                                name = "dracula";
-                                                transparent = true;
-                                        };
-                                        treesitter = {
-                                                enable = true;
-                                                addDefaultGrammars = true;
-                                                autotagHtml = true;
-                                                context = {
-                                                        enable = true;
-                                                };
-                                                fold = true;
-                                                highlight = {
-                                                        enable = true;
-                                                };
-                                                textobjects = {
-                                                        enable = true;
-                                                };
-                                        };
-                                        ui = {
-                                                borders = {
-                                                        enable = true;
-                                                };
-                                        };
-                                        utility = {
-                                                oil-nvim = {
-                                                        enable = true;
-                                                };
-                                                surround = {
-                                                        enable = true;
-                                                };
-                                                yazi-nvim = {
-                                                        enable = true;
-                                                };
-                                        };
-                                        viAlias = true;
-                                        vimAlias = true;
-                                };
+                        finalPackage = pkgs.${namespace}.nvim;
+                        settings.vim = {
+                                viAlias = true;
+                                vimAlias = true;
                         };
                 };
                 starship = {

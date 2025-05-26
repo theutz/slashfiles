@@ -1,4 +1,4 @@
-{ pkgs, ...  }: {
+{ pkgs, namespace, ...  }: {
 	environment = {
                 shellAliases = {
                         gcam = "git commit --all --message";
@@ -16,10 +16,11 @@
                         fish
                         zsh
                 ];
-		systemPackages = with pkgs; [
-                        karabiner-elements
+		systemPackages = (with pkgs; [
                         ripgrep
-		];
+		]) ++ (with pkgs.${namespace}; [
+                        nvim
+                ]);
 	};
         homebrew = {
                 enable = true;
@@ -75,8 +76,6 @@
                         enableFzfCompletion = true;
                         enableFzfGit = true;
                         enableFzfHistory = true;
-                        # mutually exclusive with enableFastSyntaxHighlighting
-                        # enableSyntaxHighlighting = true; 
 		};
 	};
         security = {
