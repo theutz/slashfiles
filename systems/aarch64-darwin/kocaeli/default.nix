@@ -11,35 +11,34 @@
                         nr = "sudo darwin-rebuild";
                         nrs = "sudo darwin-rebuild switch";
                 };
-
                 shells = with pkgs; [
                         bashInteractive
                         fish
                         zsh
                 ];
-
 		systemPackages = with pkgs; [
+                        karabiner-elements
                         ripgrep
 		];
 	};
-
         homebrew = {
                 enable = true;
                 brews = [];
-                casks = ["vivaldi" "karabiner-elements"];
+                casks = [
+                        "vivaldi"
+                        "karabiner-elements"
+                ];
                 onActivation = {
                         autoUpdate = false; # default
                         cleanup = "zap";
                 };
                 taps = [];
         };
-
 	home-manager = {
 		backupFileExtension = "bak";
 		useUserPackages = true;
 		useGlobalPkgs = true;
 	};
-
 	nix = {
                 enable = true;
 		checkConfig = true;
@@ -47,20 +46,16 @@
 			nixpkgs = "github:NixOS/nixpkgs/nixpkgs-24.11-darwin";
 		};
 	};
-
 	programs = {
 		fish = {
 			enable = true;
 		};
-
                 man = {
                         enable = true;
                 };
-
                 nix-index = {
                         enable = true;
                 };
-
                 tmux = {
                         enable = true;
                         enableSensible = true;
@@ -68,12 +63,10 @@
                         enableMouse = true;
                         enableVim = true;
                 };
-
                 vim = {
                         enable = true;
                         enableSensible = true;
                 };
-
 		zsh = {
 			enable = true;
                         enableBashCompletion = true;
@@ -82,12 +75,10 @@
                         enableFzfCompletion = true;
                         enableFzfGit = true;
                         enableFzfHistory = true;
-
                         # mutually exclusive with enableFastSyntaxHighlighting
                         # enableSyntaxHighlighting = true; 
 		};
 	};
-
         security = {
                 pam = {
                         services = {
@@ -97,16 +88,38 @@
                         };
                 };
         };
-
 	services = {
                 aerospace = {
                         enable = true;
+                        settings = {
+                                gaps = let
+                                        gap = 8;
+                                in {
+                                        outer = {
+                                          left = gap;
+                                          right = gap;
+                                          top = gap;
+                                          bottom = gap;
+                                        };
+                                };
+                        };
                 };
-                karabiner-elements = {
-                        enable = false;
-                };
+                # FIXME: When https://github.com/nix-darwin/nix-darwin/issues/1041 is fixed, we can use
+                # Karabiner Elements services through nix. Until then, c'est la vie.
+                # karabiner-elements = {
+                #         enable = true;
+                #         package = pkgs.karabiner-elements.overrideAttrs (old: {
+                #               version = "15.3.0";
+                #
+                #               src = pkgs.fetchurl {
+                #                       inherit (old.src) url;
+                #                       hash = "sha256-Szf2mBC8c4JA3Ky4QPTvS4GJ0PXFbN0Y7Rpum9lRABE=";
+                #               };
+                #
+                #               dontFixup = true;
+                #         });
+                # };
 	};
-
 	system = {
 		checks = {
 			verifyBuildUsers = true;
@@ -115,7 +128,6 @@
                 primaryUser = "michael";
 		stateVersion = 5;
 	};
-
 	users = {
 		users.michael = {
 			description = "Michael Utz";

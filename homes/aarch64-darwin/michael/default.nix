@@ -235,6 +235,7 @@
                 enable = true;
                 configFile = {
                         "ghostty/config".source = ./ghostty-config;
+                        "karabiner/karabiner.json".source = ./karabiner.json;
                 };
         };
 }
