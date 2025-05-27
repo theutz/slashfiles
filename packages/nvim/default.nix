@@ -1,9 +1,9 @@
 {
-  inputs,
+  lib,
   pkgs,
   ...
 }: let
-  inherit (inputs.nvf.lib) neovimConfiguration nvim;
+  inherit (lib) neovimConfiguration nvim;
 in
   (neovimConfiguration {
     inherit pkgs;

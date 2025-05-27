@@ -26,7 +26,7 @@
       "aarch64-darwin"
     ];
 
-    nvim = pkgs: import ./packages/nvim {inherit inputs pkgs;};
+    nvim = pkgs: pkgs.callPackage (import ./packages/nvim) { inherit (inputs.nvf) lib; };
   in {
     packages = forAllSystems (
       system: let
