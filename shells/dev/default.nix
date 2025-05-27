@@ -3,12 +3,12 @@
                 watchexec
                 zsh
                 mask
-                mprocs
         ];
 
         shellHook = /* bash */ ''
-                alias dev='mask dev'
+                alias d='mask dev'
+                alias r='exec mask reload'
 
-                echo "Run 'dev' to watch for changes"
+                echo "Run 'mask dev' to watch for changes"
         '';
 }

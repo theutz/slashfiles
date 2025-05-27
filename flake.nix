@@ -34,10 +34,6 @@
 	in lib.mkFlake {
 		channels-config = { allowUnfree = true; };
 
-		homes.modules = with inputs; [
-			nvf.homeManagerModules.default
-		];
-
                 alias = {
                         shells.default = "dev";
                 };

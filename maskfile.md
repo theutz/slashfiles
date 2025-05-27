@@ -5,9 +5,10 @@
 > Watch for changes, and switch them!
 
 ```bash
-mprocs  \
-    "watchexec --wrap-process none -- mask switch"
+watchexec --ignore result --wrap-process none -- mask switch
 ```
+
+NOTE: By not wrapping the process, the terminal can attach to stdin for inputting passwords.
 
 ## switch
 
@@ -15,4 +16,12 @@ mprocs  \
 
 ```bash
 sudo darwin-rebuild switch
+```
+
+## reload
+
+> Reload the devshell
+
+```bash
+exec nix develop
 ```

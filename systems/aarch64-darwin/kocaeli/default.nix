@@ -1,37 +1,32 @@
-{ pkgs, namespace, ...  }: {
-	environment = {
-                shellAliases = {
-                        gcam = "git commit --all --message";
-                        gcm = "git commit --message";
-                        gf = "git fetch";
-                        gfm = "git pull";
-                        gpp = "git pull && git push";
-                        gws = "git status --short";
-                        gwS = "git status";
-                        nr = "sudo darwin-rebuild";
-                        nrs = "sudo darwin-rebuild switch";
-                };
-                shells = with pkgs; [
-                        bashInteractive
-                        fish
-                        zsh
-                        nushell
-                ];
-		systemPackages = (with pkgs; [
-                        ripgrep
-                        pam-reattach
-		]) ++ (with pkgs.${namespace}; [
-                        nvim
-                ]);
-                etc = {
-                        "pam.d/sudo_local" = {
-                                text = ''
-                                        auth    optional        ${pkgs.pam-reattach}/lib/pam/pam_reattach.so
-                                        auth    sufficient      pam_tid.so
-                                '';
-                        };
-                };
-	};
+{ pkgs, namespace, inputs, system, ...  }: {
+        environment.shellAliases = {
+                gcam = "git commit --all --message";
+                gcm = "git commit --message";
+                gf = "git fetch";
+                gfm = "git pull";
+                gpp = "git pull && git push";
+                gws = "git status --short";
+                gwS = "git status";
+        };
+        environment.shells = with pkgs; [
+                bashInteractive
+                fish
+                zsh
+                nushell
+        ];
+        environment.systemPackages = (with pkgs; [
+                ripgrep
+                pam-reattach
+                inputs.nvf.packages.${system}.docs-manpages
+        ]) ++ (with pkgs.${namespace}; [
+                nvim
+        ]);
+        environment.etc."pam.d/sudo_local" = {
+                text = ''
+                        auth    optional        ${pkgs.pam-reattach}/lib/pam/pam_reattach.so
+                        auth    sufficient      pam_tid.so
+                '';
+        };
         homebrew = {
                 enable = true;
                 brews = [];
@@ -57,36 +52,28 @@
 			nixpkgs = "github:NixOS/nixpkgs/nixpkgs-24.11-darwin";
 		};
 	};
-	programs = {
-		fish = {
-			enable = true;
-		};
-                man = {
-                        enable = true;
-                };
-                nix-index = {
-                        enable = true;
-                };
-                tmux = {
-                        enable = true;
-                        enableSensible = true;
-                        enableFzf = true;
-                        enableMouse = true;
-                        enableVim = true;
-                };
-                vim = {
-                        enable = true;
-                        enableSensible = true;
-                };
-		zsh = {
-			enable = true;
-                        enableBashCompletion = true;
-                        enableCompletion = true;
-                        enableFastSyntaxHighlighting = true;
-                        enableFzfCompletion = true;
-                        enableFzfGit = true;
-                        enableFzfHistory = true;
-		};
+	programs.fish.enable = true;
+        programs.man.enable = true;
+        programs.nix-index.enable = true;
+        programs.tmux = {
+                enable = true;
+                enableSensible = true;
+                enableFzf = true;
+                enableMouse = true;
+                enableVim = true;
+        };
+        programs.vim = {
+                enable = true;
+                enableSensible = true;
+        };
+        programs.zsh = {
+                enable = true;
+                enableBashCompletion = true;
+                enableCompletion = true;
+                enableFastSyntaxHighlighting = true;
+                enableFzfCompletion = true;
+                enableFzfGit = true;
+                enableFzfHistory = true;
 	};
         security = {
                 pam = {

@@ -1,1 +1,4 @@
 - [ ] Create idea stack app
+- [ ] Fix weather location in tmux dracula
+- [ ] Fix dark mode in delta
+- [ ] Setup finicky

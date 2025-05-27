@@ -32,6 +32,7 @@
                         lazygit
                         procs
                         ripgrep
+                        aichat
                 ];
                 preferXdgDirectories = true;
                 shell = {
@@ -83,15 +84,6 @@
                 };
                 nushell = {
                         enable = true;
-                };
-                nvf = {
-                        enable = false;
-                        enableManpages = true;
-                        finalPackage = pkgs.${namespace}.nvim;
-                        settings.vim = {
-                                viAlias = true;
-                                vimAlias = true;
-                        };
                 };
                 starship = {
                         enable = true;
