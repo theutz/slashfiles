@@ -36,6 +36,7 @@
         '';
     };
     packages = with pkgs; [
+      zoom-us
       coreutils
       delta
       fd
