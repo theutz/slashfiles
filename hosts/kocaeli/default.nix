@@ -53,7 +53,8 @@
 
   nix.enable = true;
   nix.checkConfig = true;
-  nix.nixPath.nixpkgs = "github:NixOS/nixpkgs/nixpkgs-24.11-darwin";
+  nix.nixPath.nixpkgs = "github:NixOS/nixpkgs/nixpkgs-24.05-darwin";
+
   nix.settings = {
     experimental-features = ["nix-command" "flakes"];
   };

@@ -74,6 +74,9 @@
     fish = {
       enable = true;
     };
+    gh = {
+      enable = true;
+    };
     ghostty = {
       enable = true;
       package =
