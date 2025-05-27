@@ -12,6 +12,8 @@
     gpp = "git pull && git push";
     gws = "git status --short";
     gwS = "git status";
+    la = "ls -la";
+    ll = "ls -l";
   };
 
   environment.shells = with pkgs; [
@@ -54,7 +56,6 @@
   nix.enable = true;
   nix.checkConfig = true;
   nix.nixPath.nixpkgs = "github:NixOS/nixpkgs/nixpkgs-24.05-darwin";
-
   nix.settings = {
     experimental-features = ["nix-command" "flakes"];
   };
