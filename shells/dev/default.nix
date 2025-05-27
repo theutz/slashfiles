@@ -7,6 +7,7 @@
 
         shellHook = /* bash */ ''
                 alias d='mask dev'
+                alias b='mask switch'
                 alias r='exec mask reload'
 
                 echo "Run 'mask dev' to watch for changes"

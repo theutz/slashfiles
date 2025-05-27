@@ -35,6 +35,8 @@
         homebrew.casks = [
                 "vivaldi"
                 "karabiner-elements"
+                "spotify"
+                "slack"
         ];
         homebrew.onActivation.autoUpdate = false; # default
         homebrew.onActivation.cleanup = "zap";
