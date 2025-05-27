@@ -21,7 +21,12 @@
     };
   };
 
-  outputs = inputs @ {nixpkgs, ...}: let
+  outputs = inputs @ {
+    nixpkgs,
+    nix-darwin,
+    home-manager,
+    ...
+  }: let
     forAllSystems = nixpkgs.lib.genAttrs [
       "aarch64-darwin"
     ];
@@ -36,12 +41,31 @@
   in {
     inherit packages;
 
+    darwinConfigurations = let
+      system = "aarch64-darwin";
+      pkgs = nixpkgs.legacyPackages.${system};
+    in {
+      kocaeli = nix-darwin.lib.darwinSystem {
+        inherit system;
+        modules = [
+          home-manager.darwinModules.home-manager
+          ((import ./hosts/kocaeli) {
+            inherit inputs system;
+            pkgs = pkgs // packages.${system};
+          })
+        ];
+      };
+    };
+
     devShells = forAllSystems (
       system: let
         pkgs = nixpkgs.legacyPackages.${system};
       in rec {
         default = slashfiles;
-        slashfiles = import ./shells/slashfiles { inherit pkgs; inherit (packages.${system}) nvim; };
+        slashfiles = import ./shells/slashfiles {
+          inherit pkgs;
+          inherit (packages.${system}) nvim;
+        };
       }
     );
 

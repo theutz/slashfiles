@@ -1,4 +1,8 @@
-{pkgs, nvim, ...}:
+{
+  pkgs,
+  nvim,
+  ...
+}:
 pkgs.mkShell {
   name = "slashfiles";
 

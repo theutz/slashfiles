@@ -4,6 +4,7 @@
   ...
 }: let
   inherit (lib) neovimConfiguration nvim;
+  inherit (nvim.binds) mkKeymap;
 in
   (neovimConfiguration {
     inherit pkgs;
@@ -11,13 +12,10 @@ in
     modules = [
       {
         config.vim = {
-          keymaps = let
-            inherit (nvim.binds) mkKeymap;
-            normal = key: action: desc: mkKeymap "n" key action {inherit desc;};
-          in [
-            (normal "<leader>," "<cmd>FzfLua buffers<cr>" "Open buffers...")
-            (normal "<leader>/" "<cmd>FzfLua grep_visual<cr>" "Search project...")
-            (normal "<leader>gg" "<cmd>Neogit<cr>" "Neogit")
+          keymaps = [
+            (mkKeymap "n" "<leader>," "<cmd>FzfLua buffers<cr>" {desc = "Open buffers...";})
+            (mkKeymap "n" "<leader>/" "<cmd>FzfLua grep_visual<cr>" {desc = "Search project...";})
+            (mkKeymap "n" "<leader>gg" "<cmd>Neogit<cr>" {desc = "Neogit";})
             (mkKeymap ["n" "i"] "C-s" ":w<cr>" {desc = "Save current file";})
             (mkKeymap "n" "<leader>qq" ":xa<cr>" {desc = "Save all and quit.";})
             (mkKeymap "n" "<leader>e" "<cmd>Oil<cr>" {desc = "Open file explorer";})
@@ -26,8 +24,15 @@ in
               desc = "Clear search highlighting";
               silent = true;
             })
+            (mkKeymap "n" "<leader>sh" "<cmd>FzfLua helptags<cr>" {desc = "Search help";})
           ];
           binds.whichKey.enable = true;
+          binds.whichKey.register = {
+            "<leader>g" = "git";
+            "<leader>s" = "search";
+            "<leader>u" = "ui/toggle";
+          };
+          formatter.conform-nvim.enable = true;
           fzf-lua.enable = true;
           git.enable = true;
           languages.enableExtraDiagnostics = true;
@@ -41,6 +46,7 @@ in
             };
           };
           lsp.enable = true;
+          lsp.formatOnSave = true;
           session.nvim-session-manager.enable = true;
           statusline.lualine.enable = true;
           theme.enable = true;

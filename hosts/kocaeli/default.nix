@@ -1,9 +1,7 @@
 {
   pkgs,
-  namespace,
   inputs,
   system,
-  lib,
   ...
 }: {
   environment.shellAliases = {
@@ -23,15 +21,12 @@
     nushell
   ];
 
-  environment.systemPackages =
-    (with pkgs; [
-      ripgrep
-      pam-reattach
-      inputs.nvf.packages.${system}.docs-manpages
-    ])
-    ++ (with pkgs.${namespace}; [
-      nvim
-    ]);
+  environment.systemPackages = with pkgs; [
+    ripgrep
+    pam-reattach
+    inputs.nvf.packages.${system}.docs-manpages
+    nvim
+  ];
 
   environment.etc."pam.d/sudo_local".text = ''
     auth    optional        ${pkgs.pam-reattach}/lib/pam/pam_reattach.so
@@ -54,10 +49,14 @@
   home-manager.backupFileExtension = "bak";
   home-manager.useUserPackages = true;
   home-manager.useGlobalPkgs = true;
+  home-manager.users.michael = ../../homes/michael;
 
   nix.enable = true;
   nix.checkConfig = true;
   nix.nixPath.nixpkgs = "github:NixOS/nixpkgs/nixpkgs-24.11-darwin";
+  nix.settings = {
+    experimental-features = ["nix-command" "flakes"];
+  };
 
   programs.fish.enable = true;
 
@@ -85,7 +84,7 @@
   security.pam.services.sudo_local.touchIdAuth = true;
 
   services.aerospace.enable = true;
-  services.aerospace.settings.gaps.outer = lib.genAttrs ["left" "right" "top" "bottom"] (x: 16);
+  services.aerospace.settings.gaps.outer = pkgs.lib.genAttrs ["left" "right" "top" "bottom"] (x: 16);
 
   # FIXME: When https://github.com/nix-darwin/nix-darwin/issues/1041 is fixed, we can use
   # Karabiner Elements services through nix. Until then, c'est la vie.
