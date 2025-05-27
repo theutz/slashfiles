@@ -26,44 +26,22 @@
       "aarch64-darwin"
     ];
 
-    nvim = pkgs: pkgs.callPackage (import ./packages/nvim) { inherit (inputs.nvf) lib; };
-  in {
     packages = forAllSystems (
       system: let
         pkgs = nixpkgs.legacyPackages.${system};
       in {
-        nvim = nvim pkgs;
+        nvim = pkgs.callPackage (import ./packages/nvim) {inherit (inputs.nvf) lib;};
       }
     );
+  in {
+    inherit packages;
 
     devShells = forAllSystems (
       system: let
         pkgs = nixpkgs.legacyPackages.${system};
       in rec {
         default = slashfiles;
-        slashfiles = pkgs.mkShell {
-          name = "slashfiles";
-          buildInputs = with pkgs; [
-            (nvim pkgs)
-            fish
-            mask
-            watchexec
-            onefetch
-            lazygit
-          ];
-          shellHook = /* bash */ ''
-            alias build="mask switch"
-            alias dev="mask dev"
-            alias reload="exec nix develop"
-            alias lg="lazygit"
-            alias m="mask"
-            alias d="dev"
-            alias b="build"
-            alias r="reload"
-
-            onefetch
-          '';
-        };
+        slashfiles = import ./shells/slashfiles { inherit pkgs; inherit (packages.${system}) nvim; };
       }
     );
 

@@ -17,6 +17,7 @@ in
           in [
             (normal "<leader>," "<cmd>FzfLua buffers<cr>" "Open buffers...")
             (normal "<leader>/" "<cmd>FzfLua grep_visual<cr>" "Search project...")
+            (normal "<leader>gg" "<cmd>Neogit<cr>" "Neogit")
             (mkKeymap ["n" "i"] "C-s" ":w<cr>" {desc = "Save current file";})
             (mkKeymap "n" "<leader>qq" ":xa<cr>" {desc = "Save all and quit.";})
             (mkKeymap "n" "<leader>e" "<cmd>Oil<cr>" {desc = "Open file explorer";})
@@ -28,11 +29,17 @@ in
           ];
           binds.whichKey.enable = true;
           fzf-lua.enable = true;
+          git.enable = true;
           languages.enableExtraDiagnostics = true;
           languages.enableFormat = true;
           languages.enableTreesitter = true;
           languages.nix.enable = true;
           languages.bash.enable = true;
+          lazy.plugins = {
+            neogit = {
+              package = pkgs.vimPlugins.neogit;
+            };
+          };
           lsp.enable = true;
           session.nvim-session-manager.enable = true;
           statusline.lualine.enable = true;
