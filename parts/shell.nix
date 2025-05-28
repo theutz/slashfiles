@@ -18,6 +18,9 @@
 
       packages =
         [
+          # From inputs
+          inputs'.nh.default
+
           # From flake-parts modules
           config.treefmt.build.wrapper # Use `treefmt` command
         ]

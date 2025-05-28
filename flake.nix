@@ -9,7 +9,7 @@
 
       imports = [
         ./parts
-        # ./hosts
+        ./hosts
       ];
     };
 
@@ -29,7 +29,7 @@
     };
 
     # Nix Darwin: NixOS configuration for macOS
-    darwin = {
+    nix-darwin = {
       url = "github:nix-darwin/nix-darwin/nix-darwin-25.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
@@ -58,6 +58,12 @@
       url = "github:numtide/treefmt-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    # Nix wrapper that brings me joy
+    nh = {
+      url = "github:nix-community/nh";
+      inputs.nixpkgs.follows = "unstable";
+    };
   };
 
   # outputs = inputs @ {
@@ -70,16 +76,7 @@
   #   "aarch64-darwin"
   # ];
 
-  # packages = forAllSystems (
-  #   system: let
-  #     pkgs = nixpkgs.legacyPackages.${system};
-  #   in {
-  #     nvim = pkgs.callPackage (import ./packages/nvim) {inherit (inputs.nvf) lib;};
-  #   }
-  # );
   # in {
-  # inherit packages;
-
   #   darwinConfigurations = let
   #     system = "aarch64-darwin";
   #     pkgs = nixpkgs.legacyPackages.${system};
@@ -95,24 +92,5 @@
   #       ];
   #     };
   #   };
-  #
-  #   devShells = forAllSystems (
-  #     system: let
-  #       pkgs = nixpkgs.legacyPackages.${system};
-  #     in rec {
-  #       default = slashfiles;
-  #       slashfiles = import ./shells/slashfiles {
-  #         inherit pkgs;
-  #         inherit (packages.${system}) nvim;
-  #       };
-  #     }
-  #   );
-  #
-  #   formatter = forAllSystems (
-  #     system: let
-  #       pkgs = nixpkgs.legacyPackages.${system};
-  #     in
-  #       pkgs.alejandra
-  #   );
   # };
 }

@@ -1,9 +1,15 @@
 {
+  inputs',
   pkgs,
-  inputs,
-  system,
+  packages,
+  lib,
   ...
 }: {
+  environment.etc."pam.d/sudo_local".text = ''
+    auth    optional        ${pkgs.pam-reattach}/lib/pam/pam_reattach.so
+    auth    sufficient      pam_tid.so
+  '';
+
   environment.shellAliases = {
     gcam = "git commit --all --message";
     gcm = "git commit --message";
@@ -29,14 +35,13 @@
   environment.systemPackages = with pkgs; [
     ripgrep
     pam-reattach
-    inputs.nvf.packages.${system}.docs-manpages
-    nvim
+    packages.nvf
+    inputs'.nh.packages.default
   ];
 
-  environment.etc."pam.d/sudo_local".text = ''
-    auth    optional        ${pkgs.pam-reattach}/lib/pam/pam_reattach.so
-    auth    sufficient      pam_tid.so
-  '';
+  environment.variables = {
+    NH_DARWIN_FLAKE = "/etc/nix-darwin";
+  };
 
   homebrew.enable = true;
   homebrew.brews = [];
@@ -58,7 +63,7 @@
 
   nix.enable = true;
   nix.checkConfig = true;
-  nix.nixPath.nixpkgs = "github:NixOS/nixpkgs/nixpkgs-24.05-darwin";
+  # nix.nixPath.nixpkgs = "github:NixOS/nixpkgs/nixpkgs-24.05-darwin";
   nix.settings = {
     experimental-features = ["nix-command" "flakes"];
   };

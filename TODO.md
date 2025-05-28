@@ -2,3 +2,5 @@
 - [ ] Fix weather location in tmux dracula
 - [ ] Fix dark mode in delta
 - [ ] Setup finicky
+- [ ] integrate smart splits
+- [ ] use catppucin
