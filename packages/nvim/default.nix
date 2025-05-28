@@ -18,12 +18,19 @@ in
             (mkKeymap "n" "<leader>gg" "<cmd>Neogit<cr>" {desc = "Neogit";})
             (mkKeymap ["n" "i"] "C-s" ":w<cr>" {desc = "Save current file";})
             (mkKeymap "n" "<leader>qq" ":xa<cr>" {desc = "Save all and quit.";})
-            (mkKeymap "n" "<leader>e" "<cmd>Oil<cr>" {desc = "Open file explorer";})
+            (mkKeymap "n" "<leader>ee" "<cmd>Yazi<cr>" {desc = "Open yazi.nvim";})
             (mkKeymap "n" "<leader> " "<cmd>FzfLua files<cr>" {desc = "Open files...";})
-            (mkKeymap "n" "<esc><esc>" "<cmd>nohlsearch<bar>diffupdate<bar>normal! <C-l><cr>" {
-              desc = "Clear search highlighting";
-              silent = true;
-            })
+            (mkKeymap ["n" "i" "s"] "<esc>" ''
+                function()
+                  vim.cmd('noh');
+                  return '<esc>'
+                end
+              '' {
+                desc = "Escape and Clear hlsearch";
+                silent = true;
+                expr = true;
+                lua = true;
+              })
             (mkKeymap "n" "<leader>sh" "<cmd>FzfLua helptags<cr>" {desc = "Search help";})
           ];
           binds.whichKey.enable = true;
@@ -60,7 +67,6 @@ in
           treesitter.highlight.enable = true;
           treesitter.textobjects.enable = true;
           ui.borders.enable = true;
-          utility.oil-nvim.enable = true;
           utility.surround.enable = true;
           utility.yazi-nvim.enable = true;
         };

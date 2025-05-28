@@ -14,6 +14,9 @@
     gwS = "git status";
     la = "ls -la";
     ll = "ls -l";
+    nd = "man 5 configuration.nix";
+    nvf = "man 5 nvf";
+    hm = "man 5 home-configuration.nix";
   };
 
   environment.shells = with pkgs; [

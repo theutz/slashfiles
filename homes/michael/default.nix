@@ -44,6 +44,7 @@
       procs
       ripgrep
       aichat
+      signal-desktop-bin
     ];
     preferXdgDirectories = true;
     shell = {
