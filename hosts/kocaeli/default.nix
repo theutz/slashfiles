@@ -40,6 +40,7 @@
   ];
 
   environment.variables = {
+    EDITOR = lib.mkForce (lib.getExe packages.nvf);
     NH_DARWIN_FLAKE = "/etc/nix-darwin";
   };
 
