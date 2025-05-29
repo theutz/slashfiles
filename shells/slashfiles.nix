@@ -49,14 +49,15 @@
           bash
           */
           ''
-              alias m="mask"
+            onefetch
 
-              onefetch
-              cat <<-markdown | gum format
+            cat <<-markdown | gum format
             # ${description}
 
             ${longDescription}
             markdown
+
+            mask --help
           '';
       };
   };
