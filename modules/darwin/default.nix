@@ -1,5 +1,7 @@
-{
+{...}: {
   flake = {...}: {
-    darwinModules = {};
+    darwinModules = {
+      brew = import ./brew;
+    };
   };
 }
