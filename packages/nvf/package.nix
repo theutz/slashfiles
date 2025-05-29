@@ -14,7 +14,7 @@ in
         config.vim = {
           keymaps = [
             (mkKeymap "n" "<leader>," "<cmd>FzfLua buffers<cr>" {desc = "Open buffers...";})
-            (mkKeymap "n" "<leader>/" "<cmd>FzfLua grep_visual<cr>" {desc = "Search project...";})
+            (mkKeymap "n" "<leader>/" "<cmd>FzfLua grep<cr>" {desc = "Search project...";})
             (mkKeymap "n" "<leader>gg" "<cmd>Neogit<cr>" {desc = "Neogit";})
             (mkKeymap ["n" "i" "s" "x"] "<C-s>" "<cmd>w<cr><esc>" {desc = "Save File";})
             (mkKeymap "n" "<leader>qq" "<cmd>xa<cr>" {desc = "Save all and quit";})
