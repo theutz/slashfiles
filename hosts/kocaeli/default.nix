@@ -11,10 +11,10 @@
     auth    sufficient      pam_tid.so
   '';
 
-  environment.pathsToLink = [
-    "/opt/homebrew/bin"
-    "/opt/homebrew/sbin"
-  ];
+  # environment.pathsToLink = [
+  #   "/opt/homebrew/bin"
+  #   "/opt/homebrew/sbin"
+  # ];
 
   environment.shellAliases = {
     gcam = "git commit --all --message";
