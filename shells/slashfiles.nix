@@ -1,6 +1,7 @@
-{ ...}: {
+_: {
   perSystem = {
     inputs',
+    self',
     config,
     pkgs,
     ...
@@ -19,6 +20,8 @@
         meta = {inherit description longDescription;};
 
         inputsFrom = [config.treefmt.build.devShell];
+
+        buildInputs = self'.checks.pre-commit.enabledPackages;
 
         DIRENV_LOG_FORMAT = "";
         NH_FLAKE = "/etc/nix-darwin";
@@ -49,6 +52,7 @@
           bash
           */
           ''
+            ${self'.checks.pre-commit.shellHook}
             onefetch
 
             cat <<-markdown | gum format
