@@ -8,6 +8,7 @@
       systems = import inputs.systems;
 
       imports = [
+        ./formatter
         ./parts
         ./hosts
       ];
