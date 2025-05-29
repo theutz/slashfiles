@@ -4,11 +4,16 @@
     config,
     pkgs,
     lib,
+    inputs',
     ...
   }: {
     overlayAttrs = config.packages;
     packages = let
-      callPackage = lib.callPackageWith (pkgs // {nvf' = inputs.nvf;});
+      callPackage = lib.callPackageWith (pkgs
+        // {
+          inherit inputs inputs';
+          nvf' = inputs.nvf;
+        });
     in
       lib.packagesFromDirectoryRecursive {
         inherit callPackage;
