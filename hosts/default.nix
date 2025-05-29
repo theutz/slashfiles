@@ -14,10 +14,12 @@
       }:
         inputs.nix-darwin.lib.darwinSystem {
           inherit system;
+
           specialArgs = {
             packages = config.packages;
             inherit inputs inputs';
           };
+
           modules = [
             inputs.home-manager.darwinModules.home-manager
             ../modules/darwin
