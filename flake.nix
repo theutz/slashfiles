@@ -8,6 +8,7 @@
       systems = import inputs.systems;
 
       imports = [
+        ./pre-commit
         ./formatter
         ./shells
         ./packages
@@ -65,6 +66,11 @@
     nh = {
       url = "github:nix-community/nh";
       inputs.nixpkgs.follows = "unstable";
+    };
+
+    git-hooks = {
+      url = "github:cachix/git-hooks.nix";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 }

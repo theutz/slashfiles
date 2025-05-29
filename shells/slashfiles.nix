@@ -1,9 +1,8 @@
-{self, ...}: {
+{ ...}: {
   perSystem = {
     inputs',
     config,
     pkgs,
-    lib,
     ...
   }: {
     devShells.slashfiles = let

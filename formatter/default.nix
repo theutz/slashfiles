@@ -11,6 +11,7 @@
 
       programs = {
         alejandra.enable = true;
+        deadnix.enable = true;
         taplo.enable = true;
         shellcheck.enable = true;
         shfmt = {

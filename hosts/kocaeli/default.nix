@@ -112,7 +112,7 @@
   security.pam.services.sudo_local.touchIdAuth = true;
 
   services.aerospace.enable = true;
-  services.aerospace.settings.gaps.outer = pkgs.lib.genAttrs ["left" "right" "top" "bottom"] (x: 16);
+  services.aerospace.settings.gaps.outer = pkgs.lib.genAttrs ["left" "right" "top" "bottom"] (_x: 16);
 
   # FIXME: When https://github.com/nix-darwin/nix-darwin/issues/1041 is fixed, we can use
   # Karabiner Elements services through nix. Until then, c'est la vie.
