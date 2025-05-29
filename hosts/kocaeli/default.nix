@@ -51,7 +51,6 @@
     pkgs.pam-reattach
     pkgs.fd
     pkgs.git
-    pkgs.onefetch
   ];
 
   environment.variables = {
