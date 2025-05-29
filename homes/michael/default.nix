@@ -58,7 +58,8 @@
     ];
     sessionVariables = {
       DIRENV_LOG_FORMAT = ""; # Quiet!
-      MANPAGER = lib.getExe packages.nvf;
+      MANPAGER = "${lib.getExe packages.nvf} -c +Man!";
+      MANWIDTH = 999;
     };
     shell = {
       # Enables in all shells
