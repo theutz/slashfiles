@@ -39,6 +39,7 @@
       [
         packages.home
         packages.swch
+        packages.nvf
       ]
       ++ (with pkgs; [
         zoom-us
