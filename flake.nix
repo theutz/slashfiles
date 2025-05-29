@@ -11,7 +11,6 @@
         ./formatter
         ./shells
         ./packages
-        ./modules/darwin
         ./hosts
       ];
     };

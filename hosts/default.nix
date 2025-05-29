@@ -20,6 +20,7 @@
           };
           modules = [
             inputs.home-manager.darwinModules.home-manager
+            ../modules/darwin
             ./kocaeli
           ];
         });
