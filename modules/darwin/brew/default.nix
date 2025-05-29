@@ -1,5 +1,7 @@
 {pkgs, ...}: {
-  environment.systemPackages = with pkgs; [
-    onefetch
-  ];
+  config = {
+    environment.systemPackages = with pkgs; [
+      onefetch
+    ];
+  };
 }
