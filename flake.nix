@@ -67,32 +67,4 @@
       inputs.nixpkgs.follows = "unstable";
     };
   };
-
-  # outputs = inputs @ {
-  #   nixpkgs,
-  #   nix-darwin,
-  #   home-manager,
-  #   ...
-  # }: let
-  # forAllSystems = nixpkgs.lib.genAttrs [
-  #   "aarch64-darwin"
-  # ];
-
-  # in {
-  #   darwinConfigurations = let
-  #     system = "aarch64-darwin";
-  #     pkgs = nixpkgs.legacyPackages.${system};
-  #   in {
-  #     kocaeli = nix-darwin.lib.darwinSystem {
-  #       inherit system;
-  #       modules = [
-  #         home-manager.darwinModules.home-manager
-  #         ((import ./hosts/kocaeli) {
-  #           inherit inputs system;
-  #           pkgs = pkgs // packages.${system};
-  #         })
-  #       ];
-  #     };
-  #   };
-  # };
 }

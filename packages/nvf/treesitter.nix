@@ -1,11 +1,11 @@
 {
-  config.vim = {
-    treesitter.addDefaultGrammars = true;
-    treesitter.autotagHtml = true;
-    treesitter.context.enable = true;
-    treesitter.enable = true;
-    treesitter.fold = true;
-    treesitter.highlight.enable = true;
-    treesitter.textobjects.enable = true;
+  config.vim.treesitter = {
+    addDefaultGrammars = true;
+    autotagHtml = true;
+    context.enable = true;
+    enable = true;
+    fold = true;
+    highlight.enable = true;
+    textobjects.enable = true;
   };
 }
