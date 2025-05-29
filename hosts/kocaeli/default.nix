@@ -10,6 +10,11 @@
     auth    sufficient      pam_tid.so
   '';
 
+  environment.pathsToLink = [
+    "/opt/homebrew/bin"
+    "/opt/homebrew/sbin"
+  ];
+
   environment.shellAliases = {
     gcam = "git commit --all --message";
     gcm = "git commit --message";
@@ -32,11 +37,19 @@
     nushell
   ];
 
-  environment.systemPackages = with pkgs; [
-    ripgrep
-    pam-reattach
-    packages.nvf
+  environment.systemPackages = [
+    # Packages from my flake inputs
     inputs'.nh.packages.default
+
+    # Setup Neovim Flake
+    inputs'.nvf.packages.docs-manpages # generate manpages
+    packages.nvf
+
+    # Normal nixpkgs packages
+    pkgs.ripgrep
+    pkgs.pam-reattach
+    pkgs.fd
+    pkgs.git
   ];
 
   environment.variables = {
@@ -61,6 +74,7 @@
   home-manager.useUserPackages = true;
   home-manager.useGlobalPkgs = true;
   home-manager.users.michael = ../../homes/michael;
+  home-manager.extraSpecialArgs = {inherit packages;};
 
   nix.enable = true;
   nix.checkConfig = true;

@@ -1,7 +1,9 @@
 {
+  osConfig,
   config,
   pkgs,
   lib,
+  packages,
   ...
 }: {
   home = {
@@ -35,18 +37,25 @@
 
         '';
     };
-    packages = with pkgs; [
-      zoom-us
-      coreutils
-      delta
-      fd
-      lazygit
-      procs
-      ripgrep
-      aichat
-      signal-desktop-bin
-    ];
+    packages =
+      [
+        packages.home
+      ]
+      ++ (with pkgs; [
+        zoom-us
+        coreutils
+        delta
+        fd
+        lazygit
+        procs
+        ripgrep
+        aichat
+        signal-desktop-bin
+      ]);
     preferXdgDirectories = true;
+    sessionPath = [
+      osConfig.homebrew.brewPrefix
+    ];
     shell = {
       # Enables in all shells
       enableShellIntegration = true;
@@ -127,6 +136,9 @@
           set -sa terminal-features "xterm*:extkeys"
           set -ga update-environment TERM
           set -ga update-environment TERM_PROGRAM
+          set -ga update-environment PATH
+          set -ga update-environment EDITOR
+          set -ga update-environment VISUAL
         '';
       focusEvents = true;
       keyMode = "vi";
