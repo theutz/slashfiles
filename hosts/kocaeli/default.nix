@@ -65,6 +65,7 @@
     "spotify"
     "slack"
     "telegram"
+    "mouseless"
   ];
   homebrew.onActivation.autoUpdate = false; # default
   homebrew.onActivation.cleanup = "zap";

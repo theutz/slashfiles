@@ -1,6 +1,8 @@
+- [ ] Setup nix-sops
+- [ ] Setup spotify_player
 - [ ] Create idea stack app
 - [ ] Fix weather location in tmux dracula
 - [ ] Fix dark mode in delta
 - [ ] Setup finicky
-- [ ] integrate smart splits
-- [ ] use catppucin
+- [ ] Integrate smart splits
+- [ ] Use catppucin
