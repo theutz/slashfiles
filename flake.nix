@@ -9,8 +9,8 @@
 
       imports = [
         ./formatter
+        ./shells
         ./packages
-        ./parts
         ./hosts
       ];
     };
