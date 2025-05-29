@@ -23,14 +23,28 @@ in
     text =
       # bash
       ''
-        msg=".git/comt_msg"
-        # [[ -f "$msg" ]] && rm -f "$msg"
+        args=()
 
-        # trap 'rm .git/comt_msg' EXIT
+        while [[ $# -gt 0 ]]; do
+          case "$1" in
+            --all | -a)
+              git add -A
+              shift
+              ;;
+            *)
+              args+=("$1")
+              shift
+              ;;
+          esac
+        done
+
+        set -- "''${args[@]}"
+
+        msg=".git/comt_msg"
 
         git diff --cached |
           aichat "$PROMPT" > "$msg"
 
-        cat "$msg"
+        git commit --file "$msg" "$@"
       '';
   }
