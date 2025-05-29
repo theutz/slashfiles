@@ -42,6 +42,7 @@
         utility.yazi-nvim.enable = true;
       };
     }
+    ./treesitter.nix
     ./keymaps.nix
   ];
 }).neovim
