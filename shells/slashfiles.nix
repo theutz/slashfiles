@@ -28,18 +28,14 @@ _: {
     installCommitMsgHook =
       # bash
       ''
-          git_dir="$(git rev-parse --path-format=absolute --git-common-dir)"
-          hooks_dir="''${git_dir}/hooks"
-          hook="''${hooks_dir}/prepare-commit-msg"
+        git_dir="$(git rev-parse --path-format=absolute --git-common-dir)"
+        hooks_dir="''${git_dir}/hooks"
+        hook="''${hooks_dir}/prepare-commit-msg"
 
-          if [[ -x "$hook" ]]; then
-            echo "Hook exists already at $hook. Aborting..." >&2
-            exit 1
-          fi
-
+        if [[ ! -x "$hook" ]]; then
           cp "${prepare-commit-msg}" "$hook"
           chmod +x "$hook"
-        [[
+        fi
       '';
   in {
     devShells.slashfiles = let
@@ -58,7 +54,10 @@ _: {
         DIRENV_LOG_FORMAT = "";
         NH_FLAKE = "/etc/nix-darwin";
 
-        inputsFrom = [config.treefmt.build.devShell];
+        inputsFrom = [
+          config.treefmt.build.devShell
+          config.packages.nvf
+        ];
 
         packages =
           [
@@ -67,6 +66,7 @@ _: {
 
             # Packages from my config
             config.packages.swch
+            config.packages.nvf
 
             # From flake-parts modules
             config.treefmt.build.wrapper # Use `treefmt` command
