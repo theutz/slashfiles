@@ -1,2 +1,3 @@
 *.swp
 *.log
+.pre-commit-config.yaml
