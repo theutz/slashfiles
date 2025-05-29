@@ -8,16 +8,24 @@
     ...
   }: {
     overlayAttrs = config.packages;
+
     packages = let
-      my-pkgs = {
-        inherit inputs inputs';
-        nvf' = inputs.nvf;
-      };
-      callPackage = lib.callPackageWith (pkgs // my-pkgs);
+      autoArgs =
+        pkgs
+        // {
+          inherit inputs inputs';
+          nvf' = inputs.nvf;
+        };
+
+      callPackage = lib.callPackageWith autoArgs;
+
+      packages =
+        lib.packagesFromDirectoryRecursive {
+          inherit callPackage;
+          directory = ./.;
+        }
+        // {default = config.packages.swch;};
     in
-      lib.packagesFromDirectoryRecursive {
-        inherit callPackage;
-        directory = ./.;
-      };
+      packages;
   };
 }
