@@ -41,6 +41,7 @@
             watchexec
             mask
             gum
+            aichat
           ]);
 
         shellHook =
