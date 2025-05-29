@@ -26,10 +26,8 @@
                           run ${tmux} source-file "${file}"
                   then
                           verboseEcho "Tmux config reloaded!"
-                          run ${tmux} display-message -d 5000 "Config reloaded by nix-darwin!" &!
                   else
                           echo "ERROR: Could not reload tmux config."
-                          run ${tmux} display-message -d 5000 "Failed to reload config!" &!
                   fi
           else
                   verboseEcho "No tmux running"
