@@ -56,6 +56,10 @@
     sessionPath = [
       osConfig.homebrew.brewPrefix
     ];
+    sessionVariables = {
+      DIRENV_LOG_FORMAT = ""; # Quiet!
+      MANPAGER = lib.getExe packages.nvf;
+    };
     shell = {
       # Enables in all shells
       enableShellIntegration = true;

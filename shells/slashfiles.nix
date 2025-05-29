@@ -21,6 +21,7 @@
 
         inputsFrom = [config.treefmt.build.devShell];
 
+        DIRENV_LOG_FORMAT = "";
         NH_FLAKE = "/etc/nix-darwin";
 
         packages =
