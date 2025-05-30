@@ -12,6 +12,7 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
+    # homebrew.brews = import ./brew
     environment.systemPackages = with pkgs; [
       onefetch
     ];
