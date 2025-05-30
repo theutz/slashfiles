@@ -9,9 +9,11 @@
 
   modules = [
     ./fzf-lua.nix
+    ./session.nix
     {
       config = {
         fzf-lua.enable = true;
+        session.enable = true;
       };
       config.vim = {
         formatter.conform-nvim.enable = true;
