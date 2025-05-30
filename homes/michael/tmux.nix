@@ -31,13 +31,16 @@
       '';
 
     programs.tmux = let
-      theme = pkgs.tmuxPlugins.catppuccin;
+      theme = pkgs.tmuxPlugins.dracula;
+
       plugins =
-        [theme]
-        ++ (with pkgs.tmuxPlugins; [
+        lib.concat
+        (lib.singleton theme)
+        (with pkgs.tmuxPlugins; [
           sessionist
           pain-control
         ]);
+
       hasCatppuccin = lib.elem pkgs.tmuxPlugins.catppuccin plugins;
     in {
       inherit plugins;

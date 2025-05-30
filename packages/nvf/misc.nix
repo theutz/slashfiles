@@ -30,7 +30,7 @@
 
     theme = rec {
       enable = true;
-      name = "catppuccin";
+      name = "dracula";
       style = lib.attrByPath [name] null {
         catppuccin = "mocha";
       };
