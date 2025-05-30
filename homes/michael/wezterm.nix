@@ -18,7 +18,7 @@
             config.font_size = 16
             config.line_height = 1.1
             config.color_scheme = "rose-pine"
-            config.default_prog = { ${lib.getExe pkgs.fish} }
+            config.default_prog = { "${lib.getExe pkgs.fish}" }
             config.hide_tab_bar_if_only_one_tab = true
 
             -- For compatibility with mprocs https://github.com/pvolok/mprocs/issues/165
