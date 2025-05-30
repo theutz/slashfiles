@@ -12,10 +12,10 @@
     auth    sufficient      pam_tid.so
   '';
 
-  # environment.pathsToLink = [
-  #   "/opt/homebrew/bin"
-  #   "/opt/homebrew/sbin"
-  # ];
+  environment.pathsToLink = [
+    "/opt/homebrew/bin"
+    "/opt/homebrew/sbin"
+  ];
 
   environment.shellAliases = {
     gcam = "git commit --all --message";
@@ -68,6 +68,7 @@
     "slack"
     "telegram"
     "mouseless@preview"
+    "dark-mode"
   ];
   homebrew.onActivation.autoUpdate = false; # default
   homebrew.onActivation.cleanup = "zap";

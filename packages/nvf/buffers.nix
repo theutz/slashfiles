@@ -22,6 +22,7 @@ in {
     keymaps = flatConcat [
       [
         (mkItem "d" "Bdelete" "Delete buffer")
+        (mkItem "D" "bd" "Delete buffer and close window")
         (mkItem "n" "bnext" "Next buffer")
         (mkItem "p" "bprev" "Prev buffer")
         (mkItem "b" "b #" "Most recent buffer")

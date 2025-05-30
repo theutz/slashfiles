@@ -23,8 +23,9 @@ in {
         }
       )
 
-      (mkKeymap ["n" "i" "s" "x"] "<C-s>"
-        "<cmd>w<cr><esc>" {desc = "Save File";})
+      (mkKeymap ["n" "i" "s" "x"] "<C-s>" "<cmd>w<cr><esc>" {desc = "Save File";})
+      (mkKeymap "n" "<leader>wd" "<cmd>wq<cr>" {desc = "Close window";})
+      (mkKeymap "n" "<leader>wq" "<cmd>wq<cr>" {desc = "Close window";})
     ];
   };
 }

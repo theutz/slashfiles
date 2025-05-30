@@ -154,20 +154,16 @@
       enable = true;
       enableBashIntegration = true;
       enableZshIntegration = true;
-      extraConfig = let
-        fish = lib.getExe pkgs.fish;
-      in
-        # lua
-        ''
-          local config = wezterm.config_builder()
+      extraConfig = ''
+        local config = wezterm.config_builder()
 
-          config.font_size = 16
-          config.color_scheme = "Dracula"
-          config.default_prog = { "${fish}" }
-          -- For compatibility with mprocs https://github.com/pvolok/mprocs/issues/165
-          -- config.enable_csi_u_key_encoding = true
-          return config
-        '';
+        config.font_size = 16
+        config.color_scheme = "catppuccin-mocha"
+        config.default_prog = { fish }
+        -- For compatibility with mprocs https://github.com/pvolok/mprocs/issues/165
+        -- config.enable_csi_u_key_encoding = true
+        return config
+      '';
     };
     yazi = {
       enable = true;
@@ -189,8 +185,5 @@
   };
   xdg = {
     enable = true;
-    configFile = {
-      "karabiner/karabiner.json".source = ./karabiner.json;
-    };
   };
 }
