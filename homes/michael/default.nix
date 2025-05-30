@@ -13,11 +13,12 @@
 
   home = {
     packages =
-      [
-        packages.home
-        packages.swch
-        packages.nvf
-      ]
+      (with packages; [
+        home
+        swch
+        nvf
+        comt
+      ])
       ++ (with pkgs;
         [
           zoom-us
