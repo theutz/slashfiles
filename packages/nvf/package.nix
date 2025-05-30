@@ -23,6 +23,10 @@
           enableFormat = true;
           enableTreesitter = true;
           nix.enable = true;
+          nix.extraDiagnostics = {
+            enable = true;
+            types = ["statix" "deadnix"];
+          };
           bash.enable = true;
         };
 
