@@ -15,7 +15,7 @@
             config.line_height = 1.1
             config.color_scheme = "catppuccin-mocha"
             config.default_prog = { fish }
-            config.hide_tab_bar_if_only_one_tab = false
+            config.hide_tab_bar_if_only_one_tab = true
 
             -- For compatibility with mprocs https://github.com/pvolok/mprocs/issues/165
             -- config.enable_csi_u_key_encoding = true
