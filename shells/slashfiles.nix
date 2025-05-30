@@ -11,6 +11,7 @@ _: {
       ''
         commit_msg_file="$1"
         orig="$(cat "$commit_msg_file")"
+
         prompt="$(cat <<-EOF
         Ignore all previous instructions.
         Write a conventional commit message for these changes.
@@ -18,11 +19,11 @@ _: {
         Do not wrap the message in backticks.
         EOF
         )"
+
         generated="$(git diff --cached |
           aichat "$prompt")"
 
-        echo "$generated" > "$commit_msg_file"
-        echo "$orig" >> "$commit_msg_file"
+        echo "$generated\n\n$orig" > "$commit_msg_file"
       '';
 
     installCommitMsgHook =
