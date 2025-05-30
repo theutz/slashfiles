@@ -32,6 +32,7 @@
         ]
         ++ (with nerd-fonts; [
           roboto-mono
+          blex-mono
         ]));
     preferXdgDirectories = true;
     sessionPath = [
