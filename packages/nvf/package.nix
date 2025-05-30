@@ -34,7 +34,7 @@
           nvim-session-manager = {
             enable = true;
             setupOpts = {
-              autoload_mode = "CurrentDir";
+              autoload_mode = lib.generators.mkLuaInline "sm.AutoloadMode.GitSession";
             };
           };
         };
@@ -43,13 +43,19 @@
 
         theme = {
           enable = true;
-          name = "dracula";
+          name = "catppuccin";
+          style = "mocha";
           transparent = true;
         };
 
         ui.borders.enable = true;
 
         utility = {
+          motion = {
+            flash-nvim = {
+              enable = true;
+            };
+          };
           surround.enable = true;
           yazi-nvim.enable = true;
         };
