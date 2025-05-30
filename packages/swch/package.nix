@@ -119,16 +119,8 @@ in
         fi
 
         debug "Creating commit message"
-        prompt="$(cat <<-EOF
-          Create a conventional commit message for this diff.
-          Trim all leading and traililng whitespace.
-          Do not surround your output with backticks.
-        EOF
-        );"
         if
-          git -C "$NH_FLAKE" diff --cached |
-            aichat "$prompt" |
-            git -C "$NH_FLAKE" commit --file -
+          comt -C "$NH_FLAKE" -a
         then
           info "Changes committed"
         else
