@@ -18,17 +18,21 @@
         packages.swch
         packages.nvf
       ]
-      ++ (with pkgs; [
-        zoom-us
-        coreutils
-        delta
-        fd
-        lazygit
-        procs
-        ripgrep
-        aichat
-        signal-desktop-bin
-      ]);
+      ++ (with pkgs;
+        [
+          zoom-us
+          coreutils
+          delta
+          fd
+          lazygit
+          procs
+          ripgrep
+          aichat
+          signal-desktop-bin
+        ]
+        ++ (with nerd-fonts; [
+          roboto-mono
+        ]));
     preferXdgDirectories = true;
     sessionPath = [
       osConfig.homebrew.brewPrefix
