@@ -50,8 +50,6 @@ in
           git ''${repo:+-C ''${repo}} add -A
         fi
 
-        echo "repo: $repo" >&2
-
         msg="''${repo:+''${repo}/}.git/comt_msg"
 
         git ''${repo:+-C ''${repo}} diff --cached |
