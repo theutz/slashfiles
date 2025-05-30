@@ -35,10 +35,9 @@ _: {
         hooks_dir="''${git_dir}/hooks"
         hook="''${hooks_dir}/prepare-commit-msg"
 
-        if [[ ! -x "$hook" ]]; then
-          cp "${prepare-commit-msg}" "$hook"
-          chmod +x "$hook"
-        fi
+        [[ -f "$hook" ]] && rm -f "$hook"
+        cp "${prepare-commit-msg}" "$hook"
+        chmod +x "$hook"
       '';
   in {
     devShells.slashfiles = let
