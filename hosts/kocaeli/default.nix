@@ -33,13 +33,6 @@
       hm = "man 5 home-configuration.nix";
     };
 
-    shells = with pkgs; [
-      bashInteractive
-      fish
-      zsh
-      nushell
-    ];
-
     systemPackages = [
       # Packages from my flake inputs
       inputs'.nh.packages.default
@@ -47,38 +40,12 @@
       # Setup Neovim Flake
       inputs'.nvf.packages.docs-manpages # generate manpages
       packages.nvf
-
-      # Normal nixpkgs packages
-      pkgs.ripgrep
-      pkgs.pam-reattach
-      pkgs.fd
-      pkgs.git
     ];
 
     variables = {
       EDITOR = lib.mkForce (lib.getExe packages.nvf);
       NH_FLAKE = "/etc/nix-darwin";
     };
-  };
-
-  homebrew = {
-    enable = true;
-    brews = [
-      "dark-mode"
-    ];
-    casks = [
-      "vivaldi"
-      "karabiner-elements"
-      "spotify"
-      "slack"
-      "telegram"
-      "mouseless@preview"
-    ];
-    onActivation = {
-      autoUpdate = false; # default
-      cleanup = "zap";
-    };
-    taps = [];
   };
 
   home-manager = {
