@@ -164,6 +164,7 @@
         ''
           local config = wezterm.config_builder()
 
+          config.font_family = "RobotoMono Nerd Font Propo"
           config.font_size = 16
           config.color_scheme = "catppuccin-mocha"
           config.default_prog = { fish }
