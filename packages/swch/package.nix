@@ -1,6 +1,8 @@
 {
   pkgs,
   inputs',
+  self',
+  ...
 }: let
   cmd =
     if pkgs.stdenv.isDarwin
@@ -15,6 +17,7 @@ in
 
     runtimeInputs = [
       inputs'.nh.packages.default
+      self'.packages.comt
       pkgs.git
       pkgs.gum
       pkgs.aichat
