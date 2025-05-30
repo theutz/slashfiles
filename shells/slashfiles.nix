@@ -79,6 +79,7 @@ _: {
             mask
             gum
             aichat
+            mprocs
           ]);
 
         shellHook =
@@ -92,9 +93,11 @@ _: {
             # ${description}
 
             ${longDescription}
-            markdown
 
-            mask --help
+            ## Commands
+
+            Type \`mask --help\` to see available development commands.
+            markdown
           '';
       };
   };

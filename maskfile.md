@@ -1,5 +1,36 @@
 # /slashfiles
 
+## dev
+
+> Start development servers
+
+```bash
+mprocs --names test,switch \
+  "$MASK test watch" \
+  "$MASK switch watch"
+```
+
+## switch
+
+> Run switch command
+
+```bash
+swch
+```
+
+### watch
+
+> Watch for changes and switch
+
+```bash
+watchexec \
+  -w homes \
+  -w hosts \
+  -w modules \
+  --restart \
+  -- $MASK switch
+```
+
 ## test
 
 > Run tests on the flake
