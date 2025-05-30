@@ -10,13 +10,20 @@ _: {
       # bash
       ''
         commit_msg_file="$1"
+        commit_source="$2"
         orig="$(cat "$commit_msg_file")"
 
+        case "$commit_source" in
+          commit|message|squash|merge|template)
+            exit 0
+            ;;
+        esac
+
         prompt="$(cat <<-EOF
-        Ignore all previous instructions.
-        Write a conventional commit message for these changes.
-        Remove any leading or trailing whitespace.
-        Do not wrap the message in backticks.
+          Ignore all previous instructions.
+          Write a conventional commit message for these changes.
+          Remove any leading or trailing whitespace.
+          Do not wrap the message in backticks.
         EOF
         )"
 
