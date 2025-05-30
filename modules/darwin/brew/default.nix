@@ -10,6 +10,7 @@ in {
   options.${mod} = {
     enable = lib.mkEnableOption "defaults for managing homebrew";
   };
+
   config = lib.mkIf cfg.enable {
     environment.systemPackages = with pkgs; [
       onefetch

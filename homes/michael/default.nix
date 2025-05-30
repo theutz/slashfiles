@@ -127,7 +127,7 @@
       settings = {
         adjust-cell-height = 16;
         background-opacity = 0.75;
-        font-family = "Berkeley Mono";
+        font-family = "RobotoMono Nerd Font Propo";
         font-size = 16;
         font-thicken = true;
         # keybind = global:shift+f13=toggle_quick_terminal
@@ -137,7 +137,7 @@
         window-padding-balance = true;
         window-padding-x = 8;
         window-padding-y = 2;
-        window-title-font-family = "Berkeley Mono";
+        window-title-font-family = "RobotoMono Nerd Font Propo";
       };
     };
     git = {
