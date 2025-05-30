@@ -5,9 +5,10 @@
   packages,
   ...
 }: {
-  imports = lib.pipe ./. [
-    lib.filesystem.listFilesRecursive
-    (lib.filter (f: f != /. + __curPos.file && (lib.hasSuffix "nix" f)))
+  imports = [
+    ./karabiner
+    ./tmux
+    ./wezterm.nix
   ];
 
   home = {

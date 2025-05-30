@@ -1,9 +1,5 @@
-{lib, ...}: let
-  currentFile = /. + __curPos.file;
-  modules = lib.pipe ./. [
-    lib.filesystem.listFilesRecursive
-    (lib.filter (f: f != currentFile))
+{...}: {
+  imports = [
+    ./packages
   ];
-in {
-  imports = modules;
 }

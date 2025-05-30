@@ -1,0 +1,9 @@
+[
+  "figma"
+  "vivaldi"
+  "karabiner-elements"
+  "spotify"
+  "slack"
+  "telegram"
+  "mouseless@preview"
+]
