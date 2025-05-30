@@ -83,6 +83,8 @@ _: {
             gum
             aichat
             mprocs
+            tmux
+            tmuxp
           ]);
 
         shellHook =
