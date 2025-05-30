@@ -14,6 +14,8 @@
       config = {
         fzf-lua.enable = true;
         session.enable = true;
+        vim = {
+        };
       };
       config.vim = {
         formatter.conform-nvim.enable = true;
