@@ -32,7 +32,15 @@
 
     programs.tmux = let
       theme = pkgs.tmuxPlugins.catppuccin;
+      plugins =
+        [theme]
+        ++ (with pkgs; [
+          tmuxPlugins.sessionist
+          tmuxPlugins.pain-control
+        ]);
+      hasCatppuccin = lib.elem pkgs.tmuxPlugins.catppuccin plugins;
     in {
+      inherit plugins;
       aggressiveResize = true;
       baseIndex = 1;
       clock24 = true;
@@ -53,16 +61,14 @@
           set -ga update-environment PATH
           set -ga update-environment EDITOR
           set -ga update-environment VISUAL
+          ${lib.optionalString hasCatppuccin ''
+            set -g @catppuccin_flavor 'mocha';
+          ''}
         '';
       focusEvents = true;
       keyMode = "vi";
       mouse = true;
-      plugins =
-        [theme]
-        ++ (with pkgs; [
-          tmuxPlugins.sessionist
-          tmuxPlugins.pain-control
-        ]);
+
       prefix = "M-m";
     };
   };
