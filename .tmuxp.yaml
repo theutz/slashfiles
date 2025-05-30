@@ -4,7 +4,7 @@ options:
 windows:
   - window_name: edit
     layout: main-vertical
-    option:
+    options:
       other-pane-width: 100
     panes:
       - shell_command: nix run .#nvf
