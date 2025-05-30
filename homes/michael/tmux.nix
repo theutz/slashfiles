@@ -66,7 +66,7 @@
             set -g status-right-length 100
             set -g status-left ""
             set -g @catppuccin_flavor 'mocha'
-            set -g @catppuccin_window_status_style "rounded"
+            set -g @catppuccin_window_status_style "slanted"
             set -g status-right "#{E:@catppuccin_status_application}"
             set -ag status-right "#{E:@catppuccin_status_session}"
             set -ag status-right "#{E:@catppuccin_status_uptime}"
