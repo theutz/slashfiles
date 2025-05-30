@@ -13,8 +13,6 @@
       config.vim = {
         formatter.conform-nvim.enable = true;
 
-        fzf-lua.enable = true;
-
         git.enable = true;
 
         languages = {
