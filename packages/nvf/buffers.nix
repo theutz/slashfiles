@@ -24,11 +24,11 @@ in {
         (mkItem "d" "Bdelete" "Delete buffer")
         (mkItem "n" "bnext" "Next buffer")
         (mkItem "p" "bprev" "Prev buffer")
-        (mkItem "l" "b #" "Most recent buffer")
+        (mkItem "b" "b #" "Most recent buffer")
       ]
       (
         optional hasFzf [
-          (mkItem "b" "FzfLua buffers" "Search buffers")
+          (mkItem "s" "FzfLua buffers" "Search buffers")
         ]
       )
     ];

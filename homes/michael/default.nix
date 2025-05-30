@@ -6,35 +6,12 @@
   packages,
   ...
 }: {
-  home = {
-    activation = {
-      reloadTmux = let
-        tmux = lib.getExe pkgs.tmux;
-        file = lib.concatStringsSep "/" [config.xdg.configHome "tmux" "tmux.conf"];
-      in
-        lib.hm.dag.entryAfter ["writeBoundary"]
-        /*
-        bash
-        */
-        ''
-          export TERM="xterm-256color"
-          if
-                  run ${tmux} ls &>/dev/null
-          then
-                  verboseEcho "Reloading tmux..."
-                  if
-                          run ${tmux} source-file "${file}"
-                  then
-                          verboseEcho "Tmux config reloaded!"
-                  else
-                          echo "ERROR: Could not reload tmux config."
-                  fi
-          else
-                  verboseEcho "No tmux running"
-          fi
+  imports = lib.pipe ./. [
+    lib.filesystem.listFilesRecursive
+    (lib.filter (f: f != /. + __curPos.file && (lib.hasSuffix "nix" f)))
+  ];
 
-        '';
-    };
+  home = {
     packages =
       [
         packages.home
@@ -143,6 +120,21 @@
       enableBashIntegration = true;
       enableZshIntegration = true;
       enableFishIntegration = true;
+      settings = {
+        adjust-cell-height = 16;
+        background-opacity = 0.75;
+        font-family = "Berkeley Mono";
+        font-size = 16;
+        font-thicken = true;
+        # keybind = global:shift+f13=toggle_quick_terminal
+        macos-option-as-alt = "left";
+        macos-titlebar-style = "transparent";
+        theme = "dracula";
+        window-padding-balance = true;
+        window-padding-x = 8;
+        window-padding-y = 2;
+        window-title-font-family = "Berkeley Mono";
+      };
     };
     git = {
       delta = {
@@ -158,41 +150,6 @@
     starship = {
       enable = true;
     };
-    tmux = {
-      aggressiveResize = true;
-      baseIndex = 1;
-      clock24 = true;
-      # customPaneNavigationAndResize = true;
-      enable = true;
-      escapeTime = 0;
-      extraConfig =
-        /*
-        tmux
-        */
-        ''
-          set -g allow-passthrough on
-          set -g allow-rename on
-          set -g default-command "${lib.getExe pkgs.fish}"
-          set -g default-terminal "xterm-256color"
-          set -g extended-keys always
-          set -g terminal-overrides ",xterm*:Tc"
-          set -sa terminal-features "xterm*:extkeys"
-          set -ga update-environment TERM
-          set -ga update-environment TERM_PROGRAM
-          set -ga update-environment PATH
-          set -ga update-environment EDITOR
-          set -ga update-environment VISUAL
-        '';
-      focusEvents = true;
-      keyMode = "vi";
-      mouse = true;
-      plugins = with pkgs; [
-        tmuxPlugins.sessionist
-        tmuxPlugins.pain-control
-        tmuxPlugins.dracula
-      ];
-      prefix = "M-m";
-    };
     wezterm = {
       enable = true;
       enableBashIntegration = true;
@@ -200,9 +157,7 @@
       extraConfig = let
         fish = lib.getExe pkgs.fish;
       in
-        /*
-        lua
-        */
+        # lua
         ''
           local config = wezterm.config_builder()
 
@@ -235,7 +190,6 @@
   xdg = {
     enable = true;
     configFile = {
-      "ghostty/config".source = ./ghostty-config;
       "karabiner/karabiner.json".source = ./karabiner.json;
     };
   };

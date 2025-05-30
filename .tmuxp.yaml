@@ -20,6 +20,6 @@ windows:
     panes:
       - shell: man 5 configuration.nix
 
-  - window_name: nix-darwin
+  - window_name: nvf
     panes:
       - shell: man 5 nvf
