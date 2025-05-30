@@ -4,7 +4,7 @@
   ...
 }: let
   inherit (lib) mkIf mkEnableOption;
-  inherit (lib.binds) mkKeymap;
+  inherit (lib.nvim.binds) mkKeymap;
   cfg = config.fzf-lua;
 in {
   options.fzf-lua.enable = mkEnableOption "use fzf-lua";
