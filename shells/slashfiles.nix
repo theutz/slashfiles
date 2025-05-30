@@ -59,7 +59,7 @@ _: {
 
         inputsFrom = [
           config.treefmt.build.devShell
-          config.packages.nvf
+          # config.packages.nvf
         ];
 
         packages =
@@ -70,6 +70,7 @@ _: {
             # Packages from my config
             config.packages.swch
             config.packages.nvf
+            config.packages.comt
 
             # From flake-parts modules
             config.treefmt.build.wrapper # Use `treefmt` command
