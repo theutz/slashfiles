@@ -6,7 +6,7 @@
 }: let
   mods = lib.pipe ./. [
     lib.filesystem.listFilesRecursive
-    (lib.filter (f: f != ./package.nix))
+    (lib.filter (f: f != /. + (__curPos.file)))
   ];
 in
   (nvf'.lib.neovimConfiguration {
