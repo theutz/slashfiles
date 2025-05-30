@@ -1,16 +1,7 @@
-{
-  config,
-  lib,
-  ...
-}: let
-  inherit (lib) mkEnableOption mkIf;
+{lib, ...}: let
   inherit (lib.generators) mkLuaInline;
-  name = "session";
-  cfg = config.${name};
 in {
-  options.${name}.enable = mkEnableOption "Manage neovim sesions";
-
-  config.vim = mkIf cfg.enable {
+  config.vim = {
     binds.whichKey.register."<leader>q" = "quit/session";
 
     session.nvim-session-manager = {

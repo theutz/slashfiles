@@ -1,11 +1,5 @@
-{
-  lib,
-  config,
-  ...
-}: let
-  inherit (lib) mkIf mkEnableOption;
+{lib, ...}: let
   inherit (lib.nvim.binds) mkKeymap;
-  cfg = config.fzf-lua;
 
   searchBindings =
     lib.lists.map (
@@ -21,9 +15,7 @@
       ["h" "helptags" "Search help"]
     ];
 in {
-  options.fzf-lua.enable = mkEnableOption "use fzf-lua";
-
-  config.vim = mkIf cfg.enable {
+  config.vim = {
     keymaps =
       [
         (mkKeymap ["n"] "<leader>,"
