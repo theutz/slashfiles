@@ -4,64 +4,66 @@
   config,
   ...
 }: {
-  home.activation.reloadTmux = let
-    tmux = lib.getExe pkgs.tmux;
-    file = lib.concatStringsSep "/" [config.xdg.configHome "tmux" "tmux.conf"];
-  in
-    lib.hm.dag.entryAfter ["writeBoundary"]
-    # bash
-    ''
-      export TERM="xterm-256color"
-      if
-              run ${tmux} ls &>/dev/null
-      then
-              verboseEcho "Reloading tmux..."
-              if
-                      run ${tmux} source-file "${file}"
-              then
-                      verboseEcho "Tmux config reloaded!"
-              else
-                      echo "ERROR: Could not reload tmux config."
-              fi
-      else
-              verboseEcho "No tmux running"
-      fi
-
-    '';
-
-  programs.tmux = let
-    theme = pkgs.tmuxPlugins.catppuccin;
-  in {
-    aggressiveResize = true;
-    baseIndex = 1;
-    clock24 = true;
-    enable = true;
-    escapeTime = 0;
-    extraConfig =
-      # tmux
+  config = {
+    home.activation.reloadTmux = let
+      tmux = lib.getExe pkgs.tmux;
+      file = lib.concatStringsSep "/" [config.xdg.configHome "tmux" "tmux.conf"];
+    in
+      lib.hm.dag.entryAfter ["writeBoundary"]
+      # bash
       ''
-        set -g allow-passthrough on
-        set -g allow-rename on
-        set -g default-command "${lib.getExe pkgs.fish}"
-        set -g default-terminal "xterm-256color"
-        set -g extended-keys always
-        set -g terminal-overrides ",xterm*:Tc"
-        set -sa terminal-features "xterm*:extkeys"
-        set -ga update-environment TERM
-        set -ga update-environment TERM_PROGRAM
-        set -ga update-environment PATH
-        set -ga update-environment EDITOR
-        set -ga update-environment VISUAL
+        export TERM="xterm-256color"
+        if
+                run ${tmux} ls &>/dev/null
+        then
+                verboseEcho "Reloading tmux..."
+                if
+                        run ${tmux} source-file "${file}"
+                then
+                        verboseEcho "Tmux config reloaded!"
+                else
+                        echo "ERROR: Could not reload tmux config."
+                fi
+        else
+                verboseEcho "No tmux running"
+        fi
+
       '';
-    focusEvents = true;
-    keyMode = "vi";
-    mouse = true;
-    plugins =
-      [theme]
-      ++ (with pkgs; [
-        tmuxPlugins.sessionist
-        tmuxPlugins.pain-control
-      ]);
-    prefix = "M-m";
+
+    programs.tmux = let
+      theme = pkgs.tmuxPlugins.catppuccin;
+    in {
+      aggressiveResize = true;
+      baseIndex = 1;
+      clock24 = true;
+      enable = true;
+      escapeTime = 0;
+      extraConfig =
+        # tmux
+        ''
+          set -g allow-passthrough on
+          set -g allow-rename on
+          set -g default-command "${lib.getExe pkgs.fish}"
+          set -g default-terminal "xterm-256color"
+          set -g extended-keys always
+          set -g terminal-overrides ",xterm*:Tc"
+          set -sa terminal-features "xterm*:extkeys"
+          set -ga update-environment TERM
+          set -ga update-environment TERM_PROGRAM
+          set -ga update-environment PATH
+          set -ga update-environment EDITOR
+          set -ga update-environment VISUAL
+        '';
+      focusEvents = true;
+      keyMode = "vi";
+      mouse = true;
+      plugins =
+        [theme]
+        ++ (with pkgs; [
+          tmuxPlugins.sessionist
+          tmuxPlugins.pain-control
+        ]);
+      prefix = "M-m";
+    };
   };
 }
