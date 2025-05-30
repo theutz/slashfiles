@@ -1,7 +1,11 @@
 {lib, ...}: let
   inherit (lib.generators) mkLuaInline;
+  inherit (lib.nvim.binds) mkKeymap;
 in {
   config.vim = {
+    keymaps = [
+      (mkKeymap ["n"] "<leader>qq" "<cmd>xa<cr>" {desc = "Save all and quit";})
+    ];
     binds.whichKey.register."<leader>q" = "quit/session";
 
     session.nvim-session-manager = {

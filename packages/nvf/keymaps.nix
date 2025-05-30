@@ -5,17 +5,10 @@ in {
     binds.whichKey.enable = true;
 
     binds.whichKey.register = {
-      "<leader>g" = "git";
       "<leader>u" = "ui/toggle";
     };
 
     keymaps = [
-      (mkKeymap ["n"] "<leader>gg"
-        "<cmd>Neogit<cr>" {desc = "Neogit";})
-
-      (mkKeymap ["n"] "<leader>qq"
-        "<cmd>xa<cr>" {desc = "Save all and quit";})
-
       (
         mkKeymap ["n" "i" "s"] "<esc>"
         # lua
