@@ -30,7 +30,14 @@
           };
         };
 
-        session.nvim-session-manager.enable = true;
+        session = {
+          nvim-session-manager = {
+            enable = true;
+            setupOpts = {
+              autoload_mode = "CurrentDir";
+            };
+          };
+        };
 
         statusline.lualine.enable = true;
 
