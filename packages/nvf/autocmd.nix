@@ -53,6 +53,7 @@
 
       {
         group = "last_loc";
+        event = ["BufReadPost"];
         callback =
           mkLuaInline
           # lua
