@@ -45,6 +45,6 @@ in
         git diff --cached |
           aichat "$PROMPT" > "$msg"
 
-        git commit --file "$msg" "$@"
+        git commit --template "$msg" "$@"
       '';
   }
