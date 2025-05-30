@@ -10,23 +10,19 @@
         desc = lib.elemAt x 2;
       }
     ) [
-      ["f" "files" "Search files"]
-      ["b" "buffers" "Search buffers"]
-      ["h" "helptags" "Search help"]
+      ["f" "files" "Files in project"]
+      ["b" "buffers" "Open buffers"]
+      ["h" "helptags" "Help files"]
+      ["r" "resume" "Resume search"]
     ];
 in {
   config.vim = {
     binds.whichKey.register."<leader>s" = "search";
     keymaps =
       [
-        (mkKeymap ["n"] "<leader>,"
-          "<cmd>FzfLua buffers<cr>" {desc = "Open buffers...";})
-
-        (mkKeymap ["n"] "<leader>/"
-          "<cmd>FzfLua grep<cr>" {desc = "Search project...";})
-
-        (mkKeymap ["n"] "<leader> "
-          "<cmd>FzfLua files<cr>" {desc = "Open files...";})
+        (mkKeymap ["n"] "<leader>," "<cmd>FzfLua buffers<cr>" {desc = "Open buffers...";})
+        (mkKeymap ["n"] "<leader>/" "<cmd>FzfLua grep<cr><cr>" {desc = "Search in project...";})
+        (mkKeymap ["n"] "<leader> " "<cmd>FzfLua files<cr>" {desc = "Open files...";})
       ]
       ++ searchBindings;
 
