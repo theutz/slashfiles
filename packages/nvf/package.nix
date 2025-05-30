@@ -35,12 +35,6 @@
         session = {
           nvim-session-manager = {
             enable = true;
-            mappings = {
-              deleteSession = "<leader>qx";
-              loadLastSession = "<leader>ql";
-              loadSession = "<leader>qf";
-              saveCurrentSession = "<leader>qs";
-            };
             setupOpts = {
               autoload_mode = lib.generators.mkLuaInline "sm.AutoloadMode.GitSession";
             };
