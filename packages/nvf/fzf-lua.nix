@@ -16,6 +16,7 @@
     ];
 in {
   config.vim = {
+    binds.whichKey.register."<leader>s" = "search";
     keymaps =
       [
         (mkKeymap ["n"] "<leader>,"
