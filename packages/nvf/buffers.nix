@@ -7,7 +7,9 @@
   inherit (lib.lists) optional;
 
   mkItem = key: cmd: desc: mkKeymap ["n"] "<leader>b${key}" "<cmd>${cmd}<cr>" {inherit desc;};
+
   flatConcat = (lib.flip lib.pipe) [lib.concatLists lib.flatten];
+  hasFzf = config.vim.fzf-lua.enable;
 in {
   config.vim = {
     startPlugins = ["bufdelete-nvim"];
@@ -24,7 +26,7 @@ in {
         (mkItem "l" "b #" "Most recent buffer")
       ]
       (
-        optional config.vim.fzf-lua.enable [
+        optional hasFzf [
           (mkItem "b" "FzfLua buffers" "Search buffers")
         ]
       )
