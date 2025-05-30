@@ -26,7 +26,6 @@ _: {
         )"
 
         echo "$generated
-
         $orig" > "$commit_msg_file"
       '';
 
