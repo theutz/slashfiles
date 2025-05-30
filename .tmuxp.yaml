@@ -5,12 +5,16 @@ windows:
   - window_name: edit
     layout: main-vertical
     options:
-      remain-on-exit: true
+      remain-on-exit: false
       other-pane-width: 100
     panes:
       - shell_command: nix run .#nvf
       - shell: mask test watch
+        options:
+          remain-on-exit: false
       - shell: mask switch watch
+        options:
+          remain-on-exit: false
 
   - window_name: home-manager
     panes:
