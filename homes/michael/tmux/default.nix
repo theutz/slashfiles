@@ -31,19 +31,19 @@
       '';
 
     programs.tmux = let
-      theme = pkgs.tmuxPlugins.dracula;
+      inherit (pkgs.tmuxPlugins) rose-pine catppuccin;
 
-      plugins =
-        lib.concat
-        (lib.singleton theme)
-        (with pkgs.tmuxPlugins; [
-          sessionist
-          pain-control
-        ]);
+      plugins = with pkgs.tmuxPlugins; [
+        sessionist
+        pain-control
+        rose-pine
+      ];
 
-      hasCatppuccin = lib.elem pkgs.tmuxPlugins.catppuccin plugins;
+      hasCatppuccin = lib.elem catppuccin plugins;
+      hasRosePine = lib.elem rose-pine plugins;
     in {
       inherit plugins;
+
       aggressiveResize = true;
       baseIndex = 1;
       clock24 = true;
@@ -69,6 +69,7 @@
           set -ga update-environment PATH
           set -ga update-environment EDITOR
           set -ga update-environment VISUAL
+
           ${lib.optionalString hasCatppuccin ''
             set -g status-left-length 100
             set -g status-right-length 100
@@ -78,6 +79,10 @@
             set -g status-right "#{E:@catppuccin_status_application}"
             set -ag status-right "#{E:@catppuccin_status_session}"
             set -ag status-right "#{E:@catppuccin_status_uptime}"
+          ''}
+
+          ${lib.optionalString hasRosePine ''
+            set -g @rose_pine_variant "main"
           ''}
 
           ${menus}
