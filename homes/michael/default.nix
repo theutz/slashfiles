@@ -164,10 +164,12 @@
         ''
           local config = wezterm.config_builder()
 
-          config.font_family = "RobotoMono Nerd Font Propo"
+          config.font = "RobotoMono Nerd Font Propo"
           config.font_size = 16
           config.color_scheme = "catppuccin-mocha"
           config.default_prog = { fish }
+          config.hide_tab_bar_if_only_one_tab = false
+
           -- For compatibility with mprocs https://github.com/pvolok/mprocs/issues/165
           -- config.enable_csi_u_key_encoding = true
           return config
