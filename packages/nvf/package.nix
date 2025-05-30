@@ -4,9 +4,10 @@
   nvf',
   ...
 }: let
+  currentFile = /. + __curPos.file;
   mods = lib.pipe ./. [
     lib.filesystem.listFilesRecursive
-    (lib.filter (f: f != /. + __curPos.file))
+    (lib.filter (f: f != currentFile))
   ];
 in
   (nvf'.lib.neovimConfiguration {
