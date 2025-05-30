@@ -25,7 +25,9 @@ _: {
             bash -c "git diff --cached | aichat \"$prompt\""
         )"
 
-        echo "$generated\\n\\n$orig" > "$commit_msg_file"
+        echo "$generated
+
+        $orig" > "$commit_msg_file"
       '';
 
     installCommitMsgHook =
