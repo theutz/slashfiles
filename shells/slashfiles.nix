@@ -92,6 +92,7 @@ _: {
           ''
             ${config.pre-commit.installationScript}
             ${installCommitMsgHook}
+            echo
             onefetch
 
             cat <<-markdown | gum format
