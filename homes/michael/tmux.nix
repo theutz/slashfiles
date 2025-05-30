@@ -65,6 +65,11 @@
             set -g status-left-length 200;
             set -g @catppuccin_flavor 'mocha';
             set -g @catppuccin_window_status_style "rounded"
+            set -g status-right "#{E:@catppuccin_status_application}"
+            set -agF status-right "#{E:@catppuccin_status_cpu}"
+            set -ag status-right "#{E:@catppuccin_status_session}"
+            set -ag status-right "#{E:@catppuccin_status_uptime}"
+            set -agF status-right "#{E:@catppuccin_status_battery}"
           ''}
         '';
       focusEvents = true;
