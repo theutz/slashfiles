@@ -63,6 +63,7 @@
           set -ga update-environment VISUAL
           ${lib.optionalString hasCatppuccin ''
             set -g @catppuccin_flavor 'mocha';
+            set -g status-left-length 200;
           ''}
         '';
       focusEvents = true;
