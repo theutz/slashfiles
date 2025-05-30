@@ -40,12 +40,5 @@ in {
     fzf-lua = {
       enable = true;
     };
-
-    session.nvim-session-manager.mappings = mkIf config.vim.session.nvim-session-manager.enable {
-      deleteSession = "<leader>qx";
-      loadLastSession = "<leader>ql";
-      loadSession = "<leader>qf";
-      saveCurrentSession = "<leader>qs";
-    };
   };
 }

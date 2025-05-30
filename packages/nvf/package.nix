@@ -32,15 +32,6 @@
           };
         };
 
-        session = {
-          nvim-session-manager = {
-            enable = true;
-            setupOpts = {
-              autoload_mode = lib.generators.mkLuaInline "sm.AutoloadMode.GitSession";
-            };
-          };
-        };
-
         statusline.lualine.enable = true;
 
         theme = {
