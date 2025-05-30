@@ -41,6 +41,11 @@
       };
       surround.enable = true;
       yazi-nvim.enable = true;
+      yazi-nvim.mappings = {
+        openYazi = "<leader>e";
+        openYaziDir = null;
+        yaziToggle = null;
+      };
     };
   };
 }
