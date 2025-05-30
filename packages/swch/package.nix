@@ -18,13 +18,14 @@ in
       pkgs.git
       pkgs.gum
       pkgs.aichat
+      pkgs.noti
     ];
 
     text =
-      /*
-      bash
-      */
+      # bash
       ''
+        trap 'noti -t "${name}" -m "Process complete"' EXIT
+
         debug=0
         help=0
 
