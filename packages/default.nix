@@ -4,6 +4,7 @@
     config,
     pkgs,
     lib,
+    lib',
     inputs',
     ...
   }: {
@@ -13,7 +14,7 @@
       autoArgs =
         pkgs
         // {
-          inherit inputs inputs';
+          inherit inputs inputs' lib';
           nvf' = inputs.nvf;
         };
 

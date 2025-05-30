@@ -1,6 +1,7 @@
 {
   pkgs,
   lib,
+  lib',
   nvf',
   ...
 }: let
@@ -12,4 +13,8 @@
 in
   (nvf'.lib.neovimConfiguration {
     inherit pkgs modules;
+
+    extraSpecialArgs = {
+      inherit lib';
+    };
   }).neovim

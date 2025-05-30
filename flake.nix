@@ -8,6 +8,7 @@
       systems = import inputs.systems;
 
       imports = [
+        ./lib
         ./pre-commit
         ./formatter
         ./shells

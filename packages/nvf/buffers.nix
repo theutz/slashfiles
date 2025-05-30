@@ -1,14 +1,15 @@
 {
   lib,
   config,
+  lib',
   ...
 }: let
   inherit (lib.nvim.binds) mkKeymap;
   inherit (lib.lists) optional;
+  inherit (lib'.lists) flatConcat;
 
   mkItem = key: cmd: desc: mkKeymap ["n"] "<leader>b${key}" "<cmd>${cmd}<cr>" {inherit desc;};
 
-  flatConcat = (lib.flip lib.pipe) [lib.concatLists lib.flatten];
   hasFzf = config.vim.fzf-lua.enable;
 in {
   config.vim = {
