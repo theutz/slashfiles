@@ -5,7 +5,7 @@
   lib,
   ...
 }: {
-  brew.enable = false;
+  brew.enable = true;
 
   environment = {
     etc."pam.d/sudo_local".text = ''
