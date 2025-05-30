@@ -5,4 +5,4 @@
 - [ ] Fix dark mode in delta
 - [ ] Setup finicky
 - [ ] Integrate smart splits
-- [ ] Use catppucin
+- [x] Use catppucin

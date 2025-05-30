@@ -1,4 +1,8 @@
-{pkgs, ...}: {
+{
+  pkgs,
+  lib,
+  ...
+}: {
   config.vim = {
     formatter.conform-nvim.enable = true;
 
@@ -24,10 +28,12 @@
 
     statusline.lualine.enable = true;
 
-    theme = {
+    theme = rec {
       enable = true;
       name = "catppuccin";
-      style = "mocha";
+      style = lib.attrByPath [name] null {
+        catppuccin = "mocha";
+      };
       transparent = true;
     };
 
