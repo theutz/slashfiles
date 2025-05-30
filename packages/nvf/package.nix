@@ -3,68 +3,67 @@
   lib,
   nvf',
   ...
-}:
-(nvf'.lib.neovimConfiguration {
-  inherit pkgs;
+}: let
+  mods = lib.pipe ./. [
+    lib.filesystem.listFilesRecursive
+    (lib.filter (f: f != ./package.nix))
+  ];
+in
+  (nvf'.lib.neovimConfiguration {
+    inherit pkgs;
 
-  modules = [
-    ./fzf-lua.nix
-    ./session.nix
-    {
-      config = {
-        fzf-lua.enable = true;
-        session.enable = true;
-        vim = {
-        };
-      };
-      config.vim = {
-        formatter.conform-nvim.enable = true;
+    modules =
+      mods
+      ++ [
+        {
+          config = {
+            fzf-lua.enable = true;
+            session.enable = true;
+            vim = {
+              formatter.conform-nvim.enable = true;
 
-        git.enable = true;
+              git.enable = true;
 
-        languages = {
-          enableExtraDiagnostics = true;
-          enableFormat = true;
-          enableTreesitter = true;
-          nix.enable = true;
-          nix.extraDiagnostics = {
-            enable = true;
-            types = ["statix" "deadnix"];
-          };
-          bash.enable = true;
-        };
+              languages = {
+                enableExtraDiagnostics = true;
+                enableFormat = true;
+                enableTreesitter = true;
+                nix.enable = true;
+                nix.extraDiagnostics = {
+                  enable = true;
+                  types = ["statix" "deadnix"];
+                };
+                bash.enable = true;
+              };
 
-        lazy.plugins = {
-          neogit = {
-            package = pkgs.vimPlugins.neogit;
-          };
-        };
+              lazy.plugins = {
+                neogit = {
+                  package = pkgs.vimPlugins.neogit;
+                };
+              };
 
-        statusline.lualine.enable = true;
+              statusline.lualine.enable = true;
 
-        theme = {
-          enable = true;
-          name = "catppuccin";
-          style = "mocha";
-          transparent = true;
-        };
+              theme = {
+                enable = true;
+                name = "catppuccin";
+                style = "mocha";
+                transparent = true;
+              };
 
-        ui.borders.enable = true;
+              ui.borders.enable = true;
 
-        utility = {
-          motion = {
-            flash-nvim = {
-              enable = true;
+              utility = {
+                motion = {
+                  flash-nvim = {
+                    enable = true;
+                  };
+                };
+                surround.enable = true;
+                yazi-nvim.enable = true;
+              };
             };
           };
-          surround.enable = true;
-          yazi-nvim.enable = true;
-        };
-      };
-    }
-    ./diagnostics.nix
-    ./lsp.nix
-    ./treesitter.nix
-    ./keymaps.nix
-  ];
-}).neovim
+        }
+      ];
+  }).neovim
