@@ -13,6 +13,8 @@ in {
     keymaps = [
       (mkItem "d" "Bdelete" "Delete buffer")
       (mkItem "n" "bnext" "Next buffer")
+      (mkItem "p" "bprev" "Prev buffer")
+      (mkItem "l" "b #" "Most recent buffer")
     ];
   };
 }
