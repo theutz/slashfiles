@@ -23,7 +23,10 @@ in
     text =
       # bash
       ''
+        set -x
         args=()
+        repo=""
+        do_add=0
 
         while [[ $# -gt 0 ]]; do
           case "$1" in
@@ -32,7 +35,7 @@ in
               shift 2
               ;;
             --all | -a)
-              git add -A
+              do_add=1
               shift
               ;;
             *)
@@ -44,12 +47,18 @@ in
 
         set -- "''${args[@]}"
 
-        msg=".git/comt_msg"
+        if [[ $do_add -eq 1 ]]; then
+          git ''${repo:+-C ''${repo}} add -A
+        fi
 
-        git "''${repo:+-C ''${repo}}" diff --cached |
+        echo "repo: $repo" >&2
+
+        msg="''${repo:+''${repo}/}.git/comt_msg"
+
+        git ''${repo:+-C ''${repo}} diff --cached |
           aichat "$PROMPT" > "$msg"
 
-        git "''${repo:+-C ''${repo}}" commit \
+        git ''${repo:+-C ''${repo}} commit \
           --file "$msg" \
           --edit \
           "$@"

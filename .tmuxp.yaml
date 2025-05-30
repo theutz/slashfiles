@@ -2,7 +2,7 @@ session_name: slashfiles
 global_options:
   remain-on-exit: true
 windows:
-  - window_name: edit
+  - window_name: main
     layout: main-vertical
     options:
       remain-on-exit: false
