@@ -29,7 +29,9 @@
 
     '';
 
-  programs.tmux = {
+  programs.tmux = let
+    theme = pkgs.tmuxPlugins.catppuccin;
+  in {
     aggressiveResize = true;
     baseIndex = 1;
     clock24 = true;
@@ -54,11 +56,12 @@
     focusEvents = true;
     keyMode = "vi";
     mouse = true;
-    plugins = with pkgs; [
-      tmuxPlugins.sessionist
-      tmuxPlugins.pain-control
-      tmuxPlugins.dracula
-    ];
+    plugins =
+      [theme]
+      ++ (with pkgs; [
+        tmuxPlugins.sessionist
+        tmuxPlugins.pain-control
+      ]);
     prefix = "M-m";
   };
 }
