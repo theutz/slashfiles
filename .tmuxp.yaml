@@ -1,24 +1,25 @@
 session_name: slashfiles
-options:
-  remain-on-exit: on
+global_options:
+  remain-on-exit: true
 windows:
   - window_name: edit
     layout: main-vertical
     options:
+      remain-on-exit: true
       other-pane-width: 100
     panes:
       - shell_command: nix run .#nvf
-      - shell_command: mask test watch
-      - shell_command: mask switch watch
+      - shell: mask test watch
+      - shell: mask switch watch
 
   - window_name: home-manager
     panes:
-      - shell_command: man 5 home-configuration.nix
+      - shell: man 5 home-configuration.nix
 
   - window_name: nix-darwin
     panes:
-      - shell_command: man 5 configuration.nix
+      - shell: man 5 configuration.nix
 
   - window_name: nix-darwin
     panes:
-      - shell_command: man 5 nvf
+      - shell: man 5 nvf

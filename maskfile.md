@@ -24,6 +24,7 @@ swch
 
 ```bash
 watchexec \
+  --postpone \
   -w homes \
   -w hosts \
   -w modules \
@@ -45,7 +46,8 @@ nix flake check
 > Watch for changes and run the tests
 
 ```bash
-watchexec --restart -- nix flake check
+watchexec --postpone --restart \
+  -- nix flake check
 ```
 
 ## commit
