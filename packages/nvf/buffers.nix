@@ -15,7 +15,7 @@ in {
       "<leader>b" = "buffers";
     };
 
-    keymaps = lib.concatLists [
+    keymaps = lib.pipe [
       [
         (mkItem "d" "Bdelete" "Delete buffer")
         (mkItem "n" "bnext" "Next buffer")
@@ -26,6 +26,6 @@ in {
         optional config.vim.fzf-lua.enable
         (mkItem "b" "FzfLua buffers" "Search buffers")
       )
-    ];
+    ] [lib.concatLists lib.flatten];
   };
 }
