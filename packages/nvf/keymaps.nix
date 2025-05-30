@@ -17,12 +17,6 @@ in {
       (mkKeymap ["n"] "<leader>bd"
         "<cmd>Bdelete<cr>" {desc = "Delete buffer";})
 
-      (mkKeymap ["n"] "<leader>,"
-        "<cmd>FzfLua buffers<cr>" {desc = "Open buffers...";})
-
-      (mkKeymap ["n"] "<leader>/"
-        "<cmd>FzfLua grep<cr>" {desc = "Search project...";})
-
       (mkKeymap ["n"] "<leader>gg"
         "<cmd>Neogit<cr>" {desc = "Neogit";})
 
@@ -31,12 +25,6 @@ in {
 
       (mkKeymap ["n"] "<leader>e"
         "<cmd>Yazi<cr>" {desc = "Open file explorer...";})
-
-      (mkKeymap ["n"] "<leader> "
-        "<cmd>FzfLua files<cr>" {desc = "Open files...";})
-
-      (mkKeymap ["n"] "<leader>sh"
-        "<cmd>FzfLua helptags<cr>" {desc = "Search help";})
 
       (
         mkKeymap ["n" "i" "s"] "<esc>"

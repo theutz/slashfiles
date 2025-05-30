@@ -8,6 +8,7 @@
   inherit pkgs;
 
   modules = [
+    ./fzf-lua.nix
     {
       config.vim = {
         formatter.conform-nvim.enable = true;

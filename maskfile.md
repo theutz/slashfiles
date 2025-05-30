@@ -27,6 +27,7 @@ watchexec \
   -w homes \
   -w hosts \
   -w modules \
+  -w packages \
   --restart \
   -- $MASK switch
 ```
