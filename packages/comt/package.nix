@@ -27,6 +27,10 @@ in
 
         while [[ $# -gt 0 ]]; do
           case "$1" in
+            -C)
+              repo="$2"
+              shift 2
+              ;;
             --all | -a)
               git add -A
               shift
@@ -42,9 +46,12 @@ in
 
         msg=".git/comt_msg"
 
-        git diff --cached |
+        git "''${repo:+-C ''${repo}}" diff --cached |
           aichat "$PROMPT" > "$msg"
 
-        git commit --file "$msg" --edit "$@"
+        git "''${repo:+-C ''${repo}}" commit \
+          --file "$msg" \
+          --edit \
+          "$@"
       '';
   }
