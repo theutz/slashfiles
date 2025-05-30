@@ -22,8 +22,7 @@ _: {
 
         generated="$(
           gum spin --show-output --title "Generating commit message..." -- \
-            git diff --cached |
-              aichat "$prompt"
+            bash -c "git diff --cached | aichat \"$prompt\""
         )"
 
         echo "$generated\n$orig" > "$commit_msg_file"
