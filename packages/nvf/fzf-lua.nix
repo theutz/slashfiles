@@ -16,7 +16,9 @@
         desc = lib.elemAt x 2;
       }
     ) [
-      ["b" "buffers" "Open buffers..."]
+      ["f" "files" "Search files"]
+      ["b" "buffers" "Search buffers"]
+      ["h" "helptags" "Search help"]
     ];
 in {
   options.fzf-lua.enable = mkEnableOption "use fzf-lua";
@@ -32,9 +34,6 @@ in {
 
         (mkKeymap ["n"] "<leader> "
           "<cmd>FzfLua files<cr>" {desc = "Open files...";})
-
-        (mkKeymap ["n"] "<leader>sh"
-          "<cmd>FzfLua helptags<cr>" {desc = "Search help";})
       ]
       ++ searchBindings;
 
