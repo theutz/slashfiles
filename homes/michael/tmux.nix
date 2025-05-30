@@ -34,9 +34,11 @@
       theme = pkgs.tmuxPlugins.catppuccin;
       plugins =
         [theme]
-        ++ (with pkgs; [
-          tmuxPlugins.sessionist
-          tmuxPlugins.pain-control
+        ++ (with pkgs.tmuxPlugins; [
+          sessionist
+          pain-control
+          battery
+          cpu
         ]);
       hasCatppuccin = lib.elem pkgs.tmuxPlugins.catppuccin plugins;
     in {
