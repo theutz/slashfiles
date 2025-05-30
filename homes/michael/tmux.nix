@@ -64,8 +64,8 @@
           set -ga update-environment EDITOR
           set -ga update-environment VISUAL
           ${lib.optionalString hasCatppuccin ''
-            set -g status-left-length 200;
-            set -g @catppuccin_flavor 'mocha';
+            set -g status-left-length 200
+            set -g @catppuccin_flavor 'mocha'
             set -g @catppuccin_window_status_style "rounded"
             set -g status-right "#{E:@catppuccin_status_application}"
             set -agF status-right "#{E:@catppuccin_status_cpu}"
