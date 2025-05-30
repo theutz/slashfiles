@@ -62,15 +62,16 @@
           set -ga update-environment EDITOR
           set -ga update-environment VISUAL
           ${lib.optionalString hasCatppuccin ''
-            set -g @catppuccin_flavor 'mocha';
             set -g status-left-length 200;
+            set -g @catppuccin_flavor 'mocha';
+            set -g @catppuccin_window_status_style "rounded"
           ''}
         '';
       focusEvents = true;
       keyMode = "vi";
       mouse = true;
-
       prefix = "M-m";
+      tmuxp.enable = true;
     };
   };
 }
