@@ -94,12 +94,6 @@
 
   programs.nix-index.enable = true;
 
-  programs.tmux.enable = true;
-  programs.tmux.enableSensible = true;
-  programs.tmux.enableFzf = true;
-  programs.tmux.enableMouse = true;
-  programs.tmux.enableVim = true;
-
   programs.vim.enable = true;
   programs.vim.enableSensible = true;
 
