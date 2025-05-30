@@ -1,6 +1,5 @@
 {
   osConfig,
-  config,
   pkgs,
   lib,
   packages,
@@ -164,8 +163,9 @@
         ''
           local config = wezterm.config_builder()
 
-          config.font = "RobotoMono Nerd Font Propo"
+          config.font = wezterm.font "RobotoMono Nerd Font Propo"
           config.font_size = 16
+          config.line_height = 1.1
           config.color_scheme = "catppuccin-mocha"
           config.default_prog = { fish }
           config.hide_tab_bar_if_only_one_tab = false
