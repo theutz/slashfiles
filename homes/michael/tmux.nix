@@ -49,7 +49,36 @@
       clock24 = true;
       enable = true;
       escapeTime = 0;
-      extraConfig =
+      extraConfig = let
+        killMenu = ''
+          bind-key -N "Open kill menu" x \
+            menu -T "Kill..." -x "#{popup_pane_left}" -y "#{popup_pane_bottom}" \
+              server S {
+                kill-server
+              } \'\' session s {
+                kill-session
+              } other-sessions C-s {
+                kill-session -a
+              } 'bells' b {
+                kill-session -C
+              } \'\' window w {
+                kill-window
+              } other-windows C-w {
+                kill-window -a
+              } respawn-window W {
+                respawn-window -k
+              } \'\' pane p {
+                kill-pane
+              } other-panes C-p {
+                kill-pane -a
+              } respawn-pane P {
+                respawn-pane -k
+              }
+        '';
+        menus = lib.concatLines [
+          killMenu
+        ];
+      in
         # tmux
         ''
           set -g allow-passthrough on
@@ -74,6 +103,8 @@
             set -ag status-right "#{E:@catppuccin_status_session}"
             set -ag status-right "#{E:@catppuccin_status_uptime}"
           ''}
+
+          ${menus}
         '';
       focusEvents = true;
       keyMode = "vi";
