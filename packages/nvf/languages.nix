@@ -30,10 +30,6 @@
 
     html = {
       enable = true;
-      dap.enable = true;
-      extraDiagnostics.enable = true;
-      format.enable = true;
-      lsp.enable = true;
       treesitter.enable = true;
     };
 
@@ -48,13 +44,13 @@
 
     markdown = {
       enable = true;
-      extendions = {
+      extensions = {
         markview-nvim.enable = true;
       };
       extraDiagnostics.enable = true;
       format.enable = true;
       lsp.enable = true;
-      treesitter = true;
+      treesitter.enable = true;
     };
 
     nix = {
