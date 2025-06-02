@@ -4,18 +4,6 @@
 
     git.enable = true;
 
-    languages = {
-      enableExtraDiagnostics = true;
-      enableFormat = true;
-      enableTreesitter = true;
-      nix.enable = true;
-      nix.extraDiagnostics = {
-        enable = true;
-        types = ["statix" "deadnix"];
-      };
-      bash.enable = true;
-    };
-
     lazy.plugins = {
       neogit = {
         package = pkgs.vimPlugins.neogit;
