@@ -5,7 +5,7 @@
   packages,
   ...
 }: let
-  dirsIn = p:
+  listNextLevelDefaults = p:
     lib.pipe p [
       lib.filesystem.listFilesRecursive
       (lib.map builtins.toString)
@@ -21,7 +21,7 @@
       ))
     ];
 in {
-  imports = dirsIn ./.;
+  imports = listNextLevelDefaults ./.;
 
   home = {
     packages =

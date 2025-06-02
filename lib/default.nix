@@ -22,6 +22,17 @@
       filters = {
         nixFiles = lib.filter (lib.hasSuffix "nix");
         defaultFiles = lib.filter (lib.hasSuffix "default.nix");
+        defaultsOneDeep = p:
+          lib.filter (
+            f:
+              ((lib.strings.match (
+                  builtins.toString (
+                    p + "/[^/]+/default.nix"
+                  )
+                ))
+                f)
+              != null
+          );
       };
     };
 
