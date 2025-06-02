@@ -123,7 +123,7 @@ in
 
         debug "Creating commit message"
         if
-          comt -C "$NH_FLAKE"
+          comt -C "$NH_FLAKE" -a
         then
           info "Changes committed"
         else
