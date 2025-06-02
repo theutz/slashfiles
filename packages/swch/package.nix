@@ -101,9 +101,9 @@ in
           debug -s "Found" "NH_FLAKE" "$NH_FLAKE"
         fi
 
-        debug "Adding all files in the flake's the git repository"
+        debug "Checking which files to add"
         if
-          git -C "$NH_FLAKE" add --all
+          git -C "$NH_FLAKE" add --interactive
         then
           debug "Added successfully";
         else

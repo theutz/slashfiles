@@ -47,9 +47,9 @@ in
         set -- "''${args[@]}"
 
         if [[ $do_add_all -eq 1 ]]; then
-          git ''${repo:+-C ''${repo}} add -A
+          git ''${repo:+-C ''${repo}} add --all
         else
-          git ''${repo:+-C ''${repo}} add -i
+          git ''${repo:+-C ''${repo}} add --interactive
         fi
 
         msg="''${repo:+''${repo}/}.git/comt_msg"
