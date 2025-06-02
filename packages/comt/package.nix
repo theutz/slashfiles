@@ -63,7 +63,7 @@ in
           $git commit "$@"
         else
           echo "$msg" > "$file"
-          $git commit --file "$msg" --edit "$@"
+          $git commit --file "$file" --edit "$@"
         fi
       '';
   }

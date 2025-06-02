@@ -113,6 +113,14 @@
     };
     fish = {
       enable = true;
+      functions = {
+        fish_greeting = "";
+      };
+      shellInit =
+        # fish
+        ''
+          fish_vi_key_bindings
+        '';
     };
     gh = {
       enable = true;
