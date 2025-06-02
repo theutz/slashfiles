@@ -1,4 +1,5 @@
 {
+  home.shellAliases.sp = "spotify_player";
   programs.spotify-player = {
     enable = true;
 
