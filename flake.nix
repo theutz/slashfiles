@@ -69,8 +69,15 @@
       inputs.nixpkgs.follows = "unstable";
     };
 
+    # You know. For git hooks.
     git-hooks = {
       url = "github:cachix/git-hooks.nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    # secrets with sops
+    sops-nix = {
+      url = "github:mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
