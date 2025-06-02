@@ -19,6 +19,7 @@ in
       inputs'.nh.packages.default
       self'.packages.comt
       pkgs.git
+      pkgs.gitu
       pkgs.gum
       pkgs.aichat
       pkgs.noti
@@ -103,7 +104,8 @@ in
 
         debug "Checking which files to add"
         if
-          git -C "$NH_FLAKE" add --interactive
+          (cd "$NH_FLAKE" && gitu)
+          # git -C "$NH_FLAKE" add --interactive
         then
           debug "Added successfully";
         else
