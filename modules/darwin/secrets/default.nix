@@ -15,7 +15,11 @@
   sops = {
     defaultSopsFile = ./secrets.yaml;
     secrets = {
-      "spotify_player/client_id" = {};
+      "spotify_player/client_id" = {
+        owner = "michael";
+        group = "staff";
+        mode = "0400";
+      };
     };
   };
 }
