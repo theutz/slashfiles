@@ -16,7 +16,7 @@ in {
       confirm = true;
       cursorline = true;
       expandtab = true;
-      fillchars = {
+      fillchars = lib.strings.concatMapAttrsStringSep "," (name: value: "${name}:${value}") {
         foldopen = "";
         foldclose = "";
         fold = " ";
@@ -43,7 +43,7 @@ in {
       relativenumber = true;
       ruler = false;
       scrolloff = 4;
-      sessionoptions = ["buffers" "curdir" "tabpages" "winsize" "help" "globals" "skiprtp" "folds"];
+      sessionoptions = lib.strings.concatStringsSep "," ["buffers" "curdir" "tabpages" "winsize" "help" "globals" "skiprtp" "folds"];
       shiftround = true;
       shiftwidth = 2;
       shortmess =
@@ -57,7 +57,7 @@ in {
       signcolumn = "yes";
       smartcase = true;
       smartindent = true;
-      spelllang = ["en"];
+      spelllang = "en";
       splitbelow = true;
       splitkeep = "screen";
       splitright = true;

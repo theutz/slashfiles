@@ -32,12 +32,21 @@
           enable = true;
         };
       };
+
       surround.enable = true;
-      yazi-nvim.enable = true;
-      yazi-nvim.mappings = {
-        openYazi = "<leader>e";
-        openYaziDir = null;
-        yaziToggle = null;
+
+      yazi-nvim = {
+        enable = true;
+
+        mappings = {
+          openYazi = "<leader>e";
+          openYaziDir = null;
+          yaziToggle = null;
+        };
+
+        setupOpts = {
+          open_for_directories = true;
+        };
       };
     };
   };
