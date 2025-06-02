@@ -1,6 +1,6 @@
-{inputs, ...}: {
+{...}: {
   imports = [
+    ./secrets
     ./packages
-    inputs.sops-nix.darwinModules.sops
   ];
 }

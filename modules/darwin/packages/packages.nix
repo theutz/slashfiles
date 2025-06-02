@@ -4,4 +4,6 @@ with pkgs; [
   pam-reattach
   fd
   git
+  sops
+  age
 ]
