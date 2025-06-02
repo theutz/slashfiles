@@ -46,20 +46,24 @@ in
 
         set -- "''${args[@]}"
 
+        git="git ''${repo:+-C ''${repo}}"
+
         if [[ $do_add_all -eq 1 ]]; then
-          git ''${repo:+-C ''${repo}} add --all
+          $git add --all
         else
-          git ''${repo:+-C ''${repo}} add --interactive
+          $git add --interactive
         fi
 
-        msg="''${repo:+''${repo}/}.git/comt_msg"
+        file="''${repo:+''${repo}/}.git/comt_msg"
 
-        git ''${repo:+-C ''${repo}} diff --cached |
-          aichat "$PROMPT" > "$msg"
+        msg="$($git diff --cached | aichat "$PROMPT")"
 
-        git ''${repo:+-C ''${repo}} commit \
-          --file "$msg" \
-          --edit \
-          "$@"
+        if [[ -z "$msg" ]]; then
+          echo "No commit message generated" >&2
+          $git commit "$@"
+        else
+          echo "$msg" > "$file"
+          $git commit --file "$msg" --edit "$@"
+        fi
       '';
   }
