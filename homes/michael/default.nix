@@ -9,6 +9,7 @@
     ./karabiner
     ./tmux
     ./wezterm.nix
+    ./spotify-player
   ];
 
   home = {
