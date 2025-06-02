@@ -25,7 +25,7 @@ in
       ''
         args=()
         repo=""
-        do_add=0
+        do_add_all=0
 
         while [[ $# -gt 0 ]]; do
           case "$1" in
@@ -34,7 +34,7 @@ in
               shift 2
               ;;
             --all | -a)
-              do_add=1
+              do_add_all=1
               shift
               ;;
             *)
@@ -46,8 +46,10 @@ in
 
         set -- "''${args[@]}"
 
-        if [[ $do_add -eq 1 ]]; then
+        if [[ $do_add_all -eq 1 ]]; then
           git ''${repo:+-C ''${repo}} add -A
+        else
+          git ''${repo:+-C ''${repo}} add -i
         fi
 
         msg="''${repo:+''${repo}/}.git/comt_msg"
