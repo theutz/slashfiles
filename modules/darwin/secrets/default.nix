@@ -11,4 +11,6 @@
     sops
     age
   ];
+
+  sops.age.defaultSopsFile = ./secrets.yaml;
 }
