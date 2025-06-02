@@ -30,6 +30,7 @@
           ripgrep
           aichat
           signal-desktop-bin
+          spotify-player
         ]
         ++ (with nerd-fonts; [
           roboto-mono
@@ -114,9 +115,7 @@
     fish = {
       enable = true;
       functions = {
-        fish_greeting = ''
-          echo "boo"
-        '';
+        fish_greeting = '''';
       };
       shellInit =
         # fish

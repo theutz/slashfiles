@@ -12,9 +12,10 @@
     age
   ];
 
-  sops.defaultSopsFile = ./secrets.yaml;
-
-  sops.secrets = {
-    hello = {};
+  sops = {
+    defaultSopsFile = ./secrets.yaml;
+    secrets = {
+      "spotify_player/client_id" = {};
+    };
   };
 }
