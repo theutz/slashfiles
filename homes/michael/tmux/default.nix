@@ -93,26 +93,33 @@
 
         ${lib.optionalString hasRosePine ''
           set -g @rose_pine_variant "main"
+          set -g @rose_pine_host 'on'
+          set -g @rose_pine_datetime '%Y-%m-%d'
+          set -g @rose_pine_user 'on'
+          set -g @rose_pine_directory 'on'
         ''}
 
         set-hook -g pane-died[10] {
-            menu -T "What next?" -x "#{popup_pane_right}" -y "#{popup_pane_bottom}" \
-              "respawn pane" r "respawn-pane -k" \
-              "new command" n {
+            display-menu -T "What next?" -x "#{popup_pane_right}" -y "#{popup_pane_bottom}" \
+              "respawn pane" r { \
+                respawn-pane -k \
+              } "new command" n {
                 command-prompt -I 'respawn-pane #{pane_start_command}'
-              } \
-              "kill-pane" q "kill-pane" \
-              "scroll up" C-u {
+              } "kill-pane" q {
+                kill-pane  \
+              } "scroll up" C-u {
                 copy-mode
                 send-keys -X halfpage-up
               }
           }
+
         bind-key -n -N "Respawn dead pane" Enter \
           if -F '#{pane_dead}' respawn-pane { send-keys Enter }
         bind-key -n -N "Kill dead pane" q \
           if -F '#{pane_dead}' kill-pane { send-keys q }
         bind-key -n -N "Open command prompt" : \
           if -F '#{pane_dead}' command-prompt { send-keys : }
+
         bind-key -n M-m send-prefix
         bind-key -N "Copy mode" C-u "copy-mode; send-keys -X halfpage-up"
         bind-key -N "Session picker" s choose-tree -sZ -O time
