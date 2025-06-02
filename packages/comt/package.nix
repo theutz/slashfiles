@@ -9,7 +9,6 @@ in
       gum
       git
       coreutils
-      gitu
     ];
 
     runtimeEnv = {
@@ -50,7 +49,7 @@ in
         if [[ $do_add_all -eq 1 ]]; then
           git ''${repo:+-C ''${repo}} add --all
         else
-          (cd "$repo" && gitu)
+          git ''${repo:+-C ''${repo}} add --interactive
         fi
 
         msg="''${repo:+''${repo}/}.git/comt_msg"
