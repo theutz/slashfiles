@@ -46,6 +46,16 @@
         lib.attrsets.attrValues
         lib.strings.concatLines
       ];
+      aliases = lib.pipe (import ./aliases.nix) [
+        (lib.attrsets.mapAttrs
+          (name: value: {inherit name value;}))
+        lib.attrsets.attrValues
+        (lib.imap
+          (i: v: ''
+            set -g command-alias[${builtins.toString (100 + i)}] ${v.name}="${v.value}"
+          ''))
+        lib.strings.concatLines
+      ];
     in {
       inherit plugins;
 
@@ -85,6 +95,7 @@
 
         set -g command-alias[100] reload="source $HOME/.config/tmux/tmux.conf"
 
+        ${aliases}
         ${menus}
       '';
       focusEvents = true;

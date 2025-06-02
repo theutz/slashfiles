@@ -1,0 +1,3 @@
+{
+  reload = "source $HOME/.config/tmux/tmux.conf";
+}
