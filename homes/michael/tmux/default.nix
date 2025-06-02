@@ -83,7 +83,7 @@
           set -g @rose_pine_variant "main"
         ''}
 
-        set -g command-alias[100] reload="source $HOME/.config/tmux.conf"
+        set -g command-alias[100] reload="source $HOME/.config/tmux/tmux.conf"
 
         ${menus}
       '';
