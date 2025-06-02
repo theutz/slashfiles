@@ -13,4 +13,8 @@
   ];
 
   sops.defaultSopsFile = ./secrets.yaml;
+
+  sops.secrets = {
+    hello = {};
+  };
 }

@@ -114,7 +114,9 @@
     fish = {
       enable = true;
       functions = {
-        fish_greeting = "";
+        fish_greeting = ''
+          echo "boo"
+        '';
       };
       shellInit =
         # fish
