@@ -31,10 +31,15 @@ in
 
         debug=0
         help=0
+        do_add_all=0
 
         args=()
         while [[ $# -gt 0 ]]; do
           case "$1" in
+            --all | -a)
+              do_add_all=1
+              shift
+              ;;
             --verbose | -v)
               debug=1
               shift
@@ -65,6 +70,7 @@ in
 
         ## Flags
 
+        -a, --all        Run "git add -A"
         -h, --help       Show this help
         -v, --verbose    Print verbose logs
         markdown
@@ -93,6 +99,8 @@ in
           fi
         }
 
+        git="git -C $NH_FLAKE"
+
         debug "Checking for flake environment var"
         if [[ ! -v NH_FLAKE || -z "$NH_FLAKE" ]]; then
           error "Please define an NH_FLAKE environment variable."
@@ -102,13 +110,19 @@ in
         fi
 
         debug "Checking which files to add"
-        if
-          git -C "$NH_FLAKE" add --interactive
-        then
-          debug "Added successfully";
+        if [[ $do_add_all -eq 1 ]]; then
+          if $git add --all; then
+            debug "Added all files successfully";
+          else
+            error "Could not add all files."
+          fi
         else
-          error "Could not add all files."
-          exit 1
+          if $git add --interactive; then
+            debug "Added files successfully";
+          else
+            error "Could not add all files."
+            exit 1
+          fi
         fi
 
         debug "Running \`nh ${cmd} switch\`"

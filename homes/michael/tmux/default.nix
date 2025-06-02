@@ -27,7 +27,6 @@
         else
                 verboseEcho "No tmux running"
         fi
-
       '';
 
     programs.tmux = let

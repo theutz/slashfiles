@@ -5,12 +5,26 @@
   packages,
   ...
 }: {
-  imports = [
-    ./karabiner
-    ./tmux
-    ./wezterm.nix
-    ./spotify-player
+  imports = lib.pipe ./. [
+    lib.filesystem.listFilesRecursive
+    (lib.map builtins.toString)
+    (lib.filter (
+      f:
+        ((lib.strings.match (
+            builtins.toString (
+              ./. + "/[^/]+/default.nix"
+            )
+          ))
+          f)
+        != null
+    ))
   ];
+  # imports = [
+  #   ./karabiner
+  #   ./tmux
+  #   ./wezterm
+  #   ./spotify-player
+  # ];
 
   home = {
     packages =
@@ -117,11 +131,15 @@
       enable = true;
       functions = {
         fish_greeting = '''';
+        fish_user_key_bindings = ''
+          fish_default_key_bindings -M insert
+          fish_vi_key_bindings --no-erase insert
+        '';
       };
       shellInit =
         # fish
         ''
-          fish_vi_key_bindings
+          fish_user_key_bindings
         '';
     };
     gh = {
