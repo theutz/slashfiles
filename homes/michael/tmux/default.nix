@@ -71,6 +71,8 @@
         set -g default-terminal "xterm-256color"
         set -g extended-keys always
         set -g terminal-overrides ",xterm*:Tc"
+        set -g renumber-windows on
+
         set -sa terminal-features "xterm*:extkeys"
         set -ga update-environment TERM
         set -ga update-environment TERM_PROGRAM
