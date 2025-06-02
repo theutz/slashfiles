@@ -41,6 +41,11 @@
 
       hasCatppuccin = lib.elem catppuccin plugins;
       hasRosePine = lib.elem rose-pine plugins;
+
+      menus = lib.pipe (import ./menus.nix) [
+        lib.attrsets.attrValues
+        lib.strings.concatLines
+      ];
     in {
       inherit plugins;
 
@@ -78,6 +83,7 @@
           set -g @rose_pine_variant "main"
         ''}
 
+        ${menus}
       '';
       focusEvents = true;
       keyMode = "vi";
