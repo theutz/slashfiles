@@ -1,10 +1,10 @@
 {
   kill = ''
     bind-key -N "Open kill menu" x \
-      display-menu -T "Kill..." \
+      display-menu -T "Kill..." -x "#{popup_pane_left}" -y "#{popup_pane_bottom}" \
         server S {
           kill-server
-        } ''' sessions {
+        } ''' session s {
           kill-session
         } other-sessions C-s {
           kill-session -a
