@@ -4,27 +4,24 @@
   lib,
   packages,
   ...
-}: {
-  imports = lib.pipe ./. [
-    lib.filesystem.listFilesRecursive
-    (lib.map builtins.toString)
-    (lib.filter (
-      f:
-        ((lib.strings.match (
-            builtins.toString (
-              ./. + "/[^/]+/default.nix"
-            )
-          ))
-          f)
-        != null
-    ))
-  ];
-  # imports = [
-  #   ./karabiner
-  #   ./tmux
-  #   ./wezterm
-  #   ./spotify-player
-  # ];
+}: let
+  dirsIn = p:
+    lib.pipe p [
+      lib.filesystem.listFilesRecursive
+      (lib.map builtins.toString)
+      (lib.filter (
+        f:
+          ((lib.strings.match (
+              builtins.toString (
+                p + "/[^/]+/default.nix"
+              )
+            ))
+            f)
+          != null
+      ))
+    ];
+in {
+  imports = dirsIn ./.;
 
   home = {
     packages =
