@@ -8,6 +8,7 @@
   imports = [./tmux ./karabiner ./spotify-player];
   slashfiles = {
     packages.enable = true;
+    git.enable = true;
   };
 
   home = {
@@ -76,13 +77,16 @@
       enable = true;
       config = {theme = "Dracula";};
     };
+
     bash = {
       enable = true;
     };
+
     direnv = {
       enable = true;
       nix-direnv.enable = true;
     };
+
     eza = {
       enable = true;
       enableBashIntegration = true;
@@ -90,6 +94,7 @@
       enableFishIntegration = true;
       enableNushellIntegration = true;
     };
+
     fish = {
       enable = true;
       functions = {
@@ -105,9 +110,7 @@
           fish_user_key_bindings
         '';
     };
-    gh = {
-      enable = true;
-    };
+
     ghostty = {
       enable = true;
       package =
@@ -133,17 +136,15 @@
         window-title-font-family = "RobotoMono Nerd Font Propo";
       };
     };
-    git = {
-      delta = {
-        enable = true;
-      };
-    };
+
     home-manager = {
       enable = true;
     };
+
     nushell = {
       enable = true;
     };
+
     starship = {
       enable = true;
     };
@@ -169,6 +170,7 @@
           return config
         '';
     };
+
     yazi = {
       enable = true;
       enableBashIntegration = true;
@@ -176,6 +178,7 @@
       enableZshIntegration = true;
       enableNushellIntegration = true;
     };
+
     zoxide = {
       enable = true;
       enableBashIntegration = true;
@@ -183,10 +186,12 @@
       enableZshIntegration = true;
       enableNushellIntegration = true;
     };
+
     zsh = {
       enable = true;
     };
   };
+
   xdg = {
     enable = true;
   };
