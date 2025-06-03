@@ -12,25 +12,6 @@
   };
 
   home = {
-    packages = with pkgs;
-      [
-        zoom-us
-        coreutils
-        delta
-        fd
-        eza
-        lazygit
-        procs
-        ripgrep
-        aichat
-        signal-desktop-bin
-        spotify-player
-      ]
-      ++ (with nerd-fonts; [
-        roboto-mono
-        blex-mono
-      ]);
-
     preferXdgDirectories = true;
     sessionPath = [
       osConfig.homebrew.brewPrefix
