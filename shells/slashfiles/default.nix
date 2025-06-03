@@ -20,17 +20,11 @@ in
 
     packages =
       (with pkgs; [
-        inputs.nh.packages.${pkgs.system}.default
-
         git
         onefetch
-        watchexec
         gum
-        aichat
-        tmux
-        tmuxp
-        gitu
-        lazygit
+        nh
+        comma
       ])
       ++ (with pkgs.${namespace}; [
         nvf
@@ -48,8 +42,11 @@ in
         # ${description}
 
         ${longDescription}
+
+        ## Git Status
         markdown
 
-        git status
+        gum style --border="rounded" --margin="1 2" --padding="1 2" -- \
+          "$(git -c status.color=always status -sb)"
       '';
   }

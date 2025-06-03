@@ -3,6 +3,7 @@
   namespace,
   config,
   lib,
+  inputs,
   ...
 }: let
   inherit (builtins) baseNameOf;
@@ -17,6 +18,7 @@ in {
   config = mkIf cfg.enable {
     home.packages = with pkgs;
       [
+        comma
         zoom-us
         coreutils
         fd
