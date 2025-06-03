@@ -1,11 +1,25 @@
 {
-  inputs',
   pkgs,
-  packages,
+  inputs,
   lib,
+  system,
+  namespace,
   ...
 }: {
-  # brew.enable = true;
+  snowfallorg.users."michael@kocaeli" = {
+    create = true;
+    # FIXME: Figure out why this doesn't work
+    # admin = true;
+    home = {
+      enable = true;
+      path = "/Users/michael";
+      config = {
+        backupFileExtension = "bak";
+        useUserPackages = true;
+        useGlobalPkgs = true;
+      };
+    };
+  };
 
   environment = {
     etc."pam.d/sudo_local".text = ''
@@ -34,26 +48,19 @@
     };
 
     systemPackages = [
-      # Packages from my flake inputs
-      inputs'.nh.packages.default
+      inputs.nh.packages.${system}.default
+      inputs.nvf.packages.${system}.docs-manpages # generate manpages
 
-      # Setup Neovim Flake
-      inputs'.nvf.packages.docs-manpages # generate manpages
-      packages.nvf
+      pkgs.${namespace}.nvf
+      pkgs.${namespace}.home
+      pkgs.${namespace}.swch
+      pkgs.${namespace}.comt
     ];
 
     variables = {
-      EDITOR = lib.mkForce (lib.getExe packages.nvf);
+      EDITOR = lib.mkForce (lib.getExe pkgs.${namespace}.nvf);
       NH_FLAKE = "/etc/nix-darwin";
     };
-  };
-
-  home-manager = {
-    backupFileExtension = "bak";
-    useUserPackages = true;
-    useGlobalPkgs = true;
-    users.michael = ../../homes/michael;
-    extraSpecialArgs = {inherit packages;};
   };
 
   nix = {

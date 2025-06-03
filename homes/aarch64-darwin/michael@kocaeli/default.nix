@@ -2,44 +2,38 @@
   osConfig,
   pkgs,
   lib,
-  lib',
-  packages,
   ...
 }: {
-  imports = lib'.filesystem.listNextLevelDefaults ./.;
+  imports = lib.slashfiles.filesystem.listNextLevelDefaults ./.;
 
   home = {
-    packages =
-      (with packages; [
-        home
-        swch
+    packages = with pkgs;
+      [
+        zoom-us
+        coreutils
+        delta
+        fd
+        lazygit
+        procs
+        ripgrep
+        aichat
+        signal-desktop-bin
+        spotify-player
+      ]
+      ++ (with slashfiles; [
         nvf
-        comt
       ])
-      ++ (with pkgs;
-        [
-          zoom-us
-          coreutils
-          delta
-          fd
-          lazygit
-          procs
-          ripgrep
-          aichat
-          signal-desktop-bin
-          spotify-player
-        ]
-        ++ (with nerd-fonts; [
-          roboto-mono
-          blex-mono
-        ]));
+      ++ (with nerd-fonts; [
+        roboto-mono
+        blex-mono
+      ]);
     preferXdgDirectories = true;
     sessionPath = [
       osConfig.homebrew.brewPrefix
     ];
     sessionVariables = {
       DIRENV_LOG_FORMAT = ""; # Quiet!
-      MANPAGER = "${lib.getExe packages.nvf} -c +Man!";
+      # MANPAGER = "${lib.getExe packages.nvf} -c +Man!";
       MANWIDTH = 999;
     };
     shell = {

@@ -58,12 +58,6 @@
   lists = {
     flatConcat = func.pipe [lib.concatLists lib.flatten];
   };
-
-  lib' = {inherit lists func path filesystem;};
 in {
-  flake.lib = lib';
-
-  perSystem = {
-    _module.args = {inherit lib';};
-  };
+  inherit lists func path filesystem;
 }

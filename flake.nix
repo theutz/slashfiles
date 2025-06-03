@@ -2,24 +2,6 @@
   # This flake is heavily inspired by @NotAShelf's github.com/notashelf/nyx
   description = "/slashfiles: .dotfiles/{everywhere}.nix";
 
-  # Bootstrap point for this whole, lovely mess.
-  outputs = inputs:
-    inputs.flake-parts.lib.mkFlake {inherit inputs;} {
-      debug = false;
-
-      systems = import inputs.systems;
-
-      imports = [
-        ./lib
-        ./pre-commit
-        ./formatter
-        ./shells
-        ./packages
-        ./modules/darwin
-        ./hosts
-      ];
-    };
-
   # Define the libraries that will define our system.
   inputs = {
     # I like to stay stable as my base, occasionally overriding with
@@ -36,7 +18,7 @@
     };
 
     # Nix Darwin: NixOS configuration for macOS
-    nix-darwin = {
+    darwin = {
       url = "github:nix-darwin/nix-darwin/nix-darwin-25.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
@@ -45,20 +27,18 @@
     nvf = {
       url = "github:notashelf/nvf";
       inputs.nixpkgs.follows = "unstable";
-      inputs.flake-parts.follows = "flake-parts";
     };
 
-    # Used to modularize this flake
-    flake-parts = {
-      url = "github:hercules-ci/flake-parts";
-      inputs.nixpkgs-lib.follows = "nixpkgs";
+    # A nice way to modularize your flake for multiple systems
+    snowfall-lib = {
+      url = "github:snowfallorg/lib";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # Standard definitions for flake-parts' `systems` attribute
-    # Can be changed to `/default-linux` to support only linux,
-    # or to `/default` to support everything. Generally, a smaller
-    # set should improve nix performance.
-    systems.url = "github:nix-systems/default-darwin";
+    comma = {
+      url = "github:nix-community/comma";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     # Format all the things
     treefmt-nix = {
@@ -72,16 +52,46 @@
       inputs.nixpkgs.follows = "unstable";
     };
 
-    # You know. For git hooks.
-    git-hooks = {
-      url = "github:cachix/git-hooks.nix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     # secrets with sops
     sops-nix = {
       url = "github:mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
+
+  # Bootstrap point for this whole, lovely mess.
+  outputs = inputs: let
+    namespace = "slashfiles";
+  in
+    inputs.snowfall-lib.mkFlake {
+      inherit inputs;
+
+      src = ./.;
+
+      snowfall = {
+        inherit namespace;
+        meta = {
+          name = namespace;
+          title = "/slashfiles: .dotfiles/{everywhere}.nix";
+        };
+      };
+
+      alias = {
+        shells.default = namespace;
+      };
+
+      outputs-builder = channels: let
+        pkgs = channels.nixpkgs;
+        treefmt = inputs.treefmt-nix.lib.evalModule pkgs ./treefmt.nix;
+      in {
+        formatter = treefmt.config.build.wrapper;
+        checks = {formatting = treefmt.config.build.check inputs.self;};
+      };
+
+      channels-config = {
+        allowUnfree = true;
+        permittedInsecurePackages = [];
+        config = {};
+      };
+    };
 }

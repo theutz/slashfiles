@@ -1,9 +1,11 @@
 {
   pkgs,
-  inputs',
-  self',
+  inputs,
+  stdenv,
+  namespace,
   ...
 }: let
+  inherit (pkgs.stdenv.hostPlatform) system;
   cmd =
     if pkgs.stdenv.isDarwin
     then "darwin"
@@ -16,8 +18,9 @@ in
     meta.description = description;
 
     runtimeInputs = [
-      inputs'.nh.packages.default
-      self'.packages.comt
+      inputs.nh.packages.${system}.default
+
+      pkgs.${namespace}.comt
       pkgs.git
       pkgs.gum
       pkgs.aichat
