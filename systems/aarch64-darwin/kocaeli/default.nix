@@ -21,6 +21,12 @@
     };
   };
 
+  home-manager = {
+    backupFileExtension = "bak";
+    useUserPackages = true;
+    useGlobalPkgs = true;
+  };
+
   "${namespace}" = {
     pam.enable = true;
   };

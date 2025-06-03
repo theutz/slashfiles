@@ -19,7 +19,6 @@ lib.${namespace}.mkModule {
       # bash
       ''
         export TERM="xterm-256color"
-        echo "boo"
         if
                 run ${tmux} ls &>/dev/null
         then
