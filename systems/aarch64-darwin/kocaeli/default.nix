@@ -1,6 +1,5 @@
 {
   pkgs,
-  inputs,
   lib,
   system,
   namespace,
@@ -65,7 +64,7 @@
   };
 
   nix = {
-    enable = true;
+    enable = false;
     checkConfig = true;
     # nix.nixPath.nixpkgs = "github:NixOS/nixpkgs/nixpkgs-24.05-darwin";
     settings = {

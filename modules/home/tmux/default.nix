@@ -1,4 +1,4 @@
-args @ {
+{
   lib,
   namespace,
   config,

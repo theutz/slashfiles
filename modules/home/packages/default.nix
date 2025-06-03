@@ -3,7 +3,6 @@
   namespace,
   config,
   lib,
-  inputs,
   ...
 }: let
   inherit (builtins) baseNameOf;
