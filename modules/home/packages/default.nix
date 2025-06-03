@@ -19,9 +19,7 @@ in {
       [
         zoom-us
         coreutils
-        delta
         fd
-        eza
         lazygit
         procs
         ripgrep
