@@ -2,6 +2,7 @@
   osConfig,
   pkgs,
   lib,
+  namespace,
   ...
 }: {
   imports = lib.slashfiles.filesystem.listNextLevelDefaults ./.;
@@ -13,6 +14,7 @@
         coreutils
         delta
         fd
+        eza
         lazygit
         procs
         ripgrep
@@ -20,28 +22,29 @@
         signal-desktop-bin
         spotify-player
       ]
-      ++ (with slashfiles; [
-        nvf
-      ])
       ++ (with nerd-fonts; [
         roboto-mono
         blex-mono
       ]);
+
     preferXdgDirectories = true;
     sessionPath = [
       osConfig.homebrew.brewPrefix
     ];
+
     sessionVariables = {
       DIRENV_LOG_FORMAT = ""; # Quiet!
-      # MANPAGER = "${lib.getExe packages.nvf} -c +Man!";
+      MANPAGER = "${lib.getExe pkgs.${namespace}.nvf} -c +Man!";
       MANWIDTH = 999;
     };
+
     shell = {
       # Enables in all shells
       enableShellIntegration = true;
     };
     shellAliases = {
       lg = "lazygit";
+      ls = "eza";
     };
     stateVersion = "25.05";
   };

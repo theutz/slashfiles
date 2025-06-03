@@ -76,6 +76,10 @@
         };
       };
 
+      systems.modules.darwin = [
+        inputs.sops-nix.darwinModules.sops
+      ];
+
       alias = {
         shells.default = namespace;
       };
