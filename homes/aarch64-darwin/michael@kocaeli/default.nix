@@ -7,7 +7,9 @@
 }: {
   imports = lib.slashfiles.filesystem.listNextLevelDefaults ./.;
 
-  slashfiles = {};
+  slashfiles = {
+    packages.enable = true;
+  };
 
   home = {
     packages = with pkgs;
