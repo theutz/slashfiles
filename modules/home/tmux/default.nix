@@ -1,15 +1,21 @@
-{
+args @ {
   lib,
-  pkgs,
+  namespace,
   config,
+  pkgs,
   ...
-}: {
-  config = {
+}:
+lib.${namespace}.mkModule {
+  inherit config;
+  here = ./.;
+} ({cfg}: {
+  options.enable = lib.mkEnableOption "tmux setup";
+  config = lib.mkIf cfg.enable {
     home.activation.reloadTmux = let
       tmux = lib.getExe pkgs.tmux;
       file = lib.concatStringsSep "/" [config.xdg.configHome "tmux" "tmux.conf"];
     in
-      lib.hm.dag.entryAfter ["writeBoundary"]
+      config.lib.dag.entryAfter ["writeBoundary"]
       # bash
       ''
         export TERM="xterm-256color"
@@ -145,4 +151,4 @@
       tmuxp.enable = true;
     };
   };
-}
+})

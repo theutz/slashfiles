@@ -5,10 +5,12 @@
   namespace,
   ...
 }: {
-  imports = [./tmux ./karabiner ./spotify-player];
+  imports = [./karabiner ./spotify-player];
+
   slashfiles = {
     packages.enable = true;
     git.enable = true;
+    tmux.enable = true;
   };
 
   home = {
