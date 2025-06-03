@@ -26,6 +26,7 @@ lib.${namespace}.mkModule {
                 if
                         run ${tmux} source-file "${file}"
                 then
+                        run ${tmux} display-message -d 2000 "Config relaoded!"
                         verboseEcho "Tmux config reloaded!"
                 else
                         echo "ERROR: Could not reload tmux config."
