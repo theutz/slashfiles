@@ -5,6 +5,7 @@
   namespace,
   ...
 }: {
+  imports = [./tmux ./karabiner ./spotify-player];
   slashfiles = {
     packages.enable = true;
   };
