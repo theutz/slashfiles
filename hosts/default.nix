@@ -22,6 +22,7 @@
 
           modules = [
             inputs.home-manager.darwinModules.home-manager
+            inputs.sops-nix.darwinModules.sops
             ../modules/darwin
             ./kocaeli
           ];

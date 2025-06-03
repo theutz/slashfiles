@@ -5,6 +5,8 @@
   # Bootstrap point for this whole, lovely mess.
   outputs = inputs:
     inputs.flake-parts.lib.mkFlake {inherit inputs;} {
+      debug = false;
+
       systems = import inputs.systems;
 
       imports = [
@@ -13,6 +15,7 @@
         ./formatter
         ./shells
         ./packages
+        ./modules/darwin
         ./hosts
       ];
     };

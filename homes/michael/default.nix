@@ -2,26 +2,11 @@
   osConfig,
   pkgs,
   lib,
+  lib',
   packages,
   ...
-}: let
-  listNextLevelDefaults = p:
-    lib.pipe p [
-      lib.filesystem.listFilesRecursive
-      (lib.map builtins.toString)
-      (lib.filter (
-        f:
-          ((lib.strings.match (
-              builtins.toString (
-                p + "/[^/]+/default.nix"
-              )
-            ))
-            f)
-          != null
-      ))
-    ];
-in {
-  imports = listNextLevelDefaults ./.;
+}: {
+  imports = lib'.filesystem.listNextLevelDefaults ./.;
 
   home = {
     packages =

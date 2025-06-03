@@ -1,12 +1,4 @@
-{
-  inputs,
-  pkgs,
-  ...
-}: {
-  imports = [
-    inputs.sops-nix.darwinModules.sops
-  ];
-
+{pkgs, ...}: {
   environment.systemPackages = with pkgs; [
     sops
     age
