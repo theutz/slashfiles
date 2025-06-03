@@ -14,7 +14,7 @@ lib.${namespace}.mkModule {
     programs.gh.enable = true;
     programs.git = {
       enable = true;
-      ignores = ["*~" "*.swp" "*.log"];
+      ignores = ["*~" "*.swp" "*.log" ".direnv"];
       userName = "Michael Utz";
       userEmail = "michael@theutz.com";
       delta = {

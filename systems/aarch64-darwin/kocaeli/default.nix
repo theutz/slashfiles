@@ -13,11 +13,6 @@
     home = {
       enable = true;
       path = "/Users/michael";
-      config = {
-        backupFileExtension = "bak";
-        useUserPackages = true;
-        useGlobalPkgs = true;
-      };
     };
   };
 

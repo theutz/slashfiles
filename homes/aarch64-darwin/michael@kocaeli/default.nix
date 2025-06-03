@@ -31,7 +31,6 @@
     };
     shellAliases = {
       lg = "lazygit";
-      ls = "eza";
     };
     stateVersion = "25.05";
   };
