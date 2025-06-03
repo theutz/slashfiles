@@ -1,4 +1,8 @@
-{lib, ...}: let
+{
+  lib,
+  namespace,
+  ...
+}: let
   filesystem = {
     listNixFilesRecursive = func.pipe [
       lib.filesystem.listFilesRecursive
@@ -58,6 +62,20 @@
   lists = {
     flatConcat = func.pipe [lib.concatLists lib.flatten];
   };
+
+  modules = {
+    mkModule = {
+      here,
+      config,
+    }: mod': let
+      name = builtins.baseNameOf here;
+      cfg = config.${namespace}.${name};
+      mod = mod' {inherit cfg;};
+    in {
+      inherit (mod) config;
+      options.${namespace}.${name} = mod.options;
+    };
+  };
 in {
-  inherit lists func path filesystem;
+  inherit lists func path filesystem modules;
 }
