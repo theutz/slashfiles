@@ -34,13 +34,13 @@ in
 
         debug=0
         help=0
-        do_add_all=0
+        do_add_all=1
 
         args=()
         while [[ $# -gt 0 ]]; do
           case "$1" in
-            --all | -a)
-              do_add_all=1
+            --interactive | -i)
+              do_add_all=0
               shift
               ;;
             --verbose | -v)
@@ -73,9 +73,9 @@ in
 
         ## Flags
 
-        -a, --all        Run "git add -A"
-        -h, --help       Show this help
-        -v, --verbose    Print verbose logs
+        -i, --interactive    "git add" files interactively
+        -h, --help           Show this help
+        -v, --verbose        Print verbose logs
         markdown
         }
 
