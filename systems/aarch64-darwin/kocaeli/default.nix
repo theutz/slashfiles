@@ -48,9 +48,9 @@
     };
 
     systemPackages = [
-      inputs.nh.packages.${system}.default
       inputs.nvf.packages.${system}.docs-manpages # generate manpages
 
+      pkgs.nvf-man
       pkgs.${namespace}.nvf
       pkgs.${namespace}.home
       pkgs.${namespace}.swch
