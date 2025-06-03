@@ -6,7 +6,7 @@
 }: let
   inherit (lib.nvim.binds) mkKeymap;
   inherit (lib.lists) optional;
-  inherit (lib'.lists) flatConcat;
+  inherit (lib') flatConcat;
 
   mkItem = key: cmd: desc: mkKeymap ["n"] "<leader>b${key}" "<cmd>${cmd}<cr>" {inherit desc;};
 

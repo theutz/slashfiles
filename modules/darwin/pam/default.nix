@@ -5,7 +5,7 @@
   namespace,
   ...
 }:
-lib.${namespace}.modules.mkModule {
+lib.${namespace}.mkModule {
   inherit config;
   here = ./.;
 } ({cfg}: {
