@@ -21,12 +21,11 @@
     };
   };
 
-  environment = {
-    etc."pam.d/sudo_local".text = ''
-      auth    optional        ${pkgs.pam-reattach}/lib/pam/pam_reattach.so
-      auth    sufficient      pam_tid.so
-    '';
+  "${namespace}" = {
+    pam.enable = true;
+  };
 
+  environment = {
     pathsToLink = [
       "/opt/homebrew/bin"
       "/opt/homebrew/sbin"
@@ -95,8 +94,6 @@
       enableFzfHistory = true;
     };
   };
-
-  security.pam.services.sudo_local.touchIdAuth = true;
 
   services = {
     # FIXME: When https://github.com/nix-darwin/nix-darwin/issues/1041 is fixed, we can use
