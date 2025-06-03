@@ -15,6 +15,7 @@
 
   home = {
     preferXdgDirectories = true;
+
     sessionPath = [
       osConfig.homebrew.brewPrefix
     ];
@@ -29,11 +30,14 @@
       # Enables in all shells
       enableShellIntegration = true;
     };
+
     shellAliases = {
       lg = "lazygit";
     };
+
     stateVersion = "25.05";
   };
+
   programs = {
     bat = {
       enable = true;
