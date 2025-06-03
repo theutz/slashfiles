@@ -47,13 +47,16 @@
       hm = "man 5 home-configuration.nix";
     };
 
-    systemPackages = [
-      pkgs.nvf-man
-      pkgs.${namespace}.nvf
-      pkgs.${namespace}.home
-      pkgs.${namespace}.swch
-      pkgs.${namespace}.comt
-    ];
+    systemPackages = with pkgs;
+      [
+        nvf-man
+      ]
+      ++ (with pkgs.${namespace}; [
+        nvf
+        home
+        swch
+        comt
+      ]);
 
     variables = {
       EDITOR = lib.mkForce (lib.getExe pkgs.${namespace}.nvf);
