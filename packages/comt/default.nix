@@ -100,7 +100,7 @@ in
           exit 1
         fi
 
-        if [[ $do_commit -ne 0 ]]; then
+        if [[ $do_commit -eq 0 ]]; then
           echo "$msg"
         fi
 
