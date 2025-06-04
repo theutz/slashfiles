@@ -1,12 +1,11 @@
 {
   config,
-  namespace,
   lib,
   ...
 }: let
   parent = builtins.baseNameOf ./.;
   name = builtins.baseNameOf __curPos.file |> lib.removeSuffix ".nix";
-  cfg = config.slashfiles.${parent}.${name} |> lib.traceVal;
+  cfg = config.slashfiles.${parent}.${name};
 in {
   options.slashfiles.${parent}.${name}.enable = lib.mkEnableOption "${parent} > ${name}";
 
