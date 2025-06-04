@@ -28,6 +28,7 @@ in {
 
       setupOpts.options = {
         numbers = "none";
+        close_command = "Bdelete %d";
       };
     };
 
