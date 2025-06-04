@@ -1,6 +1,7 @@
 {
   lib,
   config,
+  pkgs,
   ...
 }:
 lib.slashfiles.mkModule {
@@ -13,7 +14,12 @@ lib.slashfiles.mkModule {
       enable = true;
       enableBashIntegration = true;
       enableZshIntegration = true;
-      extraConfig = lib.fileContents ./wezterm.lua;
+      extraConfig =
+        pkgs.replaceVars ./wezterm.lua {
+          fish = lib.getExe pkgs.fish;
+        }
+        |> builtins.toPath
+        |> lib.fileContents;
     };
   };
 }
