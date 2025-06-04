@@ -24,6 +24,7 @@ in
         gum
         nh
         comma
+        agenix
       ])
       ++ (with pkgs.${namespace}; [
         nvf

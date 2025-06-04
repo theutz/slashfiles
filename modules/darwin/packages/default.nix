@@ -10,15 +10,39 @@ lib.${namespace}.mkModule {
   here = ./.;
 } {
   config = {
-    environment.systemPackages = import ./packages.nix {inherit pkgs;};
+    environment.systemPackages = with pkgs; [
+      ripgrep
+      pam-reattach
+      fd
+      git
+      gitu
+    ];
 
-    environment.shells = import ./shells.nix {inherit pkgs;};
+    environment.shells = with pkgs; [
+      bashInteractive
+      fish
+      zsh
+      nushell
+    ];
 
     homebrew = {
       enable = true;
       taps = [];
-      brews = import ./brews.nix;
-      casks = import ./casks.nix;
+
+      brews = [
+        "dark-mode"
+      ];
+
+      casks = [
+        "figma"
+        "vivaldi"
+        "karabiner-elements"
+        "spotify"
+        "slack"
+        "telegram"
+        "mouseless@preview"
+      ];
+
       onActivation = {
         autoUpdate = false; # default
         cleanup = "zap";
