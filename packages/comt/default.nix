@@ -31,9 +31,14 @@ in
         do_add_all=1
         do_help=0
         do_commit=1
+        edit_message=0
 
         while [[ $# -gt 0 ]]; do
           case "$1" in
+            --edit-message | -m)
+              edit_message=1
+              shift
+              ;;
             --no-commit | --echo | -e)
               do_commit=0
               shift
@@ -68,6 +73,7 @@ in
           ## FLAGS
 
           -C, --working-directory    Change the working directory for the git commands
+          -m, --edit-message         Edit the message in EDITOR before committing
           -e, --no-commit, --echo    Echo the commit message without committing
           -h, --help                 Show this help
           -i, --interactive          Interactively add files instead of adding everything
@@ -105,7 +111,11 @@ in
           exit 0
         fi
 
-        echo "$msg" > "$file"
-        $git commit --file "$file" --edit "$@"
+        if [[ $edit_message -eq 1 ]]; then
+          echo "$msg" > "$file"
+          $git commit --file "$file" --edit "$@"
+        else
+          $git commit --file "$file" "$@"
+        fi
       '';
   }
