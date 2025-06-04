@@ -87,9 +87,7 @@ lib.${namespace}.mkModule {
         '';
 
       programs.tmux = let
-        mkGlobals = (lib.flip lib.pipe) [
-          (lib.mapAttrsToList (name: value: ''set -g ${name} ${value}''))
-        ];
+        mkGlobals = (lib.mapAttrsToList (name: value: ''set -g ${name} ${value}'')) |> lib.concatLines;
       in {
         inherit plugins;
 
