@@ -25,7 +25,7 @@ args @ {
     |> lib.lists.foldr lib.recursiveUpdate {};
 
   home = {
-    preferXdgDirectories = builtins.trace "trace: ${lib.attrNames args.osConfig or {}}" true;
+    preferXdgDirectories = true;
 
     sessionPath = [
       osConfig.homebrew.brewPrefix
