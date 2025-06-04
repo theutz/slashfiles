@@ -38,6 +38,8 @@
       gcm = "git commit --message";
       gf = "git fetch";
       gfm = "git pull";
+      gia = "git add";
+      giaa = "git add -A";
       gpp = "git pull && git push";
       gws = "git status --short";
       gwS = "git status";
