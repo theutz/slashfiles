@@ -4,17 +4,12 @@
   config,
   lib,
   ...
-}: let
-  inherit (builtins) baseNameOf;
-  inherit (lib) mkIf mkEnableOption;
-  mod = baseNameOf ./.;
-  cfg = config.${namespace}.${mod};
-in {
-  options.${namespace}.${mod} = {
-    enable = mkEnableOption "Default packages";
-  };
-
-  config = mkIf cfg.enable {
+}:
+lib.${namespace}.mkModule {
+  inherit config;
+  here = ./.;
+} {
+  config = {
     home.packages = with pkgs;
       [
         comma

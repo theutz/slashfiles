@@ -7,10 +7,8 @@
 lib.${namespace}.mkModule {
   inherit config;
   here = ./.;
-} ({cfg}: {
-  options.enable = lib.mkEnableOption "git-based tool options";
-
-  config = lib.mkIf cfg.enable {
+} {
+  config = {
     home.shellAliases.lg = "lazygit";
 
     programs = {
@@ -78,4 +76,4 @@ lib.${namespace}.mkModule {
       };
     };
   };
-})
+}

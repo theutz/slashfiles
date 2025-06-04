@@ -1,4 +1,14 @@
-{pkgs, ...}: {
+{
+  pkgs,
+  lib,
+  namespace,
+  config,
+  ...
+}:
+lib.${namespace}.mkModule {
+  inherit config;
+  here = ./.;
+} {
   config = {
     environment.systemPackages = import ./packages.nix {inherit pkgs;};
 

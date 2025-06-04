@@ -5,6 +5,12 @@
   namespace,
   ...
 }: {
+  "${namespace}" = {
+    pam.enable = true;
+    packages.enable = true;
+    secrets.enable = true;
+  };
+
   snowfallorg.users."michael@kocaeli" = {
     create = true;
     # FIXME: Figure out why this doesn't work
@@ -19,10 +25,6 @@
     backupFileExtension = "bak";
     useUserPackages = true;
     useGlobalPkgs = true;
-  };
-
-  "${namespace}" = {
-    pam.enable = true;
   };
 
   environment = {
