@@ -30,9 +30,14 @@ in
         repo=""
         do_add_all=1
         do_help=0
+        do_commit=1
 
         while [[ $# -gt 0 ]]; do
           case "$1" in
+            --no-commit | --echo | -e)
+              do_commit=0
+              shift
+              ;;
             --help | -h)
               do_help=1
               shift
@@ -56,15 +61,16 @@ in
 
         function usage() {
           cat <<-markdown | gum format
-          # ${name}
+          # ${name} [flags]
 
           ${description}
 
           ## FLAGS
 
+          -C, --working-directory    Change the working directory for the git commands
+          -e, --no-commit, --echo    Echo the commit message without committing
           -h, --help                 Show this help
           -i, --interactive          Interactively add files instead of adding everything
-          -C, --working-directory    Change the working directory for the git commands
 
         markdown
         }
@@ -84,14 +90,21 @@ in
 
         file="''${repo:+''${repo}/}.git/comt_msg"
 
-        msg="$($git diff --cached | aichat "$PROMPT")"
+        msg="$(
+          gum spin --show-output --title "Generating commit message..." -- \
+            bash -c "$git diff --cached | aichat \"$PROMPT\""
+        )"
 
         if [[ -z "$msg" ]]; then
           echo "No commit message generated" >&2
-          $git commit "$@"
-        else
-          echo "$msg" > "$file"
-          $git commit --file "$file" --edit "$@"
+          exit 1
         fi
+
+        if [[ $do_commit -ne 0 ]]; then
+          echo "$msg"
+        fi
+
+        echo "$msg" > "$file"
+        $git commit --file "$file" --edit "$@"
       '';
   }
