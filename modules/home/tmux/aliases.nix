@@ -35,7 +35,7 @@ in (
   |> (lib.attrsets.mapAttrs (name: value: {inherit name value;}))
   |> lib.attrsets.attrValues
   |> lib.imap (i: v: ''
-    set -g command-alias[${builtins.toString (100 + 1)}] ${v.name}="${v.value}"
+    set -g command-alias[${builtins.toString (100 + i)}] ${v.name}="${v.value}"
   '')
   |> lib.strings.concatLines
   |> lib.attrsets.setAttrByPath ["config" "programs" "tmux" "extraConfig"]
