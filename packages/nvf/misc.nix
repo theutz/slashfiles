@@ -1,14 +1,6 @@
-{pkgs, ...}: {
+{
   config.vim = {
     formatter.conform-nvim.enable = true;
-
-    git.enable = true;
-
-    lazy.plugins = {
-      neogit = {
-        package = pkgs.vimPlugins.neogit;
-      };
-    };
 
     statusline.lualine.enable = true;
 
