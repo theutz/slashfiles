@@ -61,7 +61,10 @@
     inputs.snowfall-lib.mkFlake {
       inherit inputs;
 
-      src = ./.;
+      src = builtins.path {
+        path = ./.;
+        name = "source";
+      };
 
       snowfall = {
         inherit namespace;
