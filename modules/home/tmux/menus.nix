@@ -135,10 +135,12 @@
         }
   '';
 in {
-  programs.tmux.extraConfig = lib.concatLines [
-    kill
-    layout
-    create
-    rename
-  ];
+  config = {
+    programs.tmux.extraConfig = lib.concatLines [
+      kill
+      layout
+      create
+      rename
+    ];
+  };
 }
