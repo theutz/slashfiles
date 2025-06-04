@@ -39,10 +39,11 @@ lib.${namespace}.mkModule {
       set -g @rose_pine_directory 'on'
     '';
 
-    menus = lib.pipe (import ./menus.nix) [
-      lib.attrsets.attrValues
-      lib.strings.concatLines
-    ];
+    # menus = lib.pipe (import ./menus.nix) [
+    #   lib.attrsets.attrValues
+    #   lib.strings.concatLines
+    # ];
+    menus = (import ./menus.nix) |> lib.attrsets.attrValues |> lib.strings.concatLines;
 
     aliases = lib.pipe (import ./aliases.nix) [
       (lib.attrsets.mapAttrs
