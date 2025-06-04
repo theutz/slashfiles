@@ -19,25 +19,24 @@
           underline = true;
           update_in_insert = true;
           signs.text =
-            lib.mapAttrs' (name: value: {
-              inherit value;
-              name = "vim.diagnostic.severity.${lib.toUpper name}";
-            })
-            {
-              Error = " ";
-              Warn = " ";
-              Hint = " ";
-              Info = " ";
-            };
+            lib.generators.mkLuaInline
+            # lua
+            ''
+              {
+                [vim.diagnostic.severity.ERROR] = " ",
+                [vim.diagnostic.severity.WARN] = " ",
+                [vim.diagnostic.severity.HINT] = " ",
+                [vim.diagnostic.severity.INFO] = " "
+              }
+            '';
         };
       };
 
       lsp = {
         enable = true;
         formatOnSave = true;
-        # inlayHints.enable = true;
+        inlayHints.enable = true;
         # lightbulb.enable = true;
-        # lspSignature.enable = true;
         trouble = {
           enable = true;
           mappings = {
