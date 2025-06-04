@@ -10,7 +10,7 @@ args @ {
   slashfiles = {
     packages.enable = true;
     git.enable = true;
-    tmux.enable = true;
+    tmux.enable = false;
     yazi.enable = true;
   };
 
