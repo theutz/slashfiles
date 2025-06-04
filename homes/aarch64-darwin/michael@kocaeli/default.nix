@@ -11,6 +11,7 @@ args @ {
     packages.enable = true;
     git.enable = true;
     tmux.enable = true;
+    yazi.enable = true;
   };
 
   home = {
