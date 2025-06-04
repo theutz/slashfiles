@@ -9,7 +9,7 @@ lib.${namespace}.mkModule {
   inherit config;
   here = ./.;
 } {
-  imports = [./menus.nix];
+  imports = [./menus.nix ./aliases.nix];
   config = let
     inherit (pkgs.tmuxPlugins) rose-pine catppuccin;
 
@@ -39,23 +39,6 @@ lib.${namespace}.mkModule {
       set -g @rose_pine_user 'on'
       set -g @rose_pine_directory 'on'
     '';
-
-    # menus = lib.pipe (import ./menus.nix) [
-    #   lib.attrsets.attrValues
-    #   lib.strings.concatLines
-    # ];
-    # menus = (import ./menus.nix) |> lib.attrsets.attrValues |> lib.strings.concatLines;
-
-    aliases = lib.pipe (import ./aliases.nix) [
-      (lib.attrsets.mapAttrs
-        (name: value: {inherit name value;}))
-      lib.attrsets.attrValues
-      (lib.imap
-        (i: v: ''
-          set -g command-alias[${builtins.toString (100 + i)}] ${v.name}="${v.value}"
-        ''))
-      lib.strings.concatLines
-    ];
   in {
     xdg.configFile."tmux/tmux.conf".text = lib.mkBefore ''
       ${lib.optionalString (hasPlugin catppuccin) catppuccinSettings}
@@ -145,8 +128,6 @@ lib.${namespace}.mkModule {
         bind-key -N "Clear screen" C-l send 'C-l'
         set-option -s user-keys[0] "\e[13;2u"
         bind-key -n User0 send-keys "\e[13;2u"
-
-        ${aliases}
       '';
       focusEvents = true;
       keyMode = "vi";
