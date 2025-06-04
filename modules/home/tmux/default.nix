@@ -86,7 +86,11 @@ lib.${namespace}.mkModule {
           fi
         '';
 
-      programs.tmux = {
+      programs.tmux = let
+        mkGlobals = (lib.flip lib.pipe) [
+          (lib.mapAttrsToList (name: value: ''set -g ${name} ${value}''))
+        ];
+      in {
         inherit plugins;
 
         aggressiveResize = true;
@@ -131,7 +135,6 @@ lib.${namespace}.mkModule {
           bind-key -n -N "Open command prompt" : \
             if -F '#{pane_dead}' command-prompt { send-keys : }
 
-          bind-key -n M-m send-prefix
           bind-key -N "Copy mode" C-u "copy-mode; send-keys -X halfpage-up"
           bind-key -N "Session picker" s choose-tree -sZ -O time
           bind-key -N "Rename pane" M-, command-prompt -I "#T" { select-pane -T "%%" }
