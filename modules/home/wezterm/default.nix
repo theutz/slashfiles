@@ -12,8 +12,10 @@ lib.slashfiles.mkModule {
   config = {
     programs.wezterm = {
       enable = true;
+
       enableBashIntegration = true;
       enableZshIntegration = true;
+
       extraConfig =
         pkgs.replaceVars ./wezterm.lua {
           fish = lib.getExe pkgs.fish;
