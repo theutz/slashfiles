@@ -26,7 +26,6 @@ in
     text =
       # bash
       ''
-        set -x
         args=()
         repo=""
         do_add_all=1
