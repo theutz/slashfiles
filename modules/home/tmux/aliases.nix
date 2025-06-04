@@ -1,4 +1,8 @@
 {lib, ...}: let
+  inherit (lib.attrsets) mapAttrsToList setAttrByPath;
+  inherit (lib.lists) imap0;
+  inherit (builtins) toString;
+  inherit (lib.strings) concatLines;
   # aliases = lib.pipe (import ./aliases.nix) [
   #   (lib.attrsets.mapAttrs
   #     (name: value: {inherit name value;}))
@@ -32,11 +36,15 @@ in (
     x = "resize-pane -x";
     y = "resize-pane -y";
   }
-  |> (lib.attrsets.mapAttrs (name: value: {inherit name value;}))
-  |> lib.attrsets.attrValues
-  |> lib.imap (i: v: ''
-    set -g command-alias[${builtins.toString (100 + i)}] ${v.name}="${v.value}"
-  '')
-  |> lib.strings.concatLines
-  |> lib.attrsets.setAttrByPath ["config" "programs" "tmux" "extraConfig"]
+  |> mapAttrsToList (n: v: ''${n}="${v}"'')
+  |> imap0 (i: v: i + 100 |> toString |> (x: ''set -g command-alias[${x}] ${v}''))
+  |> concatLines
+  |> setAttrByPath ["config" "programs" "tmux" "extraConfig"]
+  # |> (lib.attrsets.mapAttrs (name: value: {inherit name value;}))
+  # |> lib.attrsets.attrValues
+  # |> lib.imap (i: v: ''
+  #   set -g command-alias[${builtins.toString (100 + i)}] ${v.name}="${v.value}"
+  # '')
+  # |> lib.strings.concatLines
+  # |> lib.attrsets.setAttrByPath ["config" "programs" "tmux" "extraConfig"]
 )
