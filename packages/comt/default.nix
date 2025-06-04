@@ -111,11 +111,11 @@ in
           exit 0
         fi
 
-        if [[ $edit_message -eq 1 ]]; then
-          echo "$msg" > "$file"
-          $git commit --file "$file" --edit "$@"
-        else
+        echo "$msg" > "$file"
+        if [[ $edit_message -eq 0 ]]; then
           $git commit --file "$file" "$@"
+        else
+          $git commit --file "$file" --edit "$@"
         fi
       '';
   }
