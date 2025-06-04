@@ -136,11 +136,11 @@
   '';
 in {
   config = {
-    programs.tmux.extraConfig = lib.concatLines [
+    programs.tmux.extraConfig = lib.traceVal (lib.concatLines [
       kill
       layout
       create
       rename
-    ];
+    ]);
   };
 }
