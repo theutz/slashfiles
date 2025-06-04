@@ -4,15 +4,14 @@
   lib,
   ...
 }: let
-  parent = builtins.baseNameOf ./. |> lib.traceVal;
+  parent = builtins.baseNameOf ./.;
   name = builtins.baseNameOf __curPos.file |> lib.removeSuffix ".nix" |> lib.traceVal;
-  cfg = config.${namespace}.${parent}.${name} |> lib.traceVal;
+  cfg = config.${name} |> lib.traceVal;
 in {
   options.${name}.enable = lib.mkEnableOption "${parent} > ${name}";
 
-  config = {
+  config = lib.mkIf cfg.enable {
     programs.tmux.extraConfig = ''
-      # ${parent} ${name}
       # Smart pane switching with awareness of Neovim splits.
       bind-key -N "Smart switch pane left" -n C-h if -F "#{@pane-is-vim}" 'send-keys C-h'  'select-pane -L'
       bind-key -N "Smart switch pane down" -n C-j if -F "#{@pane-is-vim}" 'send-keys C-j'  'select-pane -D'
