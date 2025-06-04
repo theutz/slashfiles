@@ -26,10 +26,11 @@
       else if lib.isAttrs mod'
       then mod'
       else throw "Wrong type";
-  in {
-    options.${namespace}.${name} = {enable = lib.mkEnableOption "enable ${name}";} // (mod.options or {});
-    config = lib.mkIf cfg.enable mod.config;
-  };
+  in ({
+      options.${namespace}.${name} = {enable = lib.mkEnableOption "enable ${name}";} // (mod.options or {});
+      config = lib.mkIf cfg.enable mod.config;
+    }
+    // (lib.removeAttrs mod ["options" "config"]));
 in {
   inherit mkModule flatConcat pipe listNixFilesRecursive filterNixFiles filterDefaultNixFiles;
 }
