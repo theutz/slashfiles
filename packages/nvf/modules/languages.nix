@@ -57,7 +57,7 @@
       enable = true;
       extraDiagnostics = {
         enable = true;
-        types = ["statix" "deadnix"];
+        types = ["deadnix"];
       };
       format.enable = true;
       lsp.enable = true;

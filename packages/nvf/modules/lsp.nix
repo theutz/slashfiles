@@ -14,40 +14,39 @@
       diagnostics = {
         enable = true;
         config = {
-          virtual_lines = true;
-          virtual_text = true;
+          virtual_lines = false;
+          virtual_text = false;
           underline = true;
-          signs = {
-            text =
-              lib.mapAttrs' (name: value: {
-                inherit value;
-                name = "vim.diagnostic.severity.${lib.toUpper name}";
-              })
-              {
-                Error = " ";
-                Warn = " ";
-                Hint = " ";
-                Info = " ";
-              };
-          };
+          update_in_insert = true;
+          signs.text =
+            lib.mapAttrs' (name: value: {
+              inherit value;
+              name = "vim.diagnostic.severity.${lib.toUpper name}";
+            })
+            {
+              Error = " ";
+              Warn = " ";
+              Hint = " ";
+              Info = " ";
+            };
         };
       };
 
       lsp = {
         enable = true;
         formatOnSave = true;
-        inlayHints.enable = true;
-        lightbulb.enable = true;
-        lspSignature.enable = true;
+        # inlayHints.enable = true;
+        # lightbulb.enable = true;
+        # lspSignature.enable = true;
         trouble = {
           enable = true;
           mappings = {
-            documentDiagnostics = "<leader>ld";
-            locList = "<leader>ll";
-            lspReferences = "<leader>lr";
-            quickfix = "<leader>lq";
-            symbols = "<leader>ls";
-            workspaceDiagnostics = "<leader>lw";
+            documentDiagnostics = "<leader>xd";
+            locList = "<leader>xl";
+            lspReferences = "<leader>xr";
+            quickfix = "<leader>xq";
+            symbols = "<leader>xs";
+            workspaceDiagnostics = "<leader>xw";
           };
         };
 
