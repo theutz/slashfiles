@@ -1,4 +1,5 @@
 session_name: slashfiles
+start_directory: /etc/nix-darwin
 global_options:
   remain-on-exit: true
 windows:
@@ -9,12 +10,7 @@ windows:
       other-pane-width: 100
     panes:
       - shell_command: nix run .#nvf
-      - shell: mask test watch
-        options:
-          remain-on-exit: false
-      - shell: mask switch watch
-        options:
-          remain-on-exit: false
+      - blank
 
   - window_name: home-manager
     panes:

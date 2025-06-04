@@ -1,8 +1,11 @@
 {pkgs, ...}: let
   name = "comt";
+  description = "Generate AI commit message for files";
 in
   pkgs.writeShellApplication {
     inherit name;
+
+    meta = {inherit description;};
 
     runtimeInputs = with pkgs; [
       aichat
@@ -25,16 +28,21 @@ in
       ''
         args=()
         repo=""
-        do_add_all=0
+        do_add_all=1
+        do_help=0
 
         while [[ $# -gt 0 ]]; do
           case "$1" in
-            -C)
+            --help | -h)
+              do_help=1
+              shift
+              ;;
+            --working-directory | -C)
               repo="$2"
               shift 2
               ;;
-            --all | -a)
-              do_add_all=1
+            --interactive | -i)
+              do_add_all=0
               shift
               ;;
             *)
@@ -45,6 +53,26 @@ in
         done
 
         set -- "''${args[@]}"
+
+        function usage() {
+          cat <<-markdown | gum format
+          # ${name}
+
+          ${description}
+
+          ## FLAGS
+
+          -h, --help                 Show this help
+          -i, --interactive          Interactively add files instead of adding everything
+          -C, --working-directory    Change the working directory for the git commands
+
+        markdown
+        }
+
+        if [[ $do_help -eq 1 ]]; then
+          usage
+          exit 0
+        fi
 
         git="git ''${repo:+-C ''${repo}}"
 
