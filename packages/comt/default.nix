@@ -26,6 +26,7 @@ in
     text =
       # bash
       ''
+        set -x
         args=()
         repo=""
         do_add_all=1
@@ -86,7 +87,7 @@ in
           exit 0
         fi
 
-        git="git ''${repo:+-C ''${repo}}"
+        git="git''${repo:+ -C ''${repo}}"
 
         if [[ $do_add_all -eq 1 ]]; then
           $git add --all
@@ -112,10 +113,11 @@ in
         fi
 
         echo "$msg" > "$file"
+        commit=("$git" commit --no-verify --file "$file")
         if [[ $edit_message -eq 0 ]]; then
-          $git commit --file "$file" "$@"
+          "''${commit[@]}" "$@"
         else
-          $git commit --file "$file" --edit "$@"
+          "''${commit[@]}" --edit "$@"
         fi
       '';
   }

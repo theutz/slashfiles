@@ -1,5 +1,5 @@
 session_name: slashfiles
-start_directory: /etc/nix-darwin
+start_directory: ./
 global_options:
   remain-on-exit: true
 windows:
