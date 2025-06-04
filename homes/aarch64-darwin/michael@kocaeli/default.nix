@@ -8,8 +8,9 @@ args @ {
   imports = [./karabiner ./spotify-player];
 
   slashfiles = {
-    packages.enable = true;
+    fzf.enable = true;
     git.enable = true;
+    packages.enable = true;
     tmux.enable = true;
     tmux.smart-splits.enable = true;
     yazi.enable = true;
