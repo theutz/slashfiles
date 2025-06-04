@@ -34,15 +34,6 @@
     ];
 
     shellAliases = {
-      gcam = "git commit --all --message";
-      gcm = "git commit --message";
-      gf = "git fetch";
-      gfm = "git pull";
-      gia = "git add";
-      giaa = "git add -A";
-      gpp = "git pull && git push";
-      gws = "git status --short";
-      gwS = "git status";
       la = "ls -la";
       ll = "ls -l";
       nd = "man 5 configuration.nix";

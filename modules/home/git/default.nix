@@ -9,7 +9,22 @@ lib.${namespace}.mkModule {
   here = ./.;
 } {
   config = {
-    home.shellAliases.lg = "lazygit";
+    home = {
+      shellAliases = {
+        gcam = "git commit --all --message";
+        gcm = "git commit --message";
+        gf = "git fetch";
+        gfm = "git pull";
+        gia = "git add";
+        giaa = "git add -A";
+        gid = "git diff --cached";
+        gpp = "git pull && git push";
+        gwd = "git diff";
+        gws = "git status --short --branch";
+        gwS = "git status --show-stash";
+        lg = "lazygit";
+      };
+    };
 
     programs = {
       gh.enable = true;

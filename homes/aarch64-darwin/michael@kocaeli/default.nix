@@ -42,10 +42,6 @@ args @ {
       enableShellIntegration = true;
     };
 
-    shellAliases = {
-      lg = "lazygit";
-    };
-
     stateVersion = "25.05";
   };
 
