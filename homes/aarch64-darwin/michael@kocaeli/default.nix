@@ -18,28 +18,11 @@ args @ {
       "yazi"
       "wezterm"
     ]
-    |> lib.map (lib.strings.splitString ".")
-    |> lib.map ((lib.flip lib.setAttrByPath) {enable = true;})
+    |> lib.map (m:
+      m
+      |> lib.strings.splitString "."
+      |> (s: lib.setAttrByPath s {enable = true;}))
     |> lib.lists.foldr lib.recursiveUpdate {};
-  # slashfiles = let
-  #   simple = [
-  #     "fzf"
-  #     "ghostty"
-  #     "git"
-  #     "packages"
-  #     "tmux"
-  #     "tmux.smart-splits"
-  #     "yazi"
-  #     "wezterm"
-  #   ];
-  #   in lib.genAttrs simple (_: { enable);
-  #   ((_: {enable = true;})
-  #     |> (lib.flip lib.genAttrs))
-  #   <| [
-  #   ]
-  #   <| lib.recursiveUpdate {
-  #     tmux.smart-splits.enable = true;
-  #   };
 
   home = {
     preferXdgDirectories = builtins.trace "trace: ${lib.attrNames args.osConfig or {}}" true;
