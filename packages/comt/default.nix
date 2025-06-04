@@ -35,6 +35,10 @@ in
 
         while [[ $# -gt 0 ]]; do
           case "$1" in
+            --debug)
+              set -x
+              shift
+              ;;
             --edit-message | -m)
               edit_message=1
               shift
