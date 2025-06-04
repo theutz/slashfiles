@@ -9,7 +9,12 @@ lib.${namespace}.mkModule {
   inherit config;
   here = ./.;
 } {
-  imports = [./menus.nix ./aliases.nix];
+  imports = [
+    ./menus.nix
+    ./aliases.nix
+    ./smart-splits.nix
+  ];
+
   config = let
     inherit (pkgs.tmuxPlugins) rose-pine catppuccin;
 
