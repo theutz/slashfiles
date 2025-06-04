@@ -68,7 +68,7 @@
     checkConfig = true;
     # nix.nixPath.nixpkgs = "github:NixOS/nixpkgs/nixpkgs-24.05-darwin";
     settings = {
-      experimental-features = ["nix-command" "flakes"];
+      experimental-features = ["nix-command" "flakes" "pipe-operators"];
     };
   };
 
