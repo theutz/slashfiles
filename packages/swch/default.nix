@@ -17,14 +17,13 @@ in
     inherit name;
     meta.description = description;
 
-    runtimeInputs = [
-      inputs.nh.packages.${system}.default
-
+    runtimeInputs = with pkgs; [
       pkgs.${namespace}.comt
-      pkgs.git
-      pkgs.gum
-      pkgs.aichat
-      pkgs.noti
+      nh
+      git
+      gum
+      aichat
+      noti
     ];
 
     text =
@@ -140,7 +139,7 @@ in
 
         debug "Creating commit message"
         if
-          comt -C "$NH_FLAKE" -a
+          comt -C "$NH_FLAKE"
         then
           info "Changes committed"
         else
