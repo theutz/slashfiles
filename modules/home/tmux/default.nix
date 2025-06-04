@@ -9,6 +9,7 @@ lib.${namespace}.mkModule {
   inherit config;
   here = ./.;
 } {
+  imports = [./menus.nix];
   config = let
     inherit (pkgs.tmuxPlugins) rose-pine catppuccin;
 
@@ -43,7 +44,7 @@ lib.${namespace}.mkModule {
     #   lib.attrsets.attrValues
     #   lib.strings.concatLines
     # ];
-    menus = (import ./menus.nix) |> lib.attrsets.attrValues |> lib.strings.concatLines;
+    # menus = (import ./menus.nix) |> lib.attrsets.attrValues |> lib.strings.concatLines;
 
     aliases = lib.pipe (import ./aliases.nix) [
       (lib.attrsets.mapAttrs
@@ -146,7 +147,6 @@ lib.${namespace}.mkModule {
         bind-key -n User0 send-keys "\e[13;2u"
 
         ${aliases}
-        ${menus}
       '';
       focusEvents = true;
       keyMode = "vi";

@@ -1,4 +1,4 @@
-{
+{lib, ...}: let
   kill = ''
     bind-key -N "Open kill menu" x \
       display-menu -T "Kill..." -x "#{popup_pane_left}" -y "#{popup_pane_bottom}" \
@@ -24,6 +24,7 @@
           respawn-pane -k
         }
   '';
+
   layout = ''
     bind-key -N "Open layout menu..." v \
       display-menu -T "Layout..." -xC -yC \
@@ -133,4 +134,11 @@
           command-prompt -p "pane title:" -I '#{pane_title}' { select-pane -T '%%' }
         }
   '';
+in {
+  programs.tmux.extraConfig = lib.concatLines [
+    kill
+    layout
+    create
+    rename
+  ];
 }
