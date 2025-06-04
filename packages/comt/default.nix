@@ -90,19 +90,22 @@ in
           exit 0
         fi
 
-        git="git''${repo:+ -C ''${repo}}"
+        git=(git)
+        if [[ -v repo && -n "$repo" ]]; then
+          git+=(-C "$repo")
+        fi
 
         if [[ $do_add_all -eq 1 ]]; then
-          $git add --all
+          "''${git[@]}" add --all
         else
-          $git add --interactive
+          "''${git[@]}" add --interactive
         fi
 
         file="''${repo:+''${repo}/}.git/comt_msg"
 
         msg="$(
           gum spin --show-output --title "Generating commit message..." -- \
-            bash -c "$git diff --cached | aichat \"$PROMPT\""
+            bash -c "''${git[*]} diff --cached | aichat \"$PROMPT\""
         )"
 
         if [[ -z "$msg" ]]; then
@@ -115,8 +118,10 @@ in
           exit 0
         fi
 
+        commit=("''${git[@]}" commit --no-verify --file "$file")
+
         echo "$msg" > "$file"
-        commit=("$git" commit --no-verify --file "$file")
+
         if [[ $edit_message -eq 0 ]]; then
           "''${commit[@]}" "$@"
         else
