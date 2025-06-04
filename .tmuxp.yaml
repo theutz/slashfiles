@@ -9,7 +9,11 @@ windows:
       remain-on-exit: false
       other-pane-width: 100
     panes:
-      - shell_command: nix run .#nvf
+      - shell_command: nvim
+        sleep_before: 1
+        options:
+          remain-on-exit: true
+        focus: true
       - blank
 
   - window_name: home-manager

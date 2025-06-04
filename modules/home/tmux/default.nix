@@ -84,9 +84,7 @@ lib.${namespace}.mkModule {
         fi
       '';
 
-    programs.tmux = let
-      mkGlobals = (lib.mapAttrsToList (name: value: ''set -g ${name} ${value}'')) |> lib.concatLines;
-    in {
+    programs.tmux = {
       inherit plugins;
 
       aggressiveResize = true;
