@@ -14,21 +14,32 @@ args @ {
       "git"
       "packages"
       "tmux"
+      "tmux.smart-splits"
       "yazi"
       "wezterm"
     ]
-    |> (lib.flip lib.genAttrs) (_: {enable = true;})
-    |> lib.recursiveUpdate {tmux.smart-splits.enable = true;};
-  # slashfiles = {
-  #   fzf.enable = true;
-  #   ghostty.enable = true;
-  #   git.enable = true;
-  #   packages.enable = true;
-  #   tmux.enable = true;
-  #   tmux.smart-splits.enable = true;
-  #   yazi.enable = true;
-  #   wezterm.enable = true;
-  # };
+    |> lib.map (lib.strings.splitString ".")
+    |> lib.map ((lib.flip lib.setAttrByPath) {enable = true;})
+    |> lib.lists.foldr lib.recursiveUpdate {};
+  # slashfiles = let
+  #   simple = [
+  #     "fzf"
+  #     "ghostty"
+  #     "git"
+  #     "packages"
+  #     "tmux"
+  #     "tmux.smart-splits"
+  #     "yazi"
+  #     "wezterm"
+  #   ];
+  #   in lib.genAttrs simple (_: { enable);
+  #   ((_: {enable = true;})
+  #     |> (lib.flip lib.genAttrs))
+  #   <| [
+  #   ]
+  #   <| lib.recursiveUpdate {
+  #     tmux.smart-splits.enable = true;
+  #   };
 
   home = {
     preferXdgDirectories = builtins.trace "trace: ${lib.attrNames args.osConfig or {}}" true;
