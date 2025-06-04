@@ -17,9 +17,9 @@ args @ {
   home = {
     preferXdgDirectories = builtins.trace "trace: ${lib.attrNames args.osConfig or {}}" true;
 
-    # sessionPath = [
-    #   osConfig.homebrew.brewPrefix
-    # ];
+    sessionPath = [
+      osConfig.homebrew.brewPrefix
+    ];
 
     sessionVariables = {
       DIRENV_LOG_FORMAT = ""; # Quiet!
