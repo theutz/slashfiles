@@ -64,7 +64,7 @@
   };
 
   nix = {
-    enable = false;
+    enable = true;
     checkConfig = true;
     # nix.nixPath.nixpkgs = "github:NixOS/nixpkgs/nixpkgs-24.05-darwin";
     settings = {
@@ -125,10 +125,10 @@
     stateVersion = 5;
   };
 
-  users.users.michael = {
-    description = "Michael Utz";
-    home = "/Users/michael";
-    shell = pkgs.zsh;
-    uid = 501;
-  };
+  # users.users.michael = {
+  #   description = "Michael Utz";
+  #   home = "/Users/michael";
+  #   shell = pkgs.zsh;
+  #   uid = 501;
+  # };
 }

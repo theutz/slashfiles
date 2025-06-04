@@ -51,6 +51,7 @@ lib.${namespace}.mkModule {
         lib.attrsets.attrValues
         lib.strings.concatLines
       ];
+
       aliases = lib.pipe (import ./aliases.nix) [
         (lib.attrsets.mapAttrs
           (name: value: {inherit name value;}))
