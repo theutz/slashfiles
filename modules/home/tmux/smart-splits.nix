@@ -12,6 +12,7 @@ in {
 
   config = {
     programs.tmux.extraConfig = ''
+      # ${parent} ${name}
       # Smart pane switching with awareness of Neovim splits.
       bind-key -N "Smart switch pane left" -n C-h if -F "#{@pane-is-vim}" 'send-keys C-h'  'select-pane -L'
       bind-key -N "Smart switch pane down" -n C-j if -F "#{@pane-is-vim}" 'send-keys C-j'  'select-pane -D'
