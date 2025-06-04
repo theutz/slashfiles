@@ -5,6 +5,9 @@
         enable = true;
         globalStyle = "rounded";
       };
+      noice = {
+        enable = true;
+      };
     };
   };
 }
