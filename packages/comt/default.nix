@@ -102,6 +102,7 @@ in
 
         if [[ $do_commit -eq 0 ]]; then
           echo "$msg"
+          exit 0
         fi
 
         echo "$msg" > "$file"
