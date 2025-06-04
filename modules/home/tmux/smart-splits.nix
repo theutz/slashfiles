@@ -20,10 +20,10 @@ in {
       bind-key -n C-\\ if -F "#{@pane-is-vim}" 'send-keys C-\\' 'select-pane -l'
 
       # Smart pane resizing with awareness of Neovim splits.
-      bind-key -N "Smart resize left" -n M-h if -F "#{@pane-is-vim}" 'send-keys M-H' 'resize-pane -L 3'
-      bind-key -N "Smart resize down" -n M-j if -F "#{@pane-is-vim}" 'send-keys M-J' 'resize-pane -D 3'
-      bind-key -N "Smart resize up" -n M-k if -F "#{@pane-is-vim}" 'send-keys M-K' 'resize-pane -U 3'
-      bind-key -N "Smart resize right" -n M-l if -F "#{@pane-is-vim}" 'send-keys M-L' 'resize-pane -R 3'
+      bind-key -N "Smart resize left" -n M-h if -F "#{@pane-is-vim}" 'send-keys M-j' 'resize-pane -L 3'
+      bind-key -N "Smart resize down" -n M-j if -F "#{@pane-is-vim}" 'send-keys M-j' 'resize-pane -D 3'
+      bind-key -N "Smart resize up" -n M-k if -F "#{@pane-is-vim}" 'send-keys M-j' 'resize-pane -U 3'
+      bind-key -N "Smart resize right" -n M-l if -F "#{@pane-is-vim}" 'send-keys M-j' 'resize-pane -R 3'
 
       # Copy mode bindings
       bind-key -N "Smart switch pane left" -T copy-mode-vi 'C-h' select-pane -L
