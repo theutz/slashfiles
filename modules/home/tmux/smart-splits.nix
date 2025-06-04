@@ -5,10 +5,10 @@
   ...
 }: let
   parent = builtins.baseNameOf ./.;
-  name = builtins.baseNameOf __curPos.file |> lib.removeSuffix ".nix" |> lib.traceVal;
-  cfg = config.${name} |> lib.traceVal;
+  name = builtins.baseNameOf __curPos.file |> lib.removeSuffix ".nix";
+  cfg = config.${parent}.${name} |> lib.traceVal;
 in {
-  options.${name}.enable = lib.mkEnableOption "${parent} > ${name}";
+  options.${parent}.${name}.enable = lib.mkEnableOption "${parent} > ${name}";
 
   config = lib.mkIf cfg.enable {
     programs.tmux.extraConfig = ''
