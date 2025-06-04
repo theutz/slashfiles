@@ -9,6 +9,7 @@ args @ {
 
   slashfiles = {
     fzf.enable = true;
+    ghostty.enable = true;
     git.enable = true;
     packages.enable = true;
     tmux.enable = true;
