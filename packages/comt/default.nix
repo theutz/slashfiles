@@ -113,6 +113,7 @@ in
 
         if [[ $edit_message -eq 1 ]]; then
           echo "$msg" > "$file"
+
           $git commit --file "$file" --edit "$@"
         else
           $git commit --file "$file" "$@"
