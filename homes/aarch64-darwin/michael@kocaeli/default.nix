@@ -7,16 +7,28 @@ args @ {
 }: {
   imports = [./karabiner ./spotify-player];
 
-  slashfiles = {
-    fzf.enable = true;
-    ghostty.enable = true;
-    git.enable = true;
-    packages.enable = true;
-    tmux.enable = true;
-    tmux.smart-splits.enable = true;
-    yazi.enable = true;
-    wezterm.enable = true;
-  };
+  slashfiles =
+    [
+      "fzf"
+      "ghostty"
+      "git"
+      "packages"
+      "tmux"
+      "yazi"
+      "wezterm"
+    ]
+    |> (lib.flip lib.genAttrs) (_: {enable = true;})
+    |> lib.recursiveUpdate {tmux.smart-splits.enable = true;};
+  # slashfiles = {
+  #   fzf.enable = true;
+  #   ghostty.enable = true;
+  #   git.enable = true;
+  #   packages.enable = true;
+  #   tmux.enable = true;
+  #   tmux.smart-splits.enable = true;
+  #   yazi.enable = true;
+  #   wezterm.enable = true;
+  # };
 
   home = {
     preferXdgDirectories = builtins.trace "trace: ${lib.attrNames args.osConfig or {}}" true;
