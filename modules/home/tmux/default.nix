@@ -22,6 +22,7 @@ lib.${namespace}.mkModule {
       sessionist
       pain-control
       rose-pine
+      mode-indicator
     ];
 
     hasPlugin = (lib.flip lib.elem) plugins;
@@ -43,6 +44,7 @@ lib.${namespace}.mkModule {
       set -g @rose_pine_datetime '%Y-%m-%d'
       set -g @rose_pine_user 'on'
       set -g @rose_pine_directory 'on'
+      set -g @rose_pine_status_left_prepend_section '#{tmux_mode_indicator}'
     '';
   in {
     xdg.configFile."tmux/tmux.conf".text = lib.mkBefore ''
