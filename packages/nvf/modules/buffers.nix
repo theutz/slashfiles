@@ -13,18 +13,30 @@
   hasFzf = config.vim.fzf-lua.enable;
 in {
   config.vim = {
-    startPlugins = ["bufdelete-nvim"];
-
     binds.whichKey.register = {
       "<leader>b" = "buffers";
     };
 
+    tabline.nvimBufferline = {
+      enable = true;
+      mappings = {
+        closeCurrent = "<leader>bd";
+        cycleNext = "<leader>bn";
+        cyclePrevious = "<leader>bp";
+        pick = "<leader>bc";
+      };
+
+      setupOpts.options = {
+        numbers = "none";
+      };
+    };
+
     keymaps = flatConcat [
       [
-        (mkItem "d" "Bdelete" "Delete buffer")
+        #     (mkItem "d" "Bdelete" "Delete buffer")
         (mkItem "D" "bd" "Delete buffer and close window")
-        (mkItem "n" "bnext" "Next buffer")
-        (mkItem "p" "bprev" "Prev buffer")
+        #     (mkItem "n" "bnext" "Next buffer")
+        #     (mkItem "p" "bprev" "Prev buffer")
         (mkItem "b" "b #" "Most recent buffer")
       ]
       (
