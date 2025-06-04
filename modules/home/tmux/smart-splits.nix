@@ -4,11 +4,11 @@
   lib,
   ...
 }: let
-  parent = builtins.dirOf ./. |> builtins.baseNameOf |> lib.traceVal;
-  name = builtins.baseNameOf ./. |> lib.traceVal;
-  cfg = config.${namespace}.${parent}.${name};
+  parent = builtins.baseNameOf ./. |> lib.traceVal;
+  name = builtins.baseNameOf __curPos.file |> lib.removeSuffix ".nix" |> lib.traceVal;
+  cfg = config.${namespace}.${parent}.${name} |> lib.traceVal;
 in {
-  # options.${namespace}.${parent}.${name}.enable = lib.mkEnableOption "${parent} > ${name}";
+  options.${name}.enable = lib.mkEnableOption "${parent} > ${name}";
 
   config = {
     programs.tmux.extraConfig = ''
