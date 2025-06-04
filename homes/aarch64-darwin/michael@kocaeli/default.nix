@@ -137,14 +137,6 @@ args @ {
         '';
     };
 
-    yazi = {
-      enable = true;
-      enableBashIntegration = true;
-      enableFishIntegration = true;
-      enableZshIntegration = true;
-      enableNushellIntegration = true;
-    };
-
     zoxide = {
       enable = true;
       enableBashIntegration = true;
