@@ -4,19 +4,14 @@
   inputs,
   namespace,
   ...
-}: let
-  currentFile = /. + __curPos.file;
-in
-  (inputs.nvf.lib.neovimConfiguration {
-    inherit pkgs;
+}:
+(inputs.nvf.lib.neovimConfiguration {
+  inherit pkgs;
 
-    extraSpecialArgs = {
-      inherit namespace;
-      lib' = lib.${namespace};
-    };
+  extraSpecialArgs = {
+    inherit namespace;
+    lib' = lib.${namespace};
+  };
 
-    modules = lib.pipe ./. [
-      lib.filesystem.listFilesRecursive
-      (lib.filter (f: f != currentFile))
-    ];
-  }).neovim
+  modules = lib.filesystem.listFilesRecursive ./modules;
+}).neovim
