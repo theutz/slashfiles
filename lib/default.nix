@@ -20,10 +20,15 @@
   }: mod': let
     name = builtins.baseNameOf here;
     cfg = config.${namespace}.${name};
-    mod = mod' {inherit cfg;};
+    mod =
+      if lib.isFunction mod'
+      then mod' {inherit cfg;}
+      else if lib.isAttrs mod'
+      then mod'
+      else throw "Wrong type";
   in {
-    inherit (mod) config;
-    options.${namespace}.${name} = mod.options;
+    options.${namespace}.${name} = {enable = lib.mkEnableOption "enable ${name}";} // (mod.options or {});
+    config = lib.mkIf cfg.enable mod.config;
   };
 in {
   inherit mkModule flatConcat pipe listNixFilesRecursive filterNixFiles filterDefaultNixFiles;
