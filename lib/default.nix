@@ -9,6 +9,7 @@ in {
   inherit filterNixFiles filterDefaultNixFiles;
   tmux = import ./tmux.nix args;
   secrets = import ./secrets.nix args;
+  prefs = import ./prefs.nix args;
 
   flatConcat = (lib.flip lib.pipe) [lib.concatLists lib.flatten];
 
@@ -42,10 +43,4 @@ in {
       |> lib.strings.splitString "."
       |> (path: lib.setAttrByPath path {enable = true;}))
     |> lib.lists.foldr lib.recursiveUpdate {};
-
-  font = {
-    family = "RobotoMono Nerd Font Propo";
-    size = 16;
-    height = 1.1;
-  };
 }
