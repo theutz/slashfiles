@@ -53,7 +53,7 @@ in
             "gumus"
           ];
 
-          hosts = ["izmir" "istanbul" "ankara"];
+          hosts = ["izmir" "istanbul" "ankara" "mugla" "eskisehir" "sakarya"];
         in
           (mkMine (concatLists [
             [
