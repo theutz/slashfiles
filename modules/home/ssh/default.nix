@@ -24,6 +24,8 @@ lib.slashfiles.mkModule {
           "sakarya"
           "manisa"
           "batman"
+          "sanliurfa"
+          "erzurum"
         ]
         |> (map (h: osConfig.sops.templates."ssh/${h}.conf".path));
 

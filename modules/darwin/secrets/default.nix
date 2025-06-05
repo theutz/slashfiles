@@ -39,6 +39,8 @@ in
           (mkSshConf' "eskisehir" "yesil")
           (mkSshConf' "manisa" "yesil")
           (mkSshConf' "batman" "yesil")
+          (mkSshConf' "sanliurfa" "gumus")
+          (mkSshConf' "erzurum" "gumus")
         ];
 
         defaultSopsFile = ../../../secrets.yaml;
@@ -63,6 +65,8 @@ in
             "eskisehir"
             "sakarya"
             "manisa"
+            "sanliurfa"
+            "erzurum"
           ];
         in
           (mkMine (concatLists [
