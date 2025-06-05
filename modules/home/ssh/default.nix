@@ -14,9 +14,18 @@ lib.slashfiles.mkModule {
       enable = true;
       hashKnownHosts = true;
       addKeysToAgent = "yes";
-      includes = [
-        osConfig.sops.templates."ssh/izmir.conf".path
-      ];
+      includes =
+        [
+          "izmir"
+          "istanbul"
+          "ankara"
+          "mugla"
+          "eskisehir"
+          "sakarya"
+          "manisa"
+          "batman"
+        ]
+        |> (map (h: osConfig.sops.templates."ssh/${h}.conf".path));
 
       matchBlocks = let
         privKey = name: osConfig.sops.secrets."ssh/users/${name}/priv".path;
