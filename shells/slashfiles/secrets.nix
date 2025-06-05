@@ -1,6 +1,6 @@
 {pkgs, ...}:
 pkgs.writeShellApplication {
-  name = "sop";
+  name = "secrets";
   meta.description = "edit the sops file";
 
   runtimeInputs = with pkgs; [sops];
