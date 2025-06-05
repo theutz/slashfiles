@@ -67,7 +67,7 @@
       ''-y "${y}"''
       ''-h "${builtins.toString h}"''
       ''-w "${builtins.toString w}"''
-      ''-T "${title |> lib.strings.trim}"''
+      ''-T "${title |> lib.strings.trim |> lib.strings.toSentenceCase}"''
       (command |> lib.strings.trim)
     ]
     |> lib.strings.concatStringsSep " ";
@@ -79,6 +79,10 @@ in {
       x = "C";
       y = "C";
       mkItems = {mkItem, ...}: [
+        (mkItem "s" "spotify" (mkPopup {
+          title = "spotify";
+          command = "spotify_player";
+        }))
         (mkItem "v" "volume" (mkPopup {
           title = "volume";
           command = "volgo";
