@@ -35,6 +35,7 @@
   mkPopup = {
     title,
     command,
+    env ? {},
     autoClose ? "success",
     border ? true,
     closeOthers ? false,
@@ -57,6 +58,10 @@
       else if autoClose == "always"
       then "-E"
       else "";
+    e =
+      env
+      |> lib.attrsets.mapAttrsToList (name: value: ''-e ${name}="${builtins.toString value}"'')
+      |> lib.concatLines;
   in
     [
       "display-popup"
@@ -68,6 +73,7 @@
       ''-h "${builtins.toString h}"''
       ''-w "${builtins.toString w}"''
       ''-T "${title |> lib.strings.trim |> lib.strings.toSentenceCase}"''
+      (lib.traceValSeq e)
       (command |> lib.strings.trim)
     ]
     |> lib.strings.concatStringsSep " ";
@@ -86,6 +92,7 @@ in {
         (mkItem "e" "yazi" (mkPopup {
           title = "yazi";
           command = "yazi";
+          env = {SKIP_DIRENV = true;};
         }))
         (mkItem "g" "lazygit" (mkPopup {
           title = "lazygit";
