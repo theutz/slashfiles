@@ -17,12 +17,11 @@ lib.slashfiles.mkModule {
         me = privKey "default";
         work = privKey "work";
       in {
-        "me@github.com" = {
-          host = "github.com";
+        "github.com" = {
           identityFile = me;
         };
-        "work@github.com" = {
-          host = "work.github.com";
+        "work.github.com" = {
+          host = "github.com";
           identityFile = work;
         };
       };
