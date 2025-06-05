@@ -14,12 +14,15 @@ lib.slashfiles.mkModule {
       enable = true;
       hashKnownHosts = true;
       addKeysToAgent = "yes";
-      includes = ["conf.d/*"];
+      includes = [
+        "conf.d/*"
+        osConfig.sops.templates."ssh/izmir".path
+      ];
 
       matchBlocks = let
-        privKey = name: osConfig.sops.secrets."ssh/${name}/priv".path;
-        me = privKey "default";
-        work = privKey "work";
+        privKey = name: osConfig.sops.secrets."ssh/users/${name}/priv".path;
+        me = privKey "mor";
+        work = privKey "yesil";
       in {
         "github.com" = {
           identityFile = me;

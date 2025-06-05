@@ -1,3 +1,7 @@
+stores:
+  yaml:
+    indent: 2
+
 keys:
   - &theutz age1vlk29wfkfqff0c9yky2kwhp4c6zdwuzc7xd5xc8ydsldc9ulf99spwq9x2
   - &kocaeli age1anevvx0tk60ejfnqr7wxrsl5sfhx5epzl298vc4zdfcs0fddsetsvkxdg4

@@ -16,6 +16,18 @@ lib.${namespace}.mkModule {
     ];
 
     sops = {
+      templates = {
+        "ssh/izmir" = {
+          content = ''
+            Host ${config.sops.placeholder."ssh/hosts/izmir/host"}
+            Hostname ${config.sops.placeholder."ssh/hosts/izmir/hostname"}
+            User ${config.sops.placeholder."ssh/hosts/izmir/user"}
+            IdentityFile ${config.sops.placeholder."ssh/users/yesil/priv"}
+          '';
+          owner = config.system.primaryUser;
+        };
+      };
+
       defaultSopsFile = ../../../secrets.yaml;
 
       secrets = let
@@ -30,12 +42,17 @@ lib.${namespace}.mkModule {
             mode = "0444";
           };
       in {
-        "spotify_player/client_id" = mine;
+        "ssh/hosts/izmir/host" = mine;
+        "ssh/hosts/izmir/user" = mine;
+        "ssh/hosts/izmir/hostname" = mine;
 
-        "ssh/default/priv" = mine;
-        "ssh/default/pub" = shared;
-        "ssh/work/priv" = mine;
-        "ssh/work/pub" = shared;
+        "ssh/users/mor/priv" = mine;
+        "ssh/users/mor/pub" = shared;
+
+        "ssh/users/yesil/priv" = mine;
+        "ssh/users/yesil/pub" = shared;
+
+        "spotify_player/client_id" = mine;
       };
     };
   };
