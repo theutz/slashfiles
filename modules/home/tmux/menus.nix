@@ -93,7 +93,7 @@ in {
         (mkItem "e" "yazi" (mkPopup {
           title = "yazi";
           command = ''
-            tmux new-session yazi \; set status off
+            tmux new-session yazi \; set status off \; set remain-on-exit off
           '';
           env = {SKIP_DIRENV = true;};
         }))
