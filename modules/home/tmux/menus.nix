@@ -38,25 +38,25 @@ in {
         divider,
         mkItem,
       }: [
-        (mkItem "e" "Even Horizontal" ''
-          select-layout even-horizontal
-        '')
         (mkItem "E" "Even Vertical" ''
           select-layout even-vertical
         '')
-        divider
-        (mkItem "M" "Main Horizontal" ''
-          select-layout main-horizontal
+        (mkItem "e" "Even Horizontal" ''
+          select-layout even-horizontal
         '')
+        divider
         (mkItem "m" "Main Vertical" ''
           select-layout main-vertical
         '')
-        divider
-        (mkItem "K" "Main Horizontal (Mirrored)" ''
-          select-layout main-horizontal-mirrored
+        (mkItem "M" "Main Horizontal" ''
+          select-layout main-horizontal
         '')
-        (mkItem "k" "Main Vertical (Mirrored)" ''
+        divider
+        (mkItem "o" "Main Vertical (Mirrored)" ''
           select-layout main-vertical-mirrored
+        '')
+        (mkItem "O" "Main Horizontal (Mirrored)" ''
+          select-layout main-horizontal-mirrored
         '')
         divider
         (mkItem "t" "Tiled" ''
