@@ -30,6 +30,7 @@ in
         defaultSopsFile = ../../../secrets.yaml;
 
         secrets = let
+          mkMine = labels: lib.attrsets.genAttrs labels (_: mine);
           mine = {
             owner = config.system.primaryUser;
             mode = "0400";
