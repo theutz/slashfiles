@@ -38,17 +38,6 @@ in {
         divider,
         mkItem,
       }: [
-        (mkItem "7" "dynamic (70%)" ''
-          set -w main-pane-width '70%'
-          select-layout main-vertical
-        '')
-        (mkItem "8" "fixed 80 cols" ''
-          set -w other-pane-width 80
-          select-layout main-vertical
-        '')
-
-        divider
-
         (mkItem "E" "Even Vertical" ''
           select-layout even-vertical
         '')
