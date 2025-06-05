@@ -11,12 +11,13 @@ args @ {
     "fzf"
     "ghostty"
     "git"
+    "mise"
     "packages"
+    "ssh"
     "tmux"
     "tmux.smart-splits"
-    "yazi"
     "wezterm"
-    "ssh"
+    "yazi"
   ];
 
   home = {
