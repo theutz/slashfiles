@@ -78,7 +78,16 @@ in {
       key = "g";
       x = "C";
       y = "C";
-      mkItems = {mkItem, ...}: [
+      mkItems = {
+        mkItem,
+        divider,
+        ...
+      }: [
+        (mkItem "g" "lazygit" (mkPopup {
+          title = "lazygit";
+          command = "lazygit";
+        }))
+        divider
         (mkItem "s" "spotify" (mkPopup {
           title = "spotify";
           command = "spotify_player";
