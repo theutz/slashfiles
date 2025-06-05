@@ -33,10 +33,10 @@
 
               (let
                 label = "ssh/users/${id}/priv";
+                hasLabel = secrets ? ${label};
+                inherit (secrets.${label}) path;
               in
-                lib.optionalAttrs (secrets ? ${label}) {
-                  IdentityFile = secrets.${label}.path;
-                })
+                lib.optionalAttrs hasLabel {IdentityFile = path;})
             ]
             |> lib.attrsets.mergeAttrsList
             |> lib.attrsets.mapAttrsToList (name: value: "${name} ${value}")
