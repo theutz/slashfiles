@@ -10,22 +10,29 @@ lib.${namespace}.mkModule {
   here = ./.;
 } {
   config = {
-    home.packages = with pkgs;
-      [
-        comma
-        zoom-us
-        coreutils
-        fd
-        lazygit
-        procs
-        ripgrep
-        aichat
-        signal-desktop-bin
-        spotify-player
-      ]
-      ++ (with nerd-fonts; [
-        roboto-mono
-        blex-mono
+    home.packages =
+      (with pkgs;
+        [
+          comma
+          zoom-us
+          coreutils
+          fd
+          lazygit
+          procs
+          ripgrep
+          aichat
+          signal-desktop-bin
+          spotify-player
+        ]
+        ++ (with nerd-fonts; [
+          roboto-mono
+          blex-mono
+        ]))
+      ++ (with pkgs.${namespace}; [
+        volgo
+        home
+        comt
+        nvf
       ]);
   };
 }
