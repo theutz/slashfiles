@@ -46,7 +46,6 @@
     gcR = ''git reset "HEAD^"'';
     gcs = "git show";
     gcsS = "git show --pretty=short --show-signature";
-    gcl = "git-commit-lost";
     gcy = "git cherry --verbose --abbrev";
     gcY = "git cherry --verbose";
 
@@ -205,18 +204,14 @@
     gRu = "git remote update";
     gRp = "git remote prune";
     gRs = "git remote show";
-    gRb = "git-hub-browse";
 
     # Stash (s)
     gs = "git stash";
     gsa = "git stash apply";
     gsx = "git stash drop";
-    gsX = "git-stash-clear-interactive";
     gsl = "git stash list";
-    gsL = "git-stash-dropped";
     gsd = "git stash show --patch --stat";
     gsp = "git stash pop";
-    gsr = "git-stash-recover";
     gss = "git stash save --include-untracked";
     gsS = "git stash save --patch --no-keep-index";
     gsw = "git stash save --include-untracked --keep-index";
@@ -228,10 +223,8 @@
     gSi = "git submodule init";
     gSI = "git submodule update --init --recursive";
     gSl = "git submodule status";
-    gSm = "git-submodule-move";
     gSs = "git submodule sync";
     gSu = "git submodule update --remote --recursive";
-    gSx = "git-submodule-remove";
 
     # Tag (t)
     gt = "git tag";
