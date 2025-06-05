@@ -1,6 +1,6 @@
 {
-  config,
   osConfig,
+  lib,
   ...
 }: {
   home.shellAliases.sp = "spotify_player";
@@ -13,7 +13,6 @@
         command = "cat";
         args = [
           osConfig.sops.secrets."spotify_player/client_id".path
-          # "/run/secrets/spotify_player/client_id"
         ];
       };
       client_port = 8080;
@@ -43,34 +42,47 @@
       enable_notify = true;
     };
 
-    keymaps = [
-      {
-        command = "Queue";
-        key_sequence = "q";
-      }
-      {
-        command = "None";
-        key_sequence = "C-s";
-      }
-
-      {
-        command = "None";
-        key_sequence = "C-r";
-      }
-      {
-        command = "FocusPreviousWindow";
-        key_sequence = "h";
-      }
-
-      {
-        command = "FocusNextWindow";
-        key_sequence = "l";
-      }
-      {
-        command = "PreviousPage";
-        key_sequence = "H";
-      }
-    ];
+    keymaps =
+      [
+        ["q" "Queue"]
+        ["C-s" "None"]
+        ["C-r" "None"]
+        ["h" "FocusPreviousWindow"]
+        ["l" "FocusNextWindow"]
+        ["H" "PreviousPage"]
+      ]
+      |> lib.map (
+        x:
+          x
+          |> lib.lists.zipListsWith (a: b: {"${a}" = b;}) ["key_sequence" "command"]
+          |> lib.mergeAttrsList
+      );
+    # keymaps = [
+    #   {
+    #     command = "Queue";
+    #     key_sequence = "q";
+    #   }
+    #   {
+    #     command = "None";
+    #     key_sequence = "C-s";
+    #   }
+    #   {
+    #     command = "None";
+    #     key_sequence = "C-r";
+    #   }
+    #   {
+    #     command = "FocusPreviousWindow";
+    #     key_sequence = "h";
+    #   }
+    #   {
+    #     command = "FocusNextWindow";
+    #     key_sequence = "l";
+    #   }
+    #   {
+    #     command = "PreviousPage";
+    #     key_sequence = "H";
+    #   }
+    # ];
 
     actions = [
       {
