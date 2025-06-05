@@ -7,8 +7,16 @@ args @ {
 }: {
   imports = [./karabiner ./spotify-player];
 
-  slashfiles =
-    [
+  slashfiles = let
+    enablePaths = modules:
+      modules
+      |> lib.map (module:
+        module
+        |> lib.strings.splitString "."
+        |> (lib.flip lib.setAttrByPath) {enable = true;})
+      |> lib.lists.foldr lib.recursiveUpdate {};
+  in
+    enablePaths [
       "fzf"
       "ghostty"
       "git"
@@ -17,12 +25,7 @@ args @ {
       "tmux.smart-splits"
       "yazi"
       "wezterm"
-    ]
-    |> lib.map (m:
-      m
-      |> lib.strings.splitString "."
-      |> (s: lib.setAttrByPath s {enable = true;}))
-    |> lib.lists.foldr lib.recursiveUpdate {};
+    ];
 
   home = {
     preferXdgDirectories = true;
