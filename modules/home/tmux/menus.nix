@@ -95,7 +95,7 @@
     ];
 
   kill = mkMenu {
-    name = "kill";
+    name = "destroy";
     key = "x";
     inherit items;
   };
