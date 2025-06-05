@@ -13,7 +13,7 @@ args @ {
       |> lib.map (module:
         module
         |> lib.strings.splitString "."
-        |> (lib.flip lib.setAttrByPath) {enable = true;})
+        |> (path: lib.setAttrByPath path {enable = true;}))
       |> lib.lists.foldr lib.recursiveUpdate {};
   in
     enablePaths [
