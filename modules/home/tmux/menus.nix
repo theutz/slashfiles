@@ -8,8 +8,8 @@
   }: let
     divider = "''";
     mkItem = key: name: command: (''
-        "${name}" ${key} {
-          ${command}
+        "${name |> lib.strings.trim}" ${key |> lib.strings.trim} {
+          ${command |> lib.strings.trim}
         }
       ''
       |> lib.strings.trim);
@@ -123,18 +123,6 @@
               new-session -s '%1' -n '%2' '%3'
               select-pane -T '%4'
             }
-        }
-  '';
-
-  rename = ''
-    bind-key -N "Open rename menu" r \
-      display-menu -T "Rename..." -x "#{popup_pane_left}" -y "#{popup_pane_bottom}" \
-        session s {
-          command-prompt -p "session name:" -I '#{session_name}' { rename-session '%%' }
-        } window w {
-          command-prompt -p "window name:" -I '#{window_name}' { rename-window '%%' }
-        } pane p {
-          command-prompt -p "pane title:" -I '#{pane_title}' { select-pane -T '%%' }
         }
   '';
 in {
