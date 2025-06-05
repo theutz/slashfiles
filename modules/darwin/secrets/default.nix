@@ -5,7 +5,8 @@
   namespace,
   ...
 }: let
-  inherit (lib.attrsets) genAttrs;
+  inherit (lib.trivial) flip;
+  inherit (lib.attrsets) genAttrs mergeAttrsList;
   inherit (lib.${namespace}) mkModule;
   inherit (lib.${namespace}.secrets.sops.templates) mkSshConf';
   mkSshConf = mkSshConf' config;
@@ -21,7 +22,7 @@ in
       ];
 
       sops = {
-        templates = lib.attrsets.mergeAttrsList [
+        templates = mergeAttrsList [
           (mkSshConf {
             host = "izmir";
             id = "yesil";
@@ -31,13 +32,13 @@ in
         defaultSopsFile = ../../../secrets.yaml;
 
         secrets = let
-          mkMine = k: genAttrs k (_: {owner = config.system.primaryUser;});
+          owner = config.system.primaryUser;
+          mkMine = (flip genAttrs) (_: {inherit owner;});
 
-          mkShared = k:
-            genAttrs k (_: {
-              owner = config.system.primaryUser;
-              mode = "0444";
-            });
+          mkShared = (flip genAttrs) (_: {
+            inherit owner;
+            mode = "0444";
+          });
         in
           (mkMine [
             "ssh/hosts/izmir/host"
