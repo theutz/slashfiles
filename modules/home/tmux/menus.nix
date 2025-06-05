@@ -18,26 +18,31 @@ in {
         ...
       }: [
         (mkItem "e" "yazi" (mkPopup {
-          title = "yazi";
+          title = "file explorer";
           command = ''
             tmux new-session yazi \; set status off \; set remain-on-exit off
           '';
           env = {SKIP_DIRENV = true;};
         }))
-        (mkItem "g" "lazygit" (mkPopup {
+        (mkItem "g" "git repo" (mkPopup {
           title = "lazygit";
           command = "lazygit";
         }))
         divider
-        (mkItem "s" "spotify" (mkPopup {
+        (mkItem "s" "music player" (mkPopup {
           title = "spotify";
           command = "spotify_player";
         }))
-        (mkItem "v" "volume" (mkPopup {
+        (mkItem "v" "volume control" (mkPopup {
           title = "volume";
           command = "volgo";
           h = 7;
           w = 80;
+        }))
+        divider
+        (mkItem "S" "flake secrets" (mkPopup {
+          title = "Secrets";
+          command = "sops edit /etc/nix-darwin/secrets.yaml";
         }))
       ];
     })
