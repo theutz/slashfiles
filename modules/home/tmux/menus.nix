@@ -1,90 +1,12 @@
 {lib, ...}: let
-  mkMenuItem = {
-    name,
-    key,
-    command,
-  }: (''
-      "${name}" ${key} {
-        ${command}
-      }
-    ''
-    |> lib.strings.trim);
-
-  separator = "''";
-
-  items =
-    [
-      (mkMenuItem {
-        name = "server";
-        key = "S";
-        command = "kill-server";
-      })
-
-      separator
-
-      (mkMenuItem {
-        name = "session";
-        key = "s";
-        command = "respawn-pane -k";
-      })
-      (mkMenuItem {
-        name = "other sessions";
-        key = "C-s";
-        command = "kill-session -a";
-      })
-      (mkMenuItem {
-        name = "sessions with bells";
-        key = "b";
-        command = "kill-session -C";
-      })
-
-      separator
-
-      (mkMenuItem {
-        name = "window";
-        key = "w";
-        command = "kill-window";
-      })
-      (mkMenuItem {
-        name = "other windows";
-        key = "C-w";
-        command = "kill-window -a";
-      })
-      (mkMenuItem {
-        name = "respawn window";
-        key = "W";
-        command = "respawn-window -k";
-      })
-
-      separator
-
-      (mkMenuItem {
-        name = "pane";
-        key = "p";
-        command = "kill-pane";
-      })
-      (mkMenuItem {
-        name = "other panes";
-        key = "C-p";
-        command = "kill-pane -a";
-      })
-      (mkMenuItem {
-        name = "respawn-pane";
-        key = "P";
-        command = "respawn-pane -k";
-      })
-    ]
-    |> lib.strings.intersperse " "
-    |> lib.strings.concatStrings;
-
   mkMenu = {
-    mkItems,
     name,
     key,
+    mkItems,
     x ? "#{popup_pane_left}",
     y ? "#{popup_pane_bottom}",
   }: let
-    sep = "''";
+    divider = "''";
     mkItem = key: name: command: (''
         "${name}" ${key} {
           ${command}
@@ -99,42 +21,12 @@
       ''display-menu -T "${name |> lib.strings.toSentenceCase}..."''
       ''-x "${x}"''
       ''-y "${y}"''
-      (mkItems {inherit sep mkItem;} |> lib.strings.intersperse " " |> lib.strings.concatStrings)
+      (mkItems {
+          inherit mkItem divider;
+        }
+        |> lib.strings.intersperse " "
+        |> lib.strings.concatStrings)
     ];
-
-  kill = mkMenu {
-    name = "kill";
-    key = "x";
-    mkItems = {
-      sep,
-      mkItem,
-    }: [
-      (mkItem "S" "server" "kill-server")
-
-      sep
-
-      (mkItem "s" "session" "respawn-pane -k")
-      (mkItem "C-s" "other sessions" "kill-session -a")
-      (mkItem "b" "sessions with bells" "kill-session -C")
-
-      sep
-
-      (mkItem "w" "window" "kill-window")
-      (mkItem "C-w" "other windows" "kill-window -a")
-      (mkItem "W" "respawn window" "respawn-window -k")
-
-      sep
-
-      (mkItem "p" "pane" "kill-pane")
-      (mkItem "C-p" "other panes" "kill-pane -a")
-      (mkItem "P" "respawn-pane" "respawn-pane -k")
-    ];
-  };
-  # kill = mkMenu {
-  #   name = "destroy";
-  #   key = "x";
-  #   inherit items;
-  # };
 
   layout = ''
     bind-key -N "Open layout menu..." v \
@@ -247,9 +139,48 @@
   '';
 in {
   programs.tmux.extraConfig = lib.concatLines [
-    kill
+    (mkMenu {
+      name = "kill";
+      key = "x";
+      mkItems = {
+        divider,
+        mkItem,
+      }: [
+        (mkItem "S" "the whole server" "kill-server")
+        divider
+        (mkItem "s" "this session" "respawn-pane -k")
+        (mkItem "C-s" "other sessions" "kill-session -a")
+        (mkItem "b" "any sessions with bells" "kill-session -C")
+        divider
+        (mkItem "w" "this window" "kill-window")
+        (mkItem "C-w" "other windows" "kill-window -a")
+        (mkItem "W" "respawn this window" "respawn-window -k")
+        divider
+        (mkItem "p" "this pane" "kill-pane")
+        (mkItem "C-p" "other panes" "kill-pane -a")
+        (mkItem "P" "respawn this pane" "respawn-pane -k")
+      ];
+    })
+    (mkMenu {
+      name = "rename";
+      key = "r";
+      mkItems = {
+        divider,
+        mkItem,
+      }: [
+        (mkItem "s" "this session" ''
+          command-prompt -p "session name:" -I '#{session_name}' { rename-session '%%' }
+        '')
+        (mkItem "w" "this window" ''
+          command-prompt -p "window name:" -I '#{window_name}' { rename-window '%%' }
+        '')
+        (mkItem "p" "this pane" ''
+          command-prompt -p "pane title:" -I '#{pane_title}' { select-pane -T '%%' }
+        '')
+      ];
+    })
+
     layout
     create
-    rename
   ];
 }
