@@ -1,4 +1,9 @@
-{lib, ...}: let
+{
+  lib,
+  pkgs,
+  namespace,
+  ...
+}: let
   mkMenu = {
     name,
     key,
@@ -27,8 +32,59 @@
         |> lib.strings.intersperse " "
         |> lib.strings.concatStrings)
     ];
+  mkPopup = {
+    title,
+    command,
+    autoClose ? "success",
+    border ? true,
+    closeOthers ? false,
+    x ? "C",
+    y ? "C",
+    w ? "90%",
+    h ? "90%",
+  }: let
+    B =
+      if border
+      then ""
+      else "-B";
+    C =
+      if closeOthers
+      then "-C"
+      else "";
+    E =
+      if autoClose == "success"
+      then "-EE"
+      else if autoClose == "always"
+      then "-E"
+      else "";
+  in
+    [
+      "display-popup"
+      B
+      C
+      E
+      ''-x "${x}"''
+      ''-y "${y}"''
+      ''-h "${h}"''
+      ''-w "${w}"''
+      ''-T "${title |> lib.strings.trim}"''
+      (command |> lib.strings.trim)
+    ]
+    |> lib.strings.concatStringsSep " ";
 in {
   programs.tmux.extraConfig = lib.concatLines [
+    (mkMenu {
+      name = "goto";
+      key = "g";
+      x = "C";
+      y = "C";
+      mkItems = {mkItem, ...}: [
+        (mkItem "v" "volume" (mkPopup {
+          title = "volume";
+          command = "volgo";
+        }))
+      ];
+    })
     (mkMenu {
       name = "set layout";
       key = "v";
