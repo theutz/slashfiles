@@ -65,8 +65,8 @@
       E
       ''-x "${x}"''
       ''-y "${y}"''
-      ''-h "${h}"''
-      ''-w "${w}"''
+      ''-h "${builtins.toString h}"''
+      ''-w "${builtins.toString w}"''
       ''-T "${title |> lib.strings.trim}"''
       (command |> lib.strings.trim)
     ]
@@ -82,6 +82,8 @@ in {
         (mkItem "v" "volume" (mkPopup {
           title = "volume";
           command = "volgo";
+          h = 8;
+          w = "40";
         }))
       ];
     })
