@@ -10,7 +10,12 @@
             inherit (config.sops) secrets placeholder;
           in
             [
-              (let label = "ssh/hosts/${host}/host"; in lib.optionalAttrs (placeholder ? ${label}) {Host = placeholder.${label};})
+              (let
+                label = "ssh/hosts/${host}/host";
+              in
+                lib.optionalAttrs (placeholder ? ${label}) {
+                  Host = placeholder.${label};
+                })
             ]
             |> lib.attrsets.mergeAttrsList
             |> lib.attrsets.mapAttrsToList (name: value: "${name} ${value}")
