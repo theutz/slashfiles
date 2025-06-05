@@ -26,10 +26,10 @@
 
               (let
                 label = "ssh/hosts/${host}/user";
+                hasLabel = placeholder ? ${label};
+                value = placeholder.${label};
               in
-                lib.optionalAttrs (placeholder ? ${label}) {
-                  User = placeholder.${label};
-                })
+                lib.optionalAttrs hasLabel {User = value;})
 
               (let
                 label = "ssh/users/${id}/priv";
