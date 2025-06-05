@@ -52,37 +52,11 @@
         ["H" "PreviousPage"]
       ]
       |> lib.map (
-        x:
-          x
-          |> lib.lists.zipListsWith (a: b: {"${a}" = b;}) ["key_sequence" "command"]
-          |> lib.mergeAttrsList
+        (lib.flip lib.pipe) [
+          (lib.lists.zipListsWith (a: b: {"${a}" = b;}) ["key_sequence" "command"])
+          (lib.mergeAttrsList)
+        ]
       );
-    # keymaps = [
-    #   {
-    #     command = "Queue";
-    #     key_sequence = "q";
-    #   }
-    #   {
-    #     command = "None";
-    #     key_sequence = "C-s";
-    #   }
-    #   {
-    #     command = "None";
-    #     key_sequence = "C-r";
-    #   }
-    #   {
-    #     command = "FocusPreviousWindow";
-    #     key_sequence = "h";
-    #   }
-    #   {
-    #     command = "FocusNextWindow";
-    #     key_sequence = "l";
-    #   }
-    #   {
-    #     command = "PreviousPage";
-    #     key_sequence = "H";
-    #   }
-    # ];
 
     actions = [
       {
