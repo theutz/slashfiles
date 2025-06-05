@@ -1,11 +1,9 @@
 _: {
   sops = {
     templates = {
-      mkSshConf = {
-        config,
+      mkSshConf' = config: {
         host,
         id,
-        ...
       }: {
         "ssh/${host}.conf" = {
           content = ''

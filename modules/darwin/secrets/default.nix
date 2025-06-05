@@ -6,7 +6,8 @@
   ...
 }: let
   inherit (lib.${namespace}) mkModule;
-  inherit (lib.${namespace}.secrets.sops.templates) mkSshConf;
+  inherit (lib.${namespace}.secrets.sops.templates) mkSshConf';
+  mkSshConf = mkSshConf' config;
 in
   mkModule {
     inherit config;
@@ -21,7 +22,6 @@ in
       sops = {
         templates = lib.attrsets.mergeAttrsList [
           (mkSshConf {
-            inherit config;
             host = "izmir";
             id = "yesil";
           })
