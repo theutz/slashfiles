@@ -16,6 +16,27 @@
                 lib.optionalAttrs (placeholder ? ${label}) {
                   Host = placeholder.${label};
                 })
+
+              (let
+                label = "ssh/hosts/${host}/hostname";
+              in
+                lib.optionalAttrs (placeholder ? ${label}) {
+                  Hostname = placeholder.${label};
+                })
+
+              (let
+                label = "ssh/hosts/${host}/user";
+              in
+                lib.optionalAttrs (placeholder ? ${label}) {
+                  User = placeholder.${label};
+                })
+
+              (let
+                label = "ssh/users/${id}/priv";
+              in
+                lib.optionalAttrs (secrets ? ${label}) {
+                  IdentityFile = secrets.${label}.path;
+                })
             ]
             |> lib.attrsets.mergeAttrsList
             |> lib.attrsets.mapAttrsToList (name: value: "${name} ${value}")
