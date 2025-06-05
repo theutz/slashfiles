@@ -85,7 +85,7 @@ lib.${namespace}.mkModule {
       enable = true;
       escapeTime = 0;
       extraConfig = ''
-        set -g allow-passthrough on
+        set -g allow-passthrough all
         set -g allow-rename on
         set -g default-command "${lib.getExe pkgs.fish}"
         set -g default-terminal "xterm-256color"
