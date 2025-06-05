@@ -25,7 +25,7 @@ in
         gum
         nh
         comma
-        agenix
+        watchexec
       ])
       ++ (with pkgs.${namespace}; [
         nvf
