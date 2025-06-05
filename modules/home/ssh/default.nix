@@ -12,6 +12,9 @@ lib.slashfiles.mkModule {
   config = {
     programs.ssh = {
       enable = true;
+      hashKnownHosts = true;
+      addKeysToAgent = "yes";
+
       matchBlocks = let
         privKey = name: osConfig.sops.secrets."ssh/${name}/priv".path;
         me = privKey "default";
@@ -23,6 +26,7 @@ lib.slashfiles.mkModule {
         "work.github.com" = {
           hostname = "github.com";
           identityFile = work;
+          user = "delegator-system";
         };
       };
     };
