@@ -37,7 +37,16 @@ in
         defaultSopsFile = ../../../secrets.yaml;
 
         secrets = let
-          users = ["mor" "yesil" "beyaz"];
+          users = [
+            "mor"
+            "koyu_mor"
+            "beyaz"
+            "yesil"
+            "pembe"
+            "gri"
+            "sari"
+            "gumus"
+          ];
         in
           (mkMine ([
               "ssh/hosts/izmir/host"
@@ -47,9 +56,6 @@ in
               "ssh/hosts/istanbul/host"
               "ssh/hosts/istanbul/user"
               "ssh/hosts/istanbul/hostname"
-
-              "ssh/users/mor/priv"
-              "ssh/users/yesil/priv"
 
               "spotify_player/client_id"
             ]
