@@ -8,8 +8,8 @@
   inherit (lib.trivial) flip;
   inherit (lib.attrsets) genAttrs mergeAttrsList;
   inherit (lib.${namespace}) mkModule;
-  inherit (lib.${namespace}.secrets.sops.templates) mkSshConf';
-  mkSshConf = mkSshConf' config;
+  inherit (lib.${namespace}.secrets.sops.templates) mkSshConf;
+  mkSshConf' = mkSshConf config;
 
   owner = config.system.primaryUser;
   mkMine = (flip genAttrs) (_: {inherit owner;});
@@ -30,10 +30,7 @@ in
 
       sops = {
         templates = mergeAttrsList [
-          (mkSshConf {
-            host = "izmir";
-            id = "yesil";
-          })
+          (mkSshConf' "izmir" "yesil")
         ];
 
         defaultSopsFile = ../../../secrets.yaml;

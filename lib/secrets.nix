@@ -1,10 +1,7 @@
 {lib, ...}: {
   sops = {
     templates = {
-      mkSshConf' = config: {
-        host,
-        id,
-      }: {
+      mkSshConf = config: host: id: {
         "ssh/${host}.conf" = {
           content = let
             inherit (config.sops) secrets placeholder;
