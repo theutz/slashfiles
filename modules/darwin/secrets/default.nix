@@ -49,7 +49,10 @@ in
             "ssh/users/yesil/priv"
             "spotify_player/client_id"
           ]
-          |> (names: lib.attrsets.genAttrs names (_: mine));
+          |> (names: lib.attrsets.genAttrs names (_: mine))
+          |> lib.attrsets.recursiveUpdate ([
+            ]
+            |> (names: lib.attrsets.genAttrs names (_: shared)));
         # in {
         #   "ssh/hosts/izmir/host" = mine;
         #   "ssh/hosts/izmir/user" = mine;
