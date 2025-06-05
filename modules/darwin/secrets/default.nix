@@ -17,11 +17,22 @@ lib.${namespace}.mkModule {
 
     sops = {
       defaultSopsFile = ../../../secrets.yaml;
-      secrets = {
-        "spotify_player/client_id" = {
-          owner = "michael";
+      secrets = let
+        mine = {
+          owner = config.system.primaryUser;
           mode = "0400";
         };
+
+        shared =
+          mine
+          // {
+            mode = "0444";
+          };
+      in {
+        "spotify_player/client_id" = mine;
+
+        "ssh/default/priv" = mine;
+        "ssh/default/pub" = shared;
       };
     };
   };
