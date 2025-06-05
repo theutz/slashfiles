@@ -1,2 +1,7 @@
 {
+  sops = {
+    templates = {
+      mkSshConf = {config, ...}: {};
+    };
+  };
 }
