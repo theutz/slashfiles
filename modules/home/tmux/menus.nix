@@ -61,7 +61,8 @@
     e =
       env
       |> lib.attrsets.mapAttrsToList (name: value: ''-e ${name}="${builtins.toString value}"'')
-      |> lib.concatLines;
+      |> lib.concatLines
+      |> lib.strings.trim;
   in
     [
       "display-popup"
@@ -73,7 +74,7 @@
       ''-h "${builtins.toString h}"''
       ''-w "${builtins.toString w}"''
       ''-T "${title |> lib.strings.trim |> lib.strings.toSentenceCase}"''
-      (lib.traceValSeq e)
+      e
       (command |> lib.strings.trim)
     ]
     |> lib.strings.concatStringsSep " ";
