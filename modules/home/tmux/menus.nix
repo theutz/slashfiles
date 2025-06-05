@@ -83,6 +83,10 @@ in {
         divider,
         ...
       }: [
+        (mkItem "e" "yazi" (mkPopup {
+          title = "yazi";
+          command = "yazi";
+        }))
         (mkItem "g" "lazygit" (mkPopup {
           title = "lazygit";
           command = "lazygit";
