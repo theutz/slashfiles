@@ -27,106 +27,44 @@
         |> lib.strings.intersperse " "
         |> lib.strings.concatStrings)
     ];
-
-  layout = ''
-    bind-key -N "Open layout menu..." v \
-      display-menu -T "Layout..." -xC -yC \
-      "Even Horizontal" e {
-        select-layout even-horizontal
-      } "Even Vertical" E {
-        select-layout even-vertical
-      } "" "Main Horizontal" M {
-        select-layout main-horizontal
-      } "Main Vertical" m {
-        select-layout main-vertical
-      } "" "Main Horizontal (Mirrored)" K {
-        select-layout main-horizontal-mirrored
-      } "Main Vertical (Mirrored)" k {
-        select-layout main-vertical-mirrored
-      } "" "Tiled" t {
-        select-layout tiled
-      }
-  '';
-
-  create = ''
-    bind-key -N "Open create menu" e \
-      display-menu -T "Create..." -x "#{popup_pane_left}" -y "#{popup_pane_bottom}" \
-        "Pane below" j {
-          command-prompt -p "New pane name:,New pane command:" \
-            -I '#T,#{default-shell}' {
-              split-window -v '%2'
-              select-pane -T '%1'
-            }
-        } "Pane above" k {
-          command-prompt -p "New pane name:,New pane command:" \
-            -I '#T,#{default-shell}' {
-              split-window -v -b '%2'
-              select-pane -T '%1'
-            }
-        } "Pane right" l {
-          command-prompt -p "New pane name:,New pane command:" \
-            -I '#T,#{default-shell}' {
-              split-window -h '%2'
-              select-pane -T '%1'
-            }
-        } "Pane left" h {
-          command-prompt -p "New pane name:,New pane command:" \
-            -I '#T,#{default-shell}' {
-              split-window -h -b '%2'
-              select-pane -T '%1'
-            }
-        } ''' "Pane below all" J {
-          command-prompt -p "New pane name:,New pane command:" \
-            -I '#T,#{default-shell}' {
-              split-window -v -f '%2'
-              select-pane -T '%1'
-            }
-        } "Pane above all" K {
-          command-prompt -p "New pane name:,New pane command:" \
-            -I '#T,#{default-shell}' {
-              split-window -v -f -b '%2'
-              select-pane -T '%1'
-            }
-        } "Pane far right" L {
-          command-prompt -p "New pane name:,New pane command:" \
-            -I '#T,#{default-shell}' {
-              split-window -h -f '%2'
-              select-pane -T '%1'
-            }
-        } "Pane far left" H {
-          command-prompt -p "New pane name:,New pane command:" \
-            -I '#T,#{default-shell}' {
-              split-window -h -f -b '%2'
-              select-pane -T '%1'
-            }
-        } ''' "New window (end)" w {
-          command-prompt -p "New window name:,New window command:,New pane name:" \
-            -I '#W,#{default-shell},#T' {
-              new-window -n '%1' %2
-              select-pane -T '%3'
-            }
-        } "New window (next)" n {
-          command-prompt -p "New window name:,New window command:,New pane name:" \
-            -I '#W,#{default-shell},#T' {
-              new-window -a -n '%1' %2
-              select-pane -T '%3'
-            }
-        } "New window (prev)" p {
-          command-prompt -p "New window name:,New window command:,New pane name:" \
-            -I '#W,#{default-shell},#T' {
-              new-window -b -n '%1' %2
-              select-pane -T '%3'
-            }
-        } ''' "New session" s {
-          command-prompt -p "New session name:,New window name:,New pane command:,New pane name:" \
-            -I '#S,#W,#{default-shell},#T' {
-              new-session -s '%1' -n '%2' '%3'
-              select-pane -T '%4'
-            }
-        }
-  '';
 in {
   programs.tmux.extraConfig = lib.concatLines [
+    (mkMenu {
+      name = "layout";
+      key = "v";
+      x = "C";
+      y = "C";
+      mkItems = {
+        divider,
+        mkItem,
+      }: [
+        (mkItem "e" "Even Horizontal" ''
+          select-layout even-horizontal
+        '')
+        (mkItem "E" "Even Vertical" ''
+          select-layout even-vertical
+        '')
+        divider
+        (mkItem "M" "Main Horizontal" ''
+          select-layout main-horizontal
+        '')
+        (mkItem "m" "Main Vertical" ''
+          select-layout main-vertical
+        '')
+        divider
+        (mkItem "K" "Main Horizontal (Mirrored)" ''
+          select-layout main-horizontal-mirrored
+        '')
+        (mkItem "k" "Main Vertical (Mirrored)" ''
+          select-layout main-vertical-mirrored
+        '')
+        divider
+        (mkItem "t" "Tiled" ''
+          select-layout tiled
+        '')
+      ];
+    })
+
     (mkMenu {
       name = "kill";
       key = "x";
@@ -149,6 +87,7 @@ in {
         (mkItem "P" "respawn this pane" "respawn-pane -k")
       ];
     })
+
     (mkMenu {
       name = "rename";
       key = "r";
@@ -167,6 +106,7 @@ in {
         '')
       ];
     })
+
     (mkMenu {
       name = "create";
       key = "e";
@@ -263,85 +203,5 @@ in {
         '')
       ];
     })
-
-    # create = ''
-    #   bind-key -N "Open create menu" e \
-    #     display-menu -T "Create..." -x "#{popup_pane_left}" -y "#{popup_pane_bottom}" \
-    #       "Pane below" j {
-    #         command-prompt -p "New pane name:,New pane command:" \
-    #           -I '#T,#{default-shell}' {
-    #             split-window -v '%2'
-    #             select-pane -T '%1'
-    #           }
-    #       } "Pane above" k {
-    #         command-prompt -p "New pane name:,New pane command:" \
-    #           -I '#T,#{default-shell}' {
-    #             split-window -v -b '%2'
-    #             select-pane -T '%1'
-    #           }
-    #       } "Pane right" l {
-    #         command-prompt -p "New pane name:,New pane command:" \
-    #           -I '#T,#{default-shell}' {
-    #             split-window -h '%2'
-    #             select-pane -T '%1'
-    #           }
-    #       } "Pane left" h {
-    #         command-prompt -p "New pane name:,New pane command:" \
-    #           -I '#T,#{default-shell}' {
-    #             split-window -h -b '%2'
-    #             select-pane -T '%1'
-    #           }
-    #       } ''' "Pane below all" J {
-    #         command-prompt -p "New pane name:,New pane command:" \
-    #           -I '#T,#{default-shell}' {
-    #             split-window -v -f '%2'
-    #             select-pane -T '%1'
-    #           }
-    #       } "Pane above all" K {
-    #         command-prompt -p "New pane name:,New pane command:" \
-    #           -I '#T,#{default-shell}' {
-    #             split-window -v -f -b '%2'
-    #             select-pane -T '%1'
-    #           }
-    #       } "Pane far right" L {
-    #         command-prompt -p "New pane name:,New pane command:" \
-    #           -I '#T,#{default-shell}' {
-    #             split-window -h -f '%2'
-    #             select-pane -T '%1'
-    #           }
-    #       } "Pane far left" H {
-    #         command-prompt -p "New pane name:,New pane command:" \
-    #           -I '#T,#{default-shell}' {
-    #             split-window -h -f -b '%2'
-    #             select-pane -T '%1'
-    #           }
-    #       } ''' "New window (end)" w {
-    #         command-prompt -p "New window name:,New window command:,New pane name:" \
-    #           -I '#W,#{default-shell},#T' {
-    #             new-window -n '%1' %2
-    #             select-pane -T '%3'
-    #           }
-    #       } "New window (next)" n {
-    #         command-prompt -p "New window name:,New window command:,New pane name:" \
-    #           -I '#W,#{default-shell},#T' {
-    #             new-window -a -n '%1' %2
-    #             select-pane -T '%3'
-    #           }
-    #       } "New window (prev)" p {
-    #         command-prompt -p "New window name:,New window command:,New pane name:" \
-    #           -I '#W,#{default-shell},#T' {
-    #             new-window -b -n '%1' %2
-    #             select-pane -T '%3'
-    #           }
-    #       } ''' "New session" s {
-    #         command-prompt -p "New session name:,New window name:,New pane command:,New pane name:" \
-    #           -I '#S,#W,#{default-shell},#T' {
-    #             new-session -s '%1' -n '%2' '%3'
-    #             select-pane -T '%4'
-    #           }
-    #       }
-    # '';
-
-    layout
   ];
 }
