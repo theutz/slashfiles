@@ -78,12 +78,20 @@
     |> lib.strings.concatStrings;
 
   mkMenu = {
-    items,
+    mkItems,
     name,
     key,
     x ? "#{popup_pane_left}",
     y ? "#{popup_pane_bottom}",
-  }:
+  }: let
+    sep = "''";
+    mkItem = key: name: command: (''
+        "${name}" ${key} {
+          ${command}
+        }
+      ''
+      |> lib.strings.trim);
+  in
     lib.concatStringsSep " " [
       "bind-key"
       ''-N "Open ${name |> lib.strings.toLower} menu"''
@@ -91,40 +99,42 @@
       ''display-menu -T "${name |> lib.strings.toSentenceCase}..."''
       ''-x "${x}"''
       ''-y "${y}"''
-      items
+      (mkItems {inherit sep mkItem;} |> lib.strings.intersperse " " |> lib.strings.concatStrings)
     ];
 
   kill = mkMenu {
-    name = "destroy";
+    name = "kill";
     key = "x";
-    inherit items;
-  };
+    mkItems = {
+      sep,
+      mkItem,
+    }: [
+      (mkItem "S" "server" "kill-server")
 
-  # kill = ''
-  #   bind-key -N "Open kill menu" x \
-  #     display-menu -T "Kill..." -x "#{popup_pane_left}" -y "#{popup_pane_bottom}" \
-  #       server S {
-  #         kill-server
-  #       } ''' session s {
-  #         kill-session
-  #       } other-sessions C-s {
-  #         kill-session -a
-  #       } 'bells' b {
-  #         kill-session -C
-  #       } ''' window w {
-  #         kill-window
-  #       } other-windows C-w {
-  #         kill-window -a
-  #       } respawn-window W {
-  #         respawn-window -k
-  #       } ''' pane p {
-  #         kill-pane
-  #       } other-panes C-p {
-  #         kill-pane -a
-  #       } respawn-pane P {
-  #         respawn-pane -k
-  #       }
-  # '';
+      sep
+
+      (mkItem "s" "session" "respawn-pane -k")
+      (mkItem "C-s" "other sessions" "kill-session -a")
+      (mkItem "b" "sessions with bells" "kill-session -C")
+
+      sep
+
+      (mkItem "w" "window" "kill-window")
+      (mkItem "C-w" "other windows" "kill-window -a")
+      (mkItem "W" "respawn window" "respawn-window -k")
+
+      sep
+
+      (mkItem "p" "pane" "kill-pane")
+      (mkItem "C-p" "other panes" "kill-pane -a")
+      (mkItem "P" "respawn-pane" "respawn-pane -k")
+    ];
+  };
+  # kill = mkMenu {
+  #   name = "destroy";
+  #   key = "x";
+  #   inherit items;
+  # };
 
   layout = ''
     bind-key -N "Open layout menu..." v \
