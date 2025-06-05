@@ -4,58 +4,66 @@
   config,
   namespace,
   ...
-}:
-lib.${namespace}.mkModule {
-  inherit config;
-  here = ./.;
-} {
-  config = {
-    environment.systemPackages = with pkgs; [
-      sops
-      age
-    ];
-
-    sops = {
-      templates = lib.attrsets.mergeAttrsList [
-        {
-          "ssh/izmir.conf" = {
-            content = ''
-              Host ${config.sops.placeholder."ssh/hosts/izmir/host"}
-              Hostname ${config.sops.placeholder."ssh/hosts/izmir/hostname"}
-              User ${config.sops.placeholder."ssh/hosts/izmir/user"}
-              IdentityFile ${config.sops.secrets."ssh/users/yesil/priv".path}
-            '';
-            owner = config.system.primaryUser;
-          };
-        }
+}: let
+  inherit (lib.${namespace}) mkModule;
+  inherit (lib.${namespace}.secrets.sops.templates) mkSshConf;
+in
+  mkModule {
+    inherit config;
+    here = ./.;
+  } {
+    config = {
+      environment.systemPackages = with pkgs; [
+        sops
+        age
       ];
 
-      defaultSopsFile = ../../../secrets.yaml;
+      sops = {
+        templates = lib.attrsets.mergeAttrsList [
+          {
+            "ssh/izmir.conf" = {
+              content = ''
+                Host ${config.sops.placeholder."ssh/hosts/izmir/host"}
+                Hostname ${config.sops.placeholder."ssh/hosts/izmir/hostname"}
+                User ${config.sops.placeholder."ssh/hosts/izmir/user"}
+                IdentityFile ${config.sops.secrets."ssh/users/yesil/priv".path}
+              '';
+              owner = config.system.primaryUser;
+            };
+          }
+          (mkSshConf {
+            inherit config;
+            host = "izmir";
+            id = "yesil";
+          })
+        ];
 
-      secrets = let
-        mine = {
-          owner = config.system.primaryUser;
-          mode = "0400";
-        };
+        defaultSopsFile = ../../../secrets.yaml;
 
-        shared =
-          mine
-          // {
-            mode = "0444";
+        secrets = let
+          mine = {
+            owner = config.system.primaryUser;
+            mode = "0400";
           };
-      in {
-        "ssh/hosts/izmir/host" = mine;
-        "ssh/hosts/izmir/user" = mine;
-        "ssh/hosts/izmir/hostname" = mine;
 
-        "ssh/users/mor/priv" = mine;
-        "ssh/users/mor/pub" = shared;
+          shared =
+            mine
+            // {
+              mode = "0444";
+            };
+        in {
+          "ssh/hosts/izmir/host" = mine;
+          "ssh/hosts/izmir/user" = mine;
+          "ssh/hosts/izmir/hostname" = mine;
 
-        "ssh/users/yesil/priv" = mine;
-        "ssh/users/yesil/pub" = shared;
+          "ssh/users/mor/priv" = mine;
+          "ssh/users/mor/pub" = shared;
 
-        "spotify_player/client_id" = mine;
+          "ssh/users/yesil/priv" = mine;
+          "ssh/users/yesil/pub" = shared;
+
+          "spotify_player/client_id" = mine;
+        };
       };
     };
-  };
-}
+  }
