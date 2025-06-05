@@ -37,6 +37,7 @@ in
           (mkSshConf' "mugla" "pembe")
           (mkSshConf' "sakarya" "mor")
           (mkSshConf' "eskisehir" "yesil")
+          (mkSshConf' "manisa" "yesil")
         ];
 
         defaultSopsFile = ../../../secrets.yaml;
@@ -53,7 +54,15 @@ in
             "gumus"
           ];
 
-          hosts = ["izmir" "istanbul" "ankara" "mugla" "eskisehir" "sakarya"];
+          hosts = [
+            "izmir"
+            "istanbul"
+            "ankara"
+            "mugla"
+            "eskisehir"
+            "sakarya"
+            "manisa"
+          ];
         in
           (mkMine (concatLists [
             [
