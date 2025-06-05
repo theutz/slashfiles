@@ -52,10 +52,10 @@
         ["H" "PreviousPage"]
       ]
       |> lib.map (
-        (lib.flip lib.pipe) [
-          (lib.lists.zipListsWith (a: b: {"${a}" = b;}) ["key_sequence" "command"])
-          (lib.mergeAttrsList)
-        ]
+        x:
+          x
+          |> lib.lists.zipListsWith (a: b: {"${a}" = b;}) ["key_sequence" "command"]
+          |> lib.mergeAttrsList
       );
 
     actions = [
