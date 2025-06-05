@@ -38,12 +38,12 @@ in {
         divider,
         mkItem,
       }: [
-        (mkItem "d" "dynamic (80%)" ''
-          set -w main-window-width '80%'
+        (mkItem "7" "dynamic (70%)" ''
+          set -w main-pane-width '70%'
           select-layout main-vertical
         '')
-        (mkItem "f" "fixed 80 cols" ''
-          set -w other-window-width 80
+        (mkItem "8" "fixed 80 cols" ''
+          set -w other-pane-width 80
           select-layout main-vertical
         '')
         divider
