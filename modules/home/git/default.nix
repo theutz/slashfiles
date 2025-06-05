@@ -38,6 +38,9 @@ lib.${namespace}.mkModule {
         ];
         userName = "Michael Utz";
         userEmail = "michael@theutz.com";
+        extraConfig = {
+          pull.rebase = "true";
+        };
         delta = {
           enable = true;
         };
