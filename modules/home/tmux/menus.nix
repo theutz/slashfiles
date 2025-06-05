@@ -49,7 +49,7 @@ in {
 
     (mkMenu {
       name = "set layout";
-      key = "v";
+      key = "a";
       x = "C";
       y = "C";
       mkItems = {

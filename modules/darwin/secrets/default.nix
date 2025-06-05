@@ -17,6 +17,7 @@ lib.${namespace}.mkModule {
 
     sops = {
       defaultSopsFile = ../../../secrets.yaml;
+
       secrets = let
         mine = {
           owner = config.system.primaryUser;
@@ -33,6 +34,8 @@ lib.${namespace}.mkModule {
 
         "ssh/default/priv" = mine;
         "ssh/default/pub" = shared;
+        "ssh/work/priv" = mine;
+        "ssh/work/pub" = shared;
       };
     };
   };

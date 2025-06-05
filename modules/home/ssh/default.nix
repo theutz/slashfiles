@@ -15,9 +15,15 @@ lib.slashfiles.mkModule {
       matchBlocks = let
         privKey = name: osConfig.sops.secrets."ssh/${name}/priv".path;
         me = privKey "default";
+        work = privKey "work";
       in {
-        "github.com" = {
+        "me@github.com" = {
+          host = "github.com";
           identityFile = me;
+        };
+        "work@github.com" = {
+          host = "work.github.com";
+          identityFile = work;
         };
       };
     };
