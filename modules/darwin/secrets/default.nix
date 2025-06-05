@@ -30,30 +30,35 @@ in
         defaultSopsFile = ../../../secrets.yaml;
 
         secrets = let
-          mkMine = labels: lib.attrsets.genAttrs labels (_: mine);
           mine = {
             owner = config.system.primaryUser;
             mode = "0400";
           };
+          mkMine = labels: lib.attrsets.genAttrs labels (_: {owner = config.system.primaryUser;});
 
           shared =
             mine
             // {
               mode = "0444";
             };
+          mkShared = labels:
+            lib.attrsets.genAttrs labels (_: {
+              owner = config.system.primaryUser;
+              mode = "0444";
+            });
         in
-          [
+          (mkMine [
             "ssh/hosts/izmir/host"
             "ssh/hosts/izmir/user"
             "ssh/hosts/izmir/hostname"
             "ssh/users/mor/priv"
             "ssh/users/yesil/priv"
             "spotify_player/client_id"
-          ]
-          |> (names: lib.attrsets.genAttrs names (_: mine))
-          |> lib.attrsets.recursiveUpdate ([
-            ]
-            |> (names: lib.attrsets.genAttrs names (_: shared)));
+          ])
+          // (mkShared [
+            "ssh/users/mor/pub"
+            "ssh/users/yesil/pub"
+          ]);
         # in {
         #   "ssh/hosts/izmir/host" = mine;
         #   "ssh/hosts/izmir/user" = mine;
