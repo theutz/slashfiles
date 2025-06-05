@@ -64,7 +64,8 @@ in
               ]))
               |> flatten)
           ]))
-          // (mkShared (users |> map (u: "ssh/users/${u}/pub")));
+          // (mkShared (users
+              |> map (u: "ssh/users/${u}/pub")));
       };
     };
   }
