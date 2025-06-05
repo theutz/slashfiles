@@ -53,17 +53,9 @@ in
         in
           (mkMine (concatLists [
             [
-              "ssh/hosts/izmir/host"
-              "ssh/hosts/izmir/user"
-              "ssh/hosts/izmir/hostname"
-
-              "ssh/hosts/istanbul/host"
-              "ssh/hosts/istanbul/user"
-              "ssh/hosts/istanbul/hostname"
-
               "spotify_player/client_id"
             ]
-            (map (u: "ssh/users/${u}/priv") users)
+            (users |> map (u: "ssh/users/${u}/priv"))
             (hosts
               |> (map (h: [
                 "ssh/hosts/${h}/host"
@@ -72,7 +64,7 @@ in
               ]))
               |> flatten)
           ]))
-          // (mkShared (map (u: "ssh/users/${u}/pub") users));
+          // (mkShared (users |> map (u: "ssh/users/${u}/pub")));
       };
     };
   }
