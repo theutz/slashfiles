@@ -47,6 +47,8 @@ in
             "sari"
             "gumus"
           ];
+
+          hosts = ["izmir" "istanbul"];
         in
           (mkMine ([
               "ssh/hosts/izmir/host"
