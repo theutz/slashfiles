@@ -1,4 +1,4 @@
-{
+args @ {
   lib,
   namespace,
   ...
@@ -7,6 +7,7 @@
   filterDefaultNixFiles = lib.filter (lib.hasSuffix "default.nix");
 in {
   inherit filterNixFiles filterDefaultNixFiles;
+  tmux = import ./tmux.nix args;
 
   flatConcat = (lib.flip lib.pipe) [lib.concatLists lib.flatten];
 
