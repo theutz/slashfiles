@@ -82,8 +82,8 @@ in {
         (mkItem "v" "volume" (mkPopup {
           title = "volume";
           command = "volgo";
-          h = 8;
-          w = "40";
+          h = 7;
+          w = 80;
         }))
       ];
     })
