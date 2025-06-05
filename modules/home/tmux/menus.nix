@@ -8,7 +8,7 @@
   }: let
     divider = "''";
     mkItem = key: name: command: (''
-        "${name |> lib.strings.trim}" ${key |> lib.strings.trim} {
+        "${name |> lib.strings.trim |> lib.strings.toSentenceCase}" ${key |> lib.strings.trim} {
           ${command |> lib.strings.trim}
         }
       ''
@@ -16,7 +16,7 @@
   in
     lib.concatStringsSep " " [
       "bind-key"
-      ''-N "Open ${name |> lib.strings.toLower} menu"''
+      ''-N "Open '${name |> lib.strings.toSentenceCase}' menu"''
       key
       ''display-menu -T "${name |> lib.strings.toSentenceCase}..."''
       ''-x "${x}"''
