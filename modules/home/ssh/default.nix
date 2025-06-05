@@ -21,7 +21,7 @@ lib.slashfiles.mkModule {
           identityFile = me;
         };
         "work.github.com" = {
-          host = "github.com";
+          hostname = "github.com";
           identityFile = work;
         };
       };
