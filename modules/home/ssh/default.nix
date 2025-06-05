@@ -16,7 +16,7 @@ lib.slashfiles.mkModule {
       addKeysToAgent = "yes";
       includes = [
         "conf.d/*"
-        osConfig.sops.templates."ssh/izmir".path
+        osConfig.sops.templates."ssh/izmir.conf".path
       ];
 
       matchBlocks = let

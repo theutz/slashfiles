@@ -17,7 +17,7 @@ lib.${namespace}.mkModule {
 
     sops = {
       templates = {
-        "ssh/izmir" = {
+        "ssh/izmir.conf" = {
           content = ''
             Host ${config.sops.placeholder."ssh/hosts/izmir/host"}
             Hostname ${config.sops.placeholder."ssh/hosts/izmir/hostname"}
