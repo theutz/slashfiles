@@ -30,7 +30,7 @@
 in {
   programs.tmux.extraConfig = lib.concatLines [
     (mkMenu {
-      name = "layout";
+      name = "set layout";
       key = "v";
       x = "C";
       y = "C";
