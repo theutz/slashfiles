@@ -8,4 +8,5 @@ let
   personal = [theutz kocaeli];
 in {
   "theutz-id_ed25519.age".publicKeys = personal;
+  "spotify-client-id.age".publicKeys = users;
 }

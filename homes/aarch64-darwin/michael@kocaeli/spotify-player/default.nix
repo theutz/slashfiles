@@ -1,4 +1,8 @@
 {
+  config,
+  osConfig,
+  ...
+}: {
   home.shellAliases.sp = "spotify_player";
   programs.spotify-player = {
     enable = true;
@@ -8,7 +12,7 @@
       client_id_command = {
         command = "cat";
         args = [
-          "/run/secrets/spotify_player/client_id"
+          osConfig.age.secrets.spotify-client-id.path
         ];
       };
       client_port = 8080;

@@ -2,26 +2,18 @@
   lib,
   config,
   namespace,
+  pkgs,
   ...
 }:
 lib.${namespace}.mkModule {
   inherit config;
   here = ./.;
 } {
+  imports = [./aliases.nix];
+
   config = {
     home = {
       shellAliases = {
-        gcam = "git commit --all --message";
-        gcm = "git commit --message";
-        gf = "git fetch";
-        gfm = "git pull";
-        gia = "git add";
-        giaa = "git add -A";
-        gid = "git diff --cached";
-        gpp = "git pull && git push";
-        gwd = "git diff";
-        gws = "git status --short --branch";
-        gwS = "git status --show-stash";
         lg = "lazygit";
       };
     };
@@ -58,7 +50,7 @@ lib.${namespace}.mkModule {
             {
               key = "b";
               context = "files";
-              command = "HK_PROFILE=ai git commit";
+              command = lib.getExe pkgs.${namespace}.comt;
               description = "generate commit message with llm";
               output = "terminal";
             }

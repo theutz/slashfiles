@@ -10,6 +10,10 @@ lib.${namespace}.mkModule {
   here = ./.;
 } {
   config = {
+    age.secrets = {
+      spotify-client-id.file = ../../../secrets/spotify-client-id;
+    };
+
     environment.systemPackages = with pkgs; [
       sops
       age

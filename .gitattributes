@@ -1,0 +1,23 @@
+# Always use LF line endings so that if a repo is accessed
+# in Unix via a file share from Windows, the scripts will
+# work as expected.
+*.sh text eol=lf
+
+# Don't diff churn.
+*.envrc
+*.git-blame-ignore-revs
+*.lock -diff
+*LICENSE -diff
+
+# Try to get markdown files to be treated as markdown
+# by linguist - ** prefix is for all subdirectories.
+*.md linguist-detectable
+*.md linguist-language=Markdown
+
+# Age encrypted secrets should be treated as binaries
+# as a layer of obscurity. Though, this is not at all
+# a guarantee of any security.
+*.age binary
+*.age -linguist-detectable
+*.age -linguist-documentation
+*.age -diff
