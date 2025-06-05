@@ -40,19 +40,29 @@ in
             // {
               mode = "0444";
             };
-        in {
-          "ssh/hosts/izmir/host" = mine;
-          "ssh/hosts/izmir/user" = mine;
-          "ssh/hosts/izmir/hostname" = mine;
-
-          "ssh/users/mor/priv" = mine;
-          "ssh/users/mor/pub" = shared;
-
-          "ssh/users/yesil/priv" = mine;
-          "ssh/users/yesil/pub" = shared;
-
-          "spotify_player/client_id" = mine;
-        };
+        in
+          [
+            "ssh/hosts/izmir/host"
+            "ssh/hosts/izmir/user"
+            "ssh/hosts/izmir/hostname"
+            "ssh/users/mor/priv"
+            "ssh/users/yesil/priv"
+            "spotify_player/client_id"
+          ]
+          |> (names: lib.attrsets.genAttrs names (_: mine));
+        # in {
+        #   "ssh/hosts/izmir/host" = mine;
+        #   "ssh/hosts/izmir/user" = mine;
+        #   "ssh/hosts/izmir/hostname" = mine;
+        #
+        #   "ssh/users/mor/priv" = mine;
+        #   "ssh/users/mor/pub" = shared;
+        #
+        #   "ssh/users/yesil/priv" = mine;
+        #   "ssh/users/yesil/pub" = shared;
+        #
+        #   "spotify_player/client_id" = mine;
+        # };
       };
     };
   }
