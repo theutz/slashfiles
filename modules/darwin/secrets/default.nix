@@ -5,6 +5,7 @@
   namespace,
   ...
 }: let
+  inherit (lib.attrsets) genAttrs;
   inherit (lib.${namespace}) mkModule;
   inherit (lib.${namespace}.secrets.sops.templates) mkSshConf';
   mkSshConf = mkSshConf' config;
@@ -30,19 +31,10 @@ in
         defaultSopsFile = ../../../secrets.yaml;
 
         secrets = let
-          mine = {
-            owner = config.system.primaryUser;
-            mode = "0400";
-          };
-          mkMine = labels: lib.attrsets.genAttrs labels (_: {owner = config.system.primaryUser;});
+          mkMine = k: genAttrs k (_: {owner = config.system.primaryUser;});
 
-          shared =
-            mine
-            // {
-              mode = "0444";
-            };
-          mkShared = labels:
-            lib.attrsets.genAttrs labels (_: {
+          mkShared = k:
+            genAttrs k (_: {
               owner = config.system.primaryUser;
               mode = "0444";
             });
