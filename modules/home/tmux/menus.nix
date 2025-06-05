@@ -46,28 +46,36 @@ in {
           set -w other-pane-width 80
           select-layout main-vertical
         '')
+
         divider
+
         (mkItem "E" "Even Vertical" ''
           select-layout even-vertical
         '')
         (mkItem "e" "Even Horizontal" ''
           select-layout even-horizontal
         '')
+
         divider
+
         (mkItem "m" "Main Vertical" ''
           select-layout main-vertical
         '')
         (mkItem "M" "Main Horizontal" ''
           select-layout main-horizontal
         '')
+
         divider
+
         (mkItem "o" "Main Vertical (Mirrored)" ''
           select-layout main-vertical-mirrored
         '')
         (mkItem "O" "Main Horizontal (Mirrored)" ''
           select-layout main-horizontal-mirrored
         '')
+
         divider
+
         (mkItem "t" "Tiled" ''
           select-layout tiled
         '')
