@@ -41,12 +41,6 @@
             |> lib.attrsets.mergeAttrsList
             |> lib.attrsets.mapAttrsToList (name: value: "${name} ${value}")
             |> lib.strings.concatLines;
-          # content = ''
-          #   Host ${config.sops.placeholder."ssh/hosts/${host}/host"}
-          #   Hostname ${config.sops.placeholder."ssh/hosts/${host}/hostname"}
-          #   User ${config.sops.placeholder."ssh/hosts/${host}/user"}
-          #   IdentityFile ${config.sops.secrets."ssh/users/${id}/priv".path}
-          # '';
           owner = config.system.primaryUser;
         };
       };
