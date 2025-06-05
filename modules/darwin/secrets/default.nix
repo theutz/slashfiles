@@ -69,6 +69,14 @@ in
             [
               "spotify_player/client_id"
             ]
+            (["batman"]
+              |> map (
+                h: [
+                  "ssh/hosts/${h}/host"
+                  "ssh/hosts/${h}/user"
+                ]
+              )
+              |> flatten)
             (users |> map (u: "ssh/users/${u}/priv"))
             (hosts
               |> (map (h: [
