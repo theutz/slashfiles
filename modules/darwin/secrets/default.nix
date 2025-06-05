@@ -33,6 +33,7 @@ in
         templates = mergeAttrsList [
           (mkSshConf' "izmir" "yesil")
           (mkSshConf' "istanbul" "yesil")
+          (mkSshConf' "ankara" "beyaz")
         ];
 
         defaultSopsFile = ../../../secrets.yaml;
@@ -49,7 +50,7 @@ in
             "gumus"
           ];
 
-          hosts = ["izmir" "istanbul"];
+          hosts = ["izmir" "istanbul" "ankara"];
         in
           (mkMine (concatLists [
             [
