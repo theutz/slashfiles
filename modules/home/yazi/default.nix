@@ -9,6 +9,10 @@ lib.${namespace}.mkModule {
   here = ./.;
 } {
   config = {
+    home.shellAliases = {
+      y = "y";
+    };
+
     programs.yazi = {
       enable = true;
       enableBashIntegration = true;

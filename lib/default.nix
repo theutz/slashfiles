@@ -33,4 +33,10 @@
     // (lib.removeAttrs mod ["options" "config"]));
 in {
   inherit mkModule flatConcat pipe listNixFilesRecursive filterNixFiles filterDefaultNixFiles;
+
+  font = {
+    family = "RobotoMono Nerd Font Propo";
+    size = 16;
+    height = 1.1;
+  };
 }

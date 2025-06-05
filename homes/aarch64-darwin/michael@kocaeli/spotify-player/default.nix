@@ -12,7 +12,8 @@
       client_id_command = {
         command = "cat";
         args = [
-          osConfig.age.secrets.spotify-client-id.path
+          osConfig.sops.secrets."spotify_player/client_id".path
+          # "/run/secrets/spotify_player/client_id"
         ];
       };
       client_port = 8080;

@@ -2,6 +2,7 @@
   namespace,
   pkgs,
   mkShell,
+  lib,
   ...
 }: let
   name = "slashfiles";
@@ -31,7 +32,8 @@ in
         swch
         home
         comt
-      ]);
+      ])
+      ++ [(import ./secrets.nix {inherit pkgs;})];
 
     shellHook =
       # bash
