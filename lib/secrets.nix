@@ -13,10 +13,9 @@
               (let
                 label = "ssh/hosts/${host}/host";
                 hasLabel = placeholder ? ${label};
+                value = placeholder.${label};
               in
-                lib.optionalAttrs hasLabel {
-                  Host = placeholder.${label};
-                })
+                lib.optionalAttrs hasLabel {Host = value;})
 
               (let
                 label = "ssh/hosts/${host}/hostname";
