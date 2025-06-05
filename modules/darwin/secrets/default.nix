@@ -7,6 +7,7 @@
 }: let
   inherit (lib.trivial) flip;
   inherit (lib.attrsets) genAttrs mergeAttrsList;
+  inherit (lib.lists) concatLists;
   inherit (lib.${namespace}) mkModule;
   inherit (lib.${namespace}.secrets.sops.templates) mkSshConf;
   mkSshConf' = mkSshConf config;
@@ -50,7 +51,8 @@ in
 
           hosts = ["izmir" "istanbul"];
         in
-          (mkMine ([
+          (mkMine (concatLists [
+            [
               "ssh/hosts/izmir/host"
               "ssh/hosts/izmir/user"
               "ssh/hosts/izmir/hostname"
@@ -61,7 +63,8 @@ in
 
               "spotify_player/client_id"
             ]
-            ++ (map (u: "ssh/users/${u}/priv") users)))
+            (map (u: "ssh/users/${u}/priv") users)
+          ]))
           // (mkShared (map (u: "ssh/users/${u}/pub") users));
       };
     };
