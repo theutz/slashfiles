@@ -47,15 +47,14 @@ in
             "ssh/hosts/istanbul/hostname"
 
             "ssh/users/mor/priv"
-
             "ssh/users/yesil/priv"
 
             "spotify_player/client_id"
           ])
-          // (mkShared [
-            "ssh/users/mor/pub"
-            "ssh/users/yesil/pub"
-          ]);
+          // (mkShared (map (u: "ssh/users/${u}/pub") [
+            "mor"
+            "yesil"
+          ]));
       };
     };
   }
