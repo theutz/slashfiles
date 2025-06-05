@@ -3,16 +3,17 @@
   namespace,
   ...
 }: let
-  listNixFilesRecursive = pipe [
+  filterNixFiles = lib.filter (lib.hasSuffix "nix");
+  filterDefaultNixFiles = lib.filter (lib.hasSuffix "default.nix");
+in {
+  inherit filterNixFiles filterDefaultNixFiles;
+
+  flatConcat = (lib.flip lib.pipe) [lib.concatLists lib.flatten];
+
+  listNixFilesRecursive = (lib.flip lib.pipe) [
     lib.filesystem.listFilesRecursive
     filterNixFiles
   ];
-
-  filterNixFiles = lib.filter (lib.hasSuffix "nix");
-  filterDefaultNixFiles = lib.filter (lib.hasSuffix "default.nix");
-  pipe = lib.flip lib.pipe;
-
-  flatConcat = pipe [lib.concatLists lib.flatten];
 
   mkModule = {
     here,
@@ -31,8 +32,14 @@
       config = lib.mkIf cfg.enable mod.config;
     }
     // (lib.removeAttrs mod ["options" "config"]));
-in {
-  inherit mkModule flatConcat pipe listNixFilesRecursive filterNixFiles filterDefaultNixFiles;
+
+  enableByPath = modules:
+    modules
+    |> lib.map (module:
+      module
+      |> lib.strings.splitString "."
+      |> (path: lib.setAttrByPath path {enable = true;}))
+    |> lib.lists.foldr lib.recursiveUpdate {};
 
   font = {
     family = "RobotoMono Nerd Font Propo";
