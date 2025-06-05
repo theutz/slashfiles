@@ -38,6 +38,7 @@ in
           (mkSshConf' "sakarya" "mor")
           (mkSshConf' "eskisehir" "yesil")
           (mkSshConf' "manisa" "yesil")
+          (mkSshConf' "batman" "yesil")
         ];
 
         defaultSopsFile = ../../../secrets.yaml;
