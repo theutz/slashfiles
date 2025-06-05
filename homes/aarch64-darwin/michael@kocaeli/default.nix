@@ -16,6 +16,7 @@ args @ {
     "tmux.smart-splits"
     "yazi"
     "wezterm"
+    "ssh"
   ];
 
   home = {
