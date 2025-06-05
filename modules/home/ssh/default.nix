@@ -15,7 +15,6 @@ lib.slashfiles.mkModule {
       hashKnownHosts = true;
       addKeysToAgent = "yes";
       includes = [
-        "conf.d/*"
         osConfig.sops.templates."ssh/izmir.conf".path
       ];
 

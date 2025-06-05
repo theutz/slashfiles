@@ -31,6 +31,7 @@ in
       sops = {
         templates = mergeAttrsList [
           (mkSshConf' "izmir" "yesil")
+          (mkSshConf' "istanbul" "yesil")
         ];
 
         defaultSopsFile = ../../../secrets.yaml;
