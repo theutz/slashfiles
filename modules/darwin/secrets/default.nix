@@ -10,6 +10,13 @@
   inherit (lib.${namespace}) mkModule;
   inherit (lib.${namespace}.secrets.sops.templates) mkSshConf';
   mkSshConf = mkSshConf' config;
+
+  owner = config.system.primaryUser;
+  mkMine = (flip genAttrs) (_: {inherit owner;});
+  mkShared = (flip genAttrs) (_: {
+    inherit owner;
+    mode = "0444";
+  });
 in
   mkModule {
     inherit config;
@@ -31,15 +38,7 @@ in
 
         defaultSopsFile = ../../../secrets.yaml;
 
-        secrets = let
-          owner = config.system.primaryUser;
-          mkMine = (flip genAttrs) (_: {inherit owner;});
-
-          mkShared = (flip genAttrs) (_: {
-            inherit owner;
-            mode = "0444";
-          });
-        in
+        secrets =
           (mkMine [
             "ssh/hosts/izmir/host"
             "ssh/hosts/izmir/user"
@@ -52,19 +51,6 @@ in
             "ssh/users/mor/pub"
             "ssh/users/yesil/pub"
           ]);
-        # in {
-        #   "ssh/hosts/izmir/host" = mine;
-        #   "ssh/hosts/izmir/user" = mine;
-        #   "ssh/hosts/izmir/hostname" = mine;
-        #
-        #   "ssh/users/mor/priv" = mine;
-        #   "ssh/users/mor/pub" = shared;
-        #
-        #   "ssh/users/yesil/priv" = mine;
-        #   "ssh/users/yesil/pub" = shared;
-        #
-        #   "spotify_player/client_id" = mine;
-        # };
       };
     };
   }
