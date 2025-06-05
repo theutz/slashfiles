@@ -92,7 +92,9 @@ in {
       }: [
         (mkItem "e" "yazi" (mkPopup {
           title = "yazi";
-          command = "yazi";
+          command = ''
+            tmux new-session yazi \; set status off
+          '';
           env = {SKIP_DIRENV = true;};
         }))
         (mkItem "g" "lazygit" (mkPopup {
@@ -121,6 +123,15 @@ in {
         divider,
         mkItem,
       }: [
+        (mkItem "d" "Dynamic width (70/30)" ''
+          set-option -w main-pane-width '70%'
+          select-layout
+        '')
+        (mkItem "f" "Fixed width (x/80 px)" ''
+          set-option -w main-pane-width 80
+          select-layout
+        '')
+        divider
         (mkItem "E" "Even Vertical" ''
           select-layout even-vertical
         '')
