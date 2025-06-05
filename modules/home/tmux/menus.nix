@@ -40,7 +40,7 @@ in {
           w = 80;
         }))
         divider
-        (mkItem "S" "flake secrets" (mkPopup {
+        (mkItem "h" "flake secrets" (mkPopup {
           title = "Secrets";
           command = "sops edit /etc/nix-darwin/secrets.yaml";
         }))
