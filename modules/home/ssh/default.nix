@@ -12,9 +12,12 @@ lib.slashfiles.mkModule {
   config = {
     programs.ssh = {
       enable = true;
-      matchBlocks = {
+      matchBlocks = let
+        privKey = name: osConfig.sops.secrets."ssh/${name}/priv".path;
+        me = privKey "default";
+      in {
         "github.com" = {
-          identityFile = osConfig.sops.secrets."ssh/default/priv".path;
+          identityFile = me;
         };
       };
     };
