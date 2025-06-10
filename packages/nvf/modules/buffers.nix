@@ -37,7 +37,7 @@ in {
         [
           (mkItem "b" "b #" "Most recent buffer")
           (mkItem "o" "BufferLineCloseOthers" "Close others")
-          (mkItem "P" "BufferLineTogglePin" "Pin buffer")
+          (mkItem "k" "BufferLineTogglePin" "Pin buffer")
         ]
         (
           optional hasFzf [
