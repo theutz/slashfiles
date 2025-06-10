@@ -41,7 +41,7 @@ lib.${namespace}.mkModule {
         "slack"
         "telegram"
         "mouseless@preview"
-        "httpie-desktop"
+        "httpie"
         "signal"
       ];
 
