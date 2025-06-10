@@ -43,6 +43,7 @@ lib.${namespace}.mkModule {
         "mouseless@preview"
         "httpie"
         "signal"
+        "tailscale"
       ];
 
       onActivation = {

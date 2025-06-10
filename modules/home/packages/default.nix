@@ -11,8 +11,14 @@ lib.${namespace}.mkModule {
 } {
   config = {
     home.packages =
-      (with pkgs;
-        [
+      [
+        (with pkgs.${namespace}; [
+          volgo
+          home
+          comt
+          nvf
+        ])
+        (with pkgs; [
           comma
           zoom-us
           coreutils
@@ -25,17 +31,18 @@ lib.${namespace}.mkModule {
           curlie
           xh
           httpie
-          tailscale
-        ]
-        ++ (with nerd-fonts; [
+        ])
+        (lib.optional (! pkgs.stdenv.isDarwin) [
+          pkgs.httpie-desktop
+          pkgs.tailscale
+          pkgs.signal-desktop-bin
+        ])
+        (with pkgs.nerd-fonts; [
           roboto-mono
           blex-mono
-        ]))
-      ++ (with pkgs.${namespace}; [
-        volgo
-        home
-        comt
-        nvf
-      ]);
+        ])
+      ]
+      |> lib.concatLists
+      |> lib.flatten;
   };
 }
