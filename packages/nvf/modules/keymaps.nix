@@ -11,6 +11,7 @@ in {
       whichKey = {
         enable = true;
         register."<leader>u" = "ui/toggle";
+        register."<leader><tab>" = "tabs";
         setupOpts.spec =
           mkLuaInline
           # lua
