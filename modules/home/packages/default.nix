@@ -23,6 +23,9 @@ lib.${namespace}.mkModule {
           aichat
           signal-desktop-bin
           spotify-player
+          curlie
+          xh
+          httpie
         ]
         ++ (with nerd-fonts; [
           roboto-mono
