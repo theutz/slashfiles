@@ -25,7 +25,7 @@ in
 
         ${description}
 
-        All other flags are passed to 'swch'
+        All other flags and arguments are passed to 'swch'
 
         FLAGS
         -h, --help         Show this help
