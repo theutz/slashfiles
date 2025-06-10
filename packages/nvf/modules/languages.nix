@@ -1,9 +1,9 @@
 {pkgs, ...}: {
-  config.vim.extraPlugins = {
-    "tree-sitter-jinja2" = {
+  config.vim.lazy.plugins = {
+    "vimplugin-treesitter-grammar-jinja" = {
       package = pkgs.vimPlugins.nvim-treesitter-parsers.jinja;
     };
-    "jinja-vim" = {
+    "jinja.vim" = {
       package = pkgs.vimPlugins.jinja-vim;
     };
   };

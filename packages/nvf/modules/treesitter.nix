@@ -1,4 +1,9 @@
-{
+{pkgs, ...}: {
+  config.vim.lazy.plugins = {
+    "treewalker.nvim" = {
+      package = pkgs.vimPlugins.treewalker-nvim;
+    };
+  };
   config.vim.treesitter = {
     addDefaultGrammars = true;
     autotagHtml = true;
