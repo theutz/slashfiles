@@ -25,6 +25,7 @@ lib.${namespace}.mkModule {
           curlie
           xh
           httpie
+          tailscale
         ]
         ++ (with nerd-fonts; [
           roboto-mono
