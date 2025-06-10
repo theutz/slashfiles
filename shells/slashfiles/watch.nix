@@ -1,8 +1,4 @@
-{
-  pkgs,
-  inputs,
-  ...
-}: let
+{pkgs, ...}: let
   name = "watch";
   description = "Watcher for working on this flake";
 in
