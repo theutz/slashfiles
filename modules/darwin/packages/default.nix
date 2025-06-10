@@ -42,6 +42,7 @@ lib.${namespace}.mkModule {
         "telegram"
         "mouseless@preview"
         "httpie-desktop"
+        "signal"
       ];
 
       onActivation = {

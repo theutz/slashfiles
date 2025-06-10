@@ -21,7 +21,6 @@ lib.${namespace}.mkModule {
           procs
           ripgrep
           aichat
-          signal-desktop-bin
           spotify-player
           curlie
           xh
