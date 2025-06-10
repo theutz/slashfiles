@@ -11,6 +11,7 @@
   mkItem = key: cmd: desc: mkKeymap ["n"] "<leader>b${key}" "<cmd>${cmd}<cr>" {inherit desc;};
 
   hasFzf = config.vim.fzf-lua.enable;
+  hasBufferline = config.vim.tabline.nvimBufferline.enable == true;
 in {
   config.vim = {
     binds.whichKey.register = {
@@ -44,6 +45,18 @@ in {
             (mkItem "s" "FzfLua buffers" "Search buffers")
           ]
         )
+        [
+          (mkKeymap "n" "]b" (
+            if hasBufferline
+            then "<cmd>BufferLineCycleNext<cr>"
+            else "<cmd>bnext<cr>"
+          ) {desc = "Next buffer";})
+          (mkKeymap "n" "[b" (
+            if hasBufferline
+            then "<cmd>BufferLineCyclePrev<cr>"
+            else "<cmd>bprev<cr>"
+          ) {desc = "Previous buffer";})
+        ]
       ]
       |> lib.concatLists
       |> lib.flatten;
