@@ -3,6 +3,7 @@
   pkgs,
   ...
 }: let
+  inherit (lib.generators) mkLuaInline;
   inherit (lib.nvim.binds) mkKeymap;
 in {
   config.vim = {
@@ -11,7 +12,7 @@ in {
         enable = true;
         register."<leader>u" = "ui/toggle";
         setupOpts.spec =
-          lib.generators.mkLuaInline
+          mkLuaInline
           # lua
           ''
             {
@@ -38,23 +39,35 @@ in {
       };
     };
 
-    keymaps = [
-      (
-        mkKeymap ["n" "i" "s"] "<esc>"
-        # lua
-        ''
-          function() vim.cmd('noh'); return '<esc>' end
-        ''
-        {
-          desc = "Escape and Clear hlsearch";
-          silent = true;
-          expr = true;
-          lua = true;
-        }
-      )
+    keymaps = let
+      tabs = [
+        # map("n", "<leader><tab>l", "<cmd>tablast<cr>", { desc = "Last Tab" })
+        # map("n", "<leader><tab>o", "<cmd>tabonly<cr>", { desc = "Close Other Tabs" })
+        # map("n", "<leader><tab>f", "<cmd>tabfirst<cr>", { desc = "First Tab" })
+        # map("n", "<leader><tab><tab>", "<cmd>tabnew<cr>", { desc = "New Tab" })
+        # map("n", "<leader><tab>]", "<cmd>tabnext<cr>", { desc = "Next Tab" })
+        # map("n", "<leader><tab>d", "<cmd>tabclose<cr>", { desc = "Close Tab" })
+        # map("n", "<leader><tab>[", "<cmd>tabprevious<cr>", { desc = "Previous Tab" })
+      ];
+    in
+      tabs
+      ++ [
+        (
+          mkKeymap ["n" "i" "s"] "<esc>"
+          # lua
+          ''
+            function() vim.cmd('noh'); return '<esc>' end
+          ''
+          {
+            desc = "Escape and Clear hlsearch";
+            silent = true;
+            expr = true;
+            lua = true;
+          }
+        )
 
-      (mkKeymap ["n" "i" "s" "x"] "<C-s>" "<cmd>w<cr><esc>" {desc = "Save File";})
-      (mkKeymap "n" "<leader>wd" "<cmd>wq<cr>" {desc = "Close window";})
-    ];
+        (mkKeymap ["n" "i" "s" "x"] "<C-s>" "<cmd>w<cr><esc>" {desc = "Save File";})
+        (mkKeymap "n" "<leader>wd" "<cmd>wq<cr>" {desc = "Close window";})
+      ];
   };
 }
