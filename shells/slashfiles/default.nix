@@ -33,7 +33,10 @@ in
         home
         comt
       ])
-      ++ [(import ./secrets.nix {inherit pkgs;})];
+      ++ [
+        (import ./secrets.nix {inherit pkgs;})
+        (import ./watch.nix {inherit pkgs;})
+      ];
 
     shellHook =
       # bash
