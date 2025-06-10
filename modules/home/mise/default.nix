@@ -20,6 +20,7 @@ in
         globalConfig = {};
         settings = {};
       };
+
       programs.direnv.mise.enable = true;
     };
   }
