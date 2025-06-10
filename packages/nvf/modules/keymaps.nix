@@ -41,13 +41,13 @@ in {
 
     keymaps = let
       tabs = [
-        # map("n", "<leader><tab>l", "<cmd>tablast<cr>", { desc = "Last Tab" })
-        # map("n", "<leader><tab>o", "<cmd>tabonly<cr>", { desc = "Close Other Tabs" })
-        # map("n", "<leader><tab>f", "<cmd>tabfirst<cr>", { desc = "First Tab" })
-        # map("n", "<leader><tab><tab>", "<cmd>tabnew<cr>", { desc = "New Tab" })
-        # map("n", "<leader><tab>]", "<cmd>tabnext<cr>", { desc = "Next Tab" })
-        # map("n", "<leader><tab>d", "<cmd>tabclose<cr>", { desc = "Close Tab" })
-        # map("n", "<leader><tab>[", "<cmd>tabprevious<cr>", { desc = "Previous Tab" })
+        (mkKeymap "n" "<leader><tab>l" "<cmd>tablast<cr>" {desc = "Last Tab";})
+        (mkKeymap "n" "<leader><tab>o" "<cmd>tabonly<cr>" {desc = "Close Other Tabs";})
+        (mkKeymap "n" "<leader><tab>f" "<cmd>tabfirst<cr>" {desc = "First Tab";})
+        (mkKeymap "n" "<leader><tab><tab>" "<cmd>tabnew<cr>" {desc = "New Tab";})
+        (mkKeymap "n" "<leader><tab>]" "<cmd>tabnext<cr>" {desc = "Next Tab";})
+        (mkKeymap "n" "<leader><tab>d" "<cmd>tabclose<cr>" {desc = "Close Tab";})
+        (mkKeymap "n" "<leader><tab>[" "<cmd>tabprevious<cr>" {desc = "Previous Tab";})
       ];
     in
       tabs
