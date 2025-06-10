@@ -1,4 +1,9 @@
-{
+{pkgs, ...}: {
+  config.vim.extraPlugins = {
+    "tree-sitter-jinja2" = {
+      package = pkgs.vimPlugins.nvim-treesitter-parsers.jinja;
+    };
+  };
   config.vim.languages = {
     enableDAP = true;
     enableExtraDiagnostics = true;
