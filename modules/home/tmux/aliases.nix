@@ -18,7 +18,11 @@
     rw = "rename-window";
     s = "new-session";
     save = ''run-shell $HOME/.config/tmux/plugins/tmux-resurrect/scripts/save.sh'';
+    sp = ''respawn-pane'';
+    spk = ''respawn-pane -k'';
     spotify = "popup -EE -h80% -w90% -xC -yC -b heavy spotify_player";
+    spw = ''respwan-window'';
+    spwk = ''respwan-window -k'';
     tz = ''popup -EE -xC -yC -b rounded -w100 -h20 -s "bg=colour8" tz'';
     v = "split-window -h";
     vol = "popup -xC -yS -w100 -h5 -b rounded -EE volgo";
