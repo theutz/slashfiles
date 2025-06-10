@@ -16,6 +16,7 @@ in {
   config.vim.lazy.plugins = {
     "treewalker.nvim" = {
       package = pkgs.vimPlugins.treewalker-nvim;
+      lazy = false;
       keys = [
         (mkMove "A-h" "Left")
         (mkMove "A-j" "Down")
