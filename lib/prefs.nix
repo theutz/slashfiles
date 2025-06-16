@@ -1,7 +1,7 @@
 _: {
   font = {
     family = "RecMonoLinear Nerd Font Propo";
-    size = 16;
+    size = 14;
     height = 1.1;
   };
 }

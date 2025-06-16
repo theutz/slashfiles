@@ -21,6 +21,7 @@ lib.slashfiles.mkModule {
           fish = lib.getExe pkgs.fish;
           font-family = lib.slashfiles.prefs.font.family;
           font-size = lib.slashfiles.prefs.font.size;
+          line-height = lib.slashfiles.prefs.font.height;
         }
         |> builtins.toPath
         |> lib.fileContents;
