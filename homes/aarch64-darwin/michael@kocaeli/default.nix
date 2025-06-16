@@ -11,6 +11,7 @@ args @ {
     "fzf"
     "ghostty"
     "git"
+    "less"
     "mise"
     "monitoring"
     "pkgs"
