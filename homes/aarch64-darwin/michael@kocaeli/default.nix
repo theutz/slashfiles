@@ -8,13 +8,15 @@ args @ {
   imports = [./karabiner ./spotify-player];
 
   slashfiles = lib.slashfiles.enableByPath [
+    "bat"
+    "btop"
+    "direnv"
     "fish"
     "fzf"
     "ghostty"
     "git"
     "less"
     "mise"
-    "monitoring"
     "pkgs"
     "ssh"
     "tmux"
