@@ -5,7 +5,7 @@
   namespace,
   ...
 }: {
-  imports = [./karabiner ./spotify-player];
+  imports = [./karabiner];
 
   slashfiles =
     ../../../modules/home
