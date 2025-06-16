@@ -25,6 +25,11 @@ lib.${namespace}.mkModule {
       nushell
     ];
 
+    fonts.packages = with pkgs; [
+      nerd-fonts.recursive-mono
+      nerd-fonts.roboto-mono
+    ];
+
     homebrew = {
       enable = true;
       taps = [];
