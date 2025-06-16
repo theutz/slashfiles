@@ -11,6 +11,7 @@ lib.${namespace}.mkModule {
   config = {
     programs.zed-editor = {
       enable = true;
+      extensions = ["rose-pine-theme"];
     };
   };
 }
