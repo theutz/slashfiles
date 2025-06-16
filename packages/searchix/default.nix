@@ -20,10 +20,6 @@ in
       xh
     ];
 
-    runtimeEnv = {
-      LESS_COLUMNS = 10000;
-    };
-
     text =
       # bash
       ''
