@@ -88,8 +88,11 @@ in
           exit 1
         fi
 
-        xhs "searchix.ovh''${category}" page==0 query=="''$*" |
+        domain="https://searchix.ovh''${category}"
+
+        xhs "''$domain" page==0 query=="''$*" |
           html2markdown \
+            --domain="''$domain" \
             --plugin-table \
             --opt-table-newline-behavior=preserve \
             --include-selector '#results table' |
