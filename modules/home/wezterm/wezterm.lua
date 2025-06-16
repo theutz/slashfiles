@@ -1,7 +1,7 @@
 local wezterm = require("wezterm")
 local config = wezterm.config_builder()
 
-config.font = wezterm.font("RobotoMono Nerd Font Propo")
+config.font = wezterm.font("@font-family@")
 config.font_size = 16
 config.line_height = 1.1
 config.color_scheme = "rose-pine"

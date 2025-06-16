@@ -19,6 +19,7 @@ lib.slashfiles.mkModule {
       extraConfig =
         pkgs.replaceVars ./wezterm.lua {
           fish = lib.getExe pkgs.fish;
+          font-family = lib.slashfiles.prefs.font.family;
         }
         |> builtins.toPath
         |> lib.fileContents;
