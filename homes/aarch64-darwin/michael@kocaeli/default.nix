@@ -12,6 +12,7 @@
     "bat"
     "btop"
     "direnv"
+    "eza"
     "fish"
     "fzf"
     "ghostty"
@@ -51,14 +52,6 @@
   };
 
   programs = {
-    eza = {
-      enable = true;
-      enableBashIntegration = true;
-      enableZshIntegration = true;
-      enableFishIntegration = true;
-      enableNushellIntegration = true;
-    };
-
     home-manager = {
       enable = true;
     };
