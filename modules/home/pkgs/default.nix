@@ -19,27 +19,28 @@ lib.${namespace}.mkModule {
           nvf
         ])
         (with pkgs; [
+          aichat
           comma
-          zoom-us
           coreutils
+          curlie
           fd
+          httpie
           lazygit
           procs
           ripgrep
-          aichat
           spotify-player
-          curlie
           xh
-          httpie
+          zoom-us
         ])
         (lib.optional (! pkgs.stdenv.isDarwin) [
           pkgs.httpie-desktop
-          pkgs.tailscale
           pkgs.signal-desktop-bin
+          pkgs.tailscale
         ])
         (with pkgs.nerd-fonts; [
-          roboto-mono
           blex-mono
+          roboto-mono
+          recursive-mono
         ])
       ]
       |> lib.concatLists

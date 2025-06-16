@@ -7,7 +7,7 @@
 }: {
   "${namespace}" = {
     pam.enable = true;
-    packages.enable = true;
+    pkgs.enable = true;
     secrets.enable = true;
   };
 

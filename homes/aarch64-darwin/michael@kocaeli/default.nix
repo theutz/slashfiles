@@ -12,7 +12,7 @@ args @ {
     "ghostty"
     "git"
     "mise"
-    "packages"
+    "pkgs"
     "ssh"
     "tmux"
     "tmux.smart-splits"
