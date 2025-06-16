@@ -47,7 +47,7 @@
       ]
       ++ (with pkgs.${namespace}; [
         nvf
-        home
+        thome
         swch
         comt
       ]);

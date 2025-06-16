@@ -1,6 +1,6 @@
 {pkgs, ...}:
 pkgs.writeShellApplication {
-  name = "home";
+  name = "thome";
 
   meta.description = ''
     Connect to your home tmux session

@@ -18,6 +18,7 @@ args @ {
     "tmux.smart-splits"
     "wezterm"
     "yazi"
+    "zed"
   ];
 
   home = {

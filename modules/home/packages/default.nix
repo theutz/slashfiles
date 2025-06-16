@@ -14,7 +14,7 @@ lib.${namespace}.mkModule {
       [
         (with pkgs.${namespace}; [
           volgo
-          home
+          thome
           comt
           nvf
         ])
