@@ -11,7 +11,7 @@ lib.slashfiles.mkModule {
 } {
   config = {
     programs.man = {
-      enable = lib.traceVal true;
+      enable = true;
       generateCaches = true; # can slow down builds
     };
 
