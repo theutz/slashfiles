@@ -27,10 +27,10 @@ in {
       "<leader>ve" = "errors";
     };
 
-    # keymaps = lib.optional config.vim.ui.noice.enable [
-    #   # (mkKeymap ["n"] "<leader>vee" "<cmd>NoiceErrors<cr>" {desc = "Show errors";})
-    #   # (mkKeymap ["n"] "<leader>ves" "<cmd>NoiceFzf<cr>" {desc = "Search errors";})
-    # ];
+    keymaps = [
+      (mkKeymap ["n"] "<leader>vee" "<cmd>NoiceErrors<cr>" {desc = "Show errors";})
+      (mkKeymap ["n"] "<leader>ves" "<cmd>NoiceFzf<cr>" {desc = "Search errors";})
+    ];
 
     ui = {
       breadcrumbs = {
