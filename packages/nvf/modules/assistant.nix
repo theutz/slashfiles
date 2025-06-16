@@ -16,6 +16,7 @@ in {
       (mkKeymap "n" "<leader>clc" "<cmd>CodeCompanionChat<cr>" {desc = "Chat";})
       (mkKeymap "n" "<leader>cla" "<cmd>CodeCompanionActions<cr>" {desc = "Actions";})
       (mkKeymap "n" "<leader>clm" "<cmd>CodeCompanionCmd<cr>" {desc = "Command";})
+      (mkKeymap "n" "<leader>clp" "<cmd>CodeCompanion" {desc = "Prompt";})
     ];
 
     assistant = {
