@@ -30,7 +30,7 @@ in
       ++ (with pkgs.${namespace}; [
         nvf
         swch
-        home
+        thome
         comt
       ])
       ++ [
