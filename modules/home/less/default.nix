@@ -13,7 +13,7 @@ lib.slashfiles.mkModule {
         enable = true;
         keys = ''
           zl	right-scroll
-          zh	left-scroll 10
+          zh	left-scroll
         '';
       };
       lesspipe.enable = true;
