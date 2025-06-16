@@ -12,6 +12,14 @@ in {
       "<leader>cl" = "LLMs";
     };
 
+    luaConfigRC = {
+      "code-companion" = lib.nvim.dag.entryAfter ["mappings"] (lib.optionalString hasCodeCompanion
+        # lua
+        ''
+          vim.cmd([[cab cc CodeCompanion]])
+        '');
+    };
+
     keymaps = lib.optionals hasCodeCompanion [
       (mkKeymap ["n" "v"] "<leader>clc" "<cmd>CodeCompanionChat Toggle<cr>" {desc = "Chat";})
       (mkKeymap ["n" "v"] "<leader>cla" "<cmd>CodeCompanionActions<cr>" {desc = "Actions";})
