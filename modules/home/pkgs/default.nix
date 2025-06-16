@@ -17,6 +17,8 @@ lib.${namespace}.mkModule {
           thome
           comt
           nvf
+          html2markdown
+          searchix
         ])
         (with pkgs; [
           aichat
