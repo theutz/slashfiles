@@ -1,0 +1,9 @@
+session_name: "@session_name@"
+start_directory: $HOME
+windows:
+  - window_name: "main"
+    panes:
+      - blank
+  - window_name: spotify
+    panes:
+      - spotify_player
