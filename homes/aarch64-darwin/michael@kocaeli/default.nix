@@ -33,7 +33,6 @@ args @ {
     ];
 
     sessionVariables = {
-      DIRENV_LOG_FORMAT = ""; # Quiet!
       MANPAGER = "${lib.getExe pkgs.${namespace}.nvf} -c +Man!";
       MANWIDTH = 999;
     };
@@ -49,11 +48,6 @@ args @ {
   programs = {
     bash = {
       enable = true;
-    };
-
-    direnv = {
-      enable = true;
-      nix-direnv.enable = true;
     };
 
     eza = {
