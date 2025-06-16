@@ -12,6 +12,7 @@ args @ {
     "ghostty"
     "git"
     "mise"
+    "monitoring"
     "pkgs"
     "ssh"
     "tmux"
