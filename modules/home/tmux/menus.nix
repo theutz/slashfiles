@@ -16,7 +16,7 @@ in {
         divider,
         ...
       }: [
-        (mkItem "t" "btop" (mkPopup {
+        (mkItem "p" "btop" (mkPopup {
           title = "btop";
           command = "btop";
         }))
