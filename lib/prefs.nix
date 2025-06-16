@@ -1,6 +1,6 @@
 _: {
   font = {
-    family = "RecMonoCasual Nerd Font Propo";
+    family = "RecMonoLinear Nerd Font Propo";
     size = 16;
     height = 1.2;
   };
