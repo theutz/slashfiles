@@ -5,8 +5,6 @@
   namespace,
   ...
 }: {
-  imports = [./karabiner];
-
   slashfiles =
     ../../../modules/home
     |> lib.filesystem.listFilesRecursive
