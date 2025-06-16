@@ -20,6 +20,10 @@ in {
           title = "btop";
           command = "btop";
         }))
+        (mkItem "i" "gping" (mkPopup {
+          title = "gping";
+          command = "gping";
+        }))
         (mkItem "e" "yazi" (mkPopup {
           title = "file explorer";
           command = ''

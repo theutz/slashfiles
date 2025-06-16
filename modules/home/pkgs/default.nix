@@ -24,6 +24,7 @@ lib.${namespace}.mkModule {
           coreutils
           curlie
           fd
+          gping
           httpie
           lazygit
           ookla-speedtest
