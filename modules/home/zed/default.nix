@@ -17,7 +17,6 @@ lib.${namespace}.mkModule {
         "toml"
         "dockerfile"
         "php"
-        "python"
         "sql"
         "ruby"
         "terraform"
