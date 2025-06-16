@@ -8,6 +8,7 @@
   imports = [./karabiner ./spotify-player];
 
   slashfiles = lib.slashfiles.enableByPath [
+    "bash"
     "bat"
     "btop"
     "direnv"
@@ -17,20 +18,21 @@
     "git"
     "less"
     "mise"
+    "nushell"
     "pkgs"
     "starship"
     "ssh"
     "tmux"
     "tmux.smart-splits"
     "wezterm"
+    "xdg"
     "yazi"
     "zed"
     "zoxide"
+    "zsh"
   ];
 
   home = {
-    preferXdgDirectories = true;
-
     sessionPath = [
       osConfig.homebrew.brewPrefix
     ];
@@ -49,10 +51,6 @@
   };
 
   programs = {
-    bash = {
-      enable = true;
-    };
-
     eza = {
       enable = true;
       enableBashIntegration = true;
@@ -64,13 +62,5 @@
     home-manager = {
       enable = true;
     };
-
-    zsh = {
-      enable = true;
-    };
-  };
-
-  xdg = {
-    enable = true;
   };
 }
