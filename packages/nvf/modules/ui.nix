@@ -1,4 +1,9 @@
-{lib, ...}: let
+{
+  lib,
+  config,
+  ...
+}: let
+  inherit (lib.nvim.binds) mkKeymap;
   inherit (lib.generators) mkLuaInline;
 in {
   config.vim = {
@@ -17,6 +22,15 @@ in {
         ''
       ];
     };
+
+    binds.whichKey.register = lib.optionalAttrs config.vim.ui.noice.enable {
+      "<leader>ve" = "errors";
+    };
+
+    # keymaps = lib.optional config.vim.ui.noice.enable [
+    #   # (mkKeymap ["n"] "<leader>vee" "<cmd>NoiceErrors<cr>" {desc = "Show errors";})
+    #   # (mkKeymap ["n"] "<leader>ves" "<cmd>NoiceFzf<cr>" {desc = "Search errors";})
+    # ];
 
     ui = {
       breadcrumbs = {
