@@ -1,5 +1,4 @@
 {
-  inputs,
   pkgs,
   lib,
   system,
@@ -64,10 +63,6 @@
     checkConfig = true;
     gc = {
       automatic = true;
-    };
-    nixPath = {
-      nixpkgs = inputs.nixpkgs.legacyPackages.${system}.path;
-      unstable = inputs.unstable.legacyPackages.${system}.path;
     };
     settings = {
       experimental-features = [
