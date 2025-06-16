@@ -101,7 +101,7 @@ in
 
         git="git -C $NH_FLAKE"
 
-        info "Checking for flake environment var"
+        debug "Checking for flake environment var"
         if [[ ! -v NH_FLAKE || -z "$NH_FLAKE" ]]; then
           error "Please define an NH_FLAKE environment variable."
           exit 1
@@ -109,7 +109,7 @@ in
           debug -s "Found" "NH_FLAKE" "$NH_FLAKE"
         fi
 
-        info "Checking which files to add"
+        debug "Checking which files to add"
         if [[ $do_add_all -eq 1 ]]; then
           if $git add --all; then
             info "Added all files successfully";
@@ -125,7 +125,7 @@ in
           fi
         fi
 
-        info "Running checks"
+        debug "Running checks"
         (
           cd "$NH_FLAKE"
           fmt="$(gum spin --title "Formatting..." --show-output -- bash -c "nix fmt 2>&1")"
