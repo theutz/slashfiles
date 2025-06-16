@@ -1,6 +1,8 @@
-_: {
+{lib, ...}: {
   font = {
-    family = "RecMonoLinear Nerd Font Propo";
+    family = lib.head [
+      "RecMonoLinear Nerd Font Propo"
+    ];
     size = 16;
     height = 1.2;
   };
