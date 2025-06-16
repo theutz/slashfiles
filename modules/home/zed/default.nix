@@ -29,6 +29,9 @@ lib.${namespace}.mkModule {
         "ansible"
         "nu"
       ];
+      userSettings = {
+        vim_mode = true;
+      };
     };
   };
 }
