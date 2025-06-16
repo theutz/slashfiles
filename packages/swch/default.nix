@@ -128,7 +128,7 @@ in
         debug "Running checks"
         (
           cd "$NH_FLAKE"
-          fmt="$(gum spin --title "Formatting..." --show-output -- nix fmt 2>&1)"
+          fmt="$(gum spin --title "Formatting..." --show-output -- bash -c "nix fmt 2>&1")"
           # shellcheck disable=SC2181 # had to capture output
           if [[ $? -eq 0 ]]; then
             info "Files formatted"
@@ -138,7 +138,7 @@ in
             exit 1
           fi
 
-          check="$(gum spin --title "Checking..." --show-output -- nix flake check 2>&1)"
+          check="$(gum spin --title "Checking..." --show-output -- bash -c "nix flake check 2>&1")"
           # shellcheck disable=SC2181 # had to capture output
           if [[ $? -eq 0 ]]; then
             info "Flake checks passed"
