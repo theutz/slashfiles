@@ -2,7 +2,7 @@ local wezterm = require("wezterm")
 local config = wezterm.config_builder()
 
 config.font = wezterm.font("@font-family@")
-config.font_size = 16
+config.font_size = @font-size@
 config.line_height = 1.1
 config.color_scheme = "rose-pine"
 config.default_prog = { "@fish@" }
