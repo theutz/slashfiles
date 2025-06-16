@@ -13,8 +13,8 @@ in {
     };
 
     keymaps = lib.optionals hasCodeCompanion [
-      (mkKeymap "n" "<leader>clc" "<cmd>CodeCompanionChat<cr>" {desc = "Chat";})
-      (mkKeymap "n" "<leader>cla" "<cmd>CodeCompanionActions<cr>" {desc = "Actions";})
+      (mkKeymap ["n" "v"] "<leader>clc" "<cmd>CodeCompanionChat Toggle<cr>" {desc = "Chat";})
+      (mkKeymap ["n" "v"] "<leader>cla" "<cmd>CodeCompanionActions<cr>" {desc = "Actions";})
       (mkKeymap "n" "<leader>clm" "<cmd>CodeCompanionCmd<cr>" {desc = "Command";})
       (mkKeymap "n" "<leader>clp" "<cmd>CodeCompanion" {desc = "Prompt";})
     ];
