@@ -27,7 +27,7 @@ in {
       "<leader>ve" = "errors";
     };
 
-    keymaps = [
+    keymaps = lib.optionals config.vim.ui.noice.enable [
       (mkKeymap ["n"] "<leader>vee" "<cmd>NoiceErrors<cr>" {desc = "Show errors";})
       (mkKeymap ["n"] "<leader>ves" "<cmd>NoiceFzf<cr>" {desc = "Search errors";})
     ];
