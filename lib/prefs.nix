@@ -2,6 +2,7 @@
   font = {
     family = lib.head [
       "RecMonoLinear Nerd Font Propo"
+      "RecMonoCasual Nerd Font Propo"
       "RobotoMono Nerd Font Propo"
     ];
     size = 16;
