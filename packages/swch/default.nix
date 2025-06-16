@@ -125,6 +125,13 @@ in
           fi
         fi
 
+        debug "Running checks"
+        (
+          cd "$NH_FLAKE"
+          nix fmt
+          nix flake check
+        )
+
         debug "Running \`nh ${cmd} switch\`"
         if
           nh ${cmd} switch
