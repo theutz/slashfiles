@@ -12,8 +12,8 @@ lib.slashfiles.mkModule {
       less = {
         enable = true;
         keys = ''
-          zl	forw 10
-          zh	back 10
+          zl	right-scroll
+          zh	left-scroll 10
         '';
       };
       lesspipe.enable = true;
