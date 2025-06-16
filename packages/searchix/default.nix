@@ -27,13 +27,20 @@ in
           cat <<-markdown | gum format
         # ${name}
 
-        > ${name} [flags] \<query\>
+        > ${name} [flag] \<query\>
 
         ${description}
 
+        Flags are mutually exclusive.
+
         ## FLAGS
 
-        -h, --help        Show this help
+        -d, --darwin     Search nix-darwin options
+        -h, --help       Show this help
+        -m, --hm         Search Home Manager related options
+        -n, --nixos      Search NixOS options
+        -p, --nixpkgs    Search nixpkgs
+        -u, --nur        Search nix user repository
         markdown
         }
 
@@ -46,19 +53,27 @@ in
         }
 
         do_help=0
+        category="/"
         args=()
 
         while [[ $# -gt 0 ]]; do
           case "$1" in
             --help | -h)
-              do_help=1
-              shift
-              ;;
+              do_help=1;;
+            --darwin | -d)
+              category="/options/darwin/search";;
+            --hm | -m)
+              category="/options/home-manager/search";;
+            --nixos | -n)
+              category="/options/nixos/search";;
+            --nixpkgs | -p)
+              category="/packages/nixpkgs/search";;
+            --nur | -u)
+              category="/packages/nur/search";;
             *)
-              args+=("$1")
-              shift
-              ;;
+              args+=("$1");;
           esac
+          shift
         done
         set -- "''${args[@]}"
 
@@ -73,7 +88,7 @@ in
           exit 1
         fi
 
-        xhs "searchix.ovh/" query=="''$*" |
+        xhs "searchix.ovh''${category}" query=="''$*" |
           html2markdown \
             --plugin-table \
             --opt-table-newline-behavior=preserve \
