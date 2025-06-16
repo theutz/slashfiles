@@ -88,7 +88,7 @@ in
           exit 1
         fi
 
-        xhs "searchix.ovh''${category}" query=="''$*" |
+        xhs "searchix.ovh''${category}" page==0 query=="''$*" |
           html2markdown \
             --plugin-table \
             --opt-table-newline-behavior=preserve \
