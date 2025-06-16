@@ -11,6 +11,7 @@ lib.slashfiles.mkModule {
     programs.btop = {
       enable = true;
       settings = {
+        theme = "TTY";
         theme_backgrounnd = false;
         vim_keys = true;
         rounded_corners = true;
