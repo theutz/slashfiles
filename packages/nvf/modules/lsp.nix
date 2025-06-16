@@ -7,6 +7,7 @@
             "<leader>l" = "lists";
             "<leader>c" = "code/lsp";
             "<leader>cw" = "workspace";
+            "<leader>v" = "vim";
           };
         };
       };
