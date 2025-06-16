@@ -11,7 +11,25 @@ lib.${namespace}.mkModule {
   config = {
     programs.zed-editor = {
       enable = true;
-      extensions = ["rose-pine-theme"];
+      extensions = [
+        "rose-pine-theme"
+        "html"
+        "toml"
+        "dockerfile"
+        "php"
+        "python"
+        "sql"
+        "ruby"
+        "terraform"
+        "lua"
+        "graphql"
+        "rainbow-csv"
+        "ini"
+        "blade"
+        "just"
+        "ansible"
+        "nu"
+      ];
     };
   };
 }
