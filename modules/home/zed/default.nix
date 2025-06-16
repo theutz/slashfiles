@@ -28,6 +28,7 @@ lib.${namespace}.mkModule {
         "just"
         "ansible"
         "nu"
+        "nix"
       ];
       userSettings = {
         vim_mode = true;
