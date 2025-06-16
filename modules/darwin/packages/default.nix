@@ -40,15 +40,16 @@ lib.${namespace}.mkModule {
 
       casks = [
         "figma"
-        "vivaldi"
-        "karabiner-elements"
-        "spotify"
-        "slack"
-        "telegram"
-        "mouseless@preview"
         "httpie"
+        "karabiner-elements"
+        "mouseless@preview"
+        "orion"
         "signal"
+        "slack"
+        "spotify"
         "tailscale"
+        "telegram"
+        "vivaldi"
       ];
 
       onActivation = {
