@@ -7,31 +7,14 @@
 }: {
   imports = [./karabiner ./spotify-player];
 
-  slashfiles = lib.slashfiles.enableByPath [
-    "bash"
-    "bat"
-    "btop"
-    "direnv"
-    "eza"
-    "fish"
-    "fzf"
-    "ghostty"
-    "git"
-    "less"
-    "mise"
-    "nushell"
-    "pkgs"
-    "starship"
-    "ssh"
-    "tmux"
-    "tmux.smart-splits"
-    "wezterm"
-    "xdg"
-    "yazi"
-    "zed"
-    "zoxide"
-    "zsh"
-  ];
+  slashfiles =
+    ../../../modules/home
+    |> lib.filesystem.listFilesRecursive
+    |> lib.map (builtins.dirOf)
+    |> lib.unique
+    |> lib.filter (lib.filesystem.pathIsDirectory)
+    |> lib.map (builtins.baseNameOf)
+    |> lib.slashfiles.enableByPath;
 
   home = {
     sessionPath = [
