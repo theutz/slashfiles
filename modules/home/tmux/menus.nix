@@ -16,6 +16,10 @@ in {
         divider,
         ...
       }: [
+        (mkItem "t" "btop" (mkPopup {
+          title = "btop";
+          command = "btop";
+        }))
         (mkItem "e" "yazi" (mkPopup {
           title = "file explorer";
           command = ''
@@ -23,7 +27,7 @@ in {
           '';
           env = {SKIP_DIRENV = true;};
         }))
-        (mkItem "g" "git repo" (mkPopup {
+        (mkItem "g" "lazygit" (mkPopup {
           title = "lazygit";
           command = "lazygit";
         }))
