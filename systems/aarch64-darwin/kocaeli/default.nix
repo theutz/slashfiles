@@ -1,4 +1,5 @@
 {
+  inputs,
   pkgs,
   lib,
   system,
@@ -64,10 +65,9 @@
     gc = {
       automatic = true;
     };
-    nixPath = [
-      {nixpkgs = "github\:NixOS/nixpkgs/nixpkgs-25.05-darwin";}
-      {unstable = "github\:NixOS/nixpkgs/nixpkgs";}
-    ];
+    nixPath = {
+      inherit (inputs) nixpkgs unstable;
+    };
     settings = {
       experimental-features = [
         "nix-command"
