@@ -101,7 +101,7 @@ in
 
         git="git -C $NH_FLAKE"
 
-        debug "Checking for flake environment var"
+        info "Checking for flake environment var"
         if [[ ! -v NH_FLAKE || -z "$NH_FLAKE" ]]; then
           error "Please define an NH_FLAKE environment variable."
           exit 1
@@ -109,23 +109,23 @@ in
           debug -s "Found" "NH_FLAKE" "$NH_FLAKE"
         fi
 
-        debug "Checking which files to add"
+        info "Checking which files to add"
         if [[ $do_add_all -eq 1 ]]; then
           if $git add --all; then
-            debug "Added all files successfully";
+            info "Added all files successfully";
           else
             error "Could not add all files."
           fi
         else
           if $git add --interactive; then
-            debug "Added files successfully";
+            info "Added files successfully";
           else
             error "Could not add all files."
             exit 1
           fi
         fi
 
-        debug "Running checks"
+        info "Running checks"
         (
           cd "$NH_FLAKE"
           fmt="$(gum spin --title "Formatting..." --show-output -- bash -c "nix fmt 2>&1")"
@@ -149,7 +149,7 @@ in
           fi
         )
 
-        debug "Running \`nh ${cmd} switch\`"
+        info "Running \`nh ${cmd} switch\`"
         if
           nh ${cmd} switch
         then
@@ -159,7 +159,7 @@ in
           exit 1
         fi
 
-        debug "Creating commit message"
+        info "Creating commit message"
         if
           comt -C "$NH_FLAKE"
         then
