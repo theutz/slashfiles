@@ -64,6 +64,35 @@
     gc = {
       automatic = true;
     };
+    optimise = {
+      automatic = true;
+    };
+    registry = {
+      nixpkgs = {
+        from = {
+          id = "nixpkgs";
+          type = "indirect";
+        };
+        to = {
+          owner = "nixos";
+          repo = "nixpkgs";
+          type = "github";
+          ref = "nixpkgs-25.05-darwin";
+        };
+      };
+      unstable = {
+        from = {
+          id = "unstable";
+          type = "indirect";
+        };
+        to = {
+          owner = "nixos";
+          repo = "nixpkgs";
+          type = "github";
+          ref = "nixpkgs-unstable";
+        };
+      };
+    };
     settings = {
       experimental-features = [
         "nix-command"
