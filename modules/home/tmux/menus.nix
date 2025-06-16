@@ -21,7 +21,7 @@ in {
           command = "btop";
         }))
         (mkItem "i" "gping" (mkPopup {
-          title = "gping";
+          title = "gping google.com";
           command = "gping";
         }))
         (mkItem "e" "yazi" (mkPopup {
