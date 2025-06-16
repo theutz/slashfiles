@@ -1,6 +1,5 @@
 {
   lib,
-  pkgs,
   namespace,
   ...
 }: let
@@ -124,10 +123,7 @@ in {
     (mkMenu {
       name = "rename";
       key = "r";
-      mkItems = {
-        divider,
-        mkItem,
-      }: [
+      mkItems = {mkItem, ...}: [
         (mkItem "s" "this session" ''
           command-prompt -p "session name:" -I '#{session_name}' { rename-session '%%' }
         '')

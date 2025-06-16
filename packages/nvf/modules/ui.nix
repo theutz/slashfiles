@@ -4,7 +4,6 @@
   ...
 }: let
   inherit (lib.nvim.binds) mkKeymap;
-  inherit (lib.generators) mkLuaInline;
 in {
   config.vim = {
     statusline.lualine = {

@@ -1,11 +1,9 @@
 {
   pkgs,
-  inputs,
   stdenv,
   namespace,
   ...
 }: let
-  inherit (pkgs.stdenv.hostPlatform) system;
   cmd =
     if pkgs.stdenv.isDarwin
     then "darwin"

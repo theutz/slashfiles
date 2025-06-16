@@ -2,7 +2,6 @@
   namespace,
   pkgs,
   mkShell,
-  lib,
   ...
 }: let
   name = "slashfiles";
