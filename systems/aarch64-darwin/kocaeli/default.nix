@@ -61,9 +61,19 @@
   nix = {
     enable = true;
     checkConfig = true;
-    # nix.nixPath.nixpkgs = "github:NixOS/nixpkgs/nixpkgs-24.05-darwin";
+    gc = {
+      automatic = true;
+    };
+    nixPath = {
+      nixpkgs = "github:NixOS/nixpkgs/nixpkgs-25.05-darwin";
+      unstable = "github:NixOS/nixpkgs/nixpkgs";
+    };
     settings = {
-      experimental-features = ["nix-command" "flakes" "pipe-operators"];
+      experimental-features = [
+        "nix-command"
+        "flakes"
+        "pipe-operators"
+      ];
     };
   };
 
