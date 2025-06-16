@@ -12,7 +12,7 @@ lib.slashfiles.mkModule {
       enable = true;
       settings = {
         theme = "TTY";
-        theme_backgrounnd = false;
+        theme_background = false;
         vim_keys = true;
         rounded_corners = true;
         graph_symbol = "braille";
