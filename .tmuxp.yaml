@@ -14,7 +14,8 @@ windows:
         options:
           remain-on-exit: true
         focus: true
-      - blank
+      - shell_command: watch
+        sleep_before: 1
 
   - window_name: home-manager
     panes:
