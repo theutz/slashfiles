@@ -8,6 +8,7 @@ args @ {
   imports = [./karabiner ./spotify-player];
 
   slashfiles = lib.slashfiles.enableByPath [
+    "fish"
     "fzf"
     "ghostty"
     "git"
@@ -61,22 +62,6 @@ args @ {
       enableZshIntegration = true;
       enableFishIntegration = true;
       enableNushellIntegration = true;
-    };
-
-    fish = {
-      enable = true;
-      functions = {
-        fish_greeting = '''';
-        fish_user_key_bindings = ''
-          fish_default_key_bindings -M insert
-          fish_vi_key_bindings --no-erase insert
-        '';
-      };
-      shellInit =
-        # fish
-        ''
-          fish_user_key_bindings
-        '';
     };
 
     home-manager = {
