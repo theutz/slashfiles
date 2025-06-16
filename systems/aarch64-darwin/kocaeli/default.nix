@@ -64,10 +64,10 @@
     gc = {
       automatic = true;
     };
-    nixPath = {
-      nixpkgs = "github:NixOS/nixpkgs/nixpkgs-25.05-darwin";
-      unstable = "github:NixOS/nixpkgs/nixpkgs";
-    };
+    nixPath = [
+      {nixpkgs = "github:NixOS/nixpkgs/nixpkgs-25.05-darwin";}
+      {unstable = "github:NixOS/nixpkgs/nixpkgs";}
+    ];
     settings = {
       experimental-features = [
         "nix-command"
