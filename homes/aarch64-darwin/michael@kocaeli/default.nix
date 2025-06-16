@@ -21,11 +21,6 @@
       osConfig.homebrew.brewPrefix
     ];
 
-    sessionVariables = {
-      MANPAGER = "${lib.getExe pkgs.${namespace}.nvf} -c +Man!";
-      MANWIDTH = 999;
-    };
-
     shell = {
       # Enables in all shells
       enableShellIntegration = true;
