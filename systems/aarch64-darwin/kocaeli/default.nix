@@ -66,7 +66,8 @@
       automatic = true;
     };
     nixPath = {
-      inherit (inputs) nixpkgs unstable;
+      nixpkgs = inputs.nixpkgs .legacyPackages.${system}.path;
+      unstable = inputs.unstable.legacyPackages.${system}.path;
     };
     settings = {
       experimental-features = [
