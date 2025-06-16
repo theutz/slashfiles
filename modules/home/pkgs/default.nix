@@ -26,6 +26,7 @@ lib.${namespace}.mkModule {
           fd
           httpie
           lazygit
+          ookla-speedtest
           procs
           ripgrep
           spotify-player
