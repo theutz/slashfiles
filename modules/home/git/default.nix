@@ -35,6 +35,7 @@ lib.${namespace}.mkModule {
           "result"
           ".mise.local.toml"
           "mise.local.toml"
+          "nohup.out"
         ];
         userName = "Michael Utz";
         userEmail = "michael@theutz.com";
