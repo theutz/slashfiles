@@ -128,8 +128,25 @@ in
         debug "Running checks"
         (
           cd "$NH_FLAKE"
-          nix fmt
-          nix flake check
+          fmt="$(gum spin --title "Formatting..." --show-output -- nix fmt)"
+          # shellcheck disable=SC2181 # had to capture output
+          if [[ $? -eq 0 ]]; then
+            info "Files formatted"
+          else
+            error "Could not format."
+            echo "$fmt"
+            exit 1
+          fi
+
+          check="$(gum spin --title "Checking..." --show-output -- nix flake check)"
+          # shellcheck disable=SC2181 # had to capture output
+          if [[ $? -eq 0 ]]; then
+            info "Flake checks passed"
+          else
+            error "Flake checks failed"
+            echo "$check"
+            exit 1
+          fi
         )
 
         debug "Running \`nh ${cmd} switch\`"
