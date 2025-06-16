@@ -1,3 +1,3 @@
 {inputs, ...}: _: prev: {
-  wezterm = inputs.nixpkgs.legacyPackages.${prev.system}.wezterm;
+  wezterm = inputs.unstable.legacyPackages.${prev.system}.wezterm;
 }
