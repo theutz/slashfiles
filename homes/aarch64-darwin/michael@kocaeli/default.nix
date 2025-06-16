@@ -21,6 +21,7 @@ args @ {
     "wezterm"
     "yazi"
     "zed"
+    "zoxide"
   ];
 
   home = {
@@ -45,11 +46,6 @@ args @ {
   };
 
   programs = {
-    bat = {
-      enable = true;
-      config = {theme = "Dracula";};
-    };
-
     bash = {
       enable = true;
     };
@@ -102,14 +98,6 @@ args @ {
         |> (p: "${p}/rose-pine.toml")
         |> lib.fileContents
         |> builtins.fromTOML;
-    };
-
-    zoxide = {
-      enable = true;
-      enableBashIntegration = true;
-      enableFishIntegration = true;
-      enableZshIntegration = true;
-      enableNushellIntegration = true;
     };
 
     zsh = {
