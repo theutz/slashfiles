@@ -1,6 +1,6 @@
-{
+_: {
   font = {
-    family = "RobotoMono Nerd Font Propo";
+    family = "RecMono Nerd Font Propo";
     size = 16;
     height = 1.1;
   };

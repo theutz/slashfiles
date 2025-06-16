@@ -21,8 +21,8 @@ lib.slashfiles.mkModule {
       settings = {
         adjust-cell-height = 16;
         background-opacity = 0.75;
-        font-family = "RobotoMono Nerd Font Propo";
-        font-size = 16;
+        font-family = lib.slashfiles.prefs.font.family;
+        font-size = lib.slashfiles.prefs.font.size;
         font-thicken = true;
         # keybind = global:shift+f13=toggle_quick_terminal
         macos-option-as-alt = "left";
@@ -31,7 +31,7 @@ lib.slashfiles.mkModule {
         window-padding-balance = true;
         window-padding-x = 8;
         window-padding-y = 2;
-        window-title-font-family = "RobotoMono Nerd Font Propo";
+        window-title-font-family = lib.slashfiles.prefs.font.family;
       };
     };
   };
