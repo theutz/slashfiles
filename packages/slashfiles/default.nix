@@ -42,8 +42,9 @@ in
 
         ## FLAGS
 
-        -h, --help       Show this help
         -d, --debug      Enable debug logging
+        -h, --help       Show this help
+        -k, --kill       Kill session if it exists and restart
         -v, --verbose    Enable verbose logging
         markdown
         }
@@ -73,19 +74,20 @@ in
         }
 
         parsed="$(getopt \
-          --longoptions help,debug,verbose \
-          --options hdv \
+          --longoptions help,debug,verbose,kill \
+          --options hdvk \
           --name "${name}" \
           -- "$@"
         )" || exit 2
         eval set -- "$parsed"
 
-        flag_verbose=n flag_debug=n flag_help=n
+        flag_verbose=n flag_debug=n flag_help=n flag_kill=n
         while [[ $# -gt 0 ]]; do
           case "$1" in
             --help | -h) flag_help=y;;
             --debug | -d) flag_debug=y;;
             --verbose | -v) flag_verbose=y;;
+            --kill | -k) flag_kill=y;;
             --) shift; break;;
             *) error "Programming error"; exit 1;;
           esac
@@ -108,6 +110,12 @@ in
         if [[ $flag_help == y ]]; then
           usage
           exit 0
+        fi
+
+        has_session="$(tmux has-session -t "$SESSION" 2>&3 1>&3; echo $?)"
+
+        if [[ $flag_kill == y && $has_session -gt 0 ]]; then
+          tmux kill-session -t "$SESSION" 2>&3 1>&3
         fi
 
         if tmux has-session -t "$SESSION" 2>&3 1>&3; then
