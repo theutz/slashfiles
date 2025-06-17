@@ -15,6 +15,7 @@ lib.${namespace}.mkModule {
         (pkgs.${namespace} |> lib.attrValues)
         (with pkgs; [
           aichat
+          claude-code
           comma
           coreutils
           curlie

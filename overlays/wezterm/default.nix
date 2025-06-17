@@ -1,3 +1,3 @@
 {inputs, ...}: _: prev: {
-  wezterm = inputs.unstable.legacyPackages.${prev.system}.wezterm;
+  inherit (inputs.unstable.legacyPackages.${prev.system}) wezterm;
 }

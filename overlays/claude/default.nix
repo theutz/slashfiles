@@ -1,3 +1,3 @@
-{inputs, ...}: _: prev: {
-  inherit (inputs.unstable.${prev.system}) claude-code;
+{channels, ...}: _: _: {
+  inherit (channels.unstable) claude-code;
 }
