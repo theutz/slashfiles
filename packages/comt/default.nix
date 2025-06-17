@@ -127,11 +127,10 @@ in
         # Add files according to options
         (
           cmd=("''${git[@]}" add)
-          exec 2>&3
+          [[ $flag_verbose == y ]] && cmd+=("--verbose")
           if [[ $flag_interactive == y ]]; then
             cmd+=("--interactive")
           else
-            exec 1>&3
             cmd+=("--all")
           fi
           "''${cmd[@]}"
