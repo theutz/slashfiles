@@ -118,7 +118,7 @@ in
           tmux kill-session -t "$SESSION" 2>&3 1>&3
         fi
 
-        if tmux has-session -t "$SESSION" 2>&3 1>&3; then
+        if (( has_session > 0 )); then
           debug "Session exists"
           if [[ -v TMUX && -n "$TMUX" ]]; then
             info "Switching to session..."
