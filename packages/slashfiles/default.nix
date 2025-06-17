@@ -31,6 +31,17 @@ in
     text =
       # bash
       ''
+        function usage() {
+          cat <<-markdown | gum format
+        # ${name}
+
+        ${description}
+
+        ## USAGE
+
+        > ${name}
+        markdown
+        }
         if tmux has-session "$SESSION" &>/dev/null; then
           if [[ -v TMUX && -n "$TMUX" ]]; then
             tmux switch-client -t "$SESSION"
