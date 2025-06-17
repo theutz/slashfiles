@@ -165,6 +165,7 @@ in
           # If the user wanted a chance to edit before committing...
           if [[ $flag_edit == y ]]; then
             cmd+=("--edit")
+          else
             exec 1>&3
           fi
 
