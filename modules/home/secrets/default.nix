@@ -7,5 +7,10 @@ lib.slashfiles.mkModule {
   inherit config;
   here = ./.;
 } {
-  config = {};
+  config = {
+    programs.fish.shellInit =
+      # fish
+      ''
+      '';
+  };
 }
