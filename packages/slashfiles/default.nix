@@ -23,7 +23,7 @@ in
     ];
 
     runtimeEnv = {
-      WORKSPACE = ../..;
+      WORKSPACE = "/etc/nix-darwin";
       SESSION = namespace;
     };
 
@@ -112,13 +112,13 @@ in
           exit 0
         fi
 
-        has_session="$(tmux has-session -t "$SESSION" 2>&3 1>&3; echo $?)"
+        has_session="$(if tmux has-session -t "$SESSION" &>/dev/null; then echo y; else echo n; fi)"
 
-        if [[ $flag_kill == y && $has_session -gt 0 ]]; then
+        if [[ $flag_kill == y && $has_session == y ]]; then
           tmux kill-session -t "$SESSION" 2>&3 1>&3
         fi
 
-        if (( has_session > 0 )); then
+        if [[ $has_session == y ]]; then
           debug "Session exists"
           if [[ -v TMUX && -n "$TMUX" ]]; then
             info "Switching to session..."
