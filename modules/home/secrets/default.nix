@@ -15,5 +15,10 @@ lib.slashfiles.mkModule {
         set -gx ANTHROPIC_API_KEY "$(cat /run/secrets/anthropic)"
         set -gx GEMINI_API_KEY "$(cat /run/secrets/gemini)"
       '';
+
+    programs.bash.initExtra =
+      # bash
+      ''
+      '';
   };
 }
