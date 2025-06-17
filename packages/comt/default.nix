@@ -109,6 +109,7 @@ in
         fi
 
         if [[ $flag_verbose == y ]]; then
+          debug "Verbose mode enabled"
           exec 3>&1
         else
           exec 3>/dev/null
