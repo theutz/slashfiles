@@ -59,14 +59,17 @@ in
           fi
         }
 
+        function info() {
+          log --level info "$@"
+        }
+
+        function warning() {
+          log --level warning "$@"
+        }
+
         function error() {
           log --level error "$@"
         }
-
-        # do_add_all=1
-        # do_help=0
-        # do_commit=1
-        # edit_message=0
 
         parsed="$(getopt \
           --longoptions='debug,working-directory,edit-message,interactive,help,verbose,echo' \
