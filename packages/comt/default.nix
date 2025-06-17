@@ -45,6 +45,7 @@ in
           -h, --help                 Show this help
           -i, --interactive          Interactively add files instead of adding everything
           -m, --edit-message         Edit the message in \$EDITOR before committing
+          -s, --staged               Don't add files. Just use what's staged.
           -v, --verbose              Enable verbose logging
         markdown
         }
@@ -86,6 +87,7 @@ in
         flag_interactive=n
         flag_verbose=n
         flag_echo=n
+        flag_staged=n
 
         while [[ $# -gt 0 ]]; do
           case "$1" in
@@ -96,6 +98,7 @@ in
             --verbose | -v) flag_verbose=y;;
             --working-directory | -C) opt_repo="$2"; shift;;
             --echo | -e) flag_echo=y;;
+            --staged | -s) flag_staged=y;;
             --) shift; break;;
             *) error "Programming error"; exit 1;;
           esac
@@ -118,6 +121,11 @@ in
         if [[ $flag_help == y ]]; then
           usage
           exit 0
+        fi
+
+        if [[ $flag_staged == y && $flag_interactive == y ]]; then
+          error -- "Cannot use -i/--interactive and -s/--staged at the same time"
+          exit 1
         fi
 
         # Build git command from opts
