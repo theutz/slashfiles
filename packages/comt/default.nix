@@ -151,11 +151,16 @@ in
           echo "$msg" > "$file"
         fi
 
+        # Create commit
         (
           cmd=("''${git[@]}" commit --no-verify --file "$file")
+
+          # If the user wanted a chance to edit before committing...
           if [[ $flag_edit == y ]]; then
             cmd+=("--edit")
           fi
+
+          # Run the command
           "''${cmd[@]}" "$@"
         )
       '';
