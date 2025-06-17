@@ -72,6 +72,9 @@ in
           (mkMine (concatLists [
             [
               "spotify_player/client_id"
+              "openai"
+              "gemini"
+              "anthropic"
             ]
             (["batman"]
               |> map (
