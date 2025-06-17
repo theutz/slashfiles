@@ -5,7 +5,8 @@
   namespace,
   ...
 }: {
-  slashfiles = lib.mergeAttrsList [
+  slashfiles =
+    lib.recursiveUpdate
     (../../../modules/home
       |> lib.filesystem.listFilesRecursive
       |> lib.map (builtins.dirOf)
@@ -13,8 +14,7 @@
       |> lib.filter (lib.filesystem.pathIsDirectory)
       |> lib.map (builtins.baseNameOf)
       |> lib.slashfiles.enableByPath)
-    (["tmux.smart-splits"] |> lib.slashfiles.enableByPath)
-  ];
+    (["tmux.smart-splits"] |> lib.slashfiles.enableByPath);
 
   home = {
     sessionPath = [
