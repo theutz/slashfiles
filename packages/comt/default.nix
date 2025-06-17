@@ -116,54 +116,22 @@ in
           exit 0
         fi
 
-        # while [[ $# -gt 0 ]]; do
-        #   case "$1" in
-        #     --debug)
-        #       set -x
-        #       shift
-        #       ;;
-        #     --edit-message | -m)
-        #       edit_message=1
-        #       shift
-        #       ;;
-        #     --no-commit | --echo | -e)
-        #       do_commit=0
-        #       shift
-        #       ;;
-        #     --help | -h)
-        #       do_help=1
-        #       shift
-        #       ;;
-        #     --working-directory | -C)
-        #       opt_repo="$2"
-        #       shift 2
-        #       ;;
-        #     --interactive | -i)
-        #       do_add_all=0
-        #       shift
-        #       ;;
-        #     *)
-        #       args+=("$1")
-        #       shift
-        #       ;;
-        #   esac
-        # done
-        # set -- "''${args[@]}"
-
         # Build git command from opts
         git=(git)
         [[ -n "$opt_repo" ]] && git+=(-C "$opt_repo")
 
         (
-          flag="--all"
+          cmd=("''${git[@]}" add)
           if [[ $flag_interactive == y ]]; then
-            flag="--interactive"
+            cmd+=("--interactive")
+          else
+            cmd+=("--all")
           fi
-          "''${git[@]}" add "$flag"
+          "''${cmd[@]}"
         )
 
+        # Create commit message
         file="''${opt_repo:+''${opt_repo}/}.git/comt_msg"
-
         msg="$(
           gum spin --show-output --title "Generating commit message..." -- \
             bash -c "''${git[*]} diff --cached | aichat \"$PROMPT\""
@@ -183,15 +151,8 @@ in
 
         echo "$msg" > "$file"
 
-
         if [[ $flag_edit == y ]]; then commit+=("--edit"); fi
 
         "''${commit[@]}" "$@"
-
-        # if [[ $edit_message -eq 0 ]]; then
-        #   "''${commit[@]}" "$@"
-        # else
-        #   "''${commit[@]}" --edit "$@"
-        # fi
       '';
   }
