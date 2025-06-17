@@ -12,6 +12,7 @@ in
       gum
       git
       coreutils
+      getopt
     ];
 
     runtimeEnv = {
@@ -32,6 +33,25 @@ in
         do_help=0
         do_commit=1
         edit_message=0
+
+        parsed="$(getopt \
+          --longoptions help \
+          --options h \
+          --name "${name}" \
+          -- "$@"
+        )" || exit 2
+        eval set -- "''$parsed"
+        flag_help=n
+
+        while :; do
+        case "$1" in
+        --help | -h) flag_help=y ;;
+        --) shift; break ;;
+        *) error "Programming error" ;;
+        esac
+        shift
+        done
+        [[ $flag_help == y ]] && echo "kiss"
 
         while [[ $# -gt 0 ]]; do
           case "$1" in
@@ -70,18 +90,21 @@ in
 
         function usage() {
           cat <<-markdown | gum format
-          # ${name} [flags]
+          # ${name}
 
           ${description}
+
+          ## USAGE
+
+          > ${name} [flags]
 
           ## FLAGS
 
           -C, --working-directory    Change the working directory for the git commands
-          -m, --edit-message         Edit the message in EDITOR before committing
           -e, --no-commit, --echo    Echo the commit message without committing
           -h, --help                 Show this help
           -i, --interactive          Interactively add files instead of adding everything
-
+          -m, --edit-message         Edit the message in EDITOR before committing
         markdown
         }
 
