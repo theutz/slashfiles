@@ -73,8 +73,8 @@ in
         }
 
         parsed="$(getopt \
-          --longoptions='debug,working-directory,edit-message,interactive,help,verbose,echo' \
-          --options='dC:mihve' \
+          --longoptions='debug,working-directory,edit-message,interactive,help,verbose,echo,staged' \
+          --options='dC:mihves' \
           --name "${name}" \
           -- "$@"
         )" || exit 2
