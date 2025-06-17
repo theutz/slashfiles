@@ -159,15 +159,10 @@ in
         # Create commit
         (
           cmd=("''${git[@]}" commit --no-verify --file "$file")
-
-          if [[ $flag_verbose != y ]]; then
-            cmd+=("--quiet")
-          fi
+          [[ $flag_verbose != y ]] && cmd+=("--quiet")
 
           # If the user wanted a chance to edit before committing...
-          if [[ $flag_edit == y ]]; then
-            cmd+=("--edit")
-          fi
+          [[ $flag_edit == y ]] && cmd+=("--edit")
 
           # Run the command
           "''${cmd[@]}" "$@"
