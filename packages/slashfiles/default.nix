@@ -23,8 +23,22 @@ in
       tmuxp
     ];
 
+    runtimeEnv = {
+      WORKSPACE = ../..;
+      SESSION = namespace;
+    };
+
     text =
       # bash
       ''
+        if tmux has-session "$SESSION" &>/dev/null; then
+          if [[ -v TMUX && -n "$TMUX" ]]; then
+            tmux switch-client -t "$SESSION"
+          else
+            tmux attach -t "$SESSION"
+          fi
+        else
+          tmuxp load --yes "$WORKSPACE"
+        fi
       '';
   }
