@@ -183,6 +183,7 @@ in
 
         echo "$msg" > "$file"
 
+
         if [[ $flag_edit == y ]]; then commit+=("--edit"); fi
 
         "''${commit[@]}" "$@"
