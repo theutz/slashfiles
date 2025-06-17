@@ -5,14 +5,16 @@
   namespace,
   ...
 }: {
-  slashfiles =
-    ../../../modules/home
-    |> lib.filesystem.listFilesRecursive
-    |> lib.map (builtins.dirOf)
-    |> lib.unique
-    |> lib.filter (lib.filesystem.pathIsDirectory)
-    |> lib.map (builtins.baseNameOf)
-    |> lib.slashfiles.enableByPath;
+  slashfiles = lib.mergeAttrsList [
+    (../../../modules/home
+      |> lib.filesystem.listFilesRecursive
+      |> lib.map (builtins.dirOf)
+      |> lib.unique
+      |> lib.filter (lib.filesystem.pathIsDirectory)
+      |> lib.map (builtins.baseNameOf)
+      |> lib.slashfiles.enableByPath)
+    (["tmux.smart-splits"] |> lib.slashfiles.enableByPath)
+  ];
 
   home = {
     sessionPath = [
