@@ -7,7 +7,15 @@ lib.slashfiles.mkModule {
   inherit config;
   here = ./.;
 } {
-  config = {
+  config = let
+    posix =
+      # bash
+      ''
+        export OPENAI_API_KEY="$(cat /run/secrets/openai)"
+        export ANTHROPIC_API_KEY="$(cat /run/secrets/anthropic)"
+        export GEMINI_API_KEY="$(cat /run/secrets/gemini)"
+      '';
+  in {
     programs.fish.shellInit =
       # fish
       ''
@@ -16,9 +24,7 @@ lib.slashfiles.mkModule {
         set -gx GEMINI_API_KEY "$(cat /run/secrets/gemini)"
       '';
 
-    programs.bash.initExtra =
-      # bash
-      ''
-      '';
+    programs.bash.initExtra = posix;
+    programs.zsh.initExtra = posix;
   };
 }
