@@ -120,6 +120,7 @@ in
         git=(git)
         [[ -n "$opt_repo" ]] && git+=(-C "$opt_repo")
 
+        # Add files according to options
         (
           cmd=("''${git[@]}" add)
           if [[ $flag_interactive == y ]]; then
@@ -136,23 +137,26 @@ in
           gum spin --show-output --title "Generating commit message..." -- \
             bash -c "''${git[*]} diff --cached | aichat \"$PROMPT\""
         )"
-
         if [[ -z "$msg" ]]; then
           error "No commit message generated"
           exit 1
         fi
 
+        # Route the output for the generated message
         if [[ $flag_echo == y ]]; then
           echo "$msg"
           exit 0
+        else
+          # To be consumed by git
+          echo "$msg" > "$file"
         fi
 
-        commit=("''${git[@]}" commit --no-verify --file "$file")
-
-        echo "$msg" > "$file"
-
-        if [[ $flag_edit == y ]]; then commit+=("--edit"); fi
-
-        "''${commit[@]}" "$@"
+        (
+          cmd=("''${git[@]}" commit --no-verify --file "$file")
+          if [[ $flag_edit == y ]]; then
+            cmd+=("--edit")
+          fi
+          "''${cmd[@]}" "$@"
+        )
       '';
   }
