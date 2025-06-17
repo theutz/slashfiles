@@ -12,15 +12,7 @@ lib.${namespace}.mkModule {
   config = {
     home.packages =
       [
-        (with pkgs.${namespace}; [
-          volgo
-          thome
-          comt
-          nvf
-          html2markdown
-          searchix
-          slashfiles
-        ])
+        (pkgs.${namespace} |> lib.attrValues)
         (with pkgs; [
           aichat
           comma
