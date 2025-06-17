@@ -160,10 +160,12 @@ in
         # Create commit
         (
           cmd=("''${git[@]}" commit --no-verify --file "$file")
+          exec 2>&3
 
           # If the user wanted a chance to edit before committing...
           if [[ $flag_edit == y ]]; then
             cmd+=("--edit")
+            exec 1>&3
           fi
 
           # Run the command
