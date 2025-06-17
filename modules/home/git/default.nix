@@ -54,7 +54,7 @@ lib.${namespace}.mkModule {
             {
               key = "b";
               context = "files";
-              command = lib.getExe pkgs.${namespace}.comt;
+              command = ''${lib.getExe pkgs.${namespace}.comt} --staged'';
               description = "generate commit message with llm";
               output = "terminal";
             }

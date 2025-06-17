@@ -138,6 +138,8 @@ in
           [[ $flag_verbose == y ]] && cmd+=("--verbose")
           if [[ $flag_interactive == y ]]; then
             cmd+=("--interactive")
+          elif [[ $flag_staged == y ]]; then
+            :
           else
             cmd+=("--all")
           fi
