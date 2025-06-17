@@ -47,7 +47,7 @@ in
         case "$1" in
         --help | -h) flag_help=y ;;
         --) shift; break ;;
-        *) error "Programming error" ;;
+        *) error "Programming error"; exit 1 ;;
         esac
         shift
         done
