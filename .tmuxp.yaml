@@ -28,3 +28,8 @@ windows:
   - window_name: nvf
     panes:
       - shell: man 5 nvf
+
+  - window_name: repl
+    panes:
+      - shell: nix repl nixpkgs
+        sleep_before: 1
