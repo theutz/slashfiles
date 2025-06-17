@@ -133,18 +133,18 @@ in
         [[ -n "$opt_repo" ]] && git+=(-C "$opt_repo")
 
         # Add files according to options
-        (
-          cmd=("''${git[@]}" add)
-          [[ $flag_verbose == y ]] && cmd+=("--verbose")
-          if [[ $flag_interactive == y ]]; then
-            cmd+=("--interactive")
-          elif [[ $flag_staged == y ]]; then
-            :
-          else
-            cmd+=("--all")
-          fi
-          "''${cmd[@]}"
-        )
+        if [[ $flag_staged != y ]]; then
+          (
+            cmd=("''${git[@]}" add)
+            [[ $flag_verbose == y ]] && cmd+=("--verbose")
+            if [[ $flag_interactive == y ]]; then
+              cmd+=("--interactive")
+            else
+              cmd+=("--all")
+            fi
+            "''${cmd[@]}"
+          )
+        fi
 
         # Create commit message
         file="''${opt_repo:+''${opt_repo}/}.git/comt_msg"
