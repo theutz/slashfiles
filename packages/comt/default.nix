@@ -127,12 +127,14 @@ in
         # Add files according to options
         (
           cmd=("''${git[@]}" add)
+          exec 2>&3
           if [[ $flag_interactive == y ]]; then
             cmd+=("--interactive")
           else
+            exec 1>&3
             cmd+=("--all")
           fi
-          "''${cmd[@]}" 2>&3 1>&3
+          "''${cmd[@]}"
         )
 
         # Create commit message
