@@ -19,29 +19,12 @@ in
       tmux
       tmuxp
       gum
+      getopt
     ];
 
     text =
-      /*
-      bash
-      */
+      # bash
       ''
-        do_help=0
-        do_kill=0
-
-        usage() {
-          cat <<-markdown | gum format
-        # ${name} [flags]
-
-        ${description}
-
-        ## FLAGS
-
-        -h, --help        Show this help
-        -k, --kill        Kill and restart
-        markdown
-        }
-
         log() {
           gum log --prefix "${name}" "$@"
         }
@@ -54,56 +37,64 @@ in
           log --level info "$@"
         }
 
-        _tmux() {
-          &>/dev/null tmux "$@"
+        parsed="$(getopt \
+          --longoptions=debug,help,kill,verbose \
+          --options=dhkv \
+          --name="${name}" -- "$@")" ||
+          exit 2
+        eval set -- "$parsed"
+
+        flag_debug=n flag_help=n flag_kill=n flag_verbose=n
+
+        usage() {
+          cat <<-markdown | gum format
+        # ${name} [flags]
+
+        ${description}
+
+        ## FLAGS
+
+        -d, --debug       Show debug output
+        -h, --help        Show this help
+        -k, --kill        Kill and restart
+        -v, --verbose     Show verbose output
+        markdown
         }
 
-        args=()
-        while [[ $# -gt 0 ]]; do
+        while :; do
           case "$1" in
-            --kill | -k)
-              do_kill=1
-              shift
-              ;;
-            --help | -h)
-              do_help=1
-              shift
-              ;;
-            --* | -*)
-              error -s "Unknown arg" arg "$1"
-              exit 1
-              ;;
-            *)
-              args+=("$1")
-              shift
-              ;;
+            --debug | -d) flag_debug=y ;;
+            --help | -h) flag_help=y ;;
+            --kill | -k) flag_kill=y ;;
+            --verbose | -v) flag_verbose=y ;;
+            --) shift; break ;;
+            *) error "Programming error" ;;
           esac
+          shift
         done
-        set -- "''${args[@]}"
 
-        if [[ $do_help -eq 1 ]]; then
-          usage
-          exit 0
-        fi
+        [[ $flag_debug == y ]] && { set -x; flag_verbose=y; }
+        if [[ $flag_verbose == y ]]; then exec 3>&1; else exec 3>/dev/null; fi
+        [[ $flag_help == y ]] && { usage; exit 0; }
 
-        if _tmux has-session -t "${session_name}"; then
+        if tmux has-session -t "${session_name}" 2>&3 1>&3; then
           info "Session exists"
 
-          if [[ $do_kill -eq 0 ]]; then
+          if [[ $flag_kill == y ]]; then
             if [[ -v TMUX && -n "$TMUX" ]]; then
               info "Switching client"
-              _tmux switch-client -t "${session_name}"
+              tmux switch-client -t "${session_name}"
             else
               info "Attaching client"
-              _tmux attach -t "${session_name}"
+              tmux attach -t "${session_name}"
             fi
           else
             info "Killing session"
-            _tmux kill-session -t "${session_name}"
+            tmux kill-session -t "${session_name}"
           fi
         fi
 
         info "Loading session file"
-        &>/dev/null tmuxp load --yes ${config_file}
+        tmuxp load --yes ${config_file} 2>&3 1>&3
       '';
   }
