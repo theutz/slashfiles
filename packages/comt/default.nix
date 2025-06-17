@@ -132,7 +132,7 @@ in
           else
             cmd+=("--all")
           fi
-          "''${cmd[@]}"
+          "''${cmd[@]}" 2>&3 1>&3
         )
 
         # Create commit message
