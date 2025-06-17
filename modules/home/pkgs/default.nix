@@ -19,6 +19,7 @@ lib.${namespace}.mkModule {
           nvf
           html2markdown
           searchix
+          slashfiles
         ])
         (with pkgs; [
           aichat

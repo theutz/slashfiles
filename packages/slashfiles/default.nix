@@ -1,10 +1,9 @@
 {
   pkgs,
   namespace,
-  lib,
   ...
 }: let
-  name = ./. |> builtins.dirOf |> builtins.baseNameOf;
+  name = ./. |> builtins.baseNameOf;
   description = ''
     Open this repo as a tmux session
   '';
@@ -39,17 +38,90 @@ in
 
         ## USAGE
 
-        > ${name}
+        > ${name} [flags]
+
+        ## FLAGS
+
+        -h, --help       Show this help
+        -d, --debug      Enable debug logging
+        -v, --verbose    Enable verbose logging
         markdown
         }
-        if tmux has-session "$SESSION" &>/dev/null; then
-          if [[ -v TMUX && -n "$TMUX" ]]; then
-            tmux switch-client -t "$SESSION"
+
+        function log() {
+          cmd=("gum" "log" "--prefix=${name}" "--min-level")
+          if [[ $flag_verbose == y ]]; then
+            cmd+=("debug")
           else
-            tmux attach -t "$SESSION"
+            cmd+=("info")
+          fi
+          cmd+=("$@")
+
+          "''${cmd[@]}"
+        }
+
+        function debug() {
+          log --level debug "$@"
+        }
+
+        function info() {
+          log --level info "$@"
+        }
+
+        function error() {
+          log --level error "$@"
+        }
+
+        parsed="$(getopt \
+          --longoptions help,debug,verbose \
+          --options hdv \
+          --name "${name}" \
+          -- "$@"
+        )" || exit 2
+        eval set -- "$parsed"
+
+        flag_verbose=n flag_debug=n flag_help=n
+        while [[ $# -gt 0 ]]; do
+          case "$1" in
+            --help | -h) flag_help=y;;
+            --debug | -d) flag_debug=y;;
+            --verbose | -v) flag_verbose=y;;
+            --) shift; break;;
+            *) error "Programming error"; exit 1;;
+          esac
+          shift
+        done
+
+        if [[ $flag_debug == y ]]; then
+          set -x
+          flag_verbose=y
+          debug "Debug mode enabled"
+        fi
+
+        if [[ $flag_verbose == y ]]; then
+          debug "Verbose mode enabled"
+          exec 3>&1
+        else
+          exec 3>/dev/null
+        fi
+
+        if [[ $flag_help == y ]]; then
+          usage
+          exit 0
+        fi
+
+        if tmux has-session -t "$SESSION" 2>&3 1>&3; then
+          debug "Session exists"
+          if [[ -v TMUX && -n "$TMUX" ]]; then
+            info "Switching to session..."
+            tmux switch-client -t "$SESSION" 2>&3 1>&3
+          else
+            info "Attaching to session"
+            tmux attach -t "$SESSION" 2>&3 1>&3
           fi
         else
-          tmuxp load --yes "$WORKSPACE"
+          info "Loading session"
+          tmuxp load --yes "$WORKSPACE" 2>&3 1>&3
         fi
       '';
   }

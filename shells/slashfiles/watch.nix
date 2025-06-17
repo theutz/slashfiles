@@ -63,7 +63,10 @@ in
         )" || exit 2
         eval set -- "''$parsed"
 
-        flag_help=n flag_immediate=n flag_verbose=n flag_debug=n
+        flag_help=n
+        flag_immediate=n
+        flag_verbose=n
+        flag_debug=n
 
         while [[ $# -gt 0 ]]; do
           case "$1" in
