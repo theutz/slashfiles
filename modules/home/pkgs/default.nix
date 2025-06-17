@@ -16,6 +16,7 @@ lib.${namespace}.mkModule {
         (with pkgs; [
           aichat
           claude-code
+          codex
           comma
           coreutils
           curlie
