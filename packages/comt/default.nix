@@ -54,7 +54,7 @@ in
         }
 
         function debug() {
-          if [[ $flag_debug == y ]]; then
+          if [[ $flag_verbose == y ]]; then
             log --level debug "$@"
           fi
         }
