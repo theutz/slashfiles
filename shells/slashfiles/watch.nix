@@ -15,7 +15,7 @@ in
     text =
       # bash
       ''
-        usage() {
+        function usage() {
           cat <<-markdown | gum format
         # ${name}
 
@@ -25,24 +25,39 @@ in
 
         FLAGS
         -h, --help         Show this help
+        -i, --immediate    Run on first invocation
         markdown
         }
 
-        args=()
+        parsed="$(getopt \
+          --longoptions help,immediate \
+          --options hi \
+          --name "${name}" \
+          -- "$@"
+        )" || exit 2
+        eval set -- "$parsed"
+
+        flag_help=n flag_immediate=n
+
         while [[ $# -gt 0 ]]; do
           case "$1" in
-            --help | -h)
-              usage
-              exit
-              ;;
-            *)
-              args+=("$1")
-              shift
-              ;;
+            --help | -h) flag_help=y;;
+            --immediate | -i) flag_immediate=y;;
+            --) shift; break;;
+            *) error "Programming error"; exit 1;;
           esac
+          shift
         done
-        set -- "''${args[@]}"
 
-        watchexec --restart --postpone --wrap-process=none -- swch "$@"
+        if [[ $flag_help == y ]]; then
+          usage
+          exit 0
+        fi
+
+        cmd=("watchexec" "--restart" "--wrap-process=none")
+        [[ $flag_immediate != y ]] && cmd+=("--postpone")
+        cmd+=("--" "swch" "$@")
+
+        "''${cmd[@]}"
       '';
   }
