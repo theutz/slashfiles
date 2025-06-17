@@ -93,6 +93,7 @@ in
         xh "''$domain" page==0 query=="''$*" |
           html2markdown \
             --domain="''$domain" \
+            --opt-table-newline-behavior=preserve \
             --plugin-table \
             --include-selector '#results table' |
           gum format |

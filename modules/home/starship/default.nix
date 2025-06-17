@@ -10,6 +10,10 @@ lib.slashfiles.mkModule {
   config = {
     programs.starship = {
       enable = true;
+      enableBashIntegration = true;
+      enableFishIntegration = true;
+      enableNushellIntegration = true;
+      enableZshIntegration = true;
       settings =
         (builtins.fetchGit {
           url = "https://github.com/rose-pine/starship";

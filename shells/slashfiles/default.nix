@@ -31,6 +31,7 @@ in
         swch
         thome
         comt
+        searchix
       ])
       ++ [
         (import ./secrets.nix {inherit pkgs;})
