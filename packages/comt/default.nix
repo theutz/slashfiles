@@ -160,12 +160,14 @@ in
         # Create commit
         (
           cmd=("''${git[@]}" commit --no-verify --file "$file")
-          exec 2>&3 1>&3
+
+          if [[ $flag_verbose != y ]]; then
+            cmd+=("--quiet")
+          fi
 
           # If the user wanted a chance to edit before committing...
           if [[ $flag_edit == y ]]; then
             cmd+=("--edit")
-            exec 1>/dev/tty
           fi
 
           # Run the command
