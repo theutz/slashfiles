@@ -25,6 +25,6 @@ lib.slashfiles.mkModule {
       '';
 
     programs.bash.initExtra = posix;
-    programs.zsh.initExtra = posix;
+    programs.zsh.initContent = posix;
   };
 }
