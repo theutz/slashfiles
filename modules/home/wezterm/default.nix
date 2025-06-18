@@ -17,7 +17,7 @@ lib.slashfiles.mkModule {
       enableZshIntegration = true;
 
       extraConfig =
-        pkgs.replaceVars ./wezterm.lua {
+        {
           fish = lib.getExe pkgs.fish;
           font-family = lib.slashfiles.prefs.font.family;
           font-size = lib.slashfiles.prefs.font.size;
@@ -26,6 +26,7 @@ lib.slashfiles.mkModule {
           light-theme = lib.slashfiles.prefs.theme.light.wezterm;
           opacity = 0.85;
         }
+        |> pkgs.replaceVars ./wezterm.lua
         |> builtins.toPath
         |> lib.fileContents;
     };
