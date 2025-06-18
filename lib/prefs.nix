@@ -6,13 +6,13 @@
   themes = {
     rose-pine = {
       main = {
-        wezterm = "Rosè Pine (Gogh)";
+        wezterm = "Rose Pine (Gogh)";
       };
       dawn = {
-        wezterm = "Rosè Pine Dawn (Gogh)";
+        wezterm = "Rose Pine Dawn (Gogh)";
       };
       moon = {
-        wezterm = "Rosè Pine Moon (Gogh)";
+        wezterm = "Rose Pine Moon (Gogh)";
       };
     };
   };
