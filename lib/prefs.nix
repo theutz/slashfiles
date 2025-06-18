@@ -3,7 +3,7 @@
     dark = themes.rose-pine.main;
     light = themes.rose-pine.dawn;
 
-    themes = {
+    themes = rec {
       kanagawa = {
         main = {
           wezterm = "Kanagawa (Gogh)";
@@ -36,18 +36,18 @@
 
       rose-pine = {
         main = {
+          inherit (kanagawa.main) yazi;
           wezterm = "Rosé Pine (Gogh)";
-          yazi = "kanagawa";
         };
 
         dawn = {
+          inherit (kanagawa.lotus) yazi;
           wezterm = "Rosé Pine Dawn (Gogh)";
-          yazi = "kanagawa-lotus";
         };
 
         moon = {
+          inherit (kanagawa.main) yazi;
           wezterm = "Rosé Pine Moon (Gogh)";
-          yazi = "kanagawa";
         };
       };
     };
