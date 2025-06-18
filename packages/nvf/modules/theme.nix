@@ -13,6 +13,8 @@
       rose-pine = "main"; # main, moon, dawn (only sets the dark_variant)
     };
 
-    transparent = true;
+    transparent = lib.attrByPath [name] true {
+      rose-pine = false;
+    };
   };
 }
