@@ -4,25 +4,47 @@
     light = themes.rose-pine.dawn;
 
     themes = {
+      kanagawa = {
+        main = {
+          wezterm = "Kanagawa (Gogh)";
+          yazi = "kanagawa";
+        };
+
+        dragon = {
+          wezterm = "Kanagawa Dragon (Gogh)";
+          yazi = "kanagawa-dragon";
+        };
+
+        # light theme
+        lotus = {
+          wezterm = "Kanagawa (Gogh)";
+          yazi = "kanagawa-lotus";
+        };
+      };
+
       flexoki = {
         light = {
           wezterm = "flexoki-light";
           yazi = "flexoki-light";
         };
+
         dark = {
           wezterm = "flexoki-dark";
           yazi = "flexoki-dark";
         };
       };
+
       rose-pine = {
         main = {
           wezterm = "Rosé Pine (Gogh)";
-          yazi = "rose-pine";
+          yazi = "kanagawa-lotus";
         };
+
         dawn = {
           wezterm = "Rosé Pine Dawn (Gogh)";
           yazi = "rose-pine";
         };
+
         moon = {
           wezterm = "Rosé Pine Moon (Gogh)";
           yazi = "rose-pine";
