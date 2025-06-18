@@ -32,8 +32,8 @@ lib.${namespace}.mkModule {
         '';
       theme = {
         flavor = {
-          dark = "rose-pine";
-          light = "dracula";
+          dark = lib.${namespace}.prefs.theme.dark.yazi;
+          light = lib.${namespace}.prefs.theme.light.yazi;
         };
       };
       flavors = {

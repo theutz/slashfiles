@@ -7,12 +7,15 @@
     rose-pine = {
       main = {
         wezterm = "Rosé Pine (Gogh)";
+        yazi = "rose-pine";
       };
       dawn = {
         wezterm = "Rosé Pine Dawn (Gogh)";
+        yazi = "rose-pine";
       };
       moon = {
         wezterm = "Rosé Pine Moon (Gogh)";
+        yazi = "rose-pine";
       };
     };
   };
