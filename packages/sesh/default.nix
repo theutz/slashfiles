@@ -104,7 +104,7 @@ in
           exit 0
         fi
 
-        ${lib.toShellVars {inherit search_paths;} |> lib.replaceChars ["'"] [''"'']}
+        ${lib.toShellVars {inherit search_paths;} |> lib.replaceStrings ["'"] [''"'']}
 
         session="$(fd --extension yaml --extension yml --hidden tmuxp "''${search_paths[@]}" | fzf)"
         info -s "Loading..." session "$session"

@@ -37,6 +37,14 @@
       }
 
       {
+        group = "autosave";
+        event = ["BufLeave" "FocusLost"];
+        command = "silent! wall";
+        desc = "Save on focus lost";
+        pattern = ["*"];
+      }
+
+      {
         group = "checktime";
         event = ["FocusGained" "TermClose" "TermLeave"];
         callback =
