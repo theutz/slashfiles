@@ -56,6 +56,10 @@ lib.${namespace}.mkModule {
       tmux-dark = {
         enable = true;
         config = {
+          KeepAlive = true;
+          RunAtLoad = true;
+          StandardOutPath = "/tmp/org.nix-community.home/tmux-dark/out.log";
+          StandardErrorPath = "/tmp/org.nix-community.home/tmux-dark/err.log";
           ProgramArguments = let
             mkSetTmuxOpts = theme:
               theme
@@ -81,7 +85,7 @@ lib.${namespace}.mkModule {
                     ;;
                 esac
 
-                tmux reload
+                tmux source-file ~/.config/tmux/tmux.conf
               '';
           in [
             "${osConfig.homebrew.brewPrefix}/dark-notify"
