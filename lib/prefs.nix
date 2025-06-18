@@ -8,8 +8,12 @@
       main = {
         wezterm = "Rosè Pine (Gogh)";
       };
-      dawn = {};
-      moon = {};
+      dawn = {
+        wezterm = "Rosè Pine Dawn (Gogh)";
+      };
+      moon = {
+        wezterm = "Rosè Pine Moon (Gogh)";
+      };
     };
   };
   font = rec {
