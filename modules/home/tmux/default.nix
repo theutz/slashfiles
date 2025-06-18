@@ -39,7 +39,7 @@ lib.${namespace}.mkModule {
     '';
 
     rosePineSettings = ''
-      set -g @rose_pine_variant 'main'
+      set -go @rose_pine_variant 'main'
       set -g @rose_pine_host 'on'
       set -g @rose_pine_datetime '%Y-%m-%d'
       set -g @rose_pine_user 'on'
