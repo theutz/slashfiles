@@ -1,7 +1,7 @@
 {...}: {
   theme = rec {
     main = dark;
-    dark = "rose-pine-moon";
+    dark = "rose-pine";
     light = "rose-pine-dawn";
 
     supported = [
