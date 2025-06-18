@@ -80,6 +80,8 @@ lib.${namespace}.mkModule {
                     exit 1
                     ;;
                 esac
+
+                tmux reload
               '';
           in [
             "${osConfig.homebrew.brewPrefix}/dark-notify"
