@@ -45,6 +45,7 @@
               "@rose_pine_variant" = "main";
             };
           };
+          starship = "rose-pine";
         };
 
         dawn = {
@@ -57,6 +58,7 @@
               "@rose_pine_variant" = "dawn";
             };
           };
+          starship = "rose-pine-dawn";
         };
 
         moon = {
@@ -69,6 +71,7 @@
               "@rose_pine_variant" = "moon";
             };
           };
+          starship = "rose-pine-moon";
         };
       };
     };
