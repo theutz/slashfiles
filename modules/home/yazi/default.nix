@@ -64,13 +64,19 @@ lib.${namespace}.mkModule {
           hash = "sha256-JSl9S8kxD8XoN21WfJwjEGwDB+/McjrTv+8SbXvZKds=";
         };
         copy-file-contents =
-          lib.traceVal
-          (pkgs.fetchFromGitHub {
+          {
             owner = "AnirudhG07";
             repo = "plugins-yazi";
             rev = "524c52c";
             hash = "sha256-GrPqcHYG+qHNi80U+EJJd1JjdAOexiE6sQxsqdeCSMg=";
-          }).outPath;
+          }
+          |> pkgs.fetchFromGitHub
+          |> lib.getAttr "outPath"
+          |> lib.singleton
+          |> lib.concat ["copy-file-contents.yazi"]
+          |> lib.reverseList
+          |> lib.concatStringsSep "/"
+          |> lib.traceValSeq;
       };
       flavors = {
         rose-pine = pkgs.fetchFromGitHub {
