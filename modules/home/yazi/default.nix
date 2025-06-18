@@ -21,6 +21,12 @@ lib.${namespace}.mkModule {
       enableFishIntegration = true;
       enableZshIntegration = true;
       enableNushellIntegration = true;
+      initLua =
+        # lua
+        ''
+          require("full-border"):setup()
+          require("duckdb"):setup()
+        '';
       theme = {
         flavor = {
           dark = "dracula";
