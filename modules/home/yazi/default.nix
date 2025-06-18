@@ -71,12 +71,7 @@ lib.${namespace}.mkModule {
             hash = "sha256-GrPqcHYG+qHNi80U+EJJd1JjdAOexiE6sQxsqdeCSMg=";
           }
           |> pkgs.fetchFromGitHub
-          |> lib.getAttr "outPath"
-          |> lib.singleton
-          |> lib.concat ["copy-file-contents.yazi"]
-          |> lib.reverseList
-          |> lib.concatStringsSep "/"
-          |> lib.traceValSeq;
+          |> (p: "${p.outPath}/copy-file-contents.yazi");
       };
       flavors = {
         rose-pine = pkgs.fetchFromGitHub {
