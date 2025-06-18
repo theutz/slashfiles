@@ -36,6 +36,7 @@ lib.${namespace}.mkModule {
           light = lib.${namespace}.prefs.theme.light.yazi;
         };
       };
+      plugins = {};
       flavors = {
         rose-pine = pkgs.fetchFromGitHub {
           owner = "jamylak";
