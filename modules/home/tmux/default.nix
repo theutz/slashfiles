@@ -102,29 +102,13 @@ lib.${namespace}.mkModule {
       ${lib.optionalString (hasPlugin rose-pine) rosePineSettings}
     '';
 
-    home.activation.reloadTmux = let
-      tmux = lib.getExe pkgs.tmux;
-      file = lib.concatStringsSep "/" [config.xdg.configHome "tmux" "tmux.conf"];
-    in
+    home.activation.reloadTmux =
       config.lib.dag.entryAfter ["writeBoundary"]
-      # bash
-      ''
-        export TERM="xterm-256color"
-        if
-                run ${tmux} ls &>/dev/null
-        then
-                verboseEcho "Reloading tmux..."
-                if
-                        run ${tmux} source-file "${file}"
-                then
-                        verboseEcho "Tmux config reloaded!"
-                else
-                        echo "ERROR: Could not reload tmux config."
-                fi
-        else
-                verboseEcho "No tmux running"
-        fi
-      '';
+      (pkgs.replaceVars ./activation.bash {
+          tmux = lib.getExe pkgs.tmux;
+          file = lib.concatStringsSep "/" [config.xdg.configHome "tmux" "tmux.conf"];
+        }
+        |> lib.fileContents);
 
     programs.tmux = {
       inherit plugins;
