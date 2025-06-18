@@ -45,7 +45,7 @@ lib.slashfiles.mkModule {
               exit 1
           esac
 
-          ln -sf ~/.config/starship.toml "$file"
+          ln -sf "$file" ~/.config/starship.toml
         '';
     in {
       enable = true;
