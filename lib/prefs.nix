@@ -3,25 +3,6 @@
     main = dark;
     dark = "rose-pine";
     light = "rose-pine-dawn";
-
-    themes = rec {
-      rose-pine = {
-        main = {
-          nvf = "rose-pine";
-          starship = "rose-pine";
-        };
-
-        dawn = {
-          nvf = "rose-pine";
-          starship = "rose-pine-dawn";
-        };
-
-        moon = {
-          nvf = "rose-pine";
-          starship = "rose-pine-moon";
-        };
-      };
-    };
   };
 
   font = rec {
