@@ -1,4 +1,5 @@
 {
+  pkgs,
   lib,
   namespace,
   config,
@@ -33,6 +34,14 @@ lib.${namespace}.mkModule {
         flavor = {
           dark = "dracula";
           light = "dracula";
+        };
+      };
+      flavors = {
+        rose-pine = pkgs.fetchFromGitHub {
+          owner = "jamylak";
+          repo = "rose-pine.yazi";
+          rev = "main";
+          hash = "sha256-y+MVU6y73dLXiTrzkbG6/xc0xKcZyywBCZabVL6nAQg=";
         };
       };
       keymap = {
