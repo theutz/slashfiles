@@ -36,7 +36,19 @@ lib.${namespace}.mkModule {
           light = lib.${namespace}.prefs.theme.light.yazi;
         };
       };
-      plugins = {};
+      plugins = {
+        inherit
+          (pkgs.yaziPlugins)
+          chmod
+          duckdb
+          full-border
+          glow
+          ouch
+          smart-enter
+          smart-filter
+          smart-paste
+          ;
+      };
       flavors = {
         rose-pine = pkgs.fetchFromGitHub {
           owner = "jamylak";
