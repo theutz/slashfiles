@@ -1,4 +1,4 @@
-{lib, ...}: {
+{...}: {
   theme = rec {
     main = dark;
     dark = "rose-pine-moon";

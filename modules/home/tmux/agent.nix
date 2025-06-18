@@ -32,11 +32,12 @@
     '';
 in {
   enable = true;
-  config = {
+  config = rec {
+    Label = "com.theutz.tmux-dark";
     KeepAlive = true;
     RunAtLoad = true;
-    StandardOutPath = "/tmp/org.nix-community.home/tmux-dark/out.log";
-    StandardErrorPath = "/tmp/org.nix-community.home/tmux-dark/err.log";
+    StandardOutPath = "/tmp/${Label}/out.log";
+    StandardErrorPath = "/tmp/${Label}/err.log";
     ProgramArguments = [
       "${osConfig.homebrew.brewPrefix}/dark-notify"
       "-c"
