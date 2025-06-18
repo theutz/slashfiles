@@ -3,7 +3,6 @@
   pkgs,
   osConfig,
   light,
-  dark,
   mkVariantOpt,
   ...
 }: let
@@ -14,13 +13,14 @@
     # bash
     ''
       MODE="$1"
+      cmd=("${tmux}" set-option -g)
 
       case "$MODE" in
         light)
-          tmux set-option -g ${mkVariantOpt light}
+          cmd+=(${mkVariantOpt light})
           ;;
         dark)
-          tmux set-option -g ${mkVariantOpt dark}
+          cmd+=(${mkVariantOpt light})
           ;;
         *)
           >&2 echo "Mode was not defined"
@@ -28,7 +28,7 @@
           ;;
       esac
 
-      ${tmux} source-file ~/.config/tmux/tmux.conf
+      ''${cmd[@]} \; source-file ~/.config/tmux/tmux.conf
     '';
 in {
   enable = true;

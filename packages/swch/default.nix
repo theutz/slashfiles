@@ -20,7 +20,6 @@ in
       nh
       git
       gum
-      aichat
       noti
     ];
 
