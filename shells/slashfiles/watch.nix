@@ -55,53 +55,73 @@ in
         markdown
         }
 
-        parsed="$(getopt \
-          --longoptions=debug,help,immediate,verbose \
-          --options=dhiv \
-          --name "${name}" \
-          -- "$@"
-        )" || exit 2
-        eval set -- "''$parsed"
+        function run_cmd() {
+          cmd=("watchexec" "--restart" "--wrap-process=none")
+          [[ $flag_immediate != y ]] && cmd+=("--postpone")
+          cmd+=("--" "swch" "$@")
 
-        flag_help=n
-        flag_immediate=n
-        flag_verbose=n
-        flag_debug=n
+          "''${cmd[@]}" &
+          PID=$!
 
-        while [[ $# -gt 0 ]]; do
-          case "$1" in
-            --debug | -d) flag_debug=y;;
-            --help | -h) flag_help=y;;
-            --immediate | -i) flag_immediate=y;;
-            --verbose | -v) flag_verbose=y;;
-            --) shift; break;;
-            *) error "Programming error"; exit 1;;
-          esac
-          shift
-        done
+          function cleanup() {
+            debug -s "Killing" pid "$PID"
+            kill "$PID" 2>/dev/null
+            wait "$PID" 2>/dev/null
+            info "Watch closed"
+          }
 
-        if [[ $flag_debug == y ]]; then
-          set -x
-          flag_verbose=y
-          debug "Debug mode enabled"
-        fi
+          trap cleanup EXIT
 
-        if [[ $flag_verbose == y ]]; then
-          exec 3>&1
-          debug "Verbose mode enabled"
-        else
-          exec 3>/dev/null
-        fi
+          wait "$PID"
+        }
 
-        if [[ $flag_help == y ]]; then
-          usage
-          exit 0
-        fi
+        function main() {
+          parsed="$(getopt \
+            --longoptions=debug,help,immediate,verbose \
+            --options=dhiv \
+            --name "${name}" \
+            -- "$@"
+          )" || exit 2
+          eval set -- "''$parsed"
 
-        cmd=("watchexec" "--restart" "--wrap-process=none")
-        [[ $flag_immediate != y ]] && cmd+=("--postpone")
-        cmd+=("--" "swch" "$@")
+          flag_help=n
+          flag_immediate=n
+          flag_verbose=n
+          flag_debug=n
 
-        "''${cmd[@]}"
+          while [[ $# -gt 0 ]]; do
+            case "$1" in
+              --debug | -d) flag_debug=y;;
+              --help | -h) flag_help=y;;
+              --immediate | -i) flag_immediate=y;;
+              --verbose | -v) flag_verbose=y;;
+              --) shift; break;;
+              *) error "Programming error"; exit 1;;
+            esac
+            shift
+          done
+
+          if [[ $flag_debug == y ]]; then
+            set -x
+            flag_verbose=y
+            debug "Debug mode enabled"
+          fi
+
+          if [[ $flag_verbose == y ]]; then
+            exec 3>&1
+            debug "Verbose mode enabled"
+          else
+            exec 3>/dev/null
+          fi
+
+          if [[ $flag_help == y ]]; then
+            usage
+            exit 0
+          fi
+
+          run_cmd "$@"
+        }
+
+        main "$@"
       '';
   }
