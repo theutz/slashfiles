@@ -11,9 +11,14 @@ lib.slashfiles.mkModule {
   here = ./.;
 } {
   config = let
+    themes = {
+      rose-pine = "rose-pine";
+      rose-pine-dawn = "rose-pine-dawn";
+      rose-pine-moon = "rose-pine-moon";
+    };
+
     inherit (lib.${namespace}) prefs;
-    dark = prefs.theme.dark.starship;
-    light = prefs.theme.light.starship;
+    inherit (prefs.theme) dark light main;
 
     mkRosePinePath = file:
       {
@@ -24,7 +29,7 @@ lib.slashfiles.mkModule {
       }
       |> pkgs.fetchFromGitHub
       |> lib.getAttr "outPath"
-      |> (p: "${p}/${file}.toml");
+      |> (p: "${p}/${themes.${file}}.toml");
   in {
     launchd.agents.starship-dark = let
       script =
@@ -71,7 +76,7 @@ lib.slashfiles.mkModule {
       enableZshIntegration = true;
 
       settings =
-        dark
+        main
         |> mkRosePinePath
         |> lib.fileContents
         |> builtins.fromTOML;

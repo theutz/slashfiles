@@ -6,6 +6,21 @@
   ...
 }: let
   inherit (lib.${namespace}) prefs;
+  inherit (prefs) font;
+
+  themes = {
+    rose-pine = "Rosé Pine (Gogh)";
+    rose-pine-dawn = "Rosé Pine Dawn (Gogh)"; # light
+    rose-pine-moon = "Rosé Pine Moon (Gogh)";
+    kanagawa = "Kanagawa (Gogh)";
+    kanagawa-dragon = "Kanagawa Dragon (Gogh)";
+    kanagawa-lotus = "Kanagawa (Gogh)"; # light
+    flexoki-light = "flexoki-light";
+    flexoki-dark = "flexoki-dark";
+  };
+
+  dark = lib.attrByPath [prefs.theme.dark] themes.rose-pine themes;
+  light = lib.attrByPath [prefs.theme.light] dark themes;
 in
   lib.slashfiles.mkModule {
     inherit config;
@@ -22,15 +37,14 @@ in
         extraConfig =
           {
             fish = lib.getExe pkgs.fish;
-            font-family = prefs.font.family;
-            font-size = prefs.font.size;
-            line-height = prefs.font.height;
-            dark-theme = prefs.theme.dark.wezterm;
-            light-theme = prefs.theme.light.wezterm;
+            font-family = font.family;
+            font-size = font.size;
+            line-height = font.height;
+            dark-theme = dark;
+            light-theme = light;
             opacity = 0.85;
           }
           |> pkgs.replaceVars ./wezterm.lua
-          |> builtins.toPath
           |> lib.fileContents;
       };
     };

@@ -17,52 +17,55 @@ lib.${namespace}.mkModule {
   ];
 
   config = let
-    inherit (pkgs.tmuxPlugins) rose-pine catppuccin;
+    inherit (lib.${namespace}.prefs.theme) dark light main;
 
-    dark = lib.${namespace}.prefs.theme.dark.tmux;
-    light = lib.${namespace}.prefs.theme.light.tmux;
+    theme-plugins = rec {
+      rose-pine = pkgs.tmuxPlugins.rose-pine;
+      rose-pine-dawn = rose-pine;
+      rose-pine-moon = rose-pine;
+    };
 
-    plugins =
-      (with pkgs.tmuxPlugins; [
-        sessionist
-        pain-control
-        mode-indicator
-      ])
-      ++ [pkgs.tmuxPlugins.${dark.name}] ++ (lib.optional (dark.name != light.name) [pkgs.tmuxPlugins.${light.name}]);
+    variants = {
+      rose-pine = {"@rose_pine_variant" = "main";};
+      rose-pine-moon = {"@rose_pine_variant" = "moon";};
+      rose-pine-dawn = {"@rose_pine_variant" = "dawn";};
+    };
 
-    hasPlugin = (lib.flip lib.elem) plugins;
+    mkVariantOpt = theme:
+      variants
+      |> lib.getAttr theme
+      |> lib.foldlAttrs (_: n: v: "${n} '${v}'") null;
 
-    catppuccinSettings = ''
-      set -g status-left-length 100
-      set -g status-right-length 100
-      set -g status-left ""
-      set -g @catppuccin_flavor 'mocha'
-      set -g @catppuccin_window_status_style "slanted"
-      set -g status-right "#{E:@catppuccin_status_application}"
-      set -ag status-right "#{E:@catppuccin_status_session}"
-      set -ag status-right "#{E:@catppuccin_status_uptime}"
-    '';
-
-    rosePineSettings = let
-      variant =
-        dark.defaults
-        |> lib.mapAttrsToList (name: value: "set -goq ${name} '${value}'")
-        |> lib.concatLines;
-    in ''
-      ${variant}
-      set -g @rose_pine_host 'on'
-      set -g @rose_pine_datetime '%Y-%m-%d'
-      set -g @rose_pine_user 'on'
-      set -g @rose_pine_directory 'on'
-      set -g @rose_pine_status_left_prepend_section '#{tmux_mode_indicator}'
-    '';
+    settings = let
+      rose-pine = ''
+        set -goq ${mkVariantOpt main}
+        set -g @rose_pine_host 'on'
+        set -g @rose_pine_datetime '%Y-%m-%d'
+        set -g @rose_pine_user 'on'
+        set -g @rose_pine_directory 'on'
+        set -g @rose_pine_status_left_prepend_section '#{tmux_mode_indicator}'
+      '';
+    in {
+      inherit rose-pine;
+      rose-pine-dawn = rose-pine;
+      rose-pine-moon = rose-pine;
+      catppuccin-mocha = ''
+        set -g status-left-length 100
+        set -g status-right-length 100
+        set -g status-left ""
+        set -g @catppuccin_flavor 'mocha'
+        set -g @catppuccin_window_status_style "slanted"
+        set -g status-right "#{E:@catppuccin_status_application}"
+        set -ag status-right "#{E:@catppuccin_status_session}"
+        set -ag status-right "#{E:@catppuccin_status_uptime}"
+      '';
+    };
   in {
-    launchd.agents.tmux-dark = import ./agent.nix {inherit lib pkgs osConfig light dark;};
+    launchd.agents.tmux-dark = import ./agent.nix {
+      inherit lib pkgs osConfig light dark mkVariantOpt;
+    };
 
-    xdg.configFile."tmux/tmux.conf".text = lib.mkBefore ''
-      ${lib.optionalString (hasPlugin catppuccin) catppuccinSettings}
-      ${lib.optionalString (hasPlugin rose-pine) rosePineSettings}
-    '';
+    xdg.configFile."tmux/tmux.conf".text = lib.mkBefore settings.${main};
 
     home.activation.reloadTmux =
       config.lib.dag.entryAfter ["writeBoundary"]
@@ -73,7 +76,12 @@ lib.${namespace}.mkModule {
         |> lib.fileContents);
 
     programs.tmux = {
-      inherit plugins;
+      plugins = with pkgs.tmuxPlugins; [
+        sessionist
+        pain-control
+        mode-indicator
+        theme-plugins.${main}
+      ];
 
       aggressiveResize = true;
       baseIndex = 1;

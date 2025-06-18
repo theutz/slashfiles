@@ -4,15 +4,10 @@
   osConfig,
   light,
   dark,
+  mkVariantOpt,
   ...
 }: let
   tmux = lib.getExe pkgs.tmux;
-
-  mkSetTmuxOpts = theme:
-    theme
-    |> lib.getAttr "defaults"
-    |> lib.mapAttrsToList (n: v: ''${tmux} set-option -g ${n} "${v}"'')
-    |> lib.concatLines;
 
   script =
     pkgs.writeShellScript "update-tmux"
@@ -22,10 +17,10 @@
 
       case "$MODE" in
         light)
-          ${mkSetTmuxOpts light}
+          tmux set-option -g ${mkVariantOpt light}
           ;;
         dark)
-          ${mkSetTmuxOpts dark}
+          tmux set-option -g ${mkVariantOpt dark}
           ;;
         *)
           >&2 echo "Mode was not defined"

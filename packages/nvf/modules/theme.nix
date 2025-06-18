@@ -2,19 +2,35 @@
   lib,
   lib',
   ...
-}: {
-  config.vim.theme = rec {
-    enable = true;
+}: let
+  inherit (lib') prefs;
 
-    name = lib'.prefs.theme.dark.nvf;
+  name =
+    {
+      rose-pine = "rose-pine";
+      rose-pine-dawn = "rose-pine";
+      rose-pine-moon = "rose-pine";
+    }
+    |> lib.getAttr prefs.theme.main;
 
-    style = lib.attrByPath [name] null {
-      catppuccin = "mocha";
-      rose-pine = "main"; # main, moon, dawn (only sets the dark_variant)
-    };
+  style =
+    {
+      rose-pine = "main";
+      rose-pine-dawn = "dawn";
+      rose-pine-moon = "moon";
+    }
+    |> lib.getAttr prefs.theme.main;
 
-    transparent = lib.attrByPath [name] false {
+  transparent =
+    {
       rose-pine = true;
-    };
+      rose-pine-dawn = false;
+      rose-pine-moon = true;
+    }
+    |> lib.getAttr prefs.theme.main;
+in {
+  config.vim.theme = {
+    enable = true;
+    inherit name style transparent;
   };
 }

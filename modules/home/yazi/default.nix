@@ -16,12 +16,26 @@ lib.${namespace}.mkModule {
 
     programs.yazi = let
       useDuckDb = false;
+
+      themes = {
+        kanagawa = "kanagawa";
+        kanagawa-dragon = "kanagawa-dragon";
+        kanagawa-lotus = "kanagawa-lotus"; # light
+        flexoki-light = "flexoki-light";
+        flexoki-dark = "flexoki-dark";
+        rose-pine = "kanagawa";
+        rose-pine-dawn = "kanagawa-lotus"; # light
+        rose-pine-moon = "kanagawa";
+      };
+
+      inherit (lib.${namespace}.prefs.theme) dark light;
     in {
       enable = true;
       enableBashIntegration = true;
       enableFishIntegration = true;
       enableZshIntegration = true;
       enableNushellIntegration = true;
+
       initLua =
         # lua
         ''
@@ -30,92 +44,16 @@ lib.${namespace}.mkModule {
             # lua
             ''require("duckdb"):setup()''}
         '';
+
+      plugins = import ./plugins.nix {inherit pkgs;};
+      flavors = import ./flavors.nix {inherit pkgs;};
       theme = {
         flavor = {
-          dark = lib.${namespace}.prefs.theme.dark.yazi;
-          light = lib.${namespace}.prefs.theme.light.yazi;
+          dark = themes.${dark};
+          light = themes.${light};
         };
       };
-      plugins = {
-        inherit
-          (pkgs.yaziPlugins)
-          chmod
-          duckdb
-          full-border
-          git
-          glow
-          lazygit
-          miller
-          ouch
-          projects
-          relative-motions
-          rsync
-          smart-enter
-          smart-filter
-          smart-paste
-          starship
-          sudo
-          vcs-files
-          ;
-        path-from-root = pkgs.fetchFromGitHub {
-          owner = "aresler";
-          repo = "path-from-root";
-          rev = "7d05b87";
-          hash = "sha256-JSl9S8kxD8XoN21WfJwjEGwDB+/McjrTv+8SbXvZKds=";
-        };
-        copy-file-contents =
-          {
-            owner = "AnirudhG07";
-            repo = "plugins-yazi";
-            rev = "524c52c";
-            hash = "sha256-GrPqcHYG+qHNi80U+EJJd1JjdAOexiE6sQxsqdeCSMg=";
-          }
-          |> pkgs.fetchFromGitHub
-          |> (p: "${p.outPath}/copy-file-contents.yazi");
-      };
-      flavors = {
-        rose-pine = pkgs.fetchFromGitHub {
-          owner = "jamylak";
-          repo = "rose-pine.yazi";
-          rev = "df10f50";
-          hash = "sha256-y+MVU6y73dLXiTrzkbG6/xc0xKcZyywBCZabVL6nAQg=";
-        };
 
-        flexoki-light = pkgs.fetchFromGitHub {
-          owner = "gosxrgxx";
-          repo = "flexoki-light.yazi";
-          rev = "45eb0a0f9860eaa93146587b4d4be97b46699a38";
-          hash = "sha256-fEGAxeyeWD6HBKTmhAhKGNGb5LsYPR0Y2I4B5adpv9M=";
-        };
-
-        flexoki-dark = pkgs.fetchFromGitHub {
-          owner = "gosxrgxx";
-          repo = "flexoki-dark.yazi";
-          rev = "28e1977108e3fc79d4253db821eef1b0ae2b4c18";
-          hash = "sha256-fEGAxeyeWD6HBKTmhAhKGNGb5LsYPR0Y2I4B5adpv9M=";
-        };
-
-        kanagawa = pkgs.fetchFromGitHub {
-          owner = "dangooddd";
-          repo = "kanagawa.yazi";
-          rev = "31167ed54c9cc935b2fa448d64d367b1e5a1105d";
-          hash = "sha256-phwGd1i/n0mZH/7Ukf1FXwVgYRbXQEWlNRPCrmR5uNk=";
-        };
-
-        kanagawa-dragon = pkgs.fetchFromGitHub {
-          owner = "marcosvnmelo";
-          repo = "kanagawa-dragon.yazi";
-          rev = "49055274ff53772a13a8c092188e4f6d148d1694";
-          hash = "sha256-phwGd1i/n0mZH/7Ukf1FXwVgYRbXQEWlNRPCrmR5uNk=";
-        };
-
-        kanagawa-lotus = pkgs.fetchFromGitHub {
-          owner = "muratoffalex";
-          repo = "kanagawa-lotus.yazi";
-          rev = "d84d61a0b19de7b13faf9f2f27e2a1070de0790e";
-          hash = "sha256-uNilaHKpTlHD/8E7CugpsH0swjkqNiUvm04TGd3KMeQ=";
-        };
-      };
       keymap = {
         manager = {
           prepend_keymap =
@@ -143,6 +81,7 @@ lib.${namespace}.mkModule {
             in {inherit on run desc;});
         };
       };
+
       settings = {
         manager = {
           show_hidden = true;
