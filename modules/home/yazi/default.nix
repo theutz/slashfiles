@@ -21,6 +21,12 @@ lib.${namespace}.mkModule {
       enableFishIntegration = true;
       enableZshIntegration = true;
       enableNushellIntegration = true;
+      theme = {
+        flavor = {
+          dark = "dracula";
+          light = "dracula";
+        };
+      };
       keymap = {
         manager = {
           prepend_keymap =
