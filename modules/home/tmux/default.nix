@@ -60,6 +60,7 @@ lib.${namespace}.mkModule {
           RunAtLoad = true;
           StandardOutPath = "/tmp/org.nix-community.home/tmux-dark/out.log";
           StandardErrorPath = "/tmp/org.nix-community.home/tmux-dark/err.log";
+          Program = "${osConfig.homebrew.brewPrefix}/dark-notify";
           ProgramArguments = let
             tmux = lib.getExe pkgs.tmux;
             mkSetTmuxOpts = theme:
@@ -89,7 +90,6 @@ lib.${namespace}.mkModule {
                 ${tmux} source-file ~/.config/tmux/tmux.conf
               '';
           in [
-            "${osConfig.homebrew.brewPrefix}/dark-notify"
             "-c"
             script.outPath
           ];
