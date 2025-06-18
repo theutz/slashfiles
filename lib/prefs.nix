@@ -1,8 +1,14 @@
 {...}: {
   theme = rec {
     main = dark;
-    dark = "rose-pine";
+    dark = "rose-pine-moon";
     light = "rose-pine-dawn";
+
+    supported = [
+      "rose-pine"
+      "rose-pine-moon"
+      "rose-pine-dawn" # light
+    ];
   };
 
   font = rec {
