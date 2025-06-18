@@ -57,6 +57,20 @@ lib.${namespace}.mkModule {
           sudo
           vcs-files
           ;
+        path-from-root = pkgs.fetchFromGitHub {
+          owner = "aresler";
+          repo = "path-from-root";
+          rev = "7d05b87";
+          hash = "sha256-JSl9S8kxD8XoN21WfJwjEGwDB+/McjrTv+8SbXvZKds=";
+        };
+        copy-file-contents =
+          pkgs.fetchFromGitHub {
+            owner = "AnirudhG07";
+            repo = "plugins-yazi";
+            rev = "524c52c";
+            hash = "sha256-GrPqcHYG+qHNi80U+EJJd1JjdAOexiE6sQxsqdeCSMg=";
+          }
+          |> lib.traceValSeq;
       };
       flavors = {
         rose-pine = pkgs.fetchFromGitHub {
