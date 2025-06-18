@@ -38,16 +38,19 @@
         main = {
           inherit (kanagawa.main) yazi;
           wezterm = "Rosé Pine (Gogh)";
+          nvf = "rose-pine";
         };
 
         dawn = {
           inherit (kanagawa.lotus) yazi;
           wezterm = "Rosé Pine Dawn (Gogh)";
+          nvf = "rose-pine";
         };
 
         moon = {
           inherit (kanagawa.main) yazi;
           wezterm = "Rosé Pine Moon (Gogh)";
+          nvf = "rose-pine";
         };
       };
     };
