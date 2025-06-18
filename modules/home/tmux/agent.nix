@@ -42,8 +42,8 @@ in {
     RunAtLoad = true;
     StandardOutPath = "/tmp/org.nix-community.home/tmux-dark/out.log";
     StandardErrorPath = "/tmp/org.nix-community.home/tmux-dark/err.log";
-    Program = "${osConfig.homebrew.brewPrefix}/dark-notify";
     ProgramArguments = [
+      "${osConfig.homebrew.brewPrefix}/dark-notify"
       "-c"
       script.outPath
     ];
