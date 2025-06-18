@@ -61,10 +61,11 @@ lib.${namespace}.mkModule {
           StandardOutPath = "/tmp/org.nix-community.home/tmux-dark/out.log";
           StandardErrorPath = "/tmp/org.nix-community.home/tmux-dark/err.log";
           ProgramArguments = let
+            tmux = lib.getExe pkgs.tmux;
             mkSetTmuxOpts = theme:
               theme
               |> lib.getAttr "defaults"
-              |> lib.mapAttrsToList (n: v: ''tmux set-option -g ${n} "${v}"'')
+              |> lib.mapAttrsToList (n: v: ''${tmux} set-option -g ${n} "${v}"'')
               |> lib.concatLines;
             script =
               pkgs.writeShellScript "update-tmux"
@@ -85,7 +86,7 @@ lib.${namespace}.mkModule {
                     ;;
                 esac
 
-                ${lib.getExe pkgs.tmux} source-file ~/.config/tmux/tmux.conf
+                ${tmux} source-file ~/.config/tmux/tmux.conf
               '';
           in [
             "${osConfig.homebrew.brewPrefix}/dark-notify"
