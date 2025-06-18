@@ -25,7 +25,9 @@ lib.${namespace}.mkModule {
         # lua
         ''
           require("full-border"):setup()
-          require("duckdb"):setup()
+          ${lib.optionalString useDuckDb
+            # lua
+            ''require("duckdb"):setup()''}
         '';
       theme = {
         flavor = {
