@@ -3,6 +3,7 @@
   pkgs,
   osConfig,
   light,
+  dark,
   mkVariantOpt,
   ...
 }: let
@@ -20,7 +21,7 @@
           cmd+=(${mkVariantOpt light})
           ;;
         dark)
-          cmd+=(${mkVariantOpt light})
+          cmd+=(${mkVariantOpt dark})
           ;;
         *)
           >&2 echo "Mode was not defined"

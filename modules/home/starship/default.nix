@@ -68,18 +68,20 @@ lib.slashfiles.mkModule {
       };
     };
 
+    xdg.configFile."starship.toml" = {
+      text =
+        main
+        |> mkRosePinePath
+        |> lib.fileContents;
+      force = true;
+    };
+
     programs.starship = {
       enable = true;
       enableBashIntegration = true;
       enableFishIntegration = true;
       enableNushellIntegration = true;
       enableZshIntegration = true;
-
-      settings =
-        main
-        |> mkRosePinePath
-        |> lib.fileContents
-        |> builtins.fromTOML;
     };
   };
 }
