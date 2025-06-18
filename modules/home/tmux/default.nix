@@ -39,7 +39,7 @@ lib.${namespace}.mkModule {
     '';
 
     rosePineSettings = ''
-      set -g @rose_pine_variant "main"
+      set -gF @rose_pine_variant "#{?#{m:#(/opt/homebrew/bin/dark-mode status),on},main,dawn}"
       set -g @rose_pine_host 'on'
       set -g @rose_pine_datetime '%Y-%m-%d'
       set -g @rose_pine_user 'on'
