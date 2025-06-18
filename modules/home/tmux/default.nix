@@ -19,7 +19,8 @@ lib.${namespace}.mkModule {
   config = let
     inherit (pkgs.tmuxPlugins) rose-pine catppuccin;
 
-    theme = lib.${namespace}.prefs.theme.dark.tmux;
+    dark = lib.${namespace}.prefs.theme.dark.tmux;
+    light = lib.${namespace}.prefs.theme.light.tmux;
 
     plugins =
       (with pkgs.tmuxPlugins; [
@@ -27,7 +28,7 @@ lib.${namespace}.mkModule {
         pain-control
         mode-indicator
       ])
-      ++ [pkgs.tmuxPlugins.${theme.name}];
+      ++ [pkgs.tmuxPlugins.${dark.name}] ++ (lib.optional (dark.name != light.name) [pkgs.tmuxPlugins.${light.name}]);
 
     hasPlugin = (lib.flip lib.elem) plugins;
 
@@ -43,7 +44,7 @@ lib.${namespace}.mkModule {
     '';
 
     rosePineSettings = ''
-      ${theme.defaults |> lib.mapAttrsToList (name: value: "set -go ${name} '${value}'") |> lib.concatLines}
+      ${dark.defaults |> lib.mapAttrsToList (name: value: "set -go ${name} '${value}'") |> lib.concatLines}
       set -g @rose_pine_host 'on'
       set -g @rose_pine_datetime '%Y-%m-%d'
       set -g @rose_pine_user 'on'
@@ -51,14 +52,43 @@ lib.${namespace}.mkModule {
       set -g @rose_pine_status_left_prepend_section '#{tmux_mode_indicator}'
     '';
   in {
-    # launchd.agents = {
-    #   # tmux-dark = {
-    #   #   enable = true;
-    #   #   config = {
-    #   #     # ProgramArguments = ["${osConfig.homebrew.brewPrefix}/dark-notify" "-c" "]
-    #   #   };
-    #   # };
-    # };
+    launchd.agents = {
+      tmux-dark = {
+        enable = true;
+        config = {
+          ProgramArguments = let
+            mkSetTmuxOpts = theme:
+              theme
+              |> lib.getAttr "defaults"
+              |> lib.mapAttrsToList (n: v: ''tmux set-option -g ${n} "${v}"'')
+              |> lib.concatLines;
+            script =
+              pkgs.writeShellScript "update-tmux"
+              # bash
+              ''
+                MODE="$1"
+
+                case "$MODE" in
+                  light)
+                    ${mkSetTmuxOpts light}
+                    ;;
+                  dark)
+                    ${mkSetTmuxOpts dark}
+                    ;;
+                  *)
+                    >&2 echo "Mode was not defined"
+                    exit 1
+                    ;;
+                esac
+              '';
+          in [
+            "${osConfig.homebrew.brewPrefix}/dark-notify"
+            "-c"
+            script.outPath
+          ];
+        };
+      };
+    };
 
     xdg.configFile."tmux/tmux.conf".text = lib.mkBefore ''
       ${lib.optionalString (hasPlugin catppuccin) catppuccinSettings}
