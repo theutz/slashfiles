@@ -42,11 +42,20 @@ lib.${namespace}.mkModule {
           chmod
           duckdb
           full-border
+          git
           glow
+          lazygit
+          miller
           ouch
+          projects
+          relative-motions
+          rsync
           smart-enter
           smart-filter
           smart-paste
+          starship
+          sudo
+          vcs-files
           ;
       };
       flavors = {
