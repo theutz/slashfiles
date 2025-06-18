@@ -24,6 +24,7 @@ lib.${namespace}.mkModule {
       keymap = {
         manager = {
           prepend_keymap =
+            # Each item defines the `on`, `run`, and `desc` attrs
             [
               ["q" "close" "Close the current tab, or quit yazi"]
               ["!" ''shell "/opt/homebrew/bin/fish" --block --confirm'' "Open shell here"]
@@ -45,85 +46,6 @@ lib.${namespace}.mkModule {
               run = at 1;
               desc = at 2;
             in {inherit on run desc;});
-          # prepend_keymap = [
-          #   {
-          #     on = "q";
-          #     run = "close";
-          #     desc = "Close the current tab, or quit yazi";
-          #   }
-          #
-          #   {
-          #     on = "!";
-          #     run = ''shell "/opt/homebrew/bin/fish" --block --confirm'';
-          #     desc = "Open shell here";
-          #   }
-          #
-          #   {
-          #     on = ["g" "l"];
-          #     run = ''shell "lazygit" --block --confirm'';
-          #     desc = "Open lazygit here";
-          #   }
-          #
-          #   {
-          #     on = ["g" "r"];
-          #     run = ''shell 'ya pub dds-cd --str "$(git rev-parse --show-toplevel)"' --confirm'';
-          #     desc = "Jump to repo root";
-          #   }
-          #
-          #   {
-          #     on = ["l"];
-          #     run = "plugin smart-enter";
-          #     desc = "Enter the child directory, or open the file";
-          #   }
-          #
-          #   {
-          #     on = "p";
-          #     run = "plugin smart-paste";
-          #     desc = "Paste into the hovered directory or CWD";
-          #   }
-          #
-          #   {
-          #     on = ["g" "q"];
-          #     run = ''shell -- qlmanage -p "$@"'';
-          #     desc = "Preview with QuickLook";
-          #   }
-          #
-          #   {
-          #     on = ["C"];
-          #     run = "plugin ouch";
-          #     desc = "Compress with ouch";
-          #   }
-          #
-          #   {
-          #     on = ["c" "m"];
-          #     run = "plugin chmod";
-          #     desc = "Chmod on selected files";
-          #   }
-          #
-          #   {
-          #     on = ["c" "o"];
-          #     run = ["plugin copy-file-contents"];
-          #     desc = "Copy contents of file";
-          #   }
-          #
-          #   {
-          #     on = ["c" "r"];
-          #     run = "plugin path-from-root";
-          #     desc = "Copies path from git root";
-          #   }
-          #
-          #   {
-          #     on = "F";
-          #     run = "plugin smart-filter";
-          #     desc = "Smart filter";
-          #   }
-          #
-          #   {
-          #     on = ["L"];
-          #     run = "plugin bypass";
-          #     desc = "Recursively enter child directory, skipping children with only a single subdirectory";
-          #   }
-          # ];
         };
       };
       settings = {
@@ -134,22 +56,15 @@ lib.${namespace}.mkModule {
         opener = {
           visual = [
             {
-              run =
-                # bash
-                ''
-                  ''${VISUAL:-neovide} "$@"
-                '';
+              run = ''''${VISUAL:-neovide} "$@"'';
               orphan = true;
               for = "unix";
             }
           ];
+
           editor = [
             {
-              run =
-                # bash
-                ''
-                  ''${EDITOR:-nvim} "$@"
-                '';
+              run = ''''${EDITOR:-nvim} "$@"'';
               orphan = true;
               for = "unix";
             }

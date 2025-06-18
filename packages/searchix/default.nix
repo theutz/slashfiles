@@ -90,13 +90,18 @@ in
 
         domain="https://searchix.ovh''${category}"
 
-        xh "''$domain" page==0 query=="''$*" |
+        results="$(xh "''$domain" page==0 query=="''$*" |
           html2markdown \
             --domain="''$domain" \
             --opt-table-newline-behavior=preserve \
             --plugin-table \
             --include-selector '#results table' |
-          gum format |
-          less -SR
+          gum format)"
+
+        if [[ -v TMUX && -n "$TMUX" ]]; then
+          tmux if-shell -F "#{?window_zoomed_flag,0,1}" "resize-pane -Z"
+        fi
+
+        echo "$results" | less -SR
       '';
   }
