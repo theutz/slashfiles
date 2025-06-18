@@ -39,18 +39,36 @@
           inherit (kanagawa.main) yazi;
           wezterm = "Rosé Pine (Gogh)";
           nvf = "rose-pine";
+          tmux = {
+            name = "rose-pine";
+            defaults = {
+              "@rose_pine_variant" = "main";
+            };
+          };
         };
 
         dawn = {
           inherit (kanagawa.lotus) yazi;
           wezterm = "Rosé Pine Dawn (Gogh)";
           nvf = "rose-pine";
+          tmux = {
+            name = "rose-pine";
+            defaults = {
+              "@rose_pine_variant" = "dawn";
+            };
+          };
         };
 
         moon = {
           inherit (kanagawa.main) yazi;
           wezterm = "Rosé Pine Moon (Gogh)";
           nvf = "rose-pine";
+          tmux = {
+            name = "rose-pine";
+            defaults = {
+              "@rose_pine_variant" = "moon";
+            };
+          };
         };
       };
     };

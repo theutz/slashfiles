@@ -17,13 +17,15 @@ lib.${namespace}.mkModule {
 
   config = let
     inherit (pkgs.tmuxPlugins) rose-pine catppuccin;
+    theme = lib.${namespace}.prefs.theme.dark.tmux;
 
-    plugins = with pkgs.tmuxPlugins; [
-      sessionist
-      pain-control
-      rose-pine
-      mode-indicator
-    ];
+    plugins =
+      (with pkgs.tmuxPlugins; [
+        sessionist
+        pain-control
+        mode-indicator
+      ])
+      ++ [pkgs.tmuxPlugins.${theme.name}];
 
     hasPlugin = (lib.flip lib.elem) plugins;
 
@@ -39,7 +41,8 @@ lib.${namespace}.mkModule {
     '';
 
     rosePineSettings = ''
-      set -goq @rose_pine_variant 'main'
+      set -go @rose_pine_variant 'main'
+      ${theme.defaults |> lib.mapAttrsToList (name: value: "set -go ${name} '${value}'") |> lib.concatLines}
       set -g @rose_pine_host 'on'
       set -g @rose_pine_datetime '%Y-%m-%d'
       set -g @rose_pine_user 'on'
