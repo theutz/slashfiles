@@ -32,7 +32,7 @@ lib.${namespace}.mkModule {
         '';
       theme = {
         flavor = {
-          dark = "dracula";
+          dark = "rose-pine";
           light = "dracula";
         };
       };
