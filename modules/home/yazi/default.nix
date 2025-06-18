@@ -77,7 +77,7 @@ lib.${namespace}.mkModule {
         rose-pine = pkgs.fetchFromGitHub {
           owner = "jamylak";
           repo = "rose-pine.yazi";
-          rev = "main";
+          rev = "df10f50";
           hash = "sha256-y+MVU6y73dLXiTrzkbG6/xc0xKcZyywBCZabVL6nAQg=";
         };
       };
