@@ -1,4 +1,17 @@
-{...}: {
+{...}: rec {
+  theme = {
+    dark = themes.rose-pine.main;
+    light = themes.rose-pine.dawn;
+  };
+  themes = {
+    rose-pine = {
+      main = {
+        wezterm = "Rosè Pine (Gogh)";
+      };
+      dawn = {};
+      moon = {};
+    };
+  };
   font = rec {
     family = families.recursive.linear;
     families = {
