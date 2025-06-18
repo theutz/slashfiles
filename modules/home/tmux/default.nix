@@ -85,7 +85,7 @@ lib.${namespace}.mkModule {
                     ;;
                 esac
 
-                tmux source-file ~/.config/tmux/tmux.conf
+                ${lib.getExe pkgs.tmux} source-file ~/.config/tmux/tmux.conf
               '';
           in [
             "${osConfig.homebrew.brewPrefix}/dark-notify"
