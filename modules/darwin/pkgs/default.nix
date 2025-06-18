@@ -31,6 +31,7 @@ lib.${namespace}.mkModule {
 
       brews = [
         "dark-mode"
+        "dark-notify"
       ];
 
       casks = [

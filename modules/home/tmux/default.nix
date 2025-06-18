@@ -3,6 +3,7 @@
   namespace,
   config,
   pkgs,
+  osConfig,
   ...
 }:
 lib.${namespace}.mkModule {
@@ -17,6 +18,7 @@ lib.${namespace}.mkModule {
 
   config = let
     inherit (pkgs.tmuxPlugins) rose-pine catppuccin;
+
     theme = lib.${namespace}.prefs.theme.dark.tmux;
 
     plugins =
@@ -41,7 +43,6 @@ lib.${namespace}.mkModule {
     '';
 
     rosePineSettings = ''
-      set -go @rose_pine_variant 'main'
       ${theme.defaults |> lib.mapAttrsToList (name: value: "set -go ${name} '${value}'") |> lib.concatLines}
       set -g @rose_pine_host 'on'
       set -g @rose_pine_datetime '%Y-%m-%d'
@@ -50,6 +51,15 @@ lib.${namespace}.mkModule {
       set -g @rose_pine_status_left_prepend_section '#{tmux_mode_indicator}'
     '';
   in {
+    # launchd.agents = {
+    #   # tmux-dark = {
+    #   #   enable = true;
+    #   #   config = {
+    #   #     # ProgramArguments = ["${osConfig.homebrew.brewPrefix}/dark-notify" "-c" "]
+    #   #   };
+    #   # };
+    # };
+
     xdg.configFile."tmux/tmux.conf".text = lib.mkBefore ''
       ${lib.optionalString (hasPlugin catppuccin) catppuccinSettings}
       ${lib.optionalString (hasPlugin rose-pine) rosePineSettings}
