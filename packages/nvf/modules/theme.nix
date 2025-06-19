@@ -23,9 +23,9 @@
 
   transparent =
     {
-      rose-pine = true;
+      rose-pine = false;
       rose-pine-dawn = false;
-      rose-pine-moon = true;
+      rose-pine-moon = false;
     }
     |> lib.getAttr prefs.theme.main;
 in {

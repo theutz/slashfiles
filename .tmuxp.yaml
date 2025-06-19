@@ -14,8 +14,7 @@ windows:
         options:
           remain-on-exit: true
         focus: true
-      - shell_command: watch
-        sleep_before: 1
+      - shell: nix develop -c watch
 
   - window_name: home-manager
     panes:
