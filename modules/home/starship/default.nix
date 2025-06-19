@@ -11,6 +11,8 @@ lib.slashfiles.mkModule {
   here = ./.;
 } {
   config = let
+    inherit (pkgs.${namespace}) dark-notify;
+
     themes = {
       rose-pine = "rose-pine";
       rose-pine-dawn = "rose-pine-dawn";
@@ -67,7 +69,7 @@ lib.slashfiles.mkModule {
         RunAtLoad = true;
         KeepAlive = true;
         ProgramArguments = [
-          "${osConfig.homebrew.brewPrefix}/dark-notify"
+          (lib.getExe dark-notify)
           "-c"
           script.outPath
         ];

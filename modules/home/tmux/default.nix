@@ -62,7 +62,7 @@ in
 
     config = {
       launchd.agents.tmux-dark = import ./agent.nix {
-        inherit lib pkgs osConfig light dark mkVariantOpt;
+        inherit lib pkgs osConfig light dark mkVariantOpt namespace;
       };
 
       xdg.configFile."tmux/tmux.conf".text = lib.mkBefore settings.${main};

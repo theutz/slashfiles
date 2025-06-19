@@ -1,9 +1,9 @@
 {
   lib,
   pkgs,
-  osConfig,
   light,
   dark,
+  namespace,
   mkVariantOpt,
   ...
 }: let
@@ -40,7 +40,7 @@ in {
     StandardOutPath = "/tmp/${Label}/out.log";
     StandardErrorPath = "/tmp/${Label}/err.log";
     ProgramArguments = [
-      "${osConfig.homebrew.brewPrefix}/dark-notify"
+      (lib.getExe pkgs.${namespace}.dark-notify)
       "-c"
       script.outPath
     ];
