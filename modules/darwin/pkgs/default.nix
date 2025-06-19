@@ -27,11 +27,9 @@ lib.${namespace}.mkModule {
 
     homebrew = {
       enable = true;
-      taps = ["cormacrelf/tap"];
 
       brews = [
         "dark-mode"
-        "dark-notify"
       ];
 
       casks = [

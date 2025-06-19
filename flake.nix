@@ -76,7 +76,6 @@
 
       systems.modules.darwin = [
         inputs.sops-nix.darwinModules.sops
-        inputs.agenix.darwinModules.default
       ];
 
       alias = {

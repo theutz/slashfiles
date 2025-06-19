@@ -2,6 +2,7 @@
   lib,
   config,
   namespace,
+  pkgs,
   ...
 }:
 lib.slashfiles.mkModule {
@@ -9,6 +10,10 @@ lib.slashfiles.mkModule {
   here = ./.;
 } {
   config = {
+    home.packages = with pkgs; [
+      pkgs.${namespace}.dark-notify
+    ];
+
     programs.git.delta = {
       enable = config.${namespace}.git.enable;
       options = {
@@ -25,7 +30,7 @@ lib.slashfiles.mkModule {
     programs.lazygit.settings.git.paging.pager =
       # bash
       ''
-        delta "$(dark-mode status | grep on && echo "--dark" || echo "--light")" --paging=never
+        delta "--$(dark-notify status --exit)" --paging=never
       '';
 
     programs.tmux.extraConfig = ''
