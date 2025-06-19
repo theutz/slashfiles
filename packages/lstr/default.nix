@@ -19,6 +19,8 @@ pkgs.rustPlatform.buildRustPackage rec {
     hash = "sha256-Bg2tJYnXpJQasmcRv+ZIZAVteKUCuTgFKVRHw1CCiAQ=";
   };
 
+  cargoHash = "sha256-KlO/Uz9UPea4DFC6U4hvn4kOWSzUmYmckw+IUstcmeQ=";
+
   checkFlags = [
     # Requires tmpdir in target
     "--skip=test_git_status_flag"
@@ -27,5 +29,4 @@ pkgs.rustPlatform.buildRustPackage rec {
 
   nativeBuildInputs = with pkgs; [pkg-config];
   buildInputs = with pkgs; [openssl];
-  cargoHash = "sha256-KlO/Uz9UPea4DFC6U4hvn4kOWSzUmYmckw+IUstcmeQ=";
 }
