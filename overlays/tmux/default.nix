@@ -1,4 +1,4 @@
-{channels, ...}: _: _prev: {
+{channels, ...}: _: _: {
   tmux =
     channels.unstable.tmux
     // {
