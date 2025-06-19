@@ -1,13 +1,14 @@
 {
   config,
   lib,
+  namespace,
   ...
 }: let
   parent = builtins.baseNameOf ./.;
-  name = builtins.baseNameOf __curPos.file |> lib.removeSuffix ".nix";
-  cfg = config.slashfiles.${parent}.${name};
+  mod = lib.${namespace}.thisHere __curPos;
+  cfg = config.${namespace}.${parent}.${mod};
 in {
-  options.slashfiles.${parent}.${name}.enable = lib.mkEnableOption "${parent} > ${name}";
+  options.slashfiles.${parent}.${mod}.enable = lib.mkEnableOption "${parent} > ${mod}";
 
   config = lib.mkIf cfg.enable {
     programs.tmux.extraConfig = ''
