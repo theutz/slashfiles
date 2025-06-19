@@ -17,6 +17,7 @@ in
       ];
 
       xdg.configFile."chawan/config.toml" = {
+        executable = false;
         source = tomlFormat.generate "chawan-config" {
           buffer = {
             images = true;
