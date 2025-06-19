@@ -30,7 +30,7 @@ in
 
       programs.lazygit.settings.git.paging.pager =
         # bash
-        ''delta --"$(${exe} --exit | tr -d '\n')" --paging=never'';
+        ''delta --"$(${exe |> lib.trim} --exit | tr -d '\n')" --paging=never'';
 
       programs.tmux.extraConfig = ''
         set -ga terminal-overrides ",*-256color:Tc"
