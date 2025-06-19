@@ -18,6 +18,13 @@ in {
     filterNixFiles
   ];
 
+  # Must pass in `__curPos` as `here`
+  thisHere = here:
+    here
+    |> lib.getAttr "file"
+    |> builtins.baseNameOf
+    |> lib.removeSuffix ".nix";
+
   mkModule = {
     here,
     config,

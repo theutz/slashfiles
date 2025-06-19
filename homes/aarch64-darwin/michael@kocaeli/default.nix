@@ -14,7 +14,12 @@
       |> lib.filter (lib.filesystem.pathIsDirectory)
       |> lib.map (builtins.baseNameOf)
       |> lib.slashfiles.enableByPath)
-    (["tmux.smart-splits"] |> lib.slashfiles.enableByPath);
+    ([
+        /*
+        "tmux.smart-splits"
+        */
+      ]
+      |> lib.slashfiles.enableByPath);
 
   home = {
     sessionPath = [

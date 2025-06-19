@@ -1,16 +1,27 @@
 {
+  lib',
   pkgs,
   lib,
+  namespace,
+  config,
   ...
 }: let
+  mod = lib'.thisHere __curPos;
+  cfg = config.${namespace}.${mod};
+
   inherit (lib.nvim.binds) mkKeymap;
+
   bind = key: func: (mkKeymap "n" key "function () require('smart-splits').${func}() end" {
     desc = func |> builtins.replaceStrings ["_"] [" "] |> lib.toSentenceCase;
     lua = true;
     silent = true;
   });
 in {
-  config.vim = {
+  options.${namespace}.${mod} = {
+    enable = lib.mkEnableOption "enable smart-splits";
+  };
+
+  config.vim = lib.mkIf cfg.enable {
     extraPlugins = {
       "smart-splits.nvim" = {
         package = pkgs.vimPlugins.smart-splits-nvim;
