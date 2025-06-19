@@ -29,7 +29,12 @@ in
 
       programs.lazygit.settings.git.paging.pager =
         # bash
-        ''delta "$(if dark-mode status | grep on; then echo "--dark"; else echo "--light"; fi)" --paging=never'';
+        # ''delta "$(if dark-mode status | grep on; then echo "--dark"; else echo "--light"; fi)" --paging=never'';
+        let
+          exe = pkgs.${namespace}.dark-notify |> lib.getExe |> lib.trim;
+        in ''
+          mode=$(${exe} --exit); delta --"$mode" --paging-never
+        '';
 
       programs.tmux.extraConfig = ''
         set -ga terminal-overrides ",*-256color:Tc"
