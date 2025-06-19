@@ -6,7 +6,6 @@
   ...
 }: let
   inherit (pkgs.${namespace}) dark-notify;
-  exe = lib.getExe dark-notify;
 in
   lib.slashfiles.mkModule {
     inherit config;
@@ -30,7 +29,7 @@ in
 
       programs.lazygit.settings.git.paging.pager =
         # bash
-        ''delta --"$(${exe |> lib.trim} --exit | tr -d '\n')" --paging=never'';
+        ''delta "$(if dark-mode status | grep on; then echo "--dark"; else echo "--light"; fi)" --paging=never'';
 
       programs.tmux.extraConfig = ''
         set -ga terminal-overrides ",*-256color:Tc"
