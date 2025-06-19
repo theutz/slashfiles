@@ -30,29 +30,36 @@ lib.slashfiles.mkModule {
       |> pkgs.fetchFromGitHub
       |> lib.getAttr "outPath"
       |> (p: "${p}/${themes.${file}}.toml");
-  in {
-    launchd.agents.starship-dark = let
-      script =
-        pkgs.writeShellScript "update-starship"
-        # bash
-        ''
-          set -euo pipefail
-          file=""
-          case "$1" in
-            dark)
-              file="${mkRosePinePath dark}"
-              ;;
-            light)
-              file="${mkRosePinePath light}"
-              ;;
-            *)
-              >&2 echo "Unknown mode: $1"
-              exit 1
-          esac
 
-          ln -sf "$file" ~/.config/starship.toml
-        '';
-    in {
+    script =
+      pkgs.writeShellScript "update-starship"
+      # bash
+      ''
+        set -euo pipefail
+        file=""
+        case "$1" in
+          dark)
+            file="${mkRosePinePath dark}"
+            ;;
+          light)
+            file="${mkRosePinePath light}"
+            ;;
+          *)
+            >&2 echo "Unknown mode: $1"
+            exit 1
+        esac
+
+        ln -sf "$file" ~/.config/starship.toml
+      '';
+  in {
+    home.activation.refreshStarship =
+      config.lib.dag.entryAfter ["writeBoundary" "reloadTmux"]
+      # bash
+      ''
+        ${osConfig.homebrew.brewPrefix}/dark-notify --exit -c ${script}
+      '';
+
+    launchd.agents.starship-dark = {
       enable = true;
       config = rec {
         Label = "com.theutz.starship-dark";
