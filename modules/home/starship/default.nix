@@ -64,7 +64,7 @@ lib.slashfiles.mkModule {
       config = rec {
         Label = "com.theutz.starship-dark";
         RunAtLoad = true;
-        StayAlive = true;
+        KeepAlive = true;
         ProgramArguments = [
           "${osConfig.homebrew.brewPrefix}/dark-notify"
           "-c"
