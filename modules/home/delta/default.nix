@@ -33,7 +33,7 @@ in
         let
           exe = pkgs.${namespace}.dark-notify |> lib.getExe |> lib.trim;
         in ''
-          mode=$(${exe} --exit); delta --"$mode" --paging-never
+          mode=$(${exe} --exit); delta --"$mode" --paging=never
         '';
 
       programs.tmux.extraConfig = ''
