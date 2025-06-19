@@ -76,6 +76,7 @@ in
           |> lib.fileContents);
 
       programs.tmux = {
+        package = pkgs.tmux;
         plugins = with pkgs.tmuxPlugins; [
           sessionist
           pain-control
