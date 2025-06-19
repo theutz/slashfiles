@@ -1,6 +1,7 @@
 {
   lib,
   config,
+  namespace,
   ...
 }:
 lib.slashfiles.mkModule {
@@ -8,6 +9,12 @@ lib.slashfiles.mkModule {
   here = ./.;
 } {
   config = {
-    programs.git.delta.enable = true;
+    programs.git.delta.enable = config.${namespace}.git.enable;
+
+    programs.lazygit.settings.git.paging.pager =
+      # bash
+      ''
+        delta "$(dark-mode status | grep on && echo "--dark" || echo "--light")" --paging=never
+      '';
   };
 }

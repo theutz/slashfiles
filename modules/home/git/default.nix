@@ -42,9 +42,6 @@ lib.${namespace}.mkModule {
         extraConfig = {
           pull.rebase = "true";
         };
-        delta = {
-          enable = true;
-        };
       };
 
       lazygit = {
@@ -66,9 +63,6 @@ lib.${namespace}.mkModule {
             };
             paging = {
               colorArg = "always";
-              pager = ''
-                delta "$(dark-mode status | grep on && echo "--dark" || echo "--light")" --paging=never
-              '';
               parseEmoji = true;
               overrideGpg = true;
             };
