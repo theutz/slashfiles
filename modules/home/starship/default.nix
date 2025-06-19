@@ -56,7 +56,8 @@ lib.slashfiles.mkModule {
       config.lib.dag.entryAfter ["writeBoundary" "reloadTmux"]
       # bash
       ''
-        ${osConfig.homebrew.brewPrefix}/dark-notify --exit -c ${script}
+        verboseEcho "Dark-notify script at ${script}"
+        ${osConfig.homebrew.brewPrefix}/dark-notify --exit -c "${script}"
       '';
 
     launchd.agents.starship-dark = {
