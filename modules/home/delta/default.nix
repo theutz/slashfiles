@@ -31,7 +31,7 @@ in
       programs.lazygit.settings.git.paging.pager =
         # bash
         ''
-          delta "--$(${exe} --exit)" --paging=never
+          delta --"$(${exe} --exit | tr -d '\n')" --paging=never
         '';
 
       programs.tmux.extraConfig = ''
