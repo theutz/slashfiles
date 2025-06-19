@@ -15,6 +15,7 @@ pkgs.rustPlatform.buildRustPackage rec {
     license = [];
     maintainers = [];
     platforms = lib.platforms.darwin;
+    mainProgram = "dark-notify";
   };
 
   src = pkgs.fetchFromGitHub {

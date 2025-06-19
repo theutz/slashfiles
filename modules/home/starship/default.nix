@@ -59,7 +59,7 @@ lib.slashfiles.mkModule {
       # bash
       ''
         verboseEcho "Dark-notify script at ${script}"
-        ${osConfig.homebrew.brewPrefix}/dark-notify --exit -c "${script}"
+        ${lib.getExe pkgs.${namespace}.dark-notify} --exit -c "${script}"
       '';
 
     launchd.agents.starship-dark = {
