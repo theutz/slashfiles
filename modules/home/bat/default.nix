@@ -19,12 +19,12 @@ lib.slashfiles.mkModule {
       syntaxes = {
         tmux = {
           src = pkgs.fetchFromGitHub {
-            owner = "kei-q";
-            repo = "sublime-tmux-syntax-highlight";
-            rev = "9162993af1eab09413cd141a640cbffe7122d1de";
-            hash = "sha256-B2gypmQh1GWh/0UaD+BFbBumGhIYmrq0KpCAkgrK4ws=";
+            owner = "gerardroche";
+            repo = "sublime-tmux";
+            rev = "c7c6891698b752d5c6050929e4896bb8caa608ae";
+            hash = "sha256-c7WJOmrYi8MLCU19O8KGNfV7YxSO+SdVmxtwsdkIxtQ=";
           };
-          file = "Tmux.tmLanguage";
+          file = "Tmux.sublime-syntax";
         };
       };
     };
