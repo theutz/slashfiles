@@ -141,11 +141,6 @@
     #               dontFixup = true;
     #         });
     # };
-
-    aerospace = {
-      enable = true;
-      settings.gaps.outer = pkgs.lib.genAttrs ["left" "right" "top" "bottom"] (_x: 16);
-    };
   };
 
   system = {

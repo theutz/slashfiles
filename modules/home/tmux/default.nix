@@ -99,7 +99,7 @@ in
         historyLimit = 10000;
         keyMode = "vi";
         mouse = true;
-        newSession = true;
+        newSession = false;
         prefix = "M-m";
         tmuxp.enable = true;
       };

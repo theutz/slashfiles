@@ -6,9 +6,11 @@ windows:
     options:
       other-pane-width: 80
     panes:
-      - focus: true
-      - shell: '@tenki@'
-        # sleep_before: 1
+      - ""
+      - shell_command:
+          - clear
+          - '@tenki@'
+        sleep_before: 1
         options:
           remain-on-exit: on
       - shell_command:
@@ -17,6 +19,7 @@ windows:
         sleep_before: 1
         options:
           remain-on-exit: on
+
   - window_name: spotify
     options:
       remain-on-exit: on
