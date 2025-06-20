@@ -41,8 +41,6 @@ in
     shellHook =
       # bash
       ''
-        echo
-        onefetch
         cat <<-markdown | gum format
         # ${description}
 
