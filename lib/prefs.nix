@@ -13,8 +13,8 @@
 
   font = rec {
     family = families.lilex;
-    size = 15;
-    height = 1.2;
+    size = 16;
+    height = 1.0;
     abs_height = size * height;
 
     families = {
