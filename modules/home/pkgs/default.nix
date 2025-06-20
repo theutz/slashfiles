@@ -47,6 +47,7 @@ lib.${namespace}.mkModule {
           fira-code
           sauce-code-pro
           hasklug
+          monaspace
         ])
       ]
       |> lib.concatLists
