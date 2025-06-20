@@ -49,6 +49,44 @@ in {
       '';
       default = ["day" "week"];
     };
+
+    temperature = lib.mkOption {
+      type = with lib.types; uniq (enum ["celsius" "fahrenheit"]);
+      description = ''
+        Temperature units
+      '';
+      default = "celsius";
+    };
+
+    windspeed = lib.mkOption {
+      type = with lib.types; uniq (enum ["kmh" "mph" "knots" "ms"]);
+      default = "kmh";
+      description = "(Wind)speed units";
+    };
+
+    time = lib.mkOption {
+      type = with lib.types; uniq (enum ["military" "am_pm"]);
+      description = ''
+        Time units
+      '';
+      default = "military";
+    };
+
+    precipitation = lib.mkOption {
+      type = with lib.types; uniq (enum ["probability" "mm" "inch"]);
+      default = "probability";
+      description = ''
+        Precipitation units
+      '';
+    };
+
+    greeting = lib.mkOption {
+      type = with lib.types; uniq bool;
+      default = false;
+      description = ''
+        Display greeting message
+      '';
+    };
   };
 
   config = lib.mkIf cfg.enable {
@@ -63,10 +101,10 @@ in {
               ${cfg.forecast |> lib.concatStringsSep ",\n"}
             ],
             units: (
-                temperature: celsius,
-                speed: kmh,
-                time: military,
-                precipitation: probability,
+                temperature: ${cfg.temperature},
+                speed: ${cfg.windspeed},
+                time: ${cfg.time},
+                precipitation: ${cfg.precipitation},
             ),
             gui: (
                 border: rounded,
@@ -76,7 +114,7 @@ in {
                     rowspan: double,
                     time_indicator: true,
                 ),
-                greeting: true,
+                greeting: ${cfg.greeting |> lib.boolToString},
             ),
         )
       '';
