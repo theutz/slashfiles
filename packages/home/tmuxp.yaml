@@ -7,10 +7,7 @@ windows:
       other-pane-width: 80
     panes:
       - ""
-      - shell_command:
-          - clear
-          - '@tenki@'
-        sleep_before: 1
+      - shell: '@tenki@'
         options:
           remain-on-exit: on
       - shell_command:
