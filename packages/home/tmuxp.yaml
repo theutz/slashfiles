@@ -6,4 +6,7 @@ windows:
       - blank
   - window_name: spotify
     panes:
-      - spotify_player
+      - shell: spotify_player
+        sleep_before: 1
+        options:
+          remain-on-exit: on

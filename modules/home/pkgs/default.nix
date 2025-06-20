@@ -24,6 +24,7 @@ lib.${namespace}.mkModule {
           gping
           httpie
           lazygit
+          nix-output-monitor
           ookla-speedtest
           procs
           ripgrep

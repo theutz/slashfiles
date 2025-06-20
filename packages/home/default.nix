@@ -1,9 +1,9 @@
 {pkgs, ...}: let
-  name = "thome";
+  name = builtins.baseNameOf ./.;
   description = ''
     Connect to your home tmux session
   '';
-  session_name = "home";
+  session_name = name;
   config_file = pkgs.replaceVars ./tmuxp.yaml {
     inherit session_name;
   };

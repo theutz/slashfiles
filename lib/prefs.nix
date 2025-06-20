@@ -12,8 +12,8 @@
   };
 
   font = rec {
-    family = families.recursive.linear;
-    size = 16;
+    family = families.blex;
+    size = 15;
     height = 1.2;
     abs_height = size * height;
 
@@ -25,6 +25,7 @@
         duotone = "RecMonoDuotone Nerd Font Propo";
       };
       roboto = "RobotoMono Nerd Font Propo";
+      blex = "BlexMono Nerd Font Propo";
     };
   };
 }

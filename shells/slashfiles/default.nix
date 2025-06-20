@@ -29,7 +29,7 @@ in
       ++ (with pkgs.${namespace}; [
         nvf
         swch
-        thome
+        home
         comt
         searchix
       ])

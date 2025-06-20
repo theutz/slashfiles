@@ -21,7 +21,12 @@ in
       git
       gum
       noti
+      faketty
+      confetty
     ];
+
+    runtimeEnv = {
+    };
 
     text =
       # bash
@@ -127,23 +132,19 @@ in
         debug "Running checks"
         (
           cd "$NH_FLAKE"
-          fmt="$(gum spin --title "Formatting..." --show-output -- bash -c "nix fmt 2>&1")"
-          # shellcheck disable=SC2181 # had to capture output
-          if [[ $? -eq 0 ]]; then
+          if output="$(gum spin --title "Formatting..." --show-output -- bash -c "faketty nix fmt 2>&1")"; then
             info "Files formatted"
           else
             error "Could not format."
-            echo "$fmt"
+            gum style --trim --no-strip-ansi "$output"
             exit 1
           fi
 
-          check="$(gum spin --title "Checking..." --show-output -- bash -c "nix flake check 2>&1")"
-          # shellcheck disable=SC2181 # had to capture output
-          if [[ $? -eq 0 ]]; then
+          if output="$(gum spin --title "Checking..." --show-output -- bash -c "faketty nix flake check 2>&1")"; then
             info "Flake checks passed"
           else
             error "Flake checks failed"
-            echo "$check"
+            gum style --margin="1 2" --trim --no-strip-ansi "$output"
             exit 1
           fi
         )
@@ -167,5 +168,7 @@ in
           error "Could not commit changes."
           exit 1
         fi
+
+        confetty
       '';
   }
