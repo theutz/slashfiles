@@ -92,7 +92,7 @@ in {
   config = lib.mkIf cfg.enable {
     home.packages = with pkgs; [wthrr];
 
-    home.file."Application Support/weathercrab/wthrr.ron" = {
+    home.file."Library/Application Support/weathercrab/wthrr.ron" = {
       text = ''
         (
             address: "${cfg.address}",
