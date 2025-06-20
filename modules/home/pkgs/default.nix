@@ -42,6 +42,11 @@ lib.${namespace}.mkModule {
           blex-mono
           roboto-mono
           recursive-mono
+          lilex
+          hack
+          fira-code
+          sauce-code-pro
+          hasklug
         ])
       ]
       |> lib.concatLists
