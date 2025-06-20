@@ -11,6 +11,10 @@
     # For those cutting-edge cases
     unstable.url = "github:nixos/nixpkgs/nixpkgs-unstable";
 
+    # For very unstable updates with swift by @reckenrode
+    # https://github.com/NixOS/nixpkgs/issues/343210#issuecomment-2941878079
+    nixpkgs-swift-update.url = "github:reckenrode/nixpkgs/swift-update";
+
     # Home Manager: dotfiles, dotfiles
     home-manager = {
       url = "github:nix-community/home-manager/release-25.05";
