@@ -14,8 +14,7 @@ windows:
         options:
           remain-on-exit: on
       - shell_command:
-          - clear
-          - '@wthrr@ -f disable; sleep 7d'
+          - 'clear; @wthrr@ -f day,week; sleep 7d'
         sleep_before: 1
         options:
           remain-on-exit: on

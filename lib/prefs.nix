@@ -12,7 +12,7 @@
   };
 
   font = rec {
-    family = families.blex;
+    family = families.lilex;
     size = 15;
     height = 1.2;
     abs_height = size * height;
@@ -26,6 +26,7 @@
       };
       roboto = "RobotoMono Nerd Font Propo";
       blex = "BlexMono Nerd Font Propo";
+      lilex = "Lilex Nerd Font Propo";
     };
   };
 }
