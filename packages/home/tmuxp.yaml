@@ -7,10 +7,10 @@ windows:
       other-pane-width: 80
     panes:
       - shell_command: "@cmatrix@"
-        focus: true
         options:
           remain-on-exit: on
-      - shell: '@tenki@'
+      - shell_command: 'exec @tenki@'
+        sleep_before: 1
         options:
           remain-on-exit: on
       - shell_command:
