@@ -29,6 +29,7 @@ lib.${namespace}.mkModule {
           procs
           ripgrep
           spotify-player
+          tenki
           xh
           zoom-us
         ])

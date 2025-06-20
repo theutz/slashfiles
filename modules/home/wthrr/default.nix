@@ -97,9 +97,7 @@ in {
         (
             address: "${cfg.address}",
             language: "${cfg.language}",
-            forecast: [
-              ${cfg.forecast |> lib.concatStringsSep ",\n"}
-            ],
+            forecast: [${cfg.forecast |> lib.concatStringsSep ", "}],
             units: (
                 temperature: ${cfg.temperature},
                 speed: ${cfg.windspeed},
