@@ -56,7 +56,7 @@ in
         }
 
         function run_cmd() {
-          cmd=("watchexec" "--restart" "--wrap-process=none")
+          cmd=("watchexec" "--wrap-process=none")
           [[ $flag_immediate != y ]] && cmd+=("--postpone")
           cmd+=("--" "swch" "$@")
 
