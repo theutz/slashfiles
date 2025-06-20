@@ -21,12 +21,12 @@ lib.slashfiles.mkModule {
       enable = true;
       functions = {
         fish_greeting = ''
-          # set -a greetings (
-          #   "macchina"
-          #   "countryfetch --list-countries | awk '{print $3}' | shuf | head -n 1 | xargs countryfetch"
-          #   "tinyfetch"
-          #   "nerdfetch"
-          # )
+          set greetings \
+            macchina \
+            "countryfetch --list-countries | awk '{print \$3}' | shuf | head -n 1 | xargs countryfetch" \
+            tinyfetch \
+            nerdfetch
+          eval $greetings[(random 1 (count $greetings))]
         '';
 
         fish_user_key_bindings = ''
