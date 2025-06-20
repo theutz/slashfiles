@@ -15,6 +15,7 @@
       "tickrs"
       "spotify-player"
       "tenki"
+      "cmatrix"
       "wthrr"
     ] (x: lib.getExe pkgs.${x}));
 in

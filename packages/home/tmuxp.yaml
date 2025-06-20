@@ -6,13 +6,16 @@ windows:
     options:
       other-pane-width: 80
     panes:
-      - ""
+      - shell_command: "@cmatrix@"
+        focus: true
+        options:
+          remain-on-exit: on
       - shell: '@tenki@'
         options:
           remain-on-exit: on
       - shell_command:
           - clear
-          - '@wthrr@ -f disable'
+          - '@wthrr@ -f disable; sleep 7d'
         sleep_before: 1
         options:
           remain-on-exit: on
