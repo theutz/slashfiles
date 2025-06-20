@@ -2,11 +2,32 @@ session_name: "@session_name@"
 start_directory: $HOME
 windows:
   - window_name: "main"
+    layout: main-vertical
+    options:
+      other-pane-width: 80
     panes:
-      - blank
-  - window_name: spotify
-    panes:
-      - shell: spotify_player
+      - focus: true
+      - shell: '@tenki@'
+        # sleep_before: 1
+        options:
+          remain-on-exit: on
+      - shell_command:
+          - clear
+          - '@wthrr@ -f disable'
         sleep_before: 1
         options:
           remain-on-exit: on
+  - window_name: spotify
+    options:
+      remain-on-exit: on
+    panes:
+      - shell: '@spotify-player@'
+        sleep_before: 1
+        options:
+          remain-on-exit: on
+
+  - window_name: tickrs
+    options:
+      remain-on-exit: on
+    panes:
+      - shell: '@tickrs@ --summary'

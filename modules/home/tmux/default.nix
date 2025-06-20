@@ -96,8 +96,10 @@ in
           |> pkgs.replaceVars ./tmux.conf
           |> lib.fileContents;
         focusEvents = true;
+        historyLimit = 10000;
         keyMode = "vi";
         mouse = true;
+        newSession = true;
         prefix = "M-m";
         tmuxp.enable = true;
       };

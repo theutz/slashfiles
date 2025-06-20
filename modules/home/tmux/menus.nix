@@ -114,7 +114,7 @@ in {
       }: [
         (mkItem "S" "the whole server" "kill-server")
         divider
-        (mkItem "s" "this session" "respawn-pane -k")
+        (mkItem "s" "this session" "kill-session")
         (mkItem "C-s" "other sessions" "kill-session -a")
         (mkItem "b" "any sessions with bells" "kill-session -C")
         divider

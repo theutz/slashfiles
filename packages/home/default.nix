@@ -1,12 +1,22 @@
-{pkgs, ...}: let
+{
+  pkgs,
+  lib,
+  ...
+}: let
   name = builtins.baseNameOf ./.;
   description = ''
     Connect to your home tmux session
   '';
   session_name = name;
-  config_file = pkgs.replaceVars ./tmuxp.yaml {
-    inherit session_name;
-  };
+  config_file = pkgs.replaceVars ./tmuxp.yaml ({
+      inherit session_name;
+    }
+    // lib.genAttrs [
+      "tickrs"
+      "spotify-player"
+      "tenki"
+      "wthrr"
+    ] (x: lib.getExe pkgs.${x}));
 in
   pkgs.writeShellApplication {
     inherit name;
@@ -20,6 +30,10 @@ in
       tmuxp
       gum
       getopt
+      tickrs
+      spotify-player
+      tenki
+      wthrr
     ];
 
     text =
