@@ -1,8 +1,8 @@
-- [ ] Setup nix-sops
-- [ ] Setup spotify_player
+- [x] Setup nix-sops
+- [x] Setup spotify_player
 - [ ] Create idea stack app
-- [ ] Fix weather location in tmux dracula
-- [ ] Fix dark mode in delta
+- [x] Fix dark mode in delta
 - [ ] Setup finicky
-- [ ] Integrate smart splits
+- [x] Integrate smart splits
 - [x] Use catppucin
+- [ ] Integrate getopt with `swch`
