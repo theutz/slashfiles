@@ -175,7 +175,9 @@ in
           [[ $flag_edit == y ]] && cmd+=("--edit")
 
           # Run the command
-          "''${cmd[@]}" "$@"
+          if "''${cmd[@]}" "$@"; then
+            git show HEAD --summary --oneline
+          fi
         )
       '';
   }
