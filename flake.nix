@@ -59,13 +59,13 @@
 
     nixos-anywhere = {
       url = "github:nix-community/nixos-anywhere";
-      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.nixpkgs.follows = "unstable";
     };
 
     # disko: disk partitioning (to be used with nixos-anywhere)
     disko = {
       url = "github:nix-community/disko";
-      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.nixpkgs.follows = "unstable";
     };
   };
 
@@ -90,7 +90,7 @@
       };
 
       systems.modules.nixos = [
-        inputs.disko.nixosModules.disko
+        (builtins.trace (inputs.disko) inputs.disko.nixosModules.disko)
       ];
 
       systems.modules.darwin = [

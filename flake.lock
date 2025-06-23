@@ -24,7 +24,7 @@
     "disko": {
       "inputs": {
         "nixpkgs": [
-          "nixpkgs"
+          "unstable"
         ]
       },
       "locked": {
@@ -279,7 +279,7 @@
         "nixos-images": "nixos-images",
         "nixos-stable": "nixos-stable",
         "nixpkgs": [
-          "nixpkgs"
+          "unstable"
         ],
         "treefmt-nix": "treefmt-nix"
       },
