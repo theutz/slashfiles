@@ -31,5 +31,5 @@
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIbChuj1162NTbJx49GrPJC7qc/mBrXHcDNQO1wbNyJ5"
   ];
 
-  system.stateVersion = "24.05";
+  system.stateVersion = "25.05";
 }
