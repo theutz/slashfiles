@@ -12,23 +12,29 @@
   };
 
   font = rec {
-    family = families.lilex;
+    family = families.sauce;
     size = 16;
     height = 1.0;
     abs_height = size * height;
 
-    families = {
-      recursive = {
-        linear = "RecMonoLinear Nerd Font Propo";
-        casual = "RecMonoCasual Nerd Font Propo";
-        sm-casual = "RecMonoSmCasual Nerd Font Propo";
-        duotone = "RecMonoDuotone Nerd Font Propo";
+    families = let
+      mkVariants = family: variants:
+        variants
+        |> lib.foldl
+        (prev: curr:
+          prev
+          // {
+            ${curr |> lib.toLower} = "${family}${curr} Nerd Font Propo";
+          }) {};
+    in
+       {
+        recursive = mkVariants "RecMono" ["Linear" "Casual" "SmCasual" "Duotone"];
+        roboto = "RobotoMono Nerd Font Propo";
+        blex = "BlexMono Nerd Font Propo";
+        lilex = "Lilex Nerd Font Propo";
+        monaspice = mkVariants "Monaspice" ["Ar" "Kr" "Ne" "Rn" "Xe"];
+        sauce = "SauceCodePro Nerd Font Propo";
       };
-      roboto = "RobotoMono Nerd Font Propo";
-      blex = "BlexMono Nerd Font Propo";
-      lilex = "Lilex Nerd Font Propo";
-      monaspice = lib.genAttrs ["Ar" "Kr" "Ne" "Rn" "Xe"] (x: {"${x}" = "Monaspice${x} Nerd Font Propo";});
-    };
 
     nerdfonts = [
       "blex-mono"
