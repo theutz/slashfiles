@@ -28,5 +28,17 @@
       blex = "BlexMono Nerd Font Propo";
       lilex = "Lilex Nerd Font Propo";
     };
+
+    nerdfonts = [
+      "blex-mono"
+      "roboto-mono"
+      "recursive-mono"
+      "lilex"
+      "hack"
+      "fira-code"
+      "sauce-code-pro"
+      "hasklug"
+      "monaspace"
+    ];
   };
 }
