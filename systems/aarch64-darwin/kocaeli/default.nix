@@ -66,17 +66,19 @@
     };
     linux-builder = {
       enable = true;
+      systems = ["x86_64-linux" "aarch64-linux"];
       ephemeral = true;
-      maxJobs = 4;
-      config = {
-        virtualisation = {
-          darwin-builder = {
-            diskSize = 40 * 1024;
-            memorySize = 8 * 1024;
-          };
-          cores = 6;
-        };
-      };
+      config.boot.binfmt.emulatedSystems = ["x86_64-linux"];
+      maxJobs = 8;
+      # config = {
+      #   virtualisation = {
+      #     darwin-builder = {
+      #       diskSize = 40 * 1024;
+      #       memorySize = 8 * 1024;
+      #     };
+      #     cores = 6;
+      #   };
+      # };
     };
     optimise = {
       automatic = true;
