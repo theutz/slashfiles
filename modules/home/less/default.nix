@@ -16,6 +16,10 @@ in {
       LESS = ''-g -i -M -R -S -w -X -z-4'';
     };
 
+    programs.tmux.extraConfig = ''
+      set -ga update-environment LESS
+    '';
+
     programs = {
       less = {
         enable = true;
