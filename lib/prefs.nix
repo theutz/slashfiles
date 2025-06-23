@@ -12,39 +12,36 @@
   };
 
   font = rec {
-    family = families.monaspice.rn;
+    family = families.monaspice.Rn;
     size = 16;
     height = 1.2;
     abs_height = size * height;
 
     families = let
-      mkVariants = family: variants:
-        variants
-        |> lib.foldl
-        (prev: curr:
-          prev
-          // {
-            ${curr |> lib.toLower} = "${family}${curr} Nerd Font Propo";
-          }) {};
+      mkPropo = name: "${name} Nerd Font Propo";
+      mkVariants = family: variants: lib.genAttrs variants (variant: mkPropo (family + variant));
     in {
-      recursive = mkVariants "RecMono" ["Linear" "Casual" "SmCasual" "Duotone"];
-      roboto = "RobotoMono Nerd Font Propo";
-      blex = "BlexMono Nerd Font Propo";
-      lilex = "Lilex Nerd Font Propo";
+      blex = mkPropo "BlexMono";
+      fira = mkPropo "FiraCode";
+      hack = mkPropo "Hack";
+      hasklug = mkPropo "Hasklug";
+      lilex = mkPropo "Lilex";
       monaspice = mkVariants "Monaspice" ["Ar" "Kr" "Ne" "Rn" "Xe"];
-      sauce = "SauceCodePro Nerd Font Propo";
+      recursive = mkVariants "RecMono" ["Linear" "Casual" "SmCasual" "Duotone"];
+      roboto = mkPropo "RobotoMono";
+      sauce = mkPropo "SauceCodePro";
     };
 
     nerdfonts = [
       "blex-mono"
-      "roboto-mono"
-      "recursive-mono"
-      "lilex"
-      "hack"
       "fira-code"
-      "sauce-code-pro"
+      "hack"
       "hasklug"
+      "lilex"
       "monaspace"
+      "recursive-mono"
+      "roboto-mono"
+      "sauce-code-pro"
     ];
   };
 }
