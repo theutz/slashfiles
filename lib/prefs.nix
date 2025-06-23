@@ -1,4 +1,4 @@
-{...}: {
+{lib, ...}: {
   theme = rec {
     main = dark;
     dark = "rose-pine";
@@ -27,6 +27,7 @@
       roboto = "RobotoMono Nerd Font Propo";
       blex = "BlexMono Nerd Font Propo";
       lilex = "Lilex Nerd Font Propo";
+      monaspice = lib.genAttrs ["Ar" "Kr" "Ne" "Rn" "Xe"] (x: {"${x}" = "Monaspice${x} Nerd Font Propo";});
     };
 
     nerdfonts = [

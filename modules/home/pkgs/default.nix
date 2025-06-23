@@ -51,17 +51,6 @@ lib.${namespace}.mkModule {
               lib.${namespace}.prefs.font.nerdfonts)
           )
           |> lib.attrValues)
-        # (with pkgs.nerd-fonts; [
-        #   blex-mono
-        #   roboto-mono
-        #   recursive-mono
-        #   lilex
-        #   hack
-        #   fira-code
-        #   sauce-code-pro
-        #   hasklug
-        #   monaspace
-        # ])
       ]
       |> lib.concatLists
       |> lib.flatten;
