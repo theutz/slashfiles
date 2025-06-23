@@ -89,6 +89,10 @@
         };
       };
 
+      systems.modules.nixos = [
+        inputs.disko.nixosModules.disko
+      ];
+
       systems.modules.darwin = [
         inputs.sops-nix.darwinModules.sops
       ];
