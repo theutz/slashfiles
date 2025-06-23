@@ -2,6 +2,8 @@
   namespace,
   pkgs,
   mkShell,
+  inputs,
+  system,
   ...
 }: let
   name = "slashfiles";
@@ -17,26 +19,24 @@ in
 
     NH_FLAKE = "/etc/nix-darwin";
 
-    packages =
-      (with pkgs; [
-        git
-        onefetch
-        gum
-        nh
-        comma
-        watchexec
-      ])
-      ++ (with pkgs.${namespace}; [
-        nvf
-        swch
-        home
-        comt
-        searchix
-      ])
-      ++ [
-        (import ./secrets.nix {inherit pkgs;})
-        (import ./watch.nix {inherit pkgs;})
-      ];
+    packages = [
+      pkgs.git
+      pkgs.onefetch
+      pkgs.gum
+      pkgs.nh
+      pkgs.comma
+      pkgs.watchexec
+      inputs.nixos-anywhere.packages.${system}.default
+
+      pkgs."${namespace}".nvf
+      pkgs."${namespace}".swch
+      pkgs."${namespace}".home
+      pkgs."${namespace}".comt
+      pkgs."${namespace}".searchix
+
+      (import ./secrets.nix {inherit pkgs;})
+      (import ./watch.nix {inherit pkgs;})
+    ];
 
     shellHook =
       # bash

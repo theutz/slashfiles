@@ -1,13 +1,21 @@
 {
   lib,
   config,
+  namespace,
   ...
-}:
-lib.slashfiles.mkModule {
-  inherit config;
-  here = ./.;
-} {
-  config = {
+}: let
+  mod = baseNameOf ./.;
+  cfg = config.${namespace}.${mod};
+in {
+  options.${namespace}.${mod} = {
+    enable = lib.mkEnableOption "enable less for paging";
+  };
+
+  config = lib.mkIf cfg.enable {
+    home.sessionVariables = {
+      LESS = ''-g -i -M -R -S -w -X -z-4'';
+    };
+
     programs = {
       less = {
         enable = true;
@@ -16,6 +24,7 @@ lib.slashfiles.mkModule {
           zh	left-scroll
         '';
       };
+
       lesspipe.enable = true;
     };
   };

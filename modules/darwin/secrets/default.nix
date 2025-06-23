@@ -33,7 +33,6 @@ in
         templates = mergeAttrsList [
           (mkSshConf' "izmir" "yesil")
           (mkSshConf' "istanbul" "yesil")
-          (mkSshConf' "ankara" "beyaz")
           (mkSshConf' "mugla" "pembe")
           (mkSshConf' "sakarya" "mor")
           (mkSshConf' "eskisehir" "yesil")
@@ -41,6 +40,7 @@ in
           (mkSshConf' "batman" "yesil")
           (mkSshConf' "sanliurfa" "gumus")
           (mkSshConf' "erzurum" "gumus")
+          (mkSshConf' "bursa" "mor")
         ];
 
         defaultSopsFile = ../../../secrets.yaml;
@@ -60,7 +60,6 @@ in
           hosts = [
             "izmir"
             "istanbul"
-            "ankara"
             "mugla"
             "eskisehir"
             "sakarya"

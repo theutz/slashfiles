@@ -17,7 +17,6 @@ lib.slashfiles.mkModule {
         [
           "izmir"
           "istanbul"
-          "ankara"
           "mugla"
           "eskisehir"
           "sakarya"
