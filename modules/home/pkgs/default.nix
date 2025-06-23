@@ -47,9 +47,8 @@ lib.${namespace}.mkModule {
         # Nerd fonts
         (pkgs.nerd-fonts
           |> lib.filterAttrs (
-            name: _:
-              (name': name == name')
-              lib.${namespace}.prefs.font.nerdfonts
+            name: _: (lib.any (name': name == name')
+              lib.${namespace}.prefs.font.nerdfonts)
           )
           |> lib.attrValues)
         # (with pkgs.nerd-fonts; [
