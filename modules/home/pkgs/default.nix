@@ -12,7 +12,10 @@ lib.${namespace}.mkModule {
   config = {
     home.packages =
       [
+        # My custom packages
         (pkgs.${namespace} |> lib.attrValues)
+
+        # Basic nixpkgs stuff
         (with pkgs; [
           aichat
           claude-code
@@ -33,22 +36,33 @@ lib.${namespace}.mkModule {
           xh
           zoom-us
         ])
+
+        # Linux only
         (lib.optional (! pkgs.stdenv.isDarwin) [
           pkgs.httpie-desktop
           pkgs.signal-desktop-bin
           pkgs.tailscale
         ])
-        (with pkgs.nerd-fonts; [
-          blex-mono
-          roboto-mono
-          recursive-mono
-          lilex
-          hack
-          fira-code
-          sauce-code-pro
-          hasklug
-          monaspace
-        ])
+
+        # Nerd fonts
+        (pkgs.nerd-fonts
+          |> lib.filterAttrs (
+            name: _:
+              (name': name == name')
+              lib.${namespace}.prefs.font.nerdfonts
+          )
+          |> lib.attrValues)
+        # (with pkgs.nerd-fonts; [
+        #   blex-mono
+        #   roboto-mono
+        #   recursive-mono
+        #   lilex
+        #   hack
+        #   fira-code
+        #   sauce-code-pro
+        #   hasklug
+        #   monaspace
+        # ])
       ]
       |> lib.concatLists
       |> lib.flatten;
