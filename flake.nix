@@ -4,12 +4,7 @@
 
   # Define the libraries that will define our system.
   inputs = {
-    # I like to stay stable as my base, occasionally overriding with
-    # unstable.
-    nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-25.05-darwin";
-
-    # For those cutting-edge cases
-    unstable.url = "github:nixos/nixpkgs/nixpkgs-unstable";
+    nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
 
     # For very unstable updates with swift by @reckenrode
     # https://github.com/NixOS/nixpkgs/issues/343210#issuecomment-2941878079
@@ -17,20 +12,20 @@
 
     # Home Manager: dotfiles, dotfiles
     home-manager = {
-      url = "github:nix-community/home-manager/release-25.05";
+      url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
     # Nix Darwin: NixOS configuration for macOS
     darwin = {
-      url = "github:nix-darwin/nix-darwin/nix-darwin-25.05";
+      url = "github:nix-darwin/nix-darwin";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
     # Neovim Flake: Takes the pain out of customizing neovim with nix
     nvf = {
       url = "github:notashelf/nvf";
-      inputs.nixpkgs.follows = "unstable";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     # A nice way to modularize your flake for multiple systems
@@ -48,7 +43,7 @@
     # Nix wrapper that brings me joy
     nh = {
       url = "github:nix-community/nh";
-      inputs.nixpkgs.follows = "unstable";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     # secrets with sops
@@ -57,15 +52,16 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    # Create a nix machine from an existing machine via SSH
     nixos-anywhere = {
       url = "github:nix-community/nixos-anywhere";
-      inputs.nixpkgs.follows = "unstable";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     # disko: disk partitioning (to be used with nixos-anywhere)
     disko = {
       url = "github:nix-community/disko";
-      inputs.nixpkgs.follows = "unstable";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 

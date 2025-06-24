@@ -1,8 +1,8 @@
-{channels, ...}: _: _: {
+_: final: prev: {
   tmux =
-    channels.unstable.tmux.overrideAttrs
+    prev.tmux.overrideAttrs
     {
-      src = channels.unstable.fetchFromGitHub {
+      src = final.fetchFromGitHub {
         owner = "tmux";
         repo = "tmux";
         rev = "43e88c892d41181088b2ff7908e2f2467fd30916";
