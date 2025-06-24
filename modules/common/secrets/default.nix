@@ -5,24 +5,10 @@
   namespace,
   ...
 }: let
-  inherit (lib.trivial) flip;
-  inherit (lib.attrsets) genAttrs mergeAttrsList;
-  inherit (lib.lists) concatLists flatten;
-  inherit (lib.${namespace}) mkModule;
-  inherit (lib.${namespace}.secrets.sops.templates) mkSshConf;
-
   mod = baseNameOf ./.;
   cfg = config.${namespace}.${mod};
 
-  mkSshConf' = mkSshConf config;
-
   owner = config.system.primaryUser;
-
-  mkMine = (flip genAttrs) (_: {inherit owner;});
-  mkShared = (flip genAttrs) (_: {
-    inherit owner;
-    mode = "0444";
-  });
 in {
   options.${namespace}.${mod} = {
     enable = lib.mkEnableOption "secrets config";

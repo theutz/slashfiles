@@ -72,8 +72,7 @@
   # Bootstrap point for this whole, lovely mess.
   outputs = inputs: let
     namespace = "slashfiles";
-  in
-    inputs.snowfall-lib.mkFlake {
+    lib = inputs.snowfall-lib.mkLib {
       inherit inputs;
 
       src = builtins.path {
@@ -88,14 +87,23 @@
           title = "/slashfiles: .dotfiles/{everywhere}.nix";
         };
       };
+    };
+    common-modules = lib.create-common-modules "modules/common" |> lib.attrValues;
+  in
+    lib.mkFlake {
+      inherit lib inputs;
 
-      systems.modules.nixos = [
-        inputs.disko.nixosModules.disko
-      ];
+      systems.modules.nixos =
+        [
+          inputs.disko.nixosModules.disko
+        ]
+        ++ common-modules;
 
-      systems.modules.darwin = [
-        inputs.sops-nix.darwinModules.sops
-      ];
+      systems.modules.darwin =
+        [
+          inputs.sops-nix.darwinModules.sops
+        ]
+        ++ common-modules;
 
       alias = {
         shells.default = namespace;

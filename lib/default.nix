@@ -7,8 +7,26 @@ args @ {
   filterDefaultNixFiles = lib.filter (lib.hasSuffix "default.nix");
 in {
   inherit filterNixFiles filterDefaultNixFiles;
+
+  ## Create and inject common modules into standard module paths
+  ## Source: https://github.com/ProjectInitiative/dotfiles/blob/43d7ae752c6340c8b2138f875fc2db62e37a6602/lib/default.nix#L26
+  #@ Path -> AttrSet
+  create-common-modules = common-path: let
+    common-modules = lib.snowfall.module.create-modules {
+      src = lib.snowfall.fs.get-snowfall-file common-path;
+      overrides = lib.full-flake-options.modules.common or {};
+      alias = lib.alias.modules.common or {};
+    };
+
+    # Debug trace that won't break JSON serialization
+    _ = builtins.trace "Created modules: ${toString (builtins.attrNames common-modules)}" null;
+  in
+    common-modules;
+
   tmux = import ./tmux.nix args;
+
   secrets = import ./secrets.nix args;
+
   prefs = import ./prefs.nix args;
 
   flatConcat = (lib.flip lib.pipe) [lib.concatLists lib.flatten];
