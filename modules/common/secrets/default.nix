@@ -35,14 +35,11 @@ in {
         definition of a secret that is owned by the primary user, but is
         world-readable;
       '';
+      default = cfg.mine // {mode = "0444";};
     };
   };
 
   config = lib.mkIf cfg.enable {
-    ${namespace}.${mod} = {
-      shared = cfg.mine // {mode = "0444";};
-    };
-
     environment.systemPackages = with pkgs; [
       sops
       age
