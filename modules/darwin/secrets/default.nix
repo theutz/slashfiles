@@ -66,6 +66,7 @@ in
             "manisa"
             "sanliurfa"
             "erzurum"
+            "bursa"
           ];
         in
           (mkMine (concatLists [
