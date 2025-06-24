@@ -8,13 +8,18 @@
   mod = baseNameOf ./.;
   cfg = config.${namespace}.${mod};
 
-  owner =
-    if config.system ? primaryUser
-    then config.system.primaryUser
-    else lib.${namespace}.prefs.user;
+  owner = cfg.primaryUser;
 in {
   options.${namespace}.${mod} = {
     enable = lib.mkEnableOption "secrets config";
+
+    primaryUser = lib.mkOption {
+      type = with lib.types; nullOr str;
+      default = lib.${namespace}.prefs.user;
+      description = ''
+        The username of the primary, non-root user that can access the secrets.
+      '';
+    };
   };
 
   config = lib.mkIf cfg.enable {
