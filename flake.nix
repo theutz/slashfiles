@@ -90,7 +90,7 @@
       };
 
       systems.modules.nixos = [
-        (builtins.trace (inputs.disko) inputs.disko.nixosModules.disko)
+        inputs.disko.nixosModules.disko
       ];
 
       systems.modules.darwin = [
