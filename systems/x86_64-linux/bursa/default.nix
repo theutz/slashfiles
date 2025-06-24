@@ -3,6 +3,7 @@
   pkgs,
   system,
   modulesPath,
+  namespace,
   ...
 }: {
   imports = [
@@ -11,6 +12,11 @@
     ./disk-config.nix
     ./hardware-configuration.nix
   ];
+
+  ${namespace} = {
+    secrets.enable = true;
+  };
+
   boot = {
     kernelParams = ["console=ttyS0,19200n8"];
     loader = {
@@ -44,9 +50,25 @@
     pkgs.sysstat
   ];
 
-  users.users.root.openssh.authorizedKeys.keys = [
-    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIbChuj1162NTbJx49GrPJC7qc/mBrXHcDNQO1wbNyJ5"
-  ];
+  users = {
+    groups = {
+      michael = {};
+    };
+
+    users = let
+      key = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIbChuj1162NTbJx49GrPJC7qc/mBrXHcDNQO1wbNyJ5";
+    in {
+      root.openssh.authorizedKeys.keys = [
+        key
+      ];
+
+      michael = {
+        openssh.authorizedKeys.keys = [key];
+        group = "michael";
+        isNormalUser = true;
+      };
+    };
+  };
 
   system.stateVersion = "25.05";
 }
