@@ -46,15 +46,13 @@ in {
 
       matchBlocks = let
         mkPrivKeyPath = user: secrets."ssh/users/${user}/priv".path;
-        me = mkPrivKeyPath "mor";
-        work = mkPrivKeyPath "yesil";
       in {
         "github.com" = {
-          identityFile = me;
+          identityFile = mkPrivKeyPath "mor";
         };
         "work.github.com" = {
           hostname = "github.com";
-          identityFile = work;
+          identityFile = mkPrivKeyPath "yesil";
           user = "delegator-system";
         };
       };

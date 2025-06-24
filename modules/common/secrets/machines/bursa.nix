@@ -9,7 +9,7 @@
 
   host = lib.${namespace}.thisHere __curPos;
 
-  user = "yesil";
+  user = "mor";
   mine = {owner = cfg.primaryUser;};
 in {
   config = lib.mkIf cfg.enable {
