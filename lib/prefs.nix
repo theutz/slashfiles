@@ -1,4 +1,6 @@
 {lib, ...}: {
+  user = "michael";
+
   theme = rec {
     main = dark;
     dark = "rose-pine";

@@ -163,7 +163,7 @@
   system = {
     checks.verifyBuildUsers = true;
     checks.verifyNixPath = false; # not useful with flakes
-    primaryUser = "michael";
+    primaryUser = lib.${namespace}.prefs.user;
     stateVersion = 5;
   };
 

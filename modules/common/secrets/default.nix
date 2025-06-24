@@ -8,7 +8,10 @@
   mod = baseNameOf ./.;
   cfg = config.${namespace}.${mod};
 
-  owner = config.system.primaryUser;
+  owner =
+    if config.system ? primaryUser
+    then config.system.primaryUser
+    else lib.${namespace}.prefs.user;
 in {
   options.${namespace}.${mod} = {
     enable = lib.mkEnableOption "secrets config";
@@ -27,7 +30,7 @@ in {
           user = "yesil";
         in {
           "ssh/${host}.conf" = {
-            owner = config.system.primaryUser;
+            inherit owner;
             content = ''
               Host ${config.sops.placeholder."ssh/hosts/${host}/host"}
               Hostname ${config.sops.placeholder."ssh/hosts/${host}/hostname"}
@@ -41,7 +44,7 @@ in {
           user = "yesil";
         in {
           "ssh/${host}.conf" = {
-            owner = config.system.primaryUser;
+            inherit owner;
             content = ''
               Host ${config.sops.placeholder."ssh/hosts/${host}/host"}
               Hostname ${config.sops.placeholder."ssh/hosts/${host}/hostname"}
@@ -55,7 +58,7 @@ in {
           user = "pembe";
         in {
           "ssh/${host}.conf" = {
-            owner = config.system.primaryUser;
+            inherit owner;
             content = ''
               Host ${config.sops.placeholder."ssh/hosts/${host}/host"}
               Hostname ${config.sops.placeholder."ssh/hosts/${host}/hostname"}
@@ -69,7 +72,7 @@ in {
           user = "mor";
         in {
           "ssh/${host}.conf" = {
-            owner = config.system.primaryUser;
+            inherit owner;
             content = ''
               Host ${config.sops.placeholder."ssh/hosts/${host}/host"}
               Hostname ${config.sops.placeholder."ssh/hosts/${host}/hostname"}
@@ -83,7 +86,7 @@ in {
           user = "yesil";
         in {
           "ssh/${host}.conf" = {
-            owner = config.system.primaryUser;
+            inherit owner;
             content = ''
               Host ${config.sops.placeholder."ssh/hosts/${host}/host"}
               Hostname ${config.sops.placeholder."ssh/hosts/${host}/hostname"}
@@ -97,7 +100,7 @@ in {
           user = "yesil";
         in {
           "ssh/${host}.conf" = {
-            owner = config.system.primaryUser;
+            inherit owner;
             content = ''
               Host ${config.sops.placeholder."ssh/hosts/${host}/host"}
               Hostname ${config.sops.placeholder."ssh/hosts/${host}/hostname"}
@@ -111,7 +114,7 @@ in {
           user = "yesil";
         in {
           "ssh/${host}.conf" = {
-            owner = config.system.primaryUser;
+            inherit owner;
             content = ''
               Host ${config.sops.placeholder."ssh/hosts/${host}/host"}
               User ${config.sops.placeholder."ssh/hosts/${host}/user"}
@@ -124,7 +127,7 @@ in {
           user = "gumus";
         in {
           "ssh/${host}.conf" = {
-            owner = config.system.primaryUser;
+            inherit owner;
             content = ''
               Host ${config.sops.placeholder."ssh/hosts/${host}/host"}
               Hostname ${config.sops.placeholder."ssh/hosts/${host}/hostname"}
@@ -138,7 +141,7 @@ in {
           user = "gumus";
         in {
           "ssh/${host}.conf" = {
-            owner = config.system.primaryUser;
+            inherit owner;
             content = ''
               Host ${config.sops.placeholder."ssh/hosts/${host}/host"}
               Hostname ${config.sops.placeholder."ssh/hosts/${host}/hostname"}
@@ -152,7 +155,7 @@ in {
           user = "mor";
         in {
           "ssh/${host}.conf" = {
-            owner = config.system.primaryUser;
+            inherit owner;
             content = ''
               Host ${config.sops.placeholder."ssh/hosts/${host}/host"}
               Hostname ${config.sops.placeholder."ssh/hosts/${host}/hostname"}
@@ -211,7 +214,7 @@ in {
           "ssh/hosts/bursa/host"
           "ssh/hosts/bursa/user"
           "ssh/hosts/bursa/hostname"
-        ] (_: {owner = config.system.primaryUser;}))
+        ] (_: {inherit owner;}))
         // (let
           mode = "0444";
           priv = {inherit owner;};

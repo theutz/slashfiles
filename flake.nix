@@ -95,6 +95,7 @@
 
       systems.modules.nixos =
         [
+          inputs.sops-nix.nixosModules.sops
           inputs.disko.nixosModules.disko
         ]
         ++ common-modules;

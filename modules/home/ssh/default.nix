@@ -3,6 +3,7 @@
   config,
   osConfig,
   namespace,
+  pkgs,
   ...
 }: let
   cfg = config.${namespace}.${mod};
@@ -35,6 +36,8 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
+    services.ssh-agent.enable = pkgs.stdenv.isLinux;
+
     programs.ssh = {
       enable = true;
       hashKnownHosts = true;
