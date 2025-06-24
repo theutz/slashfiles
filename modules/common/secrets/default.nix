@@ -31,20 +31,6 @@ in {
     sops = {
       templates =
         (let
-          host = "izmir";
-          user = "yesil";
-        in {
-          "ssh/${host}.conf" = {
-            inherit owner;
-            content = ''
-              Host ${config.sops.placeholder."ssh/hosts/${host}/host"}
-              Hostname ${config.sops.placeholder."ssh/hosts/${host}/hostname"}
-              User ${config.sops.placeholder."ssh/hosts/${host}/user"}
-              IdentityFile ${config.sops.secrets."ssh/users/${user}/priv".path}
-            '';
-          };
-        })
-        // (let
           host = "istanbul";
           user = "yesil";
         in {
