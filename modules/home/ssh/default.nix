@@ -2,36 +2,49 @@
   lib,
   config,
   osConfig,
+  namespace,
   ...
-}:
-lib.slashfiles.mkModule {
-  here = ./.;
-  inherit config;
-} {
-  config = {
+}: let
+  cfg = config.${namespace}.${mod};
+  mod = baseNameOf ./.;
+  inherit (osConfig) sops;
+  inherit (sops) templates secrets;
+in {
+  options.${namespace}.${mod} = {
+    enable = lib.mkEnableOption "Manage SSH";
+
+    sopsTemplates = lib.mkOption {
+      description = ''
+        List of SSH template basenames created by sops-nix to include in the
+        ssh config. These will generally correlate with the machine names.
+      '';
+      type = with lib.types; listOf str;
+      default = [
+        "izmir"
+        "istanbul"
+        "mugla"
+        "eskisehir"
+        "sakarya"
+        "manisa"
+        "batman"
+        "sanliurfa"
+        "erzurum"
+        "bursa"
+      ];
+    };
+  };
+
+  config = lib.mkIf cfg.enable {
     programs.ssh = {
       enable = true;
       hashKnownHosts = true;
       addKeysToAgent = "yes";
-      includes =
-        [
-          "izmir"
-          "istanbul"
-          "mugla"
-          "eskisehir"
-          "sakarya"
-          "manisa"
-          "batman"
-          "sanliurfa"
-          "erzurum"
-          "bursa"
-        ]
-        |> (map (h: osConfig.sops.templates."ssh/${h}.conf".path));
+      includes = cfg.sopsTemplates |> (map (host: templates."ssh/${host}.conf".path));
 
       matchBlocks = let
-        privKey = name: osConfig.sops.secrets."ssh/users/${name}/priv".path;
-        me = privKey "mor";
-        work = privKey "yesil";
+        mkPrivKeyPath = user: secrets."ssh/users/${user}/priv".path;
+        me = mkPrivKeyPath "mor";
+        work = mkPrivKeyPath "yesil";
       in {
         "github.com" = {
           identityFile = me;
