@@ -2,17 +2,13 @@ session_name: slashfiles
 start_directory: ./
 global_options:
   remain-on-exit: true
+  other-pane-width: 80
 windows:
   - window_name: main
     layout: main-vertical
-    options:
-      remain-on-exit: false
-      other-pane-width: 100
     panes:
       - shell_command: nvim
         sleep_before: 1
-        options:
-          remain-on-exit: true
         focus: true
       - shell: nix develop -c watch
 
@@ -31,4 +27,3 @@ windows:
   - window_name: repl
     panes:
       - shell: nix repl nixpkgs
-        sleep_before: 1
