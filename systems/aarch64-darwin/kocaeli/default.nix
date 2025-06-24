@@ -70,15 +70,15 @@
       ephemeral = true;
       config.boot.binfmt.emulatedSystems = ["x86_64-linux"];
       maxJobs = 8;
-      config = {
-        virtualisation = {
-          darwin-builder = {
-            diskSize = 40 * 1024;
-            memorySize = 8 * 1024;
-          };
-          cores = 6;
-        };
-      };
+      # config = {
+      #   virtualisation = {
+      #     darwin-builder = {
+      #       diskSize = 40 * 1024;
+      #       memorySize = 8 * 1024;
+      #     };
+      #     cores = 6;
+      #   };
+      # };
     };
     optimise = {
       automatic = true;
@@ -87,6 +87,18 @@
       nixpkgs = {
         from = {
           id = "nixpkgs";
+          type = "indirect";
+        };
+        to = {
+          owner = "nixos";
+          repo = "nixpkgs";
+          type = "github";
+          ref = "nixpkgs-25.05-darwin";
+        };
+      };
+      unstable = {
+        from = {
+          id = "unstable";
           type = "indirect";
         };
         to = {
