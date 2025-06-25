@@ -34,6 +34,7 @@ lib.${namespace}.mkModule {
 
       casks = [
         "figma"
+        "google-chrome"
         "httpie"
         "karabiner-elements"
         "mouseless@preview"

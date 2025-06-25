@@ -24,6 +24,7 @@ lib.${namespace}.mkModule {
           coreutils
           curlie
           fd
+          google-chrome
           gping
           httpie
           lazygit
