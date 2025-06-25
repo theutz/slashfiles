@@ -111,6 +111,20 @@ function select_note() {
   fi
 }
 
+function do_delete() {
+  FZF_DEFAULT_OPTS="${FZF_DEFAULT_OPTS} --multi"
+  if notes="$(select_note .)"; then
+    debug -s "Selected notes for deletion" notes "${notes[*]}"
+    for note in $notes; do
+      debug -s "Deleting" note "$note"
+      rm -r "$note"
+    done
+  else
+    error "Could not select notes"
+    return 1
+  fi
+}
+
 function do_edit() {
   if note="$(select_note .)"; then
     debug -s "Editing" note "$note"
@@ -189,15 +203,15 @@ function main() {
 
   if [[ $flag_debug == y ]]; then
     set -x
-    flag_verbose=y
     export GUM_LOG_LEVEL="debug"
     debug "Debug mode enabled"
   fi
 
   if [[ $flag_verbose = y ]]; then
-    export GUM_LOG_LEVEL="info"
-    debug "Verbose mode enabled"
+    export GUM_LOG_LEVEL="debug"
+    info "Verbose mode enabled"
   fi
+  export GUM_LOG_LEVEL
 
   if [[ $flag_help == y ]]; then
     usage
@@ -215,12 +229,16 @@ function main() {
     shift
     debug -s -- "parsing" arg "$arg"
     case "$arg" in
-    paste)
+    paste | p)
       do_paste "$@" || return $?
       return
       ;;
-    edit)
+    edit | e)
       do_edit "$@" || return $?
+      return
+      ;;
+    delete | rm | x)
+      do_delete "$@" || return $?
       return
       ;;
     --) shift ;;
