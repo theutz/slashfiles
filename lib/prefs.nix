@@ -14,7 +14,7 @@
   };
 
   font = rec {
-    family = families.hasklug;
+    family = families.blex;
     size = 16;
     height = 1.2;
     abs_height = size * height;
