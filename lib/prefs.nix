@@ -14,7 +14,7 @@
   };
 
   font = rec {
-    family = families.monaspice.Rn;
+    family = families.maple;
     size = 16;
     height = 1.2;
     abs_height = size * height;
@@ -32,18 +32,20 @@
       recursive = mkVariants "RecMono" ["Linear" "Casual" "SmCasual" "Duotone"];
       roboto = mkPropo "RobotoMono";
       sauce = mkPropo "SauceCodePro";
+      maple = "Maple Mono NF";
     };
 
-    nerdfonts = [
-      "blex-mono"
-      "fira-code"
-      "hack"
-      "hasklug"
-      "lilex"
-      "monaspace"
-      "recursive-mono"
-      "roboto-mono"
-      "sauce-code-pro"
+    packages = [
+      "nerd-fonts.blex-mono"
+      "nerd-fonts.fira-code"
+      "nerd-fonts.hack"
+      "nerd-fonts.hasklug"
+      "nerd-fonts.lilex"
+      "nerd-fonts.monaspace"
+      "nerd-fonts.recursive-mono"
+      "nerd-fonts.roboto-mono"
+      "nerd-fonts.sauce-code-pro"
+      "maple-mono.NF"
     ];
   };
 }

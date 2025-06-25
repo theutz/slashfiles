@@ -44,13 +44,12 @@ lib.${namespace}.mkModule {
           pkgs.tailscale
         ])
 
-        # Nerd fonts
-        (pkgs.nerd-fonts
-          |> lib.filterAttrs (
-            name: _: (lib.any (name': name == name')
-              lib.${namespace}.prefs.font.nerdfonts)
-          )
-          |> lib.attrValues)
+        # Fonts
+        (lib.${namespace}.prefs.font.packages
+          |> lib.map (p:
+            p
+            |> lib.strings.splitString "."
+            |> (lib.flip lib.attrsets.getAttrFromPath pkgs)))
       ]
       |> lib.concatLists
       |> lib.flatten;
