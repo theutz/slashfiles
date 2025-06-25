@@ -18,6 +18,10 @@ function error() {
   log --level error "$@"
 }
 
+function fatal() {
+  log --level fatal "$@"
+}
+
 function usage() {
   cat <<-markdown | gum format
 # @name@
@@ -38,16 +42,27 @@ function usage() {
 
 ## COMMANDS
 
-### paste (this is the default command)
+### paste, p (this is the default command)
 
-paste from clipboard into a new note
+Paste from clipboard into a new note.
 
+### create, new, n
+
+Create a new note in your editor.
+
+### edit, e
+
+Edit an existing note.
+
+### delete, rm, x
+
+Delete a saved note.
 ## ENVIRONMENT VARIABLES
 
 | Name          | Description                         | Default             | Current                               |
 | :------------ | :---------------------------------- | :------------------ | :------------------------------------ |
 | NUT_PATH      | The path where notes are saved.     | \@default-nut-path@ | ${NUT_PATH:-@default-nut-path@}       |
-| NUT_LOG_LEVEL | Log level: debug, info, warn, error | @default-log-level@ | ${NUT_LOG_LEVEL:-@default-log-level@} |
+| NUT_LOG_LEVEL | debug, info, warn, error, or fatal  | @default-log-level@ | ${NUT_LOG_LEVEL:-@default-log-level@} |
 markdown
 }
 
@@ -82,16 +97,22 @@ function do_paste() {
     )"; then
       out="$("${cmd[@]}" show HEAD --summary --oneline)"
       debug -s "" git "$out"
+      return 0
     else
       error -s "Could not commit" details "$out"
+      return 1
     fi
+  else
+    code=$?
+    error -s "Failed while writing" code "$code"
+    return 1
   fi
 }
 
 function select_note() {
   if out="$(
     fd --base-directory="$NUT_PATH" --relative-path "${@:-.}" |
-      fzf --preview "bat $NUT_PATH/{}" --accept-nth="$NUT_PATH/{1}"
+      fzf --preview "bat $NUT_PATH/{}" --accept-nth="$NUT_PATH/{1..}"
   )"; then
     debug -s "Note selected" note "$out"
     echo "$out"
@@ -115,13 +136,24 @@ function do_delete() {
   FZF_DEFAULT_OPTS="${FZF_DEFAULT_OPTS} --multi"
   if notes="$(select_note .)"; then
     debug -s "Selected notes for deletion" notes "${notes[*]}"
-    for note in $notes; do
+    for note in "${notes[@]}"; do
       debug -s "Deleting" note "$note"
       rm -r "$note"
     done
   else
     error "Could not select notes"
     return 1
+  fi
+  if
+    git -C "$NUT_PATH" add -A
+    git -C "$NUT_PATH" commit -m "deleted ${notes[*]}"
+  then
+    debug "Changes committed"
+    return
+  else
+    code=$?
+    error -s "Could not commit changes" code "$code"
+    return "$code"
   fi
 }
 
@@ -243,24 +275,16 @@ function main() {
       ;;
     --) shift ;;
     *)
-      error -s "Unknown command" command "$arg"
+      fatal -s "Unknown command" command "$arg"
       return 1
       ;;
     esac
   done
-  error "Unknown condition"
+  fatal "Unknown condition"
   return 1
 }
 
-code=0
-main "$@" || code="$?"
-case "$code" in
-0)
-  log "Loves ya!"
-  exit
-  ;;
-*)
+if ! main "$@"; then
   error "Awww, nuts!"
   exit 1
-  ;;
-esac
+fi
