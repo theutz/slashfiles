@@ -17,6 +17,9 @@ in
       gum
       getopt
       aichat
+      fzf
+      fd
+      bat
     ];
 
     text =

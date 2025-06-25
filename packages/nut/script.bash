@@ -87,10 +87,42 @@ function do_paste() {
   fi
 }
 
+function select_note() {
+  if out="$(
+    fd --base-directory="$NUT_PATH" --relative-path "${@:-.}" |
+      fzf --preview "bat $NUT_PATH/{}" --accept-nth="$NUT_PATH/{1}"
+  )"; then
+    debug -s "Note selected" note "$out"
+    echo "$out"
+  else
+    status="$?"
+    case "$status" in
+    130)
+      warn "User cancelled selection"
+      return $((status + 127))
+      ;;
+    *)
+      error "Error while selecting note"
+      return $((status + 127))
+      ;;
+    esac
+  fi
+}
+
+function do_edit() {
+  note="$(select_note .)"
+  debug -s "Editing" note "$note"
+  if "$NUT_EDITOR" "$note"; then
+    debug "Note saved"
+  else
+    error "Not could not be saved"
+  fi
+}
+
 function init() {
   if [[ ! -v NUT_PATH || -z "$NUT_PATH" ]]; then
     export NUT_PATH="@default-nut-path@"
-    debug -s "NUT_PATH not set. Using default" path "$NUT_PATH"
+    info -s "NUT_PATH not set. Using default" path "$NUT_PATH"
   fi
 
   if [[ ! -d "$NUT_PATH" ]]; then
@@ -105,50 +137,56 @@ function init() {
       error -s "Could not initialize git repo" details "$out"
     fi
   fi
+
+  if [[ ! -v NUT_EDITOR || -z "$NUT_EDITOR" ]]; then
+    default="${EDITOR:-vim}"
+    info -s "NUT_EDITOR not set. Using default" default "$default"
+    export NUT_EDITOR="$default"
+  fi
 }
 
 function main() {
   parsed="$(
     getopt \
-      --longoptions=help,debug,verbose \
-      --options hdv \
-      --name "@name" \
-      -- "$@"
-  )" || exit 2
+      --longoptions='help,debug,verbose' \
+      --options='+hdv' \
+      --name="@name@" \
+      -- "$@" 2>/dev/null
+  )" || return 2
   eval set -- "$parsed"
 
   flag_help=n
   flag_debug=n
   flag_verbose=n
+  args=()
 
   while [[ $# -gt 0 ]]; do
     case "$1" in
     --help | -h) flag_help=y ;;
     --debug | -d) flag_debug=y ;;
     --verbose | -v) flag_verbose=y ;;
-    --)
-      shift
-      break
-      ;;
+    --) ;;
     *)
-      error -s "Error parsing args" arg "$1"
-      exit 1
+      args+=("$1")
       ;;
     esac
     shift
   done
+  debug -s -- "args after parsing" args "${args[*]}"
+  set -- "${args[@]}"
+
+  export GUM_LOG_LEVEL="warn"
 
   if [[ $flag_debug == y ]]; then
     set -x
     flag_verbose=y
+    export GUM_LOG_LEVEL="debug"
     debug "Debug mode enabled"
   fi
 
   if [[ $flag_verbose = y ]]; then
+    export GUM_LOG_LEVEL="info"
     debug "Verbose mode enabled"
-    exec 3>&1
-  else
-    exec 3>/dev/null
   fi
 
   if [[ $flag_help == y ]]; then
@@ -162,13 +200,26 @@ function main() {
     do_paste "$@"
     return
   fi
-  case "$1" in
-  paste) do_paste "$@" ;;
-  *)
-    error -s "Unknown command" command "$1"
-    return 1
-    ;;
-  esac
+  while [[ $# -gt 0 ]]; do
+    arg="$1"
+    shift
+    debug -s -- "parsing" arg "$arg"
+    case "$arg" in
+    paste)
+      do_paste "$@"
+      break
+      ;;
+    edit)
+      do_edit "$@"
+      break
+      ;;
+    --) shift ;;
+    *)
+      error -s "Unknown command" command "$arg"
+      return 1
+      ;;
+    esac
+  done
 }
 
 main "$@"
