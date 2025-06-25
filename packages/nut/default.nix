@@ -16,11 +16,13 @@ in
     runtimeInputs = with pkgs; [
       gum
       getopt
+      aichat
     ];
 
     text =
       {
         inherit name longDescription;
+        default-nut-path = "$HOME/nuts";
       }
       |> pkgs.replaceVars ./script.bash
       |> lib.fileContents;
