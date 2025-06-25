@@ -14,7 +14,7 @@
   };
 
   font = rec {
-    family = families.maple;
+    family = families.hasklug;
     size = 16;
     height = 1.2;
     abs_height = size * height;

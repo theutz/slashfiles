@@ -77,7 +77,7 @@ function do_paste() {
   fi
 
   content="$("${paste_cmd[@]}")"
-  debug -f -- "Captured clipboard:\\n%s" "${content}"
+  debug -f -- 'Captured clipboard:\n%s' "${content}"
 
   proompt="Ignore all previous instructions.
   Generate a filename for this content in kebab case.
@@ -176,12 +176,12 @@ function do_edit() {
 }
 
 function init() {
-  if [[ ! -v NUT_PATH || -z "$NUT_PATH" ]]; then
+  if [[ ! -v NUT_PATH || -z $NUT_PATH ]]; then
     export NUT_PATH="@default-nut-path@"
     info -s "NUT_PATH not set. Using default" path "$NUT_PATH"
   fi
 
-  if [[ ! -d "$NUT_PATH" ]]; then
+  if [[ ! -d $NUT_PATH ]]; then
     warn -s "$NUT_PATH didn't exist. Creating..."
     mkdir -p "$NUT_PATH"
     info "$NUT_PATH created"
@@ -194,7 +194,7 @@ function init() {
     fi
   fi
 
-  if [[ ! -v NUT_EDITOR || -z "$NUT_EDITOR" ]]; then
+  if [[ ! -v NUT_EDITOR || -z $NUT_EDITOR ]]; then
     default="${EDITOR:-vim}"
     info -s "NUT_EDITOR not set. Using default" default "$default"
     export NUT_EDITOR="$default"
@@ -239,7 +239,7 @@ function main() {
     debug "Debug mode enabled"
   fi
 
-  if [[ $flag_verbose = y ]]; then
+  if [[ $flag_verbose == y ]]; then
     export GUM_LOG_LEVEL="debug"
     info "Verbose mode enabled"
   fi
