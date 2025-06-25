@@ -40,7 +40,7 @@ in {
     StandardOutPath = "/tmp/${Label}/out.log";
     StandardErrorPath = "/tmp/${Label}/err.log";
     ProgramArguments = [
-      (lib.getExe pkgs.${namespace}.dark-notify)
+      (lib.getExe pkgs.dark-notify)
       "-c"
       script.outPath
     ];

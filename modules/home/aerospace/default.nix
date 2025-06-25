@@ -15,7 +15,7 @@ in {
     programs.aerospace = {
       enable = true;
       userSettings = {
-        gaps.outer = lib.genAttrs ["left" "right" "top" "bottom"] (_x: 16);
+        gaps.outer = lib.genAttrs ["left" "right" "top" "bottom"] (_: 16);
       };
     };
   };
