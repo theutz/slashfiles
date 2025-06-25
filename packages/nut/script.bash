@@ -86,7 +86,7 @@ function do_paste() {
 
   title="$(aichat "$proompt" <<<"$content")"
   debug -s "Generated ai title" title "$title"
-  title="$(date +%s)-${title}"
+  title="$(date +%s)-${title// /-}"
   debug -s "Prepended date stamp"
 
   if gum write --header="$title" --value="$content" >"$NUT_PATH/$title"; then
@@ -136,7 +136,7 @@ function do_delete() {
   FZF_DEFAULT_OPTS="${FZF_DEFAULT_OPTS} --multi"
   if notes="$(select_note .)"; then
     debug -s "Selected notes for deletion" notes "${notes[*]}"
-    for note in "${notes[@]}"; do
+    for note in $notes; do
       debug -s "Deleting" note "$note"
       rm -r "$note"
     done
@@ -146,7 +146,7 @@ function do_delete() {
   fi
   if
     git -C "$NUT_PATH" add -A
-    git -C "$NUT_PATH" commit -m "deleted ${notes[*]}"
+    git -C "$NUT_PATH" commit -m "deleted ${notes[*]//$NUT_PATH\//}"
   then
     debug "Changes committed"
     return
