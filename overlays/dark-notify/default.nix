@@ -1,6 +1,8 @@
-{lib, ...}: _final: prev: {
-  dark-notify = prev.pkgs.rustPlatform.buildRustPackage {
-    pname = "dark-notify";
+_: _final: prev: let
+  name = baseNameOf ./.;
+in {
+  ${name} = prev.pkgs.rustPlatform.buildRustPackage {
+    pname = name;
     version = "master";
 
     meta = {
@@ -10,8 +12,8 @@
       homepage = "https://github.com/cormacrelf/dark-notify";
       license = [];
       maintainers = [];
-      platforms = lib.platforms.darwin;
-      mainProgram = "dark-notify";
+      platforms = prev.lib.platforms.darwin;
+      mainProgram = name;
     };
 
     src = prev.fetchFromGitHub {

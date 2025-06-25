@@ -1,20 +1,18 @@
-{
-  pkgs,
-  lib,
-  ...
-}: let
+_: _final: prev: let
+  name = baseNameOf ./.;
   version = "2.3.3";
-in
-  pkgs.buildGoModule {
+in {
+  ${name} = prev.buildGoModule {
     inherit version;
-    pname = "html2markdown";
+    pname = name;
     meta = {
       description = "Convert HTML to Markdown.";
       homepage = "https://html-to-markdown.com";
-      license = lib.licenses.mit;
+      license = prev.lib.licenses.mit;
+      mainProgram = name;
     };
 
-    src = pkgs.fetchFromGitHub {
+    src = prev.fetchFromGitHub {
       owner = "JohannesKaufmann";
       repo = "html-to-markdown";
       rev = "v${version}";
@@ -22,4 +20,5 @@ in
     };
 
     vendorHash = "sha256-nMb4moiTMzLSWfe8JJwlH6H//cOHbKWfnM9SM366ey0=";
-  }
+  };
+}

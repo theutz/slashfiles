@@ -1,22 +1,20 @@
-{
-  pkgs,
-  lib,
-  ...
-}: let
+_: _final: prev: let
+  name = baseNameOf ./.;
   version = "0.0.1";
-in
-  pkgs.buildGoModule {
+in {
+  ${name} = prev.buildGoModule {
     inherit version;
-    pname = "volgo";
+    pname = name;
     meta = {
       description = ''
         Cross-platform CLI app for controlling system volume from the terminal.
       '';
       homepage = "https://github.com/elliot40404/volgo";
-      license = lib.licenses.mit;
+      license = prev.lib.licenses.mit;
+      mainProgram = name;
     };
 
-    src = pkgs.fetchFromGitHub {
+    src = prev.fetchFromGitHub {
       owner = "elliot40404";
       repo = "volgo";
       rev = "v${version}";
@@ -24,4 +22,5 @@ in
     };
 
     vendorHash = null;
-  }
+  };
+}

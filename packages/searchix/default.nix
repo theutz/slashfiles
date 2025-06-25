@@ -1,8 +1,4 @@
-{
-  pkgs,
-  namespace,
-  ...
-}: let
+{pkgs, ...}: let
   name = "searchix";
   description = "Search for things on searchix";
 in
@@ -15,7 +11,7 @@ in
 
     runtimeInputs = with pkgs; [
       gum
-      pkgs.${namespace}.html2markdown
+      html2markdown
       glow
       xh
     ];

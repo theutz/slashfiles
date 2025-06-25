@@ -3,7 +3,6 @@
   pkgs,
   light,
   dark,
-  namespace,
   mkVariantOpt,
   ...
 }: let
