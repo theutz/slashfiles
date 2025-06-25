@@ -44,9 +44,10 @@ paste from clipboard into a new note
 
 ## ENVIRONMENT VARIABLES
 
-| Name     | Description                     | Default             | Current                          |
-| :------- | :------------------------------ | :------------------ | :------------------------------- |
-| NUT_PATH | The path where notes are saved. | \@default-nut-path@ | ${NUT_PATH:-@default-nut-path@} |
+| Name          | Description                         | Default             | Current                               |
+| :------------ | :---------------------------------- | :------------------ | :------------------------------------ |
+| NUT_PATH      | The path where notes are saved.     | \@default-nut-path@ | ${NUT_PATH:-@default-nut-path@}       |
+| NUT_LOG_LEVEL | Log level: debug, info, warn, error | @default-log-level@ | ${NUT_LOG_LEVEL:-@default-log-level@} |
 markdown
 }
 
@@ -94,28 +95,37 @@ function select_note() {
   )"; then
     debug -s "Note selected" note "$out"
     echo "$out"
+    return 0
   else
-    status="$?"
-    case "$status" in
+    code="$?"
+    case "$code" in
     130)
-      warn "User cancelled selection"
-      return $((status + 127))
+      warn -s "User cancelled selection"
+      return 130
       ;;
     *)
-      error "Error while selecting note"
-      return $((status + 127))
+      error -s "Error while selecting note" code "$code"
+      return 1
       ;;
     esac
   fi
 }
 
 function do_edit() {
-  note="$(select_note .)"
-  debug -s "Editing" note "$note"
+  if note="$(select_note .)"; then
+    debug -s "Editing" note "$note"
+  else
+    code=$?
+    error -s "Failed while selecting file" code "$code"
+    return $code
+  fi
   if "$NUT_EDITOR" "$note"; then
     debug "Note saved"
+    return 0
   else
-    error "Not could not be saved"
+    code="$?"
+    error -s "Failed while editing" code "$code"
+    return "$code"
   fi
 }
 
@@ -146,6 +156,8 @@ function init() {
 }
 
 function main() {
+  export GUM_LOG_LEVEL="${NUT_LOG_LEVEL:-warn}"
+
   parsed="$(
     getopt \
       --longoptions='help,debug,verbose' \
@@ -175,8 +187,6 @@ function main() {
   debug -s -- "args after parsing" args "${args[*]}"
   set -- "${args[@]}"
 
-  export GUM_LOG_LEVEL="warn"
-
   if [[ $flag_debug == y ]]; then
     set -x
     flag_verbose=y
@@ -197,8 +207,8 @@ function main() {
   init
 
   if [[ ! -v 1 ]]; then
-    do_paste "$@"
-    return
+    do_paste "$@" || return $?
+    return 0
   fi
   while [[ $# -gt 0 ]]; do
     arg="$1"
@@ -206,12 +216,12 @@ function main() {
     debug -s -- "parsing" arg "$arg"
     case "$arg" in
     paste)
-      do_paste "$@"
-      break
+      do_paste "$@" || return $?
+      return
       ;;
     edit)
-      do_edit "$@"
-      break
+      do_edit "$@" || return $?
+      return
       ;;
     --) shift ;;
     *)
@@ -220,6 +230,19 @@ function main() {
       ;;
     esac
   done
+  error "Unknown condition"
+  return 1
 }
 
-main "$@"
+code=0
+main "$@" || code="$?"
+case "$code" in
+0)
+  log "Loves ya!"
+  exit
+  ;;
+*)
+  error "Awww, nuts!"
+  exit 1
+  ;;
+esac

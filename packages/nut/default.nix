@@ -26,6 +26,7 @@ in
       {
         inherit name longDescription;
         default-nut-path = "$HOME/nuts";
+        default-log-level = "warn";
       }
       |> pkgs.replaceVars ./script.bash
       |> lib.fileContents;
