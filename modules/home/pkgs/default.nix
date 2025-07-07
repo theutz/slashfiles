@@ -4,12 +4,13 @@
   config,
   lib,
   ...
-}:
-lib.${namespace}.mkModule {
-  inherit config;
-  here = ./.;
-} {
-  config = {
+}: let
+  cfg = config.${namespace}.${mod};
+  mod = baseNameOf ./.;
+in {
+  options.${namespace}.${mod}.enable = lib.mkEnableOption "enable ${mod}";
+
+  config = lib.mkIf cfg.enable {
     home.packages =
       [
         # My custom packages
@@ -33,6 +34,7 @@ lib.${namespace}.mkModule {
           ookla-speedtest
           procs
           ripgrep
+          sd
           spotify-player
           tenki
           xh
