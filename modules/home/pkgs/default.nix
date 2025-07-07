@@ -24,6 +24,7 @@ lib.${namespace}.mkModule {
           coreutils
           curlie
           fd
+          gemini-cli
           google-chrome
           gping
           httpie
@@ -35,6 +36,7 @@ lib.${namespace}.mkModule {
           spotify-player
           tenki
           xh
+          zk
           zoom-us
         ])
 
