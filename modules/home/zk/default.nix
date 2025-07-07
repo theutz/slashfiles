@@ -1,5 +1,4 @@
 {
-  pkgs,
   config,
   namespace,
   lib,
@@ -7,15 +6,15 @@
 }: let
   mod = baseNameOf ./.;
   cfg = config.${namespace}.${mod};
-  settingsFormatter = pkgs.formats.toml {};
-  settingsFile = settingsFormatter.generate "config.toml" cfg.settings;
 in {
   options.${namespace}.${mod} = {
     enable = lib.mkEnableOption "enable ${mod}";
+  };
 
-    settings = lib.mkOption {
-      inherit (settingsFormatter) type;
-      default = {
+  config = lib.mkIf cfg.enable {
+    programs.zk = {
+      enable = true;
+      settings = {
         notebook = {
           dir = "~/notes";
         };
@@ -30,17 +29,6 @@ in {
           id-case = "lower";
         };
       };
-      description = ''
-        TOML file with global settings for ZK.
-
-        https://zk-org.github.io/zk/config/config.html
-      '';
     };
-  };
-
-  config = lib.mkIf cfg.enable {
-    home.packages = with pkgs; [zk];
-
-    xdg.configFile."zk/config.toml".source = settingsFile;
   };
 }
