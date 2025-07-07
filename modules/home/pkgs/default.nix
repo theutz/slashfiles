@@ -36,7 +36,6 @@ lib.${namespace}.mkModule {
           spotify-player
           tenki
           xh
-          zk
           zoom-us
         ])
 
