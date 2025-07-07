@@ -45,6 +45,7 @@ lib.${namespace}.mkModule {
         "tailscale"
         "telegram"
         "vivaldi"
+        "whatsapp"
       ];
 
       onActivation = {
