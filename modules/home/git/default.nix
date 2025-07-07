@@ -41,6 +41,7 @@ lib.${namespace}.mkModule {
         userEmail = "michael@theutz.com";
         extraConfig = {
           pull.rebase = "true";
+          init.defaultBranch = "main";
         };
       };
 
