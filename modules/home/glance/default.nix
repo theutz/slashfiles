@@ -15,7 +15,7 @@ in {
     enable = lib.mkEnableOption "enable ${mod}";
     settings = lib.mkOption {
       inherit (settingsFormat) type;
-      default = {};
+      default = lib.${namespace}.fromYAML pkgs ./glance.yml;
       description = ''
         Configuration written to a yaml file that is read by glance. See
         <https://github.com/glanceapp/glance/blob/main/docs/configuration.md>
