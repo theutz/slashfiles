@@ -17,7 +17,7 @@ in {
       inherit (settingsFormatter) type;
       default = {
         notebook = {
-          dir = "~/.notes";
+          dir = "~/notes";
         };
         notes = {
           language = "en";
