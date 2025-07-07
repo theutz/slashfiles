@@ -14,7 +14,7 @@
   };
 
   font = rec {
-    family = families.blex;
+    family = families.annotation;
     size = 16;
     height = 1.2;
     abs_height = size * height;
@@ -23,6 +23,7 @@
       mkPropo = name: "${name} Nerd Font Propo";
       mkVariants = family: variants: lib.genAttrs variants (variant: mkPropo (family + variant));
     in {
+      annotation = "Annotation Mono";
       blex = mkPropo "BlexMono";
       fira = mkPropo "FiraCode";
       hack = mkPropo "Hack";
