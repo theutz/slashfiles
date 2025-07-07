@@ -32,6 +32,8 @@ in {
       };
       description = ''
         TOML file with global settings for ZK.
+
+        https://zk-org.github.io/zk/config/config.html
       '';
     };
   };
