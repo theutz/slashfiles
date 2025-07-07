@@ -23,7 +23,6 @@
       mkPropo = name: "${name} Nerd Font Propo";
       mkVariants = family: variants: lib.genAttrs variants (variant: mkPropo (family + variant));
     in {
-      annotation = 
       blex = mkPropo "BlexMono";
       fira = mkPropo "FiraCode";
       hack = mkPropo "Hack";
