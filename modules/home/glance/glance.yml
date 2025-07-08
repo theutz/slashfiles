@@ -58,16 +58,16 @@ pages:
 
           - type: markets
             markets:
+              - symbol: USDTRY=X
+                name: USD-TRY
+              - symbol: USDEUR=X
+                name: USD-EUR
+              - symbol: EURTRY=X
+                name: EUR-TRY
+              - symbol: DJIA
+                name: Dow Jones
               - symbol: SPY
                 name: S&P 500
-              - symbol: BTC-USD
-                name: Bitcoin
-              - symbol: NVDA
-                name: NVIDIA
-              - symbol: AAPL
-                name: Apple
-              - symbol: MSFT
-                name: Microsoft
 
           - type: releases
             cache: 1d

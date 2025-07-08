@@ -42,7 +42,10 @@ in {
       '';
     };
 
-    xdg.configFile."glance/glance.yml".source = settingsFile;
+    xdg.configFile."glance/glance.yml" = {
+      source = settingsFile;
+      force = true;
+    };
 
     launchd.agents.glance = {
       enable = true;
