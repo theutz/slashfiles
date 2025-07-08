@@ -9,7 +9,7 @@ theme:
     default-dark:
       light: false
       background-color: 246 24 17
-      primary-color: 2 55 83
+      primary-color: 2 66 75
       positive-color: 189 43 73
       negative-color: 343 76 68
     default-light:
