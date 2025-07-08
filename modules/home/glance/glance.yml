@@ -52,9 +52,9 @@ pages:
       - size: small
         widgets:
           - type: weather
-            location: London, United Kingdom
+            location: Gölckk, Kocaeli, Turkiye
             units: metric
-            hour-format: 12h
+            hour-format: 24h
 
           - type: markets
             markets:
@@ -66,6 +66,8 @@ pages:
                 name: EUR-TRY
               - symbol: DJIA
                 name: Dow Jones
+              - symbol: ^IXIC
+                name: NASDAQ
               - symbol: SPY
                 name: S&P 500
 
