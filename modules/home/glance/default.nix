@@ -3,6 +3,7 @@
   namespace,
   lib,
   pkgs,
+  osConfig,
   ...
 }: let
   mod = baseNameOf ./.;
@@ -13,6 +14,7 @@
 in {
   options.${namespace}.${mod} = {
     enable = lib.mkEnableOption "enable ${mod}";
+
     settings = lib.mkOption {
       inherit (settingsFormat) type;
       default = lib.${namespace}.fromYAML pkgs ./glance.yml;
@@ -25,6 +27,10 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
+    home.sessionVariables = {
+      GLANCE_PORT_FILE = osConfig.sops.secrets."glance/port".path;
+    };
+
     home.packages = with pkgs; [glance];
 
     xdg.configFile."glance/glance.yml".source = settingsFile;

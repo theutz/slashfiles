@@ -1,3 +1,5 @@
+server:
+  port: ${readFileFromEnv:GLANCE_PORT_FILE}
 pages:
   - name: Home
     columns:

@@ -29,6 +29,7 @@ in {
         "openai" = cfg.mine;
         "gemini" = cfg.mine;
         "anthropic" = cfg.mine;
+        "glance/port" = cfg.mine;
       };
     };
   };
