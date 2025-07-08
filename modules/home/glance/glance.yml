@@ -21,15 +21,6 @@ pages:
               - url: https://ishadeed.com/feed.xml
                 title: Ahmad Shadeed
 
-          - type: twitch-channels
-            channels:
-              - theprimeagen
-              - j_blow
-              - piratesoftware
-              - cohhcarnage
-              - christitustech
-              - EJ_SA
-
       - size: full
         widgets:
           - type: group

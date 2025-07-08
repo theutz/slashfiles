@@ -21,5 +21,10 @@ in {
     home.sessionVariables = {
       NH_DARWIN_FLAKE = "/etc/nix-darwin";
     };
+
+    home.shellAliases = {
+      nhds = "nh darwin switch";
+      nhdb = "nh darwin build -o result";
+    };
   };
 }

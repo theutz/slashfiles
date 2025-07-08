@@ -40,6 +40,7 @@ lib.${namespace}.mkModule {
         userName = "Michael Utz";
         userEmail = "michael@theutz.com";
         extraConfig = {
+          push.autoSetupRemote = "true";
           pull.rebase = "true";
           init.defaultBranch = "main";
         };
