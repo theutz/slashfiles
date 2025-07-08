@@ -15,7 +15,7 @@
     };
 
     luaConfigRC.markdown =
-      lib.nvim.dag.entryAfter ["pluginConfigs"]
+      lib.nvim.dag.entryAfter ["markview-nvim"]
       # lua
       ''
         require('markview.extras.checkboxes').setup({})
