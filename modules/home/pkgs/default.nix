@@ -37,6 +37,7 @@ in {
           sd
           spotify-player
           tenki
+          volgo
           xh
           zoom-us
         ])
