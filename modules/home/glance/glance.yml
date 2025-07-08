@@ -1,5 +1,7 @@
 server:
   port: ${readFileFromEnv:GLANCE_PORT_FILE}
+theme:
+  background-color: 249 22 12
 pages:
   - name: Home
     columns:

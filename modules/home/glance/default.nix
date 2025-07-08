@@ -11,6 +11,7 @@
 
   settingsFormat = pkgs.formats.yaml {};
   settingsFile = settingsFormat.generate "glance.yml" cfg.settings;
+  Label = "com.${namespace}.${mod}";
 in {
   options.${namespace}.${mod} = {
     enable = lib.mkEnableOption "enable ${mod}";
@@ -27,20 +28,31 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
-    home.sessionVariables = {
-      GLANCE_PORT_FILE = osConfig.sops.secrets."glance/port".path;
-    };
+    home = {
+      sessionVariables = {
+        GLANCE_PORT_FILE = osConfig.sops.secrets."glance/port".path;
+      };
 
-    home.packages = with pkgs; [glance];
+      packages = with pkgs; [glance];
+
+      activation.restartGlance = config.lib.dag.entryAfter ["writeBoundary"] ''
+        uid="''$(id -u ${lib.${namespace}.prefs.user})"
+        verboseEcho "Restarting glance"
+        run /bin/launchctl kickstart -k "gui/''${uid}/${Label}"
+      '';
+    };
 
     xdg.configFile."glance/glance.yml".source = settingsFile;
 
     launchd.agents.glance = {
       enable = true;
-      config = rec {
-        Label = "com.${namespace}.${mod}";
+      config = {
+        inherit Label;
         RunAtLoad = true;
         KeepAlive = true;
+        EnvironmentVariables = {
+          inherit (config.home.sessionVariables) GLANCE_PORT_FILE;
+        };
         ProgramArguments = [
           (lib.getExe pkgs.glance)
           "--config"
