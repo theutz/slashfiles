@@ -1,19 +1,14 @@
 server:
   port: ${readFileFromEnv:GLANCE_PORT_FILE}
 theme:
-  background-color: 249 22 12
-  primary-color: 2 55 83
-  positive-color: 189 43 73
-  negative-color: 343 76 68
-
   presets:
-    rosepine:
+    default-dark:
       light: false
       background-color: 249 22 12
       primary-color: 2 55 83
       positive-color: 189 43 73
       negative-color: 343 76 68
-    rosepine-dawn:
+    default-light:
       light: true
       background-color: 32 57 95
       primary-color: 268 21 57
@@ -59,6 +54,8 @@ pages:
 
           - type: group
             widgets:
+              - type: reddit
+              subreddit:
               - type: reddit
                 subreddit: technology
                 show-thumbnails: true
