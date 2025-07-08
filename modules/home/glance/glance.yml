@@ -26,6 +26,18 @@ pages:
           - type: calendar
             first-day-of-week: monday
 
+          - type: clock
+            hour-format: 24h
+            timezones:
+              - timezone: Europe/Istanbul
+                label: Istanbul
+              - timezone: America/New_York
+                label: Chattanooga
+              - timezone: America/Chicago
+                label: Dallas
+              - timezone: America/Los_Angeles
+                label: Seattle
+
           - type: rss
             limit: 10
             collapse-after: 3
