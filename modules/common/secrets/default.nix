@@ -30,6 +30,9 @@ in {
         "gemini" = cfg.mine;
         "anthropic" = cfg.mine;
         "glance/port" = cfg.mine;
+        "glance/reddit/name" = cfg.mine;
+        "glance/reddit/id" = cfg.mine;
+        "glance/reddit/secret" = cfg.mine;
       };
     };
   };

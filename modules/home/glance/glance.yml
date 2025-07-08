@@ -73,12 +73,18 @@ pages:
               - type: reddit
                 subreddit: turkey
                 show-thumbnails: true
+                app-auth: &redditAppAuth
+                  name: ${readFileFromEnv:GLANCE_REDDIT_APP_NAME_FILE}
+                  id: ${readFileFromEnv:GLANCE_REDDIT_APP_ID_FILE}
+                  secret: ${readFileFromEnv:GLANCE_REDDIT_APP_SECRET_FILE}
               - type: reddit
                 subreddit: technology
                 show-thumbnails: true
+                app-auth: *redditAppAuth
               - type: reddit
                 subreddit: selfhosted
                 show-thumbnails: true
+                app-auth: *redditAppAuth
 
       - size: small
         widgets:
