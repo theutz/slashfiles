@@ -9,6 +9,7 @@
   cfg = config.${namespace}.${mod};
 
   Label = "com.${namespace}.${mod}.emanote";
+  port = "3842";
 in {
   options.${namespace}.${mod} = {
     enable = lib.mkEnableOption "enable ${mod}";
@@ -36,6 +37,10 @@ in {
 
     home.packages = with pkgs; [emanote];
 
+    home.shellAliases = {
+      zopen = "open http://localhost:${port}";
+    };
+
     launchd.agents.emanote = {
       enable = true;
       config = {
@@ -48,7 +53,7 @@ in {
         ProgramArguments = [
           (lib.getExe pkgs.emanote)
           "run"
-          "--port=3842"
+          "--port=${port}"
         ];
       };
     };
