@@ -5,10 +5,10 @@
     duckdb
     full-border
     git
-    glow
     lazygit
     miller
     ouch
+    piper
     projects
     relative-motions
     rsync

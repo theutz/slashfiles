@@ -83,7 +83,7 @@ lib.${namespace}.mkModule {
       };
 
       settings = {
-        manager = {
+        mgr = {
           show_hidden = true;
         };
 
@@ -120,7 +120,7 @@ lib.${namespace}.mkModule {
               # Markdown
               {
                 name = "*.md";
-                run = "glow";
+                run = ''piper -- CLICOLOR_FORCE=1 ${lib.getExe pkgs.glow} -w=$w -s=dark "$1"'';
               }
             ]
             ++ (lib.optional useDuckDb [
