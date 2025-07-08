@@ -2,6 +2,23 @@ server:
   port: ${readFileFromEnv:GLANCE_PORT_FILE}
 theme:
   background-color: 249 22 12
+  primary-color: 2 55 83
+  positive-color: 197 49 38
+  negative-color: 343 76 68
+
+  presets:
+    rosepine:
+      light: false
+      background-color: 249 22 12
+      primary-color: 2 55 83
+      positive-color: 197 49 38
+      negative-color: 343 76 68
+    rosepine-dawn:
+      light: true
+      background-color: 32 57 95
+      primary-color: 3 53 67
+      positive-color: 197 53 34
+      negative-color: 343 35 55
 pages:
   - name: Home
     columns:
@@ -52,7 +69,7 @@ pages:
       - size: small
         widgets:
           - type: weather
-            location: Gölckk, Kocaeli, Turkiye
+            location: Gölcük, Kocaeli, Türkiye
             units: metric
             hour-format: 24h
 
