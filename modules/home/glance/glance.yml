@@ -97,3 +97,17 @@ pages:
               - go-gitea/gitea
               - immich-app/immich
               - syncthing/syncthing
+  - name: Delgator
+    columns:
+      - size: full
+        widgets:
+          - type: monitor
+            cache: 1m
+            title: Sites
+            sites:
+              - title: Delegator
+                url: https://delegator.com
+              - title: PlayCore
+                url: https://playcore.com
+              - title: SLTC
+                url: https://lineworker.com
