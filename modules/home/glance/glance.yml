@@ -3,7 +3,7 @@ server:
 theme:
   background-color: 249 22 12
   primary-color: 2 55 83
-  positive-color: 197 49 38
+  positive-color: 189 43 73
   negative-color: 343 76 68
 
   presets:
@@ -11,12 +11,12 @@ theme:
       light: false
       background-color: 249 22 12
       primary-color: 2 55 83
-      positive-color: 197 49 38
+      positive-color: 189 43 73
       negative-color: 343 76 68
     rosepine-dawn:
       light: true
       background-color: 32 57 95
-      primary-color: 3 53 67
+      primary-color: 268 21 57
       positive-color: 197 53 34
       negative-color: 343 35 55
 pages:
