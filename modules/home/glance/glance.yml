@@ -1,10 +1,14 @@
 server:
   port: ${readFileFromEnv:GLANCE_PORT_FILE}
 theme:
+  background-color: 249 22 12
+  primary-color: 2 55 83
+  positive-color: 189 43 73
+  negative-color: 343 76 68
   presets:
     default-dark:
       light: false
-      background-color: 249 22 12
+      background-color: 246 24 17
       primary-color: 2 55 83
       positive-color: 189 43 73
       negative-color: 343 76 68
@@ -55,7 +59,8 @@ pages:
           - type: group
             widgets:
               - type: reddit
-              subreddit:
+                subreddit: turkey
+                show-thumbnails: true
               - type: reddit
                 subreddit: technology
                 show-thumbnails: true
