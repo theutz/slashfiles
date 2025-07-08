@@ -97,7 +97,7 @@ pages:
               - go-gitea/gitea
               - immich-app/immich
               - syncthing/syncthing
-  - name: Delgator
+  - name: Delegator
     columns:
       - size: full
         widgets:
