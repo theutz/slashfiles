@@ -12,13 +12,24 @@
   settingsFormat = pkgs.formats.yaml {};
   settingsFile = settingsFormat.generate "glance.yml" cfg.settings;
   Label = "com.${namespace}.${mod}";
+  log-dir = "/tmp/${Label}";
+
+  tail-glance = pkgs.writeShellApplication {
+    name = "tail-glance";
+    runtimeInputs = with pkgs; [lnav];
+    text =
+      # bash
+      ''
+        lnav ${log-dir}/*.log
+      '';
+  };
 in {
   options.${namespace}.${mod} = {
     enable = lib.mkEnableOption "enable ${mod}";
 
     settings = lib.mkOption {
       inherit (settingsFormat) type;
-      default = lib.${namespace}.fromYAML pkgs ./glance.yml;
+      default = {};
       description = ''
         Configuration written to a yaml file that is read by glance. See
         <https://github.com/glanceapp/glance/blob/main/docs/configuration.md>
@@ -28,22 +39,23 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
-    home = {
-      sessionVariables = {
-        GLANCE_PORT_FILE = osConfig.sops.secrets."glance/port".path;
-        GLANCE_REDDIT_APP_NAME_FILE = osConfig.sops.secrets."glance/reddit/name".path;
-        GLANCE_REDDIT_APP_ID_FILE = osConfig.sops.secrets."glance/reddit/id".path;
-        GLANCE_REDDIT_APP_SECRET_FILE = osConfig.sops.secrets."glance/reddit/secret".path;
-      };
+    "${namespace}".${mod}.settings =
+      lib.mkDefault (lib.${namespace}.fromYAML pkgs ./glance.yml);
 
-      packages = with pkgs; [glance];
-
-      activation.restartGlance = config.lib.dag.entryAfter ["writeBoundary"] ''
-        uid="''$(id -u ${lib.${namespace}.prefs.user})"
-        verboseEcho "Restarting glance"
-        run /bin/launchctl kickstart -k "gui/''${uid}/${Label}"
-      '';
+    home.sessionVariables = {
+      GLANCE_PORT_FILE = osConfig.sops.secrets."glance/port".path;
+      GLANCE_REDDIT_APP_NAME_FILE = osConfig.sops.secrets."glance/reddit/name".path;
+      GLANCE_REDDIT_APP_ID_FILE = osConfig.sops.secrets."glance/reddit/id".path;
+      GLANCE_REDDIT_APP_SECRET_FILE = osConfig.sops.secrets."glance/reddit/secret".path;
     };
+
+    home.packages = with pkgs; [glance tail-glance];
+
+    home.activation.restartGlance = config.lib.dag.entryAfter ["writeBoundary"] ''
+      uid="''$(id -u ${lib.${namespace}.prefs.user})"
+      verboseEcho "Restarting glance"
+      run /bin/launchctl kickstart -k "gui/''${uid}/${Label}"
+    '';
 
     xdg.configFile."glance/glance.yml" = {
       source = settingsFile;
@@ -70,8 +82,8 @@ in {
           "--config"
           (toString settingsFile)
         ];
-        StandardOutPath = "/tmp/${Label}/out.log";
-        StandardErrorPath = "/tmp/${Label}/err.log";
+        StandardOutPath = "${log-dir}/out.log";
+        StandardErrorPath = "${log-dir}/err.log";
       };
     };
   };
