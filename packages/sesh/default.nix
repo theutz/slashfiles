@@ -132,7 +132,7 @@ in
           fi
         fi
 
-        info -s "Loading..." session "$session_name"
+        info -s "Loading..." session "$session"
         tmuxp load --yes "$session"
       '';
   }
