@@ -22,7 +22,8 @@ in
       gum
       noti
       faketty
-      confetty
+      lolcat
+      figlet
     ];
 
     runtimeEnv = {
@@ -169,6 +170,8 @@ in
           exit 1
         fi
 
-        confetty
+        figlet -f nvscript "Done" |
+          sed '/^\s*$/d' |
+          lolcat --animate --speed 300
       '';
   }

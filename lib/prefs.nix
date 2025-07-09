@@ -24,6 +24,7 @@
       mkVariants = family: variants: lib.genAttrs variants (variant: mkPropo (family + variant));
     in {
       annotation = "Annotation Mono";
+      atkynson = "AtkynsonMono Nerd Font Propo";
       blex = mkPropo "BlexMono";
       fira = mkPropo "FiraCode";
       hack = mkPropo "Hack";
@@ -39,6 +40,7 @@
     packages = [
       "annotation-mono"
       "maple-mono.NF"
+      "nerd-fonts.atkynson-mono"
       "nerd-fonts.blex-mono"
       "nerd-fonts.fira-code"
       "nerd-fonts.hack"
