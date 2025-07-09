@@ -27,7 +27,7 @@ in {
 
   secrets = import ./secrets.nix args;
 
-  prefs = import ./prefs.nix args;
+  prefs = import ./prefs args;
 
   flatConcat = (lib.flip lib.pipe) [lib.concatLists lib.flatten];
 
