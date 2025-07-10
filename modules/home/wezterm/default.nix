@@ -28,13 +28,8 @@ in
   }
   {
     config = {
-      programs.wezterm = {
-        enable = true;
-
-        enableBashIntegration = true;
-        enableZshIntegration = true;
-
-        extraConfig =
+      xdg.configFile."wezterm/wezterm.lua" = {
+        source =
           {
             fish = lib.getExe pkgs.fish;
             font-family = font.family;
@@ -44,8 +39,14 @@ in
             light-theme = light;
             opacity = 0.85;
           }
-          |> pkgs.replaceVars ./wezterm.lua
-          |> lib.fileContents;
+          |> pkgs.replaceVars ./wezterm.lua;
+        force = true;
+      };
+      programs.wezterm = {
+        enable = true;
+
+        enableBashIntegration = true;
+        enableZshIntegration = true;
       };
     };
   }
