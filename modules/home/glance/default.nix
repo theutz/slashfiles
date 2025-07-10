@@ -23,6 +23,13 @@
         lnav ${log-dir}/*.log
       '';
   };
+
+  envVars = {
+    GLANCE_PORT_FILE = osConfig.sops.secrets."glance/port".path;
+    GLANCE_REDDIT_APP_NAME_FILE = osConfig.sops.secrets."glance/reddit/name".path;
+    GLANCE_REDDIT_APP_ID_FILE = osConfig.sops.secrets."glance/reddit/id".path;
+    GLANCE_REDDIT_APP_SECRET_FILE = osConfig.sops.secrets."glance/reddit/secret".path;
+  };
 in {
   options.${namespace}.${mod} = {
     enable = lib.mkEnableOption "enable ${mod}";
@@ -40,14 +47,10 @@ in {
 
   config = lib.mkIf cfg.enable {
     "${namespace}".${mod}.settings =
-      lib.mkDefault (lib.${namespace}.fromYAML pkgs ./glance.yml);
+      lib.mkDefault
+      (import ./glance.nix ({inherit lib;} // envVars));
 
-    home.sessionVariables = {
-      GLANCE_PORT_FILE = osConfig.sops.secrets."glance/port".path;
-      GLANCE_REDDIT_APP_NAME_FILE = osConfig.sops.secrets."glance/reddit/name".path;
-      GLANCE_REDDIT_APP_ID_FILE = osConfig.sops.secrets."glance/reddit/id".path;
-      GLANCE_REDDIT_APP_SECRET_FILE = osConfig.sops.secrets."glance/reddit/secret".path;
-    };
+    home.sessionVariables = envVars;
 
     home.packages = with pkgs; [glance tail-glance];
 
@@ -68,15 +71,7 @@ in {
         inherit Label;
         RunAtLoad = true;
         KeepAlive = true;
-        EnvironmentVariables = {
-          inherit
-            (config.home.sessionVariables)
-            GLANCE_PORT_FILE
-            GLANCE_REDDIT_APP_NAME_FILE
-            GLANCE_REDDIT_APP_ID_FILE
-            GLANCE_REDDIT_APP_SECRET_FILE
-            ;
-        };
+        EnvironmentVariables = envVars;
         ProgramArguments = [
           (lib.getExe pkgs.glance)
           "--config"
