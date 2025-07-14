@@ -2,13 +2,17 @@
   pkgs,
   lib,
   config,
+  namespace,
   ...
-}:
-lib.slashfiles.mkModule {
-  inherit config;
-  here = ./.;
-} {
-  config = {
+}: let
+  cfg = config.${namespace}.${mod};
+  mod = baseNameOf ./.;
+in {
+  options.${namespace}.${mod} = {
+    enable = lib.mkEnableOption "enable ${mod}";
+  };
+
+  config = lib.mkIf cfg.enable {
     home.packages = with pkgs; [
       gawkInteractive
       macchina

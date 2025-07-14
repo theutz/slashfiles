@@ -2,6 +2,7 @@
   lib,
   config,
   namespace,
+  pkgs,
   ...
 }: let
   mod = baseNameOf ./.;
@@ -12,6 +13,13 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
+    assertions = [
+      {
+        assertion = pkgs.stdenv.isDarwin;
+        message = "Aerospace is only available on darwin systems.";
+      }
+    ];
+
     programs.aerospace = {
       enable = true;
       userSettings = {

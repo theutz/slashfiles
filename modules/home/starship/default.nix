@@ -52,49 +52,56 @@
 in {
   options.${namespace}.${mod} = {
     enable = lib.mkEnableOption "enable ${mod}";
+    enableDarkNotifyIntegration = lib.mkEnableOption "update appearance with system";
   };
 
-  config = lib.mkIf cfg.enable {
-    home.packages = with pkgs; [dark-notify];
-
-    home.activation.refreshStarship =
-      config.lib.dag.entryAfter ["writeBoundary" "reloadTmux"]
-      # bash
-      ''
-        verboseEcho "Dark-notify script at ${script}"
-        ${lib.getExe pkgs.dark-notify} --exit -c "${script}"
-      '';
-
-    launchd.agents.starship-dark = {
-      enable = true;
-      config = rec {
-        Label = "com.theutz.starship-dark";
-        RunAtLoad = true;
-        KeepAlive = true;
-        ProgramArguments = [
-          (lib.getExe pkgs.dark-notify)
-          "-c"
-          script.outPath
-        ];
-        StandardErrorPath = "/tmp/${Label}/err.log";
-        StandardOutPath = "/tmp/${Label}/out.log";
+  config = lib.mkIf cfg.enable (lib.recursiveUpdate {
+      xdg.configFile."starship.toml" = {
+        source =
+          main
+          |> mkRosePinePath;
+        force = true;
       };
-    };
 
-    xdg.configFile."starship.toml" = {
-      text =
-        main
-        |> mkRosePinePath
-        |> lib.fileContents;
-      force = true;
-    };
+      programs.starship = {
+        enable = true;
+        enableBashIntegration = true;
+        enableFishIntegration = true;
+        enableNushellIntegration = true;
+        enableZshIntegration = true;
+      };
+    } (lib.mkIf cfg.enableDarkNotifyIntegration {
+      assertions = [
+        {
+          assertion = pkgs.stdenv.isDarwin;
+          message = "Dark notify integration is only available on Darwin systems.";
+        }
+      ];
 
-    programs.starship = {
-      enable = true;
-      enableBashIntegration = true;
-      enableFishIntegration = true;
-      enableNushellIntegration = true;
-      enableZshIntegration = true;
-    };
-  };
+      home.packages = with pkgs; [dark-notify];
+
+      home.activation.refreshStarship =
+        config.lib.dag.entryAfter ["writeBoundary" "reloadTmux"]
+        # bash
+        ''
+          verboseEcho "Dark-notify script at ${script}"
+          ${lib.getExe pkgs.dark-notify} --exit -c "${script}"
+        '';
+
+      launchd.agents.starship-dark = {
+        enable = true;
+        config = rec {
+          Label = "com.theutz.starship-dark";
+          RunAtLoad = true;
+          KeepAlive = true;
+          ProgramArguments = [
+            (lib.getExe pkgs.dark-notify)
+            "-c"
+            script.outPath
+          ];
+          StandardErrorPath = "/tmp/${Label}/err.log";
+          StandardOutPath = "/tmp/${Label}/out.log";
+        };
+      };
+    }));
 }
