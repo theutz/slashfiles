@@ -8,7 +8,7 @@
   mod = lib.${namespace}.thisHere __curPos;
   cfg = config.${namespace}.${parent}.${mod};
 in {
-  options.slashfiles.${parent}.${mod}.enable = lib.mkEnableOption "${parent} > ${mod}";
+  options.${namespace}.${parent}.${mod}.enable = lib.mkEnableOption "${parent} > ${mod}";
 
   config = lib.mkIf cfg.enable {
     programs.tmux.extraConfig = ''

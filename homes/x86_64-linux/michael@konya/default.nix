@@ -1,9 +1,10 @@
 {
   config,
   pkgs,
+  namespace,
   ...
 }: {
-  slashfiles = {
+  "${namespace}" = {
     aerospace.enable = false;
     bash.enable = true;
     bat.enable = true;
@@ -47,7 +48,7 @@
   ];
 
   home.sessionVariables = {
-    NH_FLAKE = "${config.home.homeDirectory}/slashfiles";
+    NH_FLAKE = "${config.home.homeDirectory}/${namespace}";
   };
 
   home.stateVersion = "25.05";

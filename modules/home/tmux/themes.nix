@@ -53,7 +53,7 @@
   cfg = config.${namespace}.${mod};
 in {
   config = lib.mkIf cfg.enable {
-    slashfiles.${mod} = {
+    "${namespace}".${mod} = {
       tmuxConf.themes = config.lib.dag.entryBefore ["hmBoundary"] settings.${main};
     };
 

@@ -1,13 +1,15 @@
 {
   lib,
   config,
+  namespace,
   ...
-}:
-lib.slashfiles.mkModule {
-  inherit config;
-  here = ./.;
-} {
-  config = let
+}: let
+  mod = builtins.baseNameOf ./.;
+  cfg = config.${namespace}.${mod};
+in {
+  options.${namespace}.${mod}.enable = lib.mkEnableOption "enable ${mod}";
+
+  config = lib.mkIf cfg.enable (let
     posix =
       # bash
       ''
@@ -26,5 +28,5 @@ lib.slashfiles.mkModule {
 
     programs.bash.initExtra = posix;
     programs.zsh.initContent = posix;
-  };
+  });
 }

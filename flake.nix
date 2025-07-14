@@ -35,7 +35,8 @@
 
     # A nice way to modularize your flake for multiple systems
     snowfall-lib = {
-      url = "github:snowfallorg/lib";
+      # url = "github:snowfallorg/lib";
+      url = "github:theutz/snowfallorg-lib";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -84,7 +85,7 @@
         inherit namespace;
         meta = {
           name = namespace;
-          title = "/slashfiles: .dotfiles/{everywhere}.nix";
+          title = "/${namespace}: .dotfiles/{everywhere}.nix";
         };
       };
     };
@@ -107,7 +108,6 @@
         ++ common-modules;
 
       alias = {
-        shells.default = namespace;
         nixosConfigurations.default = "konya";
       };
 

@@ -10,20 +10,20 @@ windows:
       - shell_command: nvim
         sleep_before: 1
         focus: true
-      - shell: nix develop -c watch
+      - blank
 
-  - window_name: home-manager
-    panes:
-      - shell: man 5 home-configuration.nix
-
-  - window_name: nix-darwin
+  - window_name: man:nix
     panes:
       - shell: man 5 configuration.nix
 
-  - window_name: nvf
+  - window_name: man:home-manager
+    panes:
+      - shell: man 5 home-configuration.nix
+
+  - window_name: man:nvf
     panes:
       - shell: man 5 nvf
 
-  - window_name: repl
+  - window_name: nix-repl
     panes:
       - shell: nix repl nixpkgs

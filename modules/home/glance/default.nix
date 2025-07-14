@@ -54,11 +54,11 @@ in {
 
     home.packages = with pkgs; [glance tail-glance];
 
-    home.activation.restartGlance = config.lib.dag.entryAfter ["writeBoundary"] ''
+    home.activation.restartGlance = lib.mkIf pkgs.stdenv.isDarwin (config.lib.dag.entryAfter ["writeBoundary"] ''
       uid="''$(id -u ${lib.${namespace}.prefs.user})"
       verboseEcho "Restarting glance"
       run /bin/launchctl kickstart -k "gui/''${uid}/${Label}"
-    '';
+    '');
 
     xdg.configFile."glance/glance.yml" = {
       source = settingsFile;

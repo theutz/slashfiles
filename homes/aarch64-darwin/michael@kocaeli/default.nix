@@ -1,9 +1,10 @@
 {
   osConfig,
   pkgs,
+  namespace,
   ...
 }: {
-  slashfiles = {
+  "${namespace}" = {
     aerospace.enable = true;
     bash.enable = true;
     bat.enable = true;

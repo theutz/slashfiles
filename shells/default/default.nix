@@ -7,8 +7,8 @@
   system,
   ...
 }: let
-  name = "slashfiles";
-  description = "/slashfiles: .dotfiles{everywhere}.nix";
+  name = namespace;
+  description = "/${namespace}: .dotfiles{everywhere}.nix";
 
   longDescription = ''
     The default development shell for my Nix flake.
@@ -18,12 +18,13 @@ in
     inherit name;
     meta = {inherit description longDescription;};
 
-    NH_FLAKE = "/home/michael/slashfiles";
+    NH_FLAKE = "/home/michael/${namespace}";
     NH_DARWIN_FLAKE = "/etc/nix-darwin";
     EDITOR = lib.getExe pkgs.${namespace}.nvf;
 
     packages = with pkgs; [
       git
+      just
       onefetch
       gum
       nh
@@ -38,12 +39,8 @@ in
 
       pkgs."${namespace}".nvf
       pkgs."${namespace}".swch
-      pkgs."${namespace}".home
       pkgs."${namespace}".comt
       pkgs."${namespace}".searchix
-
-      (import ./secrets.nix {inherit pkgs;})
-      (import ./watch.nix {inherit pkgs;})
     ];
 
     shellHook =
