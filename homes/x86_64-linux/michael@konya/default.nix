@@ -1,4 +1,8 @@
-{config, ...}: {
+{
+  config,
+  pkgs,
+  ...
+}: {
   slashfiles = {
     aerospace.enable = false;
     bash.enable = true;
@@ -37,6 +41,10 @@
     zoxide.enable = true;
     zsh.enable = true;
   };
+
+  home.packages = with pkgs; [
+    wl-clipboard
+  ];
 
   home.sessionVariables = {
     NH_FLAKE = "${config.home.homeDirectory}/slashfiles";
