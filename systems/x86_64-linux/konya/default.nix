@@ -10,6 +10,8 @@
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
+    ./networking.nix
+    ./users.nix
   ];
 
   "${namespace}" = {
@@ -21,25 +23,6 @@
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
-
-  networking.hostName = "konya"; # Define your hostname.
-  # networking.wireless.enable = true; # Enables wireless support via wpa_supplicant.
-
-  # Configure network proxy if necessary
-  # networking.proxy.default = "http://user:password@proxy:port/";
-  # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
-
-  # Enable networking
-  networking.networkmanager.enable = true;
-  networking.networkmanager.dns = "none";
-  networking.useDHCP = false;
-  networking.dhcpcd.enable = false;
-  networking.nameservers = [
-    "1.1.1.1"
-    "1.0.0.1"
-    "8.8.8.8"
-    "8.8.4.4"
-  ];
 
   # Set your time zone.
   time.timeZone = "America/Los_Angeles";
@@ -95,17 +78,6 @@
   # services.xserver.libinput.enable = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.michael = {
-    isNormalUser = true;
-    description = "Michael Utz";
-    extraGroups = ["networkmanager"];
-  };
-  snowfallorg.users.michael = {
-    create = true;
-    admin = true;
-    home.enable = true;
-  };
-
   # Install 1password
   programs._1password.enable = true;
   programs._1password-gui.enable = true;
@@ -117,6 +89,12 @@
   programs.vim.enable = true;
   programs.vim.defaultEditor = true;
 
+  # Install nix-index
+  programs.nix-index.enable = true;
+  programs.nix-index.enableBashIntegration = true;
+  programs.nix-index.enableFishIntegration = true;
+  programs.nix-index.enableZshIntegration = true;
+  programs.command-not-found.enable = false;
   # Setup nix
   nix.settings.experimental-features = ["flakes" "nix-command" "pipe-operators"];
 
@@ -131,24 +109,10 @@
     #  wget
   ];
 
-  # Some programs need SUID wrappers, can be configured further or are
-  # started in user sessions.
-  # programs.mtr.enable = true;
-  # programs.gnupg.agent = {
-  #   enable = true;
-  #   enableSSHSupport = true;
-  # };
-
   # List services that you want to enable:
 
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
-
-  # Open ports in the firewall.
-  # networking.firewall.allowedTCPPorts = [ ... ];
-  # networking.firewall.allowedUDPPorts = [ ... ];
-  # Or disable the firewall altogether.
-  # networking.firewall.enable = false;
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
