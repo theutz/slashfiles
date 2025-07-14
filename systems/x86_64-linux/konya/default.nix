@@ -12,6 +12,7 @@
     ./hardware-configuration.nix
     ./networking.nix
     ./users.nix
+    ./nix-index.nix
   ];
 
   "${namespace}" = {
@@ -89,12 +90,6 @@
   programs.vim.enable = true;
   programs.vim.defaultEditor = true;
 
-  # Install nix-index
-  programs.nix-index.enable = true;
-  programs.nix-index.enableBashIntegration = true;
-  programs.nix-index.enableFishIntegration = true;
-  programs.nix-index.enableZshIntegration = true;
-  programs.command-not-found.enable = false;
   swapDevices = [
     {
       device = "/var/swapfile";
