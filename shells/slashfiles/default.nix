@@ -1,4 +1,5 @@
 {
+  lib,
   namespace,
   pkgs,
   mkShell,
@@ -17,15 +18,22 @@ in
     inherit name;
     meta = {inherit description longDescription;};
 
-    NH_FLAKE = "/etc/nix-darwin";
+    NH_FLAKE = "/home/michael/slashfiles";
+    NH_DARWIN_FLAKE = "/etc/nix-darwin";
+    EDITOR = lib.getExe pkgs.${namespace}.nvf;
 
-    packages = [
-      pkgs.git
-      pkgs.onefetch
-      pkgs.gum
-      pkgs.nh
-      pkgs.comma
-      pkgs.watchexec
+    packages = with pkgs; [
+      git
+      onefetch
+      gum
+      nh
+      comma
+      watchexec
+      yazi
+      fd
+      ripgrep
+      btop
+      lazygit
       inputs.nixos-anywhere.packages.${system}.default
 
       pkgs."${namespace}".nvf
@@ -41,6 +49,7 @@ in
     shellHook =
       # bash
       ''
+        onefetch
         cat <<-markdown | gum format
         # ${description}
 

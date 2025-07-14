@@ -21,12 +21,6 @@
     };
   };
 
-  home-manager = {
-    backupFileExtension = "bak";
-    useUserPackages = true;
-    useGlobalPkgs = true;
-  };
-
   environment = {
     pathsToLink = [
       "/opt/homebrew/bin"

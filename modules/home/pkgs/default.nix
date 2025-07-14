@@ -20,7 +20,6 @@ in {
         (with pkgs; [
           aichat
           claude-code
-          codex
           comma
           coreutils
           curlie
@@ -42,12 +41,18 @@ in {
           zoom-us
         ])
 
+        # Darwin only
+        (lib.optional (pkgs.stdenv.isDarwin) (with pkgs; [
+          codex
+        ]))
+
         # Linux only
-        (lib.optional (! pkgs.stdenv.isDarwin) [
-          pkgs.httpie-desktop
-          pkgs.signal-desktop-bin
-          pkgs.tailscale
-        ])
+        (lib.optional (pkgs.stdenv.isLinux) (with pkgs; [
+          slack
+          httpie-desktop
+          signal-desktop-bin
+          tailscale
+        ]))
 
         # Fonts
         (lib.${namespace}.prefs.font.packages

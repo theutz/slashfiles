@@ -108,6 +108,7 @@
 
       alias = {
         shells.default = namespace;
+        nixosConfigurations.default = "konya";
       };
 
       outputs-builder = channels: let
