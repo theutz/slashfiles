@@ -95,6 +95,13 @@
   programs.nix-index.enableFishIntegration = true;
   programs.nix-index.enableZshIntegration = true;
   programs.command-not-found.enable = false;
+  swapDevices = [
+    {
+      device = "/var/swapfile";
+      size = 8 * 1024;
+    }
+  ];
+
   # Setup nix
   nix.settings.experimental-features = ["flakes" "nix-command" "pipe-operators"];
 
