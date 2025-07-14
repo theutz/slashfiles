@@ -16,7 +16,6 @@
     kanata.enable = true;
     secrets.enable = true;
     home-manager.enable = true;
-    hyprland.enable = true;
   };
 
   # Bootloader.
