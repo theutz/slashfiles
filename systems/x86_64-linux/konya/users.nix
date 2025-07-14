@@ -9,5 +9,4 @@
     admin = true;
     home.enable = true;
   };
-
 }

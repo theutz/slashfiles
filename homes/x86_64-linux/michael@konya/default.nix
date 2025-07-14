@@ -1,9 +1,4 @@
-{
-  pkgs,
-  lib,
-  config,
-  ...
-}: {
+{config, ...}: {
   slashfiles = {
     aerospace.enable = false;
     bash.enable = true;

@@ -1,8 +1,6 @@
 {
   osConfig,
   pkgs,
-  lib,
-  namespace,
   ...
 }: {
   slashfiles = {
