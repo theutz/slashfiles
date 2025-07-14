@@ -28,7 +28,7 @@ in {
               hold-time 200
             )
             (defalias
-              caps (tap-hold $tap-time $hold-time esc lctl)
+              caps (tap-hold 200 100 esc lctl)
               tab (tap-hold $tap-time $hold-time tab (layer-toggle arrow))
               del del ;; alias for the true delete key action
             )
