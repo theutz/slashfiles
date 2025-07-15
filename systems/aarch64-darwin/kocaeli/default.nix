@@ -41,7 +41,6 @@
       ]
       ++ (with pkgs.${namespace}; [
         nvf
-        home
         swch
         comt
       ]);
