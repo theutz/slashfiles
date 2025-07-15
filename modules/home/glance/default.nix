@@ -24,11 +24,15 @@
       '';
   };
 
+  port = "GLANCE_PORT_FILE";
+  name = "GLANCE_REDDIT_APP_NAME_FILE";
+  id = "GLANCE_REDDIT_APP_ID_FILE";
+  secret = "GLANCE_REDDIT_APP_SECRET_FILE";
   envVars = {
-    GLANCE_PORT_FILE = osConfig.sops.secrets."glance/port".path;
-    GLANCE_REDDIT_APP_NAME_FILE = osConfig.sops.secrets."glance/reddit/name".path;
-    GLANCE_REDDIT_APP_ID_FILE = osConfig.sops.secrets."glance/reddit/id".path;
-    GLANCE_REDDIT_APP_SECRET_FILE = osConfig.sops.secrets."glance/reddit/secret".path;
+    ${port} = osConfig.sops.secrets."glance/port".path;
+    ${name} = osConfig.sops.secrets."glance/reddit/name".path;
+    ${id} = osConfig.sops.secrets."glance/reddit/id".path;
+    ${secret} = osConfig.sops.secrets."glance/reddit/secret".path;
   };
 in {
   options.${namespace}.${mod} = {
@@ -48,7 +52,7 @@ in {
   config = lib.mkIf cfg.enable {
     "${namespace}".${mod}.settings =
       lib.mkDefault
-      (import ./glance.nix ({inherit lib;} // envVars));
+      (import ./glance.nix {inherit lib port name id secret;});
 
     home.sessionVariables = envVars;
 

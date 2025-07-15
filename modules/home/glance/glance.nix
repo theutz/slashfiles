@@ -1,16 +1,16 @@
 {
   lib,
-  GLANCE_PORT_FILE,
-  GLANCE_REDDIT_APP_NAME_FILE,
-  GLANCE_REDDIT_APP_ID_FILE,
-  GLANCE_REDDIT_APP_SECRET_FILE,
+  port,
+  name,
+  id,
+  secret,
   ...
 }: let
   hsl = h: s: l: [h s l] |> lib.map builtins.toString |> lib.concatStringsSep " ";
-  readFileFromEnv = path: ''''${readFileFromEnv:${path}}'';
+  readFileFromEnv = var: ''''${readFileFromEnv:${var}}'';
 in {
   server = {
-    port = readFileFromEnv GLANCE_PORT_FILE;
+    port = readFileFromEnv port;
   };
   theme = {
     background-color = hsl 249 22 12;
@@ -69,14 +69,14 @@ in {
             }
             {
               type = "rss";
-              limit = "10";
-              collapse-after = "3";
+              limit = 10;
+              collapse-after = 3;
               cache = "12h";
               feeds = [
                 {
                   url = "https://selfh.st/rss/";
                   title = "selfh.st";
-                  limit = "4";
+                  limit = 4;
                 }
                 {
                   url = "https://ciechanow.ski/atom.xml";
@@ -121,9 +121,9 @@ in {
               type = "group";
               widgets = let
                 app-auth = {
-                  name = readFileFromEnv GLANCE_REDDIT_APP_NAME_FILE;
-                  id = readFileFromEnv GLANCE_REDDIT_APP_ID_FILE;
-                  secret = readFileFromEnv GLANCE_REDDIT_APP_SECRET_FILE;
+                  name = readFileFromEnv name;
+                  id = readFileFromEnv id;
+                  secret = readFileFromEnv secret;
                 };
               in [
                 {
