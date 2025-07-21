@@ -32,8 +32,10 @@ in {
           nix-output-monitor
           ookla-speedtest
           procs
+          qutebrowser
           ripgrep
           sd
+          spotify
           spotify-player
           tenki
           volgo
