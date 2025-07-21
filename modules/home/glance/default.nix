@@ -64,9 +64,14 @@ in {
       run /bin/launchctl kickstart -k "gui/''${uid}/${Label}"
     '');
 
-    xdg.configFile."glance/glance.yml" = {
+    xdg.configFile."glance/glance.yml" = lib.mkIf pkgs.stdenv.isDarwin {
       source = settingsFile;
       force = true;
+    };
+
+    services.glance = {
+      enable = true;
+      settings = cfg.settings;
     };
 
     launchd.agents.glance = {
