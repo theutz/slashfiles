@@ -85,7 +85,7 @@ in {
     home.packages = lib.optionals cfg.enableDarkNotifyIntegration [pkgs.dark-notify];
 
     home.activation.refreshStarship =
-      lib.optionalAttrs cfg.enableDarkNotifyIntegration
+      lib.optionalString cfg.enableDarkNotifyIntegration
       (config.lib.dag.entryAfter ["writeBoundary" "reloadTmux"]
         # bash
         ''
