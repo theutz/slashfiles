@@ -23,6 +23,7 @@ in {
           config = ''
             (defsrc
               caps tab d h j k l
+              lmeta lalt
             )
 
             (defvar
@@ -38,13 +39,14 @@ in {
 
             (deflayer default
               @caps @tab d h j k l
+              lalt lmeta
             )
 
             (deflayer arrow
               _ _ @del left down up right
+              _ _
             )
           '';
-
         };
       };
     };
