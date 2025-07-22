@@ -13,6 +13,7 @@
     ./networking.nix
     ./users.nix
     ./nix-index.nix
+    ./hyprland.nix
   ];
 
   "${namespace}" = {

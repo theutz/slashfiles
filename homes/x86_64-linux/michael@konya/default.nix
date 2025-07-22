@@ -18,6 +18,8 @@
     ghostty.enable = true;
     git.enable = true;
     glance.enable = true;
+    hyprland.enable = true;
+    kitty.enable = true;
     karabiner.enable = true;
     less.enable = true;
     man.enable = true;
