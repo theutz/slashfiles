@@ -28,6 +28,7 @@
     noti.enable = true;
     nushell.enable = true;
     pkgs.enable = true;
+    qutebrowser.enable = true;
     secrets.enable = true;
     spotify_player.enable = true;
     ssh.enable = true;
