@@ -31,6 +31,10 @@ in {
     xdg.configFile."wezterm/wezterm.lua" = {
       source =
         {
+          isDarwin =
+            if pkgs.stdenv.isDarwin
+            then "true"
+            else "false";
           fish = lib.getExe pkgs.fish;
           font-family = font.family;
           font-size = font.size;

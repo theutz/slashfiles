@@ -1,5 +1,6 @@
 local wezterm = require("wezterm")
 local config = wezterm.config_builder()
+local isDarwin = @isDarwin@
 
 -- Color Scheme
 
@@ -35,7 +36,11 @@ config.default_prog = { "@fish@" }
 
 config.hide_tab_bar_if_only_one_tab = true
 config.window_close_confirmation = "NeverPrompt"
-config.window_decorations = "RESIZE"
+if isDarwin then
+  config.window_decorations = "RESIZE"
+else
+  config.window_decorations = "NONE"
+end
 
 -- Keyboard
 
