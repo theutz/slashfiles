@@ -14,7 +14,6 @@
   exec-once = [
     "$terminal"
     "waybar"
-    "hyprshell run &"
   ];
 
   env = [
