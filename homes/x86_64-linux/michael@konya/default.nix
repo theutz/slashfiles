@@ -45,6 +45,7 @@
     tickrs.enable = true;
     tmux.enable = true;
     wezterm.enable = true;
+    wiremix.enable = true;
     wthrr.enable = true;
     xdg.enable = true;
     yazi.enable = true;
