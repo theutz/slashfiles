@@ -5,9 +5,10 @@
     force_zero_scaling = true;
   };
 
-  "$terminal" = "wezterm";
-  "$fileManager" = "dolphin";
-  "$menu" = "wofi --show drun";
+  "$terminal" = "uwsm app -- wezterm";
+  "$fileManager" = "uwsm app -- dolphin";
+  "$menu" = "uwsm app -- wofi --show drun";
+  "$browser" = "uwsm app -- qutebrowser";
 
   exec-once = [
     "$terminal"
@@ -139,7 +140,7 @@
     "$mainMod, 0, workspace, 10"
     "$mainMod SHIFT, 0, movetoworkspace, 10"
 
-    "$mainMod, B, exec, qutebrowser"
+    "$mainMod, B, exec, $browser"
     "$mainMod, E, exec, $fileManager"
     "$mainMod, H, movefocus, l"
     "$mainMod SHIFT, H, movewindow, l"
@@ -154,12 +155,12 @@
     "$mainMod SHIFT, N, movetoworkspace, +1"
     "$mainMod, P, workspace, -1"
     "$mainMod SHIFT, P, movetoworkspace, -1"
-    "$mainMod, Q, exec, uwsm stop"
+    "$mainMod, Q, killactive,"
+    "$mainMod ALT CTRL, Q, exec, uwsm stop"
     "$mainMod, R, pseudo, # dwindle"
     "$mainMod, S, togglespecialworkspace, magic"
     "$mainMod SHIFT, S, movetoworkspace, special:magic"
     "$mainMod, V, togglesplit, # dwindle"
-    "$mainMod, X, killactive,"
     "$mainMod, Z, togglefloating,"
 
     "$mainMod, space, exec, $menu"
