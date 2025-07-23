@@ -28,14 +28,35 @@ in {
       style =
         # css
         ''
+          :root {
+            font-size: ${toString font.size}px;
+          }
+
           window {
-            margin: 5px;
-            border: 1px solid ${rp "pine"};
+            margin: 1rem;
+            border: 0.25rem solid ${rp "pine"};
             background-color: ${rp "base"};
             color: ${rp "text"};
-            border-radius: 10px;
+            border-radius: 1rem;
             font-family: ${font.family};
-            font-size: ${font.size |> toString}px;
+            font-size: 1rem;
+          }
+
+          #inner-box {}
+
+          #outer-box {
+            padding: 1rem;
+          }
+
+          #input {
+            border: none;
+            background-color: ${rp "surface"};
+            color: ${rp "text"};
+            margin-bottom: 1rem;
+          }
+
+          #input:focus {
+            outline: ${rp "pine"};
           }
 
           #entry:selected {
