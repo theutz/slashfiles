@@ -18,7 +18,15 @@
     ghostty.enable = true;
     git.enable = true;
     glance.enable = true;
-    hyprland.enable = true;
+
+    hyprland = {
+      enable = true;
+      monitor = [
+        "eDP-1, preferred, auto, auto"
+        "HDMI-A-1, preferred, auto-left, 1.25"
+      ];
+    };
+
     kitty.enable = true;
     karabiner.enable = true;
     less.enable = true;

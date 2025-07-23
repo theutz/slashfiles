@@ -1,7 +1,5 @@
-{
-  monitor = [
-    "desc:BOE NV140WUM-N4H, highres@highrr, auto, 1"
-  ];
+{monitor}: {
+  inherit monitor;
 
   xwayland = {
     force_zero_scaling = true;

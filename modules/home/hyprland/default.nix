@@ -13,7 +13,17 @@ in {
     ./hyprshell.nix
   ];
 
-  options.${namespace}.${mod}.enable = lib.mkEnableOption "enable ${mod}";
+  options.${namespace}.${mod} = {
+    enable = lib.mkEnableOption "enable ${mod}";
+
+    monitor = lib.mkOption {
+      type = with lib.types; listOf str;
+      description = ''
+        List of monitors for hyprland to setup
+      '';
+      default = [", preferred, auto, auto"];
+    };
+  };
 
   config = lib.mkIf cfg.enable {
     home.packages = with pkgs; [
@@ -24,11 +34,9 @@ in {
 
     wayland.windowManager.hyprland = {
       enable = true;
-      settings = import ./settings.nix;
+      settings = import ./settings.nix {inherit (cfg) monitor;};
     };
 
-    services.dunst = {
-      enable = true;
-    };
+    services.dunst.enable = true;
   };
 }
