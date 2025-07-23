@@ -1,5 +1,7 @@
 {
-  monitor = [", preferred, auto, auto"];
+  monitor = [
+    "desc:BOE NV140WUM-N4H, highres@highrr, auto, 1"
+  ];
 
   xwayland = {
     force_zero_scaling = true;
@@ -12,6 +14,7 @@
   exec-once = [
     "$terminal"
     "waybar"
+    "hyprshell run &"
   ];
 
   env = [
@@ -40,8 +43,8 @@
     rounding = 10;
     rounding_power = 2;
 
-    active_opacity = 1.0;
-    inactive_opacity = 1.0;
+    active_opacity = 0.95;
+    inactive_opacity = 0.80;
 
     shadow = {
       enabled = true;
@@ -118,31 +121,7 @@
   "$mainMod" = "SUPER";
 
   bind = [
-    "$mainMod, M, exec, $terminal"
-    "$mainMod, B, exec, qutebrowser"
-    "$mainMod, C, killactive,"
-    "$mainMod, Q, exit,"
-    "$mainMod, E, exec, $fileManager"
-    "$mainMod, Z, togglefloating,"
-    "$mainMod, space, exec, $menu"
-    "$mainMod, P, pseudo, # dwindle"
-    "$mainMod, V, togglesplit, # dwindle"
-
-    "$mainMod, H, movefocus, l"
-    "$mainMod, L, movefocus, r"
-    "$mainMod, K, movefocus, u"
-    "$mainMod, J, movefocus, d"
-
-    "$mainMod, 1, workspace, 1"
-    "$mainMod, 2, workspace, 2"
-    "$mainMod, 3, workspace, 3"
-    "$mainMod, 4, workspace, 4"
-    "$mainMod, 5, workspace, 5"
-    "$mainMod, 6, workspace, 6"
-    "$mainMod, 7, workspace, 7"
-    "$mainMod, 8, workspace, 8"
-    "$mainMod, 9, workspace, 9"
-    "$mainMod, 0, workspace, 10"
+    "$mainMod SHIFT, 0, movetoworkspace, 10"
     "$mainMod SHIFT, 1, movetoworkspace, 1"
     "$mainMod SHIFT, 2, movetoworkspace, 2"
     "$mainMod SHIFT, 3, movetoworkspace, 3"
@@ -152,13 +131,37 @@
     "$mainMod SHIFT, 7, movetoworkspace, 7"
     "$mainMod SHIFT, 8, movetoworkspace, 8"
     "$mainMod SHIFT, 9, movetoworkspace, 9"
-    "$mainMod SHIFT, 0, movetoworkspace, 10"
-
-    "$mainMod, S, togglespecialworkspace, magic"
     "$mainMod SHIFT, S, movetoworkspace, special:magic"
-
+    "$mainMod SHIFT, N, movetoworkspace, +1"
+    "$mainMod SHIFT, P, movetoworkspace, -1"
+    "$mainMod, 0, workspace, 10"
+    "$mainMod, 1, workspace, 1"
+    "$mainMod, 2, workspace, 2"
+    "$mainMod, 3, workspace, 3"
+    "$mainMod, 4, workspace, 4"
+    "$mainMod, 5, workspace, 5"
+    "$mainMod, 6, workspace, 6"
+    "$mainMod, 7, workspace, 7"
+    "$mainMod, 8, workspace, 8"
+    "$mainMod, 9, workspace, 9"
+    "$mainMod, B, exec, qutebrowser"
+    "$mainMod, E, exec, $fileManager"
+    "$mainMod, H, movefocus, l"
+    "$mainMod, J, movefocus, d"
+    "$mainMod, K, movefocus, u"
+    "$mainMod, L, movefocus, r"
+    "$mainMod, M, exec, $terminal"
     "$mainMod, mouse_down, workspace, e+1"
     "$mainMod, mouse_up, workspace, e-1"
+    "$mainMod, N, workspace, +1"
+    "$mainMod, P, workspace, -1"
+    "$mainMod, Q, exec, uwsm stop"
+    "$mainMod, R, pseudo, # dwindle"
+    "$mainMod, S, togglespecialworkspace, magic"
+    "$mainMod, space, exec, $menu"
+    "$mainMod, V, togglesplit, # dwindle"
+    "$mainMod, X, killactive,"
+    "$mainMod, Z, togglefloating,"
   ];
 
   bindm = [

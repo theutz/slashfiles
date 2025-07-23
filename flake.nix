@@ -68,6 +68,12 @@
       url = "github:nix-community/disko";
       inputs.nixpkgs.follows = "unstable";
     };
+
+    # hyprshell: a modern GTK4-based window switcher and application launcher for Hyprland
+    hyprshell = {
+      url = "github:H3rmt/hyprshell?ref=hyprshell-release";
+      inputs.nixpkgs.follows = "unstable";
+    };
   };
 
   # Bootstrap point for this whole, lovely mess.
@@ -94,18 +100,22 @@
     lib.mkFlake {
       inherit lib inputs;
 
-      systems.modules.nixos =
+      systems.modules.nixos = with inputs;
         [
-          inputs.sops-nix.nixosModules.sops
-          inputs.disko.nixosModules.disko
+          sops-nix.nixosModules.sops
+          disko.nixosModules.disko
         ]
         ++ common-modules;
 
-      systems.modules.darwin =
+      systems.modules.darwin = with inputs;
         [
-          inputs.sops-nix.darwinModules.sops
+          sops-nix.darwinModules.sops
         ]
         ++ common-modules;
+
+      homes.modules = with inputs; [
+        hyprshell.homeModules.hyprshell
+      ];
 
       alias = {
         nixosConfigurations.default = "konya";

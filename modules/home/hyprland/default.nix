@@ -10,6 +10,7 @@
 in {
   imports = [
     ./waybar.nix
+    ./hyprshell.nix
   ];
 
   options.${namespace}.${mod}.enable = lib.mkEnableOption "enable ${mod}";
@@ -19,14 +20,15 @@ in {
       wofi
       kitty
       kdePackages.dolphin
-      dunst
-      pipewire
-      wireplumber
     ];
 
     wayland.windowManager.hyprland = {
       enable = true;
       settings = import ./settings.nix;
+    };
+
+    services.dunst = {
+      enable = true;
     };
   };
 }
