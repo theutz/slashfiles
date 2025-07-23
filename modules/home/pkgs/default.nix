@@ -39,6 +39,7 @@ in {
           spotify-player
           tenki
           volgo
+          wiremix
           xh
           zoom-us
         ])
