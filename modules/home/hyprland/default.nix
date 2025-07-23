@@ -11,6 +11,7 @@ in {
   imports = [
     ./waybar.nix
     ./hyprshell.nix
+    ./wofi.nix
   ];
 
   options.${namespace}.${mod} = {
@@ -27,7 +28,6 @@ in {
 
   config = lib.mkIf cfg.enable {
     home.packages = with pkgs; [
-      wofi
       kitty
       kdePackages.dolphin
     ];

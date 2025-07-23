@@ -29,6 +29,8 @@ in {
 
   prefs = import ./prefs args;
 
+  rose-pine = import ./rose-pine.nix args;
+
   flatConcat = (lib.flip lib.pipe) [lib.concatLists lib.flatten];
 
   listNixFilesRecursive = (lib.flip lib.pipe) [
