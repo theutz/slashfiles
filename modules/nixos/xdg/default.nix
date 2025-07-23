@@ -1,6 +1,7 @@
 {
-  lib,
   config,
+  lib,
+  pkgs,
   namespace,
   ...
 }: let
@@ -10,15 +11,10 @@ in {
   options.${namespace}.${mod}.enable = lib.mkEnableOption "enable ${mod}";
 
   config = lib.mkIf cfg.enable {
-    home.preferXdgDirectories = true;
-
-    xdg = {
+    xdg.terminal-exec = {
       enable = true;
-      mimeApps = {
-        enable = true;
-        defaultApplications = {
-          "x-scheme-handler/terminal" = ["org.wezfurlong.wezterm.desktop"];
-        };
+      settings = {
+        default = ["org.wezfurlong.wezterm.desktop"];
       };
     };
   };

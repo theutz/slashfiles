@@ -20,6 +20,7 @@
     secrets.enable = true;
     home-manager.enable = true;
     hyprland.enable = true;
+    xdg.enable = true;
   };
 
   boot = {

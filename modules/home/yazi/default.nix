@@ -15,6 +15,13 @@ in {
       y = "y";
     };
 
+    xdg.desktopEntries.yazi = {
+      name = "Yazi";
+      exec = "yazi";
+      terminal = true;
+      categories = ["System" "FileManager" "FileTools"];
+    };
+
     programs.yazi = let
       useDuckDb = false;
 
@@ -56,7 +63,8 @@ in {
       };
 
       keymap = {
-        manager = {
+        mgr = {
+          show_hidden = true;
           prepend_keymap =
             # Each item defines the `on`, `run`, and `desc` attrs
             [
@@ -84,10 +92,6 @@ in {
       };
 
       settings = {
-        mgr = {
-          show_hidden = true;
-        };
-
         opener = {
           visual = [
             {
