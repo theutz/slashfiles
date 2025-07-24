@@ -10,7 +10,6 @@
 in {
   imports = [
     ./waybar.nix
-    ./hyprshell.nix
     ./wofi.nix
   ];
 
