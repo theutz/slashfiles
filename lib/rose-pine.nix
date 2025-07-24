@@ -1,4 +1,4 @@
-{lib, ...}: let
+{ ...}: let
   main = {
     base = "191724";
     surface = "1f1d2e";

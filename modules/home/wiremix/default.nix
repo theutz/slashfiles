@@ -1,4 +1,10 @@
-{ pkgs, lib, namespace, config, ... }: let
+{
+  pkgs,
+  lib,
+  namespace,
+  config,
+  ...
+}: let
   mod = builtins.baseNameOf ./.;
   cfg = config.${namespace}.${mod};
 in {
