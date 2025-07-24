@@ -56,13 +56,30 @@ in {
       |> lib.concatMapStringsSep "\n" (x: x.data)
       |> lib.mkBefore;
 
-    home.activation.reloadTmux =
+    home.activation.reloadTmux = let
+      tmux = lib.getExe pkgs.tmux;
+      file = lib.concatStringsSep "/" [config.xdg.configHome "tmux" "tmux.conf"];
+    in
       config.lib.dag.entryAfter ["writeBoundary"]
-      (pkgs.replaceVars ./activation.bash {
-          tmux = lib.getExe pkgs.tmux;
-          file = lib.concatStringsSep "/" [config.xdg.configHome "tmux" "tmux.conf"];
-        }
-        |> lib.fileContents);
+      # bash
+      ''
+        export TERM="xterm-256color"
+
+        if
+          run ${tmux} ls &>/dev/null
+        then
+          verboseEcho "Reloading tmux..."
+          if
+            run ${tmux} source-file "${file}"
+          then
+            verboseEcho "Tmux config reloaded!"
+          else
+            echo "ERROR: Could not reload tmux config."
+          fi
+        else
+          verboseEcho "No tmux running"
+        fi
+      '';
 
     programs.tmux = {
       package = pkgs.tmux;
@@ -78,18 +95,22 @@ in {
       clock24 = true;
       enable = true;
       escapeTime = 0;
-      extraConfig =
-        {
-          fish = lib.getExe pkgs.fish;
-        }
-        |> pkgs.replaceVars ./tmux.conf
-        |> lib.fileContents;
+      extraConfig = let
+        conf =
+          {
+            fish = lib.getExe pkgs.fish;
+          }
+          |> pkgs.replaceVars ./tmux.conf;
+      in ''
+        source-file ${conf}
+      '';
       focusEvents = true;
       historyLimit = 10000;
       keyMode = "vi";
       mouse = true;
       newSession = false;
       prefix = "M-m";
+
       tmuxp.enable = true;
     };
   };
