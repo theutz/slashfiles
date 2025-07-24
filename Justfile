@@ -7,8 +7,4 @@ watch:
     --watch systems \
     --watch modules \
     --watch packages \
-    -- nh os build
-
-build:
-  nh os build --out-link ./result \
-    -- --option allow-import-from-derivation false
+    -- nh os switch
