@@ -142,6 +142,8 @@
 
     "$mainMod, B, exec, $browser"
     "$mainMod, E, exec, $fileManager"
+    "$mainMod, F, fullscreen, 1"
+    "$mainMod SHIFT, F, fullscreen, 0"
     "$mainMod, H, movefocus, l"
     "$mainMod SHIFT, H, movewindow, l"
     "$mainMod, J, movefocus, d"
