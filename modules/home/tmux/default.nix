@@ -31,6 +31,11 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
+    home.file.".tmuxp.yaml" = {
+      source = ./.tmuxp.yaml;
+      force = true;
+    };
+
     ${namespace}.${mod}.tmuxConf.hmBoundary = lib.mkDefault ''
       # ${namespace}.${mod} boundary
     '';

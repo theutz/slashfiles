@@ -1,0 +1,13 @@
+session_name: home
+start_directory: ./
+global_options:
+  remain-on-exit: on
+windows:
+  - window_name: main
+    layout: main-vertical
+    options:
+      main-pane-width: 50%
+    panes:
+      - focus: true
+      - shell_command: 'nix run nixpkgs#tenki'
+      - shell_command: 'nix run nixpkgs#cmatrix'
