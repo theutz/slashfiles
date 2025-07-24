@@ -166,6 +166,8 @@
     "$mainMod, Z, togglefloating,"
 
     "$mainMod, space, exec, $menu"
+    "$mainMod ALT, H, movecurrentworkspacetomonitor, l"
+    "$mainMod ALT, L, movecurrentworkspacetomonitor, r"
 
     "$mainMod, mouse_down, workspace, e+1"
     "$mainMod, mouse_up, workspace, e-1"
