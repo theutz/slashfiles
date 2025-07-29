@@ -30,14 +30,24 @@
     lib = inputs.snowfall-lib.mkLib {
       inherit inputs;
       src = ./.;
-      snowfall.root = ./nix;
-      snowfall.namespace = "slashfiles";
+      snowfall = {
+        root = ./nix;
+        namespace = "slashfiles";
+      };
     };
-  in lib.mkFlake {
-    inherit lib inputs;
-    channels-config.allowUnfree = true;
-    channels-config.allowUnsupportedSystem = true;
-    channels-config.permittedInsecurePackages = [];
-    channels-config.config = {};
-  };
+  in
+    lib.mkFlake {
+      inherit lib inputs;
+
+      homes.modules = with inputs; [
+        nvf.homeManagerModules.default
+      ];
+
+      channels-config = {
+        allowUnfree = true;
+        allowUnsupportedSystem = true;
+        permittedInsecurePackages = [];
+        config = {};
+      };
+    };
 }

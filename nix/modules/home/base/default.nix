@@ -1,4 +1,10 @@
-{ config, pkgs, lib, namespace, ... }: let
+{
+  config,
+  pkgs,
+  lib,
+  namespace,
+  ...
+}: let
   mod = builtins.baseNameOf ./.;
   cfg = config.${namespace}.${mod};
   inherit (lib) mkEnableOption mkIf mkMerge;
@@ -11,13 +17,14 @@ in {
   config = mkIf cfg.enable {
     ${namespace} = mkMerge [
       {
-        lazyvim.enable = true;
         shells.enable = true;
+        editors.enable = true;
+        cli.enable = true;
       }
-      
+
       (mkIf cfg.enableWorkstation {
         qutebrowser.enable = true;
-        wezterm.enable = true;
+        terminals.enable = true;
         hypr.enable = true;
       })
     ];
