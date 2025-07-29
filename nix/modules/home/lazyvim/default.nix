@@ -20,6 +20,8 @@ in {
       ripgrep
       fd
       fzf
+      wl-clipboard
+      nil
     ];
 
     xdg.configFile."nvim" = {
