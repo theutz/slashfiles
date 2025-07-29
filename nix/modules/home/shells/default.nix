@@ -31,6 +31,9 @@ in {
             "spectrum"
             "utility"
             "completion"
+            "syntax-highlighting"
+            "history-substring-search"
+            "autosuggestions"
             # "prompt"
           ];
           syntaxHighlighting = {

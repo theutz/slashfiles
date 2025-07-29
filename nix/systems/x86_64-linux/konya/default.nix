@@ -45,6 +45,7 @@
     group = "michael";
     extraGroups = [ "networkmanager" "wheel" ];
     packages = with pkgs; [ ];
+    shell = pkgs.zsh;
   };
   users.groups.michael = {};
 
