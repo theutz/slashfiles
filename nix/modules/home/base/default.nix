@@ -20,6 +20,7 @@ in {
         shells.enable = true;
         editors.enable = true;
         cli.enable = true;
+        tui.enable = true;
       }
 
       (mkIf cfg.enableWorkstation {
