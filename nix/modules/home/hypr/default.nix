@@ -1,4 +1,4 @@
-{ config, pkgs, lib, namespace, ... }: let
+{ config, pkgs, lib, namespace, ... }@args: let
   inherit (builtins) baseNameOf;
   mod = baseNameOf ./.;
   cfg = config.${namespace}.${mod};
@@ -19,7 +19,11 @@ in {
 
     # wayland.windowManager.hyprland.enable = true;
 
-    xdg.configFile."hypr/hyprland.conf".source = mkOutOfStoreSymlink ./hyprland.conf;
+    xdg.configFile."hypr" = {
+      source = mkOutOfStoreSymlink "${config.home.homeDirectory}/${namespace}/nix/modules/home/${mod}/hypr";
+      force = true;
+      recursive = false;
+    };
 
     programs.wofi.enable = true;
   };

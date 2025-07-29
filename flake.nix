@@ -14,6 +14,11 @@
       url = "github:nix-community/home-manager/release-25.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    nh = {
+      url = "github:nix-community/nh";
+      inputs.nixpkgs.follows = "unstable";
+    };
   };
 
   outputs = inputs: let

@@ -74,6 +74,26 @@
         "type": "github"
       }
     },
+    "nh": {
+      "inputs": {
+        "nixpkgs": [
+          "unstable"
+        ]
+      },
+      "locked": {
+        "lastModified": 1753546142,
+        "narHash": "sha256-OIYIlXCYOHLvapwxKwX5nixMT1pf9hTx+/oWN9PHWPk=",
+        "owner": "nix-community",
+        "repo": "nh",
+        "rev": "d9a869acec8dd35efa658234c158e6fc82e7064a",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-community",
+        "repo": "nh",
+        "type": "github"
+      }
+    },
     "nixpkgs": {
       "locked": {
         "lastModified": 1753489912,
@@ -93,6 +113,7 @@
     "root": {
       "inputs": {
         "home-manager": "home-manager",
+        "nh": "nh",
         "nixpkgs": "nixpkgs",
         "snowfall-lib": "snowfall-lib",
         "unstable": "unstable"
