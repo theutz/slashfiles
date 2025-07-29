@@ -21,12 +21,13 @@ in {
       customPaneNavigationAndResize = true;
       disableConfirmationPrompt = true;
       escapeTime = 10;
-      extraConfig = '''';
+      extraConfig = ''
+      '';
       focusEvents = true;
       historyLimit = 100000;
       keyMode = "vi";
       mouse = true;
-      newSession = true;
+      newSession = false;
       plugins = with pkgs.tmuxPlugins; [
         {
           plugin = rose-pine;

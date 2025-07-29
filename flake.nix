@@ -24,6 +24,11 @@
       url = "github:NotAShelf/nvf";
       inputs.nixpkgs.follows = "unstable";
     };
+
+    darwin = {
+      url = "github:nix-darwin/nix-darwin/nix-darwin-25.05";
+      inputs.nixpkgs.follows = "unstable";
+    };
   };
 
   outputs = inputs: let
