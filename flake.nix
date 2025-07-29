@@ -19,6 +19,11 @@
       url = "github:nix-community/nh";
       inputs.nixpkgs.follows = "unstable";
     };
+
+    nvf = {
+      url = "github:NotAShelf/nvf";
+      inputs.nixpkgs.follows = "unstable";
+    };
   };
 
   outputs = inputs: let

@@ -4,10 +4,10 @@
   ];
 
   ${namespace} = {
-    lazyvim.enable = true;
-    hypr.enable = true;
-    qutebrowser.enable = true;
-    shells.enable = true;
+    base = {
+      enable = true;
+      enableWorkstation = true;
+    };
   };
 
   programs.wofi.enable = true;
