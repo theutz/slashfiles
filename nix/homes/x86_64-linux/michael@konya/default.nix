@@ -7,19 +7,12 @@
     lazyvim.enable = true;
     hypr.enable = true;
     qutebrowser.enable = true;
+    shells.enable = true;
   };
 
   programs.wofi.enable = true;
 
   programs.zellij.enable = true;
-
-  programs.zsh.enable = true;
-
-  programs.bash.enable = true;
-
-  programs.fish.enable = true;
-
-  programs.nushell.enable = true;
 
   programs.tmux.enable = true;
 
