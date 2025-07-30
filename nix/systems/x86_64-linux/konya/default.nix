@@ -1,25 +1,29 @@
 # Edit this configuration file to define what should be installed on
 # your system. Help is available in the configuration.nix(5) man page, on
 # https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
-
-{ config, lib, pkgs, ... }:
-
 {
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-      ./boot-loader.nix
-      ./kanata.nix
-      ./networking.nix
-      ./bluetooth.nix
-      ./hyprland.nix
-    ];
+  config,
+  lib,
+  pkgs,
+  ...
+}: {
+  imports = [
+    # Include the results of the hardware scan.
+    ./hardware-configuration.nix
+    ./boot-loader.nix
+    ./networking.nix
+    ./bluetooth.nix
+    ./nix.nix
+    ./users.nix
+    ./programs
+  ];
 
   # Set your time zone.
   time.timeZone = "Europe/Istanbul";
 
   # Select internationalisation properties.
   i18n.defaultLocale = "en_US.UTF-8";
+
   console = {
     font = "Lat2-Terminus16";
     keyMap = "us";
@@ -38,54 +42,9 @@
   # Enable touchpad support (enabled default in most desktopManager).
   services.libinput.enable = true;
 
-  # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.michael = {
-    isNormalUser = true;
-    createHome = true;
-    group = "michael";
-    extraGroups = [ "networkmanager" "wheel" ];
-    packages = with pkgs; [ ];
-    shell = pkgs.zsh;
-  };
-  users.groups.michael = {};
-
-  programs.firefox.enable = true;
-  programs.vim.enable = true;
-  programs.vim.defaultEditor = true;
-  programs.tmux.enable = true;
-  programs.zsh.enable = true;
-  programs.nix-index.enable = true;
-  programs.nix-index.enableBashIntegration = true;
-  programs.command-not-found.enable = false;
-  programs._1password.enable = true;
-  programs._1password-gui.enable = true;
-
-  nix.settings.experimental-features = ["flakes" "nix-command" "pipe-operators"];
-
-  # List packages installed in system profile.
-  environment.systemPackages = with pkgs; [
-    vim
-    wget
-    git
-    comma
-    nh
-    neovim
-    yazi
-  ];
-
   environment.shellAliases = {
     flake = ''yazi "''${NH_FLAKE%#*}"'';
   };
-
-  # Some programs need SUID wrappers, can be configured further or are
-  # started in user sessions.
-  # programs.mtr.enable = true;
-  # programs.gnupg.agent = {
-  #   enable = true;
-  #   enableSSHSupport = true;
-  # };
-
-  # List services that you want to enable:
 
   # Enable the OpenSSH daemon.
   # services.openssh.enable = true;
@@ -108,6 +67,4 @@
   #
   # For more information, see `man configuration.nix` or https://nixos.org/manual/nixos/stable/options#opt-system.stateVersion .
   system.stateVersion = "25.05"; # Did you read the comment?
-
 }
-
