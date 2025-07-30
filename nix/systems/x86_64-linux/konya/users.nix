@@ -1,12 +1,20 @@
-{pkgs, ...}: {
-  # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.michael = {
-    isNormalUser = true;
-    createHome = true;
-    group = "michael";
-    extraGroups = ["networkmanager" "wheel"];
-    packages = with pkgs; [];
-    shell = pkgs.zsh;
+{
+  pkgs,
+  lib,
+  ...
+}: {
+  users = {
+    users.michael = {
+      isNormalUser = true;
+      createHome = true;
+      group = "michael";
+      extraGroups = ["networkmanager" "wheel"];
+      packages = with pkgs; [];
+      shell = pkgs.zsh;
+    };
+
+    groups.michael = {};
   };
-  users.groups.michael = {};
+
+  programs.zsh.enable = lib.mkForce true; # required to set default shell to zsh
 }
