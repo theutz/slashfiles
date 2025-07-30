@@ -3,6 +3,8 @@
   pkgs,
   lib,
   namespace,
+  inputs,
+  system,
   ...
 }: let
   inherit (builtins) baseNameOf;
@@ -18,6 +20,7 @@ in {
     home.packages = with pkgs; [
       nvf
       wl-clipboard
+      inputs.nvf.packages.${system}.docs-manpages
     ];
 
     home.sessionVariables = {
