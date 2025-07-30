@@ -26,9 +26,12 @@ in {
       (mkIf cfg.enableWorkstation {
         qutebrowser.enable = true;
         terminals.enable = true;
-        hypr.enable = true;
         media.enable = true;
         gui.enable = true;
+      })
+
+      (mkIf (cfg.enableWorkstation && pkgs.stdenv.isLinux) {
+        hyprland.enable = true;
       })
     ];
   };
