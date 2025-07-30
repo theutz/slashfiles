@@ -7,38 +7,36 @@
   inherit (lib.nvim.binds) mkKeymap;
 in {
   config.vim = {
-    git = {
-      enable = false;
+    git.enable = false;
 
-      git-conflict = {
-        enable = true;
-        mappings = {
-          both = "<leader>gcb";
-          nextConflict = "<leader>gcn";
-          prevConflict = "<leader>gcp";
-          none = "<leader>gc0";
-          ours = "<leader>gco";
-          theirs = "<leader>gct";
-        };
+    git.git-conflict = {
+      enable = true;
+      mappings = {
+        both = "<leader>gcb";
+        nextConflict = "<leader>gcn";
+        prevConflict = "<leader>gcp";
+        none = "<leader>gc0";
+        ours = "<leader>gco";
+        theirs = "<leader>gct";
       };
+    };
 
-      gitsigns = {
-        enable = true;
-        mappings = {
-          blameLine = "<leader>gb";
-          diffProject = "<leader>gdD";
-          diffThis = "<leader>gdd";
-          nextHunk = "]c";
-          previewHunk = "<leader>ghP";
-          previousHunk = "[c";
-          resetBuffer = "<leader>ghR";
-          resetHunk = "<leader>ghr";
-          stageBuffer = "<leader>ghS";
-          stageHunk = "<leader>ghs";
-          toggleBlame = "<leader>ub";
-          toggleDeleted = null;
-          undoStageHunk = "<leader>ghu";
-        };
+    git.gitsigns = {
+      enable = true;
+      mappings = {
+        blameLine = "<leader>gb";
+        diffProject = "<leader>gdD";
+        diffThis = "<leader>gdd";
+        nextHunk = "]c";
+        previewHunk = "<leader>ghP";
+        previousHunk = "[c";
+        resetBuffer = "<leader>ghR";
+        resetHunk = "<leader>ghr";
+        stageBuffer = "<leader>ghS";
+        stageHunk = "<leader>ghs";
+        toggleBlame = "<leader>ub";
+        toggleDeleted = null;
+        undoStageHunk = "<leader>ghu";
       };
     };
 
@@ -57,10 +55,8 @@ in {
 
     keymaps = lib.concatLists [
       [
-        (mkKeymap ["t"] "<C-_>" "<cmd>ToggleTerm<cr>" {desc = "Close toggleterm";})
-        (mkKeymap ["t"] "<esc>" "<C-\\><C-n>" {desc = "Normal mode";})
-        (mkKeymap ["t"] "jk" "<C-\\><C-n>" {desc = "Normal mode";})
-        (mkKeymap ["t"] "<C-w>" "<C-\\><C-n><C-w>" {desc = "Window mode";})
+        (mkKeymap ["t"] "<C-/>" "<cmd>ToggleTerm<cr>" {desc = "Close toggleterm";})
+        (mkKeymap ["t"] "<C-w>" ''<C-\><C-n><C-w>'' {desc = "Window mode";})
       ]
       (lib.optionals (! config.vim.terminal.toggleterm.lazygit.enable) [
         (mkKeymap ["n"] "<leader>gg" "<cmd>Neogit<cr>" {desc = "Neogit";})
@@ -70,12 +66,12 @@ in {
     terminal.toggleterm = {
       enable = true;
 
-      mappings = {
-        open = "<C-_>"; # underscore actually means /
-      };
-
       lazygit = {
         enable = true;
+      };
+
+      mappings = {
+        open = "<C-/>";
       };
     };
   };

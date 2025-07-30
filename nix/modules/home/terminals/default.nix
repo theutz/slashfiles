@@ -35,8 +35,15 @@ in {
           return {
             font = wezterm.font("${font.family}"),
             font_size = ${toString font.size}.0,
+
             color_scheme = "${color_scheme}",
+
             hide_tab_bar_if_only_one_tab = true,
+
+            send_composed_key_when_left_alt_is_pressed = false,
+            send_composed_key_when_right_alt_is_pressed = true,
+
+            debug_key_events = false, -- make `true` to log keys when launching from terminal
           }
         '';
     };

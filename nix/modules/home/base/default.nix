@@ -28,6 +28,7 @@ in {
         terminals.enable = true;
         hypr.enable = true;
         media.enable = true;
+        gui.enable = true;
       })
     ];
   };
