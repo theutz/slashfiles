@@ -27,6 +27,7 @@ in {
         qutebrowser.enable = true;
         terminals.enable = true;
         hypr.enable = true;
+        media.enable = true;
       })
     ];
   };

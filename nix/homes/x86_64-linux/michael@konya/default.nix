@@ -1,4 +1,9 @@
-{config, pkgs, namespace, ...}: {
+{
+  config,
+  pkgs,
+  namespace,
+  ...
+}: {
   imports = [
     ./git.nix
   ];
@@ -17,6 +22,8 @@
   programs.tmux.enable = true;
 
   programs.home-manager.enable = true;
+
+  programs.fzf.enable = true;
 
   programs.nh.enable = true;
   programs.nh.clean.enable = true;
