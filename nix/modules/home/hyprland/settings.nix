@@ -1,5 +1,9 @@
-{monitor}: {
-  inherit monitor;
+{
+  lib,
+  cfg,
+  ...
+}: {
+  inherit (cfg) monitor;
 
   xwayland = {
     force_zero_scaling = true;
@@ -118,71 +122,58 @@
 
   "$mainMod" = "SUPER";
 
-  bind = [
-    "$mainMod, 1, workspace, 1"
-    "$mainMod SHIFT, 1, movetoworkspace, 1"
-    "$mainMod, 2, workspace, 2"
-    "$mainMod SHIFT, 2, movetoworkspace, 2"
-    "$mainMod, 3, workspace, 3"
-    "$mainMod SHIFT, 3, movetoworkspace, 3"
-    "$mainMod, 4, workspace, 4"
-    "$mainMod SHIFT, 4, movetoworkspace, 4"
-    "$mainMod, 5, workspace, 5"
-    "$mainMod SHIFT, 5, movetoworkspace, 5"
-    "$mainMod, 6, workspace, 6"
-    "$mainMod SHIFT, 6, movetoworkspace, 6"
-    "$mainMod, 7, workspace, 7"
-    "$mainMod SHIFT, 7, movetoworkspace, 7"
-    "$mainMod, 8, workspace, 8"
-    "$mainMod SHIFT, 8, movetoworkspace, 8"
-    "$mainMod, 9, workspace, 9"
-    "$mainMod SHIFT, 9, movetoworkspace, 9"
-    "$mainMod, 0, workspace, 10"
-    "$mainMod SHIFT, 0, movetoworkspace, 10"
+  bind =
+    (lib.concatLists (lib.genList (x: let
+        num = toString (x + 1);
+      in [
+        "$mainMod, ${num}, workspace, ${num}"
+        "$mainMod SHIFT, ${num}, movetoworkspace, ${num}"
+      ])
+      cfg.workspaces))
+    ++ [
+      "$mainMod, B, exec, $browser"
+      "$mainMod, E, exec, $fileManager"
+      "$mainMod, F, fullscreen, 1"
+      "$mainMod, G, changegroupactive, f"
+      "$mainMod SHIFT, G, togglegroup"
+      "$mainMod SHIFT, F, fullscreen, 0"
+      "$mainMod, H, movefocus, l"
+      "$mainMod SHIFT, H, swapwindow, l"
+      "$mainMod ALT, H, moveintogroup, l"
+      "$mainMod, J, movefocus, d"
+      "$mainMod SHIFT, J, swapwindow, d"
+      "$mainMod ALT, J, moveintogroup, d"
+      "$mainMod, K, movefocus, u"
+      "$mainMod SHIFT, K, swapwindow, u"
+      "$mainMod ALT, K, moveintogroup, u"
+      "$mainMod, L, movefocus, r"
+      "$mainMod SHIFT, L, swapwindow, r"
+      "$mainMod ALT, L, moveintogroup, r"
+      "$mainMod, M, exec, $terminal"
+      "$mainMod, N, workspace, +1"
+      "$mainMod SHIFT, N, movetoworkspace, +1"
+      "$mainMod, P, workspace, -1"
+      "$mainMod SHIFT, P, movetoworkspace, -1"
+      "$mainMod, Q, killactive,"
+      "$mainMod ALT CTRL, Q, exec, uwsm stop"
+      "$mainMod, R, layoutmsg, movetoroot"
+      "$mainMod, S, togglespecialworkspace, magic"
+      "$mainMod SHIFT, S, movetoworkspace, special:magic"
+      "$mainMod, V, layoutmsg, swapsplit"
+      "$mainMod SHIFT, V, togglesplit, # dwindle"
+      "$mainMod, Z, togglefloating,"
 
-    "$mainMod, B, exec, $browser"
-    "$mainMod, E, exec, $fileManager"
-    "$mainMod, F, fullscreen, 1"
-    "$mainMod, G, changegroupactive, f"
-    "$mainMod SHIFT, G, togglegroup"
-    "$mainMod SHIFT, F, fullscreen, 0"
-    "$mainMod, H, movefocus, l"
-    "$mainMod SHIFT, H, swapwindow, l"
-    "$mainMod ALT, H, moveintogroup, l"
-    "$mainMod, J, movefocus, d"
-    "$mainMod SHIFT, J, swapwindow, d"
-    "$mainMod ALT, J, moveintogroup, d"
-    "$mainMod, K, movefocus, u"
-    "$mainMod SHIFT, K, swapwindow, u"
-    "$mainMod ALT, K, moveintogroup, u"
-    "$mainMod, L, movefocus, r"
-    "$mainMod SHIFT, L, swapwindow, r"
-    "$mainMod ALT, L, moveintogroup, r"
-    "$mainMod, M, exec, $terminal"
-    "$mainMod, N, workspace, +1"
-    "$mainMod SHIFT, N, movetoworkspace, +1"
-    "$mainMod, P, workspace, -1"
-    "$mainMod SHIFT, P, movetoworkspace, -1"
-    "$mainMod, Q, killactive,"
-    "$mainMod ALT CTRL, Q, exec, uwsm stop"
-    "$mainMod, R, layoutmsg, movetoroot"
-    "$mainMod, S, togglespecialworkspace, magic"
-    "$mainMod SHIFT, S, movetoworkspace, special:magic"
-    "$mainMod, V, layoutmsg, swapsplit"
-    "$mainMod SHIFT, V, togglesplit, # dwindle"
-    "$mainMod, Z, togglefloating,"
+      "$mainMod ALT, H, movecurrentworkspacetomonitor, l"
+      "$mainMod ALT, L, movecurrentworkspacetomonitor, r"
 
-    "$mainMod ALT, H, movecurrentworkspacetomonitor, l"
-    "$mainMod ALT, L, movecurrentworkspacetomonitor, r"
+      "$mainMod, space, exec, $menu"
+      "$mainMod, equal, splitratio, +0.1"
+      "$mainMod, minus, splitratio, -0.1"
+      "$mainMod, 0, splitratio, exact 1.0"
 
-    "$mainMod, space, exec, $menu"
-    "$mainMod SHIFT, equal, splitratio, +0.1"
-    "$mainMod, minus, splitratio, -0.1"
-    "$mainMod, equal, splitratio, exact 1.0"
-
-    "$mainMod, mouse_down, workspace, e+1"
-    "$mainMod, mouse_up, workspace, e-1"
-  ];
+      "$mainMod, mouse_down, workspace, e+1"
+      "$mainMod, mouse_up, workspace, e-1"
+    ];
 
   bindm = [
     "$mainMod, mouse:272, movewindow"

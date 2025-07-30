@@ -4,7 +4,7 @@
   lib,
   namespace,
   ...
-}: let
+} @ args: let
   mod = builtins.baseNameOf ./.;
   cfg = config.${namespace}.${mod};
 in {
@@ -23,6 +23,14 @@ in {
       '';
       default = [", preferred, auto, auto"];
     };
+
+    workspaces = lib.mkOption {
+      type = with lib.types; int;
+      description = ''
+        How many persistent workspaces to create.
+      '';
+      default = 5;
+    };
   };
 
   config = lib.mkIf cfg.enable {
@@ -33,7 +41,7 @@ in {
 
     wayland.windowManager.hyprland = {
       enable = true;
-      settings = import ./settings.nix {inherit (cfg) monitor;};
+      settings = import ./settings.nix (args // {inherit cfg;});
     };
 
     services.dunst.enable = true;
