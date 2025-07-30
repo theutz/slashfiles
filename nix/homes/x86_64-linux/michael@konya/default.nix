@@ -13,6 +13,10 @@
       enable = true;
       enableWorkstation = true;
     };
+    hyprland.monitor = [
+      "eDP-1, preferred, auto, auto"
+      "HDMI-A-1, preferred, auto-left, 1.25"
+    ];
   };
 
   programs.wofi.enable = true;
