@@ -56,7 +56,6 @@ in {
     keymaps = lib.concatLists [
       [
         (mkKeymap ["t"] "<C-/>" "<cmd>ToggleTerm<cr>" {desc = "Close toggleterm";})
-        (mkKeymap ["t"] "<C-w>" ''<C-\><C-n><C-w>'' {desc = "Window mode";})
       ]
       (lib.optionals (! config.vim.terminal.toggleterm.lazygit.enable) [
         (mkKeymap ["n"] "<leader>gg" "<cmd>Neogit<cr>" {desc = "Neogit";})
