@@ -55,15 +55,23 @@ in {
       "<leader>gd" = "diff";
     };
 
-    keymaps = lib.mkIf (! config.vim.terminal.toggleterm.lazygit.enable) [
-      (mkKeymap ["n"] "<leader>gg" "<cmd>Neogit<cr>" {desc = "Neogit";})
+    keymaps = lib.concatLists [
+      [
+        (mkKeymap ["t"] "<C-_>" "<cmd>ToggleTerm<cr>" {desc = "Close toggleterm";})
+        (mkKeymap ["t"] "<esc>" "<C-\\><C-n>" {desc = "Normal mode";})
+        (mkKeymap ["t"] "jk" "<C-\\><C-n>" {desc = "Normal mode";})
+        (mkKeymap ["t"] "<C-w>" "<C-\\><C-n><C-w>" {desc = "Window mode";})
+      ]
+      (lib.optionals (! config.vim.terminal.toggleterm.lazygit.enable) [
+        (mkKeymap ["n"] "<leader>gg" "<cmd>Neogit<cr>" {desc = "Neogit";})
+      ])
     ];
 
     terminal.toggleterm = {
       enable = true;
 
       mappings = {
-        open = "<C-/>";
+        open = "<C-_>"; # underscore actually means /
       };
 
       lazygit = {
