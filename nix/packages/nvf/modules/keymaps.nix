@@ -8,6 +8,9 @@ in {
         enable = true;
         register."<leader>u" = "ui/toggle";
         register."<leader><tab>" = "tabs";
+        register."<leader>d" = "debug";
+        register."<leader>dg" = "goto";
+        register."<leader>dv" = "stacktrace";
         setupOpts.spec =
           mkLuaInline
           # lua

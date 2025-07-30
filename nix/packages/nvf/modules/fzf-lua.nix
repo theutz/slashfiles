@@ -28,6 +28,7 @@
       ["d" "zoxide" "Zoxide recents"]
 
       ["f" "files" "Files in project"]
+      ["F" "oldfiles" "Recent files"]
 
       ["gb" "git_branches" "Git branches"]
       ["gC" "git_bcommits" "Git commits (buffer)"]
@@ -51,7 +52,6 @@
       ["q" "quickfix" "Files in quickfix"]
 
       ["r" "resume" "Resume search"]
-      ["R" "oldfiles" "Recent files"]
 
       ["s" "treesitter" "Current buffer treesitter symbols"]
 
@@ -79,7 +79,7 @@ in {
     keymaps =
       [
         (mkKeymap "n" "<leader>," "<cmd>FzfLua buffers<cr>" {desc = "Open buffers...";})
-        (mkKeymap "n" "<leader>/" "<cmd>FzfLua grep<cr><cr>" {desc = "Search in project...";})
+        (mkKeymap "n" "<leader>/" "<cmd>FzfLua grep<cr>" {desc = "Search in project...";})
         (mkKeymap "n" "<leader><space>" "<cmd>FzfLua files<cr>" {desc = "Open files...";})
       ]
       ++ searchBindings;
