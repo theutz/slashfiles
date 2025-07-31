@@ -14,7 +14,7 @@ in {
 
     xdg.desktopEntries = {
       bluetooth = {
-        name = "Bluetooth";
+        name = "Bluetooth Controls";
         exec = lib.getExe pkgs.bluetui;
         terminal = true;
         actions = {

@@ -13,6 +13,7 @@ in {
   imports = [
     ./audio.nix
     ./bluetooth.nix
+    ./wifi.nix
   ];
 
   options.${namespace}.${mod}.enable = mkEnableOption "enable ${mod}";

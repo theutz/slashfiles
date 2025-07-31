@@ -16,7 +16,7 @@ in {
     ];
 
     xdg.desktopEntries.volume = {
-      name = "Volume";
+      name = "Volume Controls";
       exec = "${exe} -v output";
       terminal = true;
       actions = {
