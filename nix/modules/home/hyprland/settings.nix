@@ -108,6 +108,7 @@ in {
       misc = {
         force_default_wallpaper = -1;
         disable_hyprland_logo = false;
+        new_window_takes_over_fullscreen = 1; # 0 - behind, 1 - takes over
       };
 
       input = {
@@ -156,28 +157,31 @@ in {
           "SUPER SHIFT, F, fullscreen, 0"
 
           "SUPER, G, changegroupactive, f"
-          "SUPER SHIFT, G, togglegroup"
+          "SUPER SHIFT, G, changegroupactive, b"
+          "SUPER CTRL, G, togglegroup"
+          "SUPER ALT CTRL, G, moveoutofgroup"
 
           "SUPER, H, movefocus, l"
-          "SUPER CTRL, H, movewindow, mon:l"
           "SUPER SHIFT, H, swapwindow, l"
-          "SUPER ALT, H, moveintogroup, l"
+          "SUPER SHIFT ALT, H, movewindow, l"
+          "SUPER ALT CTRL, H, moveintogroup, l"
+          "SUPER ALT, H, movewindow, mon:l"
 
           "SUPER, J, movefocus, d"
           "SUPER SHIFT, J, swapwindow, d"
           "SUPER SHIFT ALT, J, movewindow, d"
-          "SUPER ALT, J, moveintogroup, d"
+          "SUPER ALT CTRL, J, moveintogroup, d"
 
           "SUPER, K, movefocus, u"
           "SUPER SHIFT, K, swapwindow, u"
           "SUPER SHIFT ALT, K, movewindow, u"
-          "SUPER ALT, K, moveintogroup, u"
+          "SUPER ALT CTRL, K, moveintogroup, u"
 
           "SUPER, L, movefocus, r"
           "SUPER SHIFT, L, swapwindow, r"
           "SUPER SHIFT ALT, L, movewindow, r"
-          "SUPER ALT, L, moveintogroup, r"
-          "SUPER CTRL, L, movewindow, mon:r"
+          "SUPER ALT CTRL, L, moveintogroup, r"
+          "SUPER ALT, L, movewindow, mon:r"
 
           "SUPER, M, exec, $terminal"
 
