@@ -19,6 +19,8 @@ mkShell {
     slashfiles.nvf
     gum
     just
+    sops
+    ssh-to-age
   ];
 
   shellHook =
