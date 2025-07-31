@@ -14,6 +14,9 @@ in {
 
   config = mkConfig {
     home.packages = with pkgs; (lib.concatLists [
+      [
+        sops
+      ]
       (lib.optionals pkgs.stdenv.isLinux [])
     ]);
 
