@@ -15,8 +15,8 @@
     };
 
     hyprland.monitor = [
-      "eDP-1, preferred, auto, 1.25"
-      "HDMI-A-1, preferred, auto-left, 1.25"
+      "DP-2, 2560x1440@59.95Hz, auto-left, auto"
+      "eDP-1, preferred, auto, auto"
     ];
   };
 
