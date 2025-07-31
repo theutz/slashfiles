@@ -201,9 +201,11 @@ in {
           "SUPER, Z, togglefloating,"
 
           "SUPER, space, exec, $menu"
-          "SUPER, equal, splitratio, +0.1"
+          "SUPER, equal, splitratio, 1"
+          "SUPER SHIFT, equal, splitratio, +0.1"
           "SUPER, minus, splitratio, -0.1"
-          "SUPER, 0, splitratio, exact 1.0"
+          "SUPER, tab, workspace, e+1"
+          "SUPER SHIFT, tab, workspace, e-1"
 
           "SUPER, mouse_down, workspace, e+1"
           "SUPER, mouse_up, workspace, e-1"
