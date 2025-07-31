@@ -1,6 +1,7 @@
 {
   pkgs,
   lib,
+  config,
   ...
 }: {
   users = {
@@ -9,7 +10,10 @@
       createHome = true;
       group = "michael";
       extraGroups = ["networkmanager" "wheel"];
-      packages = with pkgs; [];
+      # packages = with pkgs; [
+      #   sops
+      #   ssh-to-age
+      # ];
       shell = pkgs.zsh;
     };
 
