@@ -86,7 +86,7 @@ in {
             car = "";
             default = ["" "" ""];
           };
-          on-click = "wezterm start wiremix";
+          on-click = "wezterm start wiremix -v output";
         };
 
         network = {
