@@ -43,6 +43,9 @@
 
   # Enable touchpad support (enabled default in most desktopManager).
   services.libinput.enable = true;
+  services.libinput.mouse.naturalScrolling = true;
+  services.libinput.touchpad.naturalScrolling = true;
+  services.libinput.touchpad.accelSpeed = "-0.5";
 
   environment.shellAliases = {
     flake = ''yazi "''${NH_FLAKE%#*}"'';
