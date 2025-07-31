@@ -27,6 +27,7 @@ in {
         modules-right = [
           "network"
           "pulseaudio"
+          "clock"
         ];
 
         "hyprland/workspaces" = {
@@ -51,6 +52,20 @@ in {
 
         "hyprland/window" = {
           icon = true;
+        };
+
+        clock = {
+          format = " {:%H:%M %Z}";
+          tooltip-format = "{tz_list}";
+          timezones = [
+            "Europe/Istanbul"
+            "America/New_York"
+            "America/Los_Angeles"
+            "Etc/UTC"
+          ];
+          actions = {
+            on-click = "tz_down";
+          };
         };
 
         pulseaudio = {
