@@ -39,13 +39,19 @@
     pulse.enable = true;
     wireplumber.enable = true;
   };
-  security.rtkit.enable = true; # Helps audio glitching by enabling realtime priority
+  # Helps audio glitching by enabling realtime priority
+  security.rtkit.enable = true;
 
-  # Enable touchpad support (enabled default in most desktopManager).
-  services.libinput.enable = true;
-  services.libinput.mouse.naturalScrolling = true;
-  services.libinput.touchpad.naturalScrolling = true;
-  services.libinput.touchpad.accelSpeed = "-0.5";
+  services.libinput = {
+    # Enable touchpad support (enabled default in most desktopManager).
+    enable = true;
+    mouse.naturalScrolling = true;
+    touchpad = {
+      naturalScrolling = true;
+      accelSpeed = "-0.5";
+      tappingButtonMap = "lrm";
+    };
+  };
 
   environment.shellAliases = {
     flake = ''yazi "''${NH_FLAKE%#*}"'';
