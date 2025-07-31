@@ -31,10 +31,6 @@ in {
 
         "hyprland/workspaces" = {
           format = ''{icon} {name}'';
-          persistent-workspaces = {
-            "DP-2" = cfg.workspaces / 2;
-            "eDP-1" = cfg.workspaces / 2;
-          };
           format-icons = {
             active = "";
             default = "";
