@@ -153,8 +153,9 @@ in {
 
           "SUPER, E, exec, $fileManager"
 
-          "SUPER, F, fullscreen, 1"
-          "SUPER SHIFT, F, fullscreen, 0"
+          "SUPER, F, setfloating"
+          "SUPER, F, resizeactive, exact 80% 80%"
+          "SUPER, F, centerwindow, 1"
 
           "SUPER, G, changegroupactive, f"
           "SUPER SHIFT, G, changegroupactive, b"
@@ -162,21 +163,23 @@ in {
 
           "SUPER, H, movefocus, l"
           "SUPER SHIFT, H, swapwindow, l"
-          "SUPER SHIFT ALT, H, movewindoworgroup, l"
-          "SUPER ALT, H, movewindow, mon:l"
+          "SUPER CTRL, H, movewindoworgroup, l"
+          "SUPER ALT, H, movewindow, l"
 
           "SUPER, J, movefocus, d"
           "SUPER SHIFT, J, swapwindow, d"
-          "SUPER SHIFT ALT, J, movewindoworgroup, d"
+          "SUPER CTRL, J, movewindoworgroup, d"
+          "SUPER ALT, J, movewindow, d"
 
           "SUPER, K, movefocus, u"
           "SUPER SHIFT, K, swapwindow, u"
-          "SUPER SHIFT ALT, K, movewindoworgroup, u"
+          "SUPER CTRL, K, movewindoworgroup, u"
+          "SUPER ALT, K, movewindow, u"
 
           "SUPER, L, movefocus, r"
           "SUPER SHIFT, L, swapwindow, r"
-          "SUPER SHIFT ALT, L, movewindoworgroup, r"
-          "SUPER ALT, L, movewindow, mon:r"
+          "SUPER CTRL, L, movewindoworgroup, r"
+          "SUPER ALT, L, movewindow, r"
 
           "SUPER, M, exec, $terminal"
 
@@ -194,15 +197,25 @@ in {
           "SUPER, S, togglespecialworkspace, scratch"
           "SUPER SHIFT, S, movetoworkspace, special:scratch"
 
-          "SUPER, V, layoutmsg, swapsplit"
-          "SUPER SHIFT, V, togglesplit, # dwindle"
+          "SUPER, T, settiled"
+          "SUPER, T, splitratio, exact 1.0"
 
-          "SUPER, Z, togglefloating,"
+          "SUPER, V, togglesplit, # dwindle"
+          "SUPER SHIFT, V, layoutmsg, swapsplit"
+
+          "SUPER, Z, fullscreen, 1"
+          "SUPER SHIFT, Z, fullscreen, 0"
 
           "SUPER, space, exec, $menu"
-          "SUPER, equal, splitratio, 1"
+          "SUPER ALT, space, centerwindow, 1"
+
+          "SUPER, equal, splitratio, exact 1.0"
           "SUPER SHIFT, equal, splitratio, +0.1"
+          "SUPER ALT, equal, resizeactive, 10% 10%"
+
           "SUPER, minus, splitratio, -0.1"
+          "SUPER ALT, minus, resizeactive, -10% -10%"
+
           "SUPER, tab, workspace, e+1"
           "SUPER SHIFT, tab, workspace, e-1"
 
