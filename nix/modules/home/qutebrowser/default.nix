@@ -27,5 +27,18 @@ in {
       source = mkOutOfStoreSymlink "${config.home.homeDirectory}/${namespace}/nix/modules/home/qutebrowser/work";
       recursive = true;
     };
+
+    xdg.desktopEntries = {
+      browser = {
+        name = "Web Browser";
+        exec = "qutebrowser";
+        actions = {
+          work = {
+            name = "Work Profile";
+            exec = "qutebrowser -B ${config.xdg.configHome}/qutebrowser-work";
+          };
+        };
+      };
+    };
   };
 }

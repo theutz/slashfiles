@@ -148,7 +148,7 @@ in {
           ", XF86AudioRaiseVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 10%+"
 
           "SUPER, B, exec, $browser"
-          "SUPER SHIFT, B, exec, $browser -B $XDG_CONFIG_HOME/qutebrowser-work"
+          "SUPER SHIFT, B, exec, ${config.xdg.desktopEntries.browser.actions.work.exec}"
 
           "SUPER, E, exec, $fileManager"
 
