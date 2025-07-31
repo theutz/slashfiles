@@ -159,28 +159,23 @@ in {
           "SUPER, G, changegroupactive, f"
           "SUPER SHIFT, G, changegroupactive, b"
           "SUPER CTRL, G, togglegroup"
-          "SUPER ALT CTRL, G, moveoutofgroup"
 
           "SUPER, H, movefocus, l"
           "SUPER SHIFT, H, swapwindow, l"
-          "SUPER SHIFT ALT, H, movewindow, l"
-          "SUPER ALT CTRL, H, moveintogroup, l"
+          "SUPER SHIFT ALT, H, movewindoworgroup, l"
           "SUPER ALT, H, movewindow, mon:l"
 
           "SUPER, J, movefocus, d"
           "SUPER SHIFT, J, swapwindow, d"
-          "SUPER SHIFT ALT, J, movewindow, d"
-          "SUPER ALT CTRL, J, moveintogroup, d"
+          "SUPER SHIFT ALT, J, movewindoworgroup, d"
 
           "SUPER, K, movefocus, u"
           "SUPER SHIFT, K, swapwindow, u"
-          "SUPER SHIFT ALT, K, movewindow, u"
-          "SUPER ALT CTRL, K, moveintogroup, u"
+          "SUPER SHIFT ALT, K, movewindoworgroup, u"
 
           "SUPER, L, movefocus, r"
           "SUPER SHIFT, L, swapwindow, r"
-          "SUPER SHIFT ALT, L, movewindow, r"
-          "SUPER ALT CTRL, L, moveintogroup, r"
+          "SUPER SHIFT ALT, L, movewindoworgroup, r"
           "SUPER ALT, L, movewindow, mon:r"
 
           "SUPER, M, exec, $terminal"
