@@ -42,5 +42,7 @@ in {
     wayland.windowManager.hyprland.enable = true;
 
     services.dunst.enable = true;
+
+    programs.hyprlock.enable = true;
   };
 }

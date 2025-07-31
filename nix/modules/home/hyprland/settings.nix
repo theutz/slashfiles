@@ -221,11 +221,21 @@ in {
 
           "SUPER, mouse_down, workspace, e+1"
           "SUPER, mouse_up, workspace, e-1"
+
+          "Shift_R, slash, exec, playerctl play-pause"
+          "Shift_R, period, exec, playerctl next"
+          "Shift_R, comma, exec, playerctl previous"
         ];
 
       bindm = [
         "SUPER, mouse:272, movewindow"
         "SUPER, mouse:273, resizewindow"
+      ];
+
+      bindl = [
+        ",switch:on:Lid Switch, exec, hyprlock --immediate"
+        ",switch:off:Lid Switch, exec, hyprlock --immediate"
+        ",switch:on:Lid Switch, exec, playerctl pause"
       ];
 
       windowrule = [
