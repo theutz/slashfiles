@@ -18,6 +18,7 @@ mkShell {
     nh
     slashfiles.nvf
     gum
+    just
   ];
 
   shellHook =
