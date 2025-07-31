@@ -39,6 +39,7 @@ in {
             "class<org.wezfurlong.wezterm>" = "";
             "class<Slack>" = "";
             "class<spotify>" = "";
+            "class<1Password>" = "󰢁";
           };
           format-icons = {
             active = "";
