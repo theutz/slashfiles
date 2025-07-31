@@ -10,7 +10,15 @@ settings:
     global: true
   colors.statusbar.normal.bg:
     global: deeppink
+  colors.statusbar.url.success.http.fg:
+    global: palevioletred
+  colors.statusbar.url.success.https.fg:
+    global: black
+  content.notifications.enabled:
+    https://app.slack.com: true
+    https://calendar.google.com: true
   content.register_protocol_handler:
+    https://calendar.google.com?cid=%25s: true
     https://mail.google.com?extsrc=mailto&url=%25s: true
   editor.command:
     global:
