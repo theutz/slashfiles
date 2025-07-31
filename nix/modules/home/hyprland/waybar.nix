@@ -20,15 +20,17 @@ in {
         height = 48;
         modules-left = [
           "hyprland/workspaces"
+        ];
+        modules-center = [
           "hyprland/window"
         ];
-        modules-center = [];
-        modules-right = [];
+        modules-right = [
+          "network"
+          "pulseaudio"
+        ];
 
         "hyprland/workspaces" = {
-          # all-outputs = true;
           format = ''{icon} {name}'';
-          window-rewrite-default = ".";
           persistent-workspaces = {
             "DP-2" = cfg.workspaces / 2;
             "eDP-1" = cfg.workspaces / 2;
@@ -46,31 +48,57 @@ in {
         "hyprland/window" = {
           icon = true;
         };
+
+        pulseaudio = {
+          format = "{icon} {volume}% {format_source}";
+          format-bluetooth = "{icon} {volume}% {format_source}";
+          format-bluetooth-muted = "{icon} {format_source}";
+          format-muted = " {format_source}";
+          format-source = " {volume}%";
+          format-source-muted = "";
+          format-icons = {
+            headphone = "";
+            hands-free = "󰏳";
+            headset = "";
+            phone = "";
+            portable = "";
+            car = "";
+            default = ["" "" ""];
+          };
+          on-click = "wezterm start wiremix";
+        };
+
+        network = {
+          format-wifi = " {essid} ({signalStrength}%)";
+          format-ethernet = "󰈀 {ipaddr}/{cidr}";
+          tooltip-format = " {ifname} via {gwaddr}";
+          format-linked = " {ifname} (No IP)";
+          format-disconnected = "⚠ Disconnected";
+          format-alt = "{ifname}: {ipaddr}/{cidr}";
+        };
       };
     };
 
     programs.waybar.style =
       # css
       ''
-        .mainBar {
+        window.mainBar {
           background-color: transparent;
-          font-family: ${lib.replaceString "Propo" "Mono" font.family};
+          font-family: ${font.family};
           font-size: 16px;
           color: ${rp "text"};
         }
 
-        #workspaces {
-          margin: 1rem 1rem 0;
-        }
-
-        #workspaces button {
-          border-radius: 0.75rem;
-          background-color: alpha(${rp "surface"}, 0.9);
+        widget {
           color: ${rp "text"};
         }
 
-        #workspaces button:not(:last-child) {
-          margin-right: 0.5rem;
+        widget:not(:last-child) {
+          padding-right: 1rem;
+        }
+
+        widget button {
+          color: ${rp "text"};
         }
 
         #workspaces button:hover {
@@ -83,11 +111,25 @@ in {
           color: ${rp "gold"};
         }
 
-        window#waybar #window {
-          background: alpha(${rp "surface"}, 0.9);
-          padding: 0.5rem 1rem;
-          margin-top: 1rem;
+        .modules-left, .modules-right, .modules-center {
+          background: ${rp "surface"};
           border-radius: 0.75rem;
+        }
+
+        .modules-center, .modules-right {
+          padding: 0 1rem;
+        }
+
+        .modules-left {
+          margin-left: 1rem;
+        }
+
+        .modules-right {
+          margin-right: 1rem;
+        }
+
+        .modules-right :not(:first-child) label {
+          padding-left: 1.5rem;
         }
 
         window#waybar #window.empty {
