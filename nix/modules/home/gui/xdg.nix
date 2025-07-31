@@ -13,5 +13,9 @@ in {
     xdg.mimeApps.defaultApplications = {
       "x-scheme-handler/terminal" = ["org.wezfurlong.wezterm.desktop"];
     };
+
+    home.sessionVariables = {
+      XDG_DOWNLOAD_DIR = "${config.home.homeDirectory}/Downloads";
+    };
   };
 }
