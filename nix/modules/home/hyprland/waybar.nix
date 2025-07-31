@@ -87,6 +87,9 @@ in {
             default = ["" "" ""];
           };
           on-click = "wezterm start wiremix -v output";
+          on-click-right = "wezterm start wiremix -v playback";
+          reverse-scrolling = true;
+          reverse-mouse-scrolling = true;
         };
 
         network = {
