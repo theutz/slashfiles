@@ -192,8 +192,8 @@ in {
 
           "SUPER, R, layoutmsg, movetoroot"
 
-          "SUPER, S, togglespecialworkspace, magic"
-          "SUPER SHIFT, S, movetoworkspace, special:magic"
+          "SUPER, S, togglespecialworkspace, scratch"
+          "SUPER SHIFT, S, movetoworkspace, special:scratch"
 
           "SUPER, V, layoutmsg, swapsplit"
           "SUPER SHIFT, V, togglesplit, # dwindle"

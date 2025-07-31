@@ -30,15 +30,22 @@ in {
         ];
 
         "hyprland/workspaces" = {
-          format = ''{icon} {name}'';
+          format = ''{icon} {name} {windows}'';
           show-special = true;
+          window-rewrite-default = "";
+          window-rewrite = {
+            "class<org.qutebrowser.qutebrowser>" = "󰾔";
+            "class<org.wezfurlong.wezterm>" = "";
+            "class<Slack>" = "";
+            "class<spotify>" = "";
+          };
           format-icons = {
             active = "";
             default = "";
             empty = "";
-            persistent = "";
-            special = "s";
-            urgent = "u";
+            persistent = "󰺕";
+            special = "󰘻";
+            urgent = "󰵚";
           };
         };
 
