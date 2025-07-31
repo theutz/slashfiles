@@ -15,6 +15,9 @@ in {
     home.packages = with pkgs; (lib.concatLists [
       [
         slack
+        zoom-us
+        signal-desktop
+        neovide
       ]
 
       (lib.optionals pkgs.stdenv.isLinux [

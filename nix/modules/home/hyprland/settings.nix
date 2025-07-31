@@ -14,7 +14,7 @@ in {
       };
 
       "$terminal" = "uwsm app -- wezterm";
-      "$fileManager" = "uwsm app -- dolphin";
+      "$fileManager" = "uwsm app -- wezterm start yazi";
       "$menu" = "uwsm app -- wofi --show drun";
       "$browser" = "uwsm app -- qutebrowser";
 
@@ -148,7 +148,7 @@ in {
           ", XF86AudioRaiseVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 10%+"
 
           "SUPER, B, exec, $browser"
-          "SUPER SHIFT, B, exec, $browser -B $XDG_CONFIG_HOME/qutebrowser-delegator"
+          "SUPER SHIFT, B, exec, $browser -B $XDG_CONFIG_HOME/qutebrowser-work"
 
           "SUPER, E, exec, $fileManager"
 
