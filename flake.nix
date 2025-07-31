@@ -29,6 +29,11 @@
       url = "github:nix-darwin/nix-darwin/nix-darwin-25.05";
       inputs.nixpkgs.follows = "unstable";
     };
+
+    wiremix = {
+      url = "github:tsowell/wiremix";
+      inputs.nixpkgs.follows = "unstable";
+    };
   };
 
   outputs = inputs: let

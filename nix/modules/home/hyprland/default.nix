@@ -2,20 +2,16 @@
   config,
   pkgs,
   lib,
-  namespace,
   ...
 } @ args: let
-  mod = builtins.baseNameOf ./.;
-  cfg = config.${namespace}.${mod};
+  inherit (lib.slashfiles.mkMod config ./.) mkConfig mkOptions cfg;
 in {
   imports = [
     ./waybar.nix
     ./wofi.nix
   ];
 
-  options.${namespace}.${mod} = {
-    enable = lib.mkEnableOption "enable ${mod}";
-
+  options = mkOptions {
     monitor = lib.mkOption {
       type = with lib.types; listOf str;
       description = ''
@@ -29,14 +25,17 @@ in {
       description = ''
         How many persistent workspaces to create.
       '';
-      default = 5;
+      default = 10;
     };
   };
 
-  config = lib.mkIf cfg.enable {
+  config = mkConfig {
     home.packages = with pkgs; [
       kitty
       kdePackages.dolphin
+      playerctl
+      brightnessctl
+      wireplumber
     ];
 
     wayland.windowManager.hyprland = {

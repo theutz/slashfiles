@@ -4,6 +4,11 @@
     ./hyprland.nix
   ];
 
+  xdg.terminal-exec = {
+    enable = true;
+    settings.default = ["org.wezfurlong.wezterm.desktop"];
+  };
+
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   # programs.mtr.enable = true;

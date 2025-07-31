@@ -5,20 +5,21 @@
   namespace,
   ...
 }: let
-  inherit (builtins) baseNameOf;
-  mod = baseNameOf ./.;
-  cfg = config.${namespace}.${mod};
-  inherit (lib) mkIf mkEnableOption;
+  inherit (lib.${namespace}.mkMod config ./.) mkOptions mkConfig;
 in {
-  options.${namespace}.${mod}.enable = mkEnableOption "enable ${mod}";
+  imports = [./xdg.nix];
 
-  config = mkIf cfg.enable {
+  options = mkOptions {};
+
+  config = mkConfig {
     home.packages = with pkgs; (lib.concatLists [
       [
         slack
       ]
+
       (lib.optionals pkgs.stdenv.isLinux [
         brightnessctl
+        playerctl
       ])
     ]);
   };

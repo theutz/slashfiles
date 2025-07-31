@@ -37,7 +37,9 @@
   services.pipewire = {
     enable = true;
     pulse.enable = true;
+    wireplumber.enable = true;
   };
+  security.rtkit.enable = true; # Helps audio glitching by enabling realtime priority
 
   # Enable touchpad support (enabled default in most desktopManager).
   services.libinput.enable = true;

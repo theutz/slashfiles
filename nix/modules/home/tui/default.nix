@@ -10,6 +10,11 @@
   cfg = config.${namespace}.${mod};
   inherit (lib) mkIf mkEnableOption;
 in {
+  imports = [
+    ./audio.nix
+    ./bluetooth.nix
+  ];
+
   options.${namespace}.${mod}.enable = mkEnableOption "enable ${mod}";
 
   config = lib.mkIf cfg.enable {
