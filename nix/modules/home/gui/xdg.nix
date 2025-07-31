@@ -17,5 +17,25 @@ in {
     home.sessionVariables = {
       XDG_DOWNLOAD_DIR = "${config.home.homeDirectory}/Downloads";
     };
+
+    xdg.desktopEntries = {
+      nixos-manual = {
+        name = "NixOS Configuration Manual";
+        exec = "man 5 configuration.nix";
+        terminal = true;
+      };
+
+      home-mananager-manual = {
+        name = "Home Manager Configuration Manual";
+        exec = "man 5 home-configuration.nix";
+        terminal = true;
+      };
+
+      nvf-manual = {
+        name = "nvf Configuration manual";
+        exec = "man 5 nvf";
+        terminal = true;
+      };
+    };
   };
 }
