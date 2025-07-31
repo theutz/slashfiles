@@ -40,6 +40,7 @@ in {
             "class<Slack>" = "";
             "class<spotify>" = "";
             "class<1Password>" = "󰢁";
+            "class<signal>" = "󰭹";
           };
           format-icons = {
             active = "";
@@ -99,13 +100,18 @@ in {
       };
     };
 
+    xdg.desktopEntries.nerdfont-icons = {
+      name = "NerdFont Icons";
+      exec = "qutebrowser https://nerdfonts.ytyng.com";
+    };
+
     programs.waybar.style =
       # css
       ''
         window.mainBar {
           background-color: transparent;
           font-family: ${font.family};
-          font-size: 16px;
+          font-size: 13px;
           color: ${rp "text"};
         }
 
