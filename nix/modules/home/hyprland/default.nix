@@ -9,6 +9,7 @@ in {
   imports = [
     ./waybar.nix
     ./wofi.nix
+    ./settings.nix
   ];
 
   options = mkOptions {
@@ -38,10 +39,7 @@ in {
       wireplumber
     ];
 
-    wayland.windowManager.hyprland = {
-      enable = true;
-      settings = import ./settings.nix (args // {inherit cfg;});
-    };
+    wayland.windowManager.hyprland.enable = true;
 
     services.dunst.enable = true;
   };
