@@ -124,8 +124,6 @@ in {
         workspace_swipe = false;
       };
 
-      "$mainMod" = "SUPER";
-
       bind =
         (lib.concatLists (lib.genList (x: let
             index = x + 1;
@@ -135,8 +133,8 @@ in {
               else (x + 1)
             );
           in [
-            "$mainMod, ${num}, workspace, ${toString index}"
-            "$mainMod SHIFT, ${num}, movetoworkspace, ${toString index}"
+            "SUPER, ${num}, workspace, ${toString index}"
+            "SUPER SHIFT, ${num}, movetoworkspace, ${toString index}"
           ])
           cfg.workspaces))
         ++ [
@@ -149,53 +147,71 @@ in {
           ", XF86AudioLowerVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 10%-"
           ", XF86AudioRaiseVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 10%+"
 
-          "$mainMod, B, exec, $browser"
-          "$mainMod, E, exec, $fileManager"
-          "$mainMod, F, fullscreen, 1"
-          "$mainMod, G, changegroupactive, f"
-          "$mainMod SHIFT, G, togglegroup"
-          "$mainMod SHIFT, F, fullscreen, 0"
-          "$mainMod, H, movefocus, l"
-          "$mainMod SHIFT, H, swapwindow, l"
-          "$mainMod ALT, H, moveintogroup, l"
-          "$mainMod, J, movefocus, d"
-          "$mainMod SHIFT, J, swapwindow, d"
-          "$mainMod ALT, J, moveintogroup, d"
-          "$mainMod, K, movefocus, u"
-          "$mainMod SHIFT, K, swapwindow, u"
-          "$mainMod ALT, K, moveintogroup, u"
-          "$mainMod, L, movefocus, r"
-          "$mainMod SHIFT, L, swapwindow, r"
-          "$mainMod ALT, L, moveintogroup, r"
-          "$mainMod, M, exec, $terminal"
-          "$mainMod, N, workspace, +1"
-          "$mainMod SHIFT, N, movetoworkspace, +1"
-          "$mainMod, P, workspace, -1"
-          "$mainMod SHIFT, P, movetoworkspace, -1"
-          "$mainMod, Q, killactive,"
-          "$mainMod ALT CTRL, Q, exec, uwsm stop"
-          "$mainMod, R, layoutmsg, movetoroot"
-          "$mainMod, S, togglespecialworkspace, magic"
-          "$mainMod SHIFT, S, movetoworkspace, special:magic"
-          "$mainMod, V, layoutmsg, swapsplit"
-          "$mainMod SHIFT, V, togglesplit, # dwindle"
-          "$mainMod, Z, togglefloating,"
+          "SUPER, B, exec, $browser"
+          "SUPER SHIFT, B, exec, $browser -B $XDG_CONFIG_HOME/qutebrowser-delegator"
 
-          "$mainMod ALT, H, movewindow, mon:l"
-          "$mainMod ALT, L, movewindow, mon:r"
+          "SUPER, E, exec, $fileManager"
 
-          "$mainMod, space, exec, $menu"
-          "$mainMod, equal, splitratio, +0.1"
-          "$mainMod, minus, splitratio, -0.1"
-          "$mainMod, 0, splitratio, exact 1.0"
+          "SUPER, F, fullscreen, 1"
+          "SUPER SHIFT, F, fullscreen, 0"
 
-          "$mainMod, mouse_down, workspace, e+1"
-          "$mainMod, mouse_up, workspace, e-1"
+          "SUPER, G, changegroupactive, f"
+          "SUPER SHIFT, G, togglegroup"
+
+          "SUPER, H, movefocus, l"
+          "SUPER CTRL, H, movewindow, mon:l"
+          "SUPER SHIFT, H, swapwindow, l"
+          "SUPER ALT, H, moveintogroup, l"
+
+          "SUPER, J, movefocus, d"
+          "SUPER SHIFT, J, swapwindow, d"
+          "SUPER SHIFT ALT, J, movewindow, d"
+          "SUPER ALT, J, moveintogroup, d"
+
+          "SUPER, K, movefocus, u"
+          "SUPER SHIFT, K, swapwindow, u"
+          "SUPER SHIFT ALT, K, movewindow, u"
+          "SUPER ALT, K, moveintogroup, u"
+
+          "SUPER, L, movefocus, r"
+          "SUPER SHIFT, L, swapwindow, r"
+          "SUPER SHIFT ALT, L, movewindow, r"
+          "SUPER ALT, L, moveintogroup, r"
+          "SUPER CTRL, L, movewindow, mon:r"
+
+          "SUPER, M, exec, $terminal"
+
+          "SUPER, N, workspace, +1"
+          "SUPER SHIFT, N, movetoworkspace, +1"
+
+          "SUPER, P, workspace, -1"
+          "SUPER SHIFT, P, movetoworkspace, -1"
+
+          "SUPER, Q, killactive,"
+          "SUPER ALT CTRL, Q, exec, uwsm stop"
+
+          "SUPER, R, layoutmsg, movetoroot"
+
+          "SUPER, S, togglespecialworkspace, magic"
+          "SUPER SHIFT, S, movetoworkspace, special:magic"
+
+          "SUPER, V, layoutmsg, swapsplit"
+          "SUPER SHIFT, V, togglesplit, # dwindle"
+
+          "SUPER, Z, togglefloating,"
+
+          "SUPER, space, exec, $menu"
+          "SUPER, equal, splitratio, +0.1"
+          "SUPER, minus, splitratio, -0.1"
+          "SUPER, 0, splitratio, exact 1.0"
+
+          "SUPER, mouse_down, workspace, e+1"
+          "SUPER, mouse_up, workspace, e-1"
         ];
 
       bindm = [
-        "$mainMod, mouse:272, movewindow"
-        "$mainMod, mouse:273, resizewindow"
+        "SUPER, mouse:272, movewindow"
+        "SUPER, mouse:273, resizewindow"
       ];
 
       windowrule = [
@@ -204,15 +220,15 @@ in {
       ];
 
       workspace = [
-        "1, monitor:DP-2"
-        "2, monitor:DP-2"
-        "3, monitor:DP-2"
-        "4, monitor:DP-2"
-        "5, monitor:DP-2"
-        "6, monitor:DP-2"
-        "7, monitor:eDP-1"
-        "8, monitor:eDP-1"
-        "9, monitor:eDP-1"
+        "1,  monitor:DP-2"
+        "2,  monitor:DP-2"
+        "3,  monitor:DP-2"
+        "4,  monitor:DP-2"
+        "5,  monitor:DP-2"
+        "6,  monitor:DP-2"
+        "7,  monitor:eDP-1"
+        "8,  monitor:eDP-1"
+        "9,  monitor:eDP-1"
         "10, monitor:eDP-1"
       ];
     };
