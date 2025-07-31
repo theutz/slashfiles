@@ -6,6 +6,7 @@
 }: {
   imports = [
     ./git.nix
+    ./secrets.nix
   ];
 
   ${namespace} = {
@@ -16,29 +17,29 @@
 
     hyprland.monitor = [
       "DP-2, 2560x1440@59.95Hz, auto-left, auto"
-      "eDP-1, preferred, auto, auto"
+      "eDP-1, preferred, auto, 1"
     ];
   };
 
-  programs = {
-    wofi.enable = true;
+  programs.wofi.enable = true;
 
-    zellij.enable = true;
+  programs.zellij.enable = true;
 
-    tmux.enable = true;
+  programs.tmux.enable = true;
 
-    home-manager.enable = true;
+  programs.home-manager.enable = true;
 
-    fzf.enable = true;
+  programs.fzf.enable = true;
 
-    nh = {
-      enable = true;
-      clean.enable = true;
-      flake = "${config.home.homeDirectory}/${namespace}";
-    };
-
-    nix-index.enable = true;
+  programs.nh = {
+    enable = true;
+    clean.enable = true;
+    flake = "${config.home.homeDirectory}/${namespace}";
   };
+
+  programs.nix-index.enable = true;
+
+  services.ssh-agent.enable = true;
 
   home.shellAliases = {
     nhs = "nh home switch";

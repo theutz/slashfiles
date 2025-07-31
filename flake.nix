@@ -34,6 +34,11 @@
       url = "github:tsowell/wiremix";
       inputs.nixpkgs.follows = "unstable";
     };
+
+    sops-nix = {
+      url = "github:Mic92/sops-nix";
+      inputs.nixpkgs.follows = "unstable";
+    };
   };
 
   outputs = inputs: let
@@ -49,8 +54,13 @@
     lib.mkFlake {
       inherit lib inputs;
 
+      systems.modules.nixos = with inputs; [
+        sops-nix.nixosModules.sops
+      ];
+
       homes.modules = with inputs; [
         nvf.homeManagerModules.default
+        sops-nix.homeManagerModules.sops
       ];
 
       channels-config = {
