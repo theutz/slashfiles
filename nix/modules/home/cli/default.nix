@@ -8,6 +8,7 @@
 in {
   imports = [
     ./bat.nix
+    ./direnv.nix
   ];
 
   options = mkOptions {};
@@ -22,9 +23,6 @@ in {
 
     programs.fd.enable = true;
     programs.ripgrep.enable = true;
-
-    programs.direnv.enable = true;
-    programs.direnv.mise.enable = true;
-    programs.direnv.nix-direnv.enable = true;
+    programs.zoxide.enable = true;
   };
 }
