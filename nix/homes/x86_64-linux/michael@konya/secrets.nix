@@ -2,20 +2,24 @@
   config,
   lib,
   ...
-}: {
-  sops.age.keyFile = "${config.xdg.configHome}/sops/age/keys.txt";
-  sops.secrets = let
+}: let
+  mkSshKeyPair = name: let
     sopsFile = lib.snowfall.fs.get-file "secrets/ssh.yaml";
     mkPath = name: "${config.home.homeDirectory}/.ssh/${name}";
   in {
-    id_ed25519 = {
+    "${name}/pri" = {
       inherit sopsFile;
-      path = mkPath "id_ed25519";
+      path = mkPath name;
     };
-
-    id_ed25519_pub = {
+    "${name}/pub" = {
       inherit sopsFile;
-      path = mkPath "id_ed25519.pub";
+      path = mkPath "${name}.pub";
     };
   };
+in {
+  sops.age.keyFile = "${config.xdg.configHome}/sops/age/keys.txt";
+  sops.secrets = lib.attrsets.mergeAttrsList [
+    (mkSshKeyPair "id_ed25519")
+    (mkSshKeyPair "id_rsa")
+  ];
 }
