@@ -2,26 +2,26 @@
   config,
   lib,
   pkgs,
-  namespace,
   ...
 }: let
-  inherit (builtins) baseNameOf;
-  inherit (lib) mkIf mkEnableOption;
-  mod = baseNameOf ./.;
-  cfg = config.${namespace}.${mod};
+  inherit (lib.slashfiles.mkMod config ./.) mkOptions mkConfig;
 in {
   imports = [
     ./bat.nix
   ];
 
-  options.${namespace}.${mod}.enable = mkEnableOption "enable ${mod}";
+  options = mkOptions {};
 
-  config = mkIf cfg.enable {
+  config = mkConfig {
     home.packages = with pkgs; (lib.concatLists [
       (lib.optionals pkgs.stdenv.isLinux [])
     ]);
 
     programs.fd.enable = true;
     programs.ripgrep.enable = true;
+
+    programs.direnv.enable = true;
+    programs.direnv.mise.enable = true;
+    programs.direnv.nix-direnv.enable = true;
   };
 }
