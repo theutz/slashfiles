@@ -26,12 +26,13 @@ in {
         modules-right = [];
 
         "hyprland/workspaces" = {
-          all-outputs = true;
+          # all-outputs = true;
           format = ''{icon} {name}'';
           window-rewrite-default = ".";
-          # persistent-workspaces = {
-          #   "*" = cfg.workspaces;
-          # };
+          persistent-workspaces = {
+            "DP-2" = cfg.workspaces / 2;
+            "eDP-1" = cfg.workspaces / 2;
+          };
           format-icons = {
             active = "";
             default = "";

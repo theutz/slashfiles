@@ -181,8 +181,8 @@ in {
           "$mainMod SHIFT, V, togglesplit, # dwindle"
           "$mainMod, Z, togglefloating,"
 
-          "$mainMod ALT, H, movecurrentworkspacetomonitor, l"
-          "$mainMod ALT, L, movecurrentworkspacetomonitor, r"
+          "$mainMod ALT, H, movewindow, mon:l"
+          "$mainMod ALT, L, movewindow, mon:r"
 
           "$mainMod, space, exec, $menu"
           "$mainMod, equal, splitratio, +0.1"
