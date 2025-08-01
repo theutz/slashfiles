@@ -16,6 +16,8 @@ settings:
     https://app.fastmail.com: true
     https://web.whatsapp.com: true
     https://www.youtube.com: false
+  hints.uppercase:
+    global: true
   tabs.last_close:
     global: startpage
   url.default_page:
