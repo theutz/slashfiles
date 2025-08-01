@@ -17,15 +17,19 @@ settings:
   content.notifications.enabled:
     https://app.slack.com: true
     https://calendar.google.com: true
+    https://projects.zoho.com: true
   content.register_protocol_handler:
     https://calendar.google.com?cid=%25s: true
     https://mail.google.com?extsrc=mailto&url=%25s: true
   editor.command:
     global:
-    - neovide
+    - /home/michael/.nix-profile/bin/neovide
     - '{file}'
+    - '--'
     - -c
     - normal {line}G{column0}l
+  hints.uppercase:
+    global: true
   tabs.last_close:
     global: startpage
   url.default_page:

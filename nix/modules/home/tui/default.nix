@@ -19,6 +19,10 @@ in {
   options.${namespace}.${mod}.enable = mkEnableOption "enable ${mod}";
 
   config = lib.mkIf cfg.enable {
+    home.packages = with pkgs; [
+      slashfiles.hygg
+    ];
+
     programs.tmux = {
       enable = true;
       aggressiveResize = true;

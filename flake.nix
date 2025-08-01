@@ -39,6 +39,11 @@
       url = "github:Mic92/sops-nix";
       inputs.nixpkgs.follows = "unstable";
     };
+
+    rust-overlay = {
+      url = "github:oxalica/rust-overlay";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = inputs: let
@@ -53,6 +58,10 @@
   in
     lib.mkFlake {
       inherit lib inputs;
+
+      overlays = with inputs; [
+        rust-overlay.overlays.default
+      ];
 
       systems.modules.nixos = with inputs; [
         sops-nix.nixosModules.sops
