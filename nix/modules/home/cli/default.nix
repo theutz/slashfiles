@@ -6,10 +6,7 @@
 }: let
   inherit (lib.slashfiles.mkMod config ./.) mkOptions mkConfig;
 in {
-  imports = [
-    ./bat.nix
-    ./direnv.nix
-  ];
+  imports = lib.slashfiles.list-other-files ./.;
 
   options = mkOptions {};
 
@@ -26,7 +23,6 @@ in {
 
     programs.zoxide.enable = true;
 
-    programs.tealdeer.enable = true;
-    programs.tealdeer.enableAutoUpdates = true;
+    programs.ftdv.enable = true;
   };
 }
