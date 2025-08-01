@@ -20,7 +20,6 @@ in {
 
       exec-once = [
         "$terminal"
-        "waybar"
       ];
 
       env = [
@@ -222,9 +221,9 @@ in {
           "SUPER, mouse_down, workspace, e+1"
           "SUPER, mouse_up, workspace, e-1"
 
-          "Shift_R, slash, exec, playerctl play-pause"
-          "Shift_R, period, exec, playerctl next"
-          "Shift_R, comma, exec, playerctl previous"
+          "Alt_R, slash, exec, playerctl play-pause"
+          "Alt_R, period, exec, playerctl next"
+          "Alt_R, comma, exec, playerctl previous"
         ];
 
       bindm = [
