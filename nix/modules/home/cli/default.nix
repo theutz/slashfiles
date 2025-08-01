@@ -25,5 +25,8 @@ in {
     programs.ripgrep.enable = true;
 
     programs.zoxide.enable = true;
+
+    programs.tealdeer.enable = true;
+    programs.tealdeer.enableAutoUpdates = true;
   };
 }
