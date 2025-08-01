@@ -11,7 +11,7 @@
 in {
   config = lib.mkIf cfg.enable {
     programs.waybar.enable = true;
-
+    programs.waybar.systemd.enable = true;
     programs.waybar.settings = {
       mainBar = {
         name = "mainBar";
@@ -57,8 +57,15 @@ in {
         };
 
         clock = {
-          format = " {:%H:%M %Z}";
-          tooltip-format = "{tz_list}";
+          format = " {:%H:%M %Z  %Od}";
+          tooltip-format =
+            # html
+            ''
+              <tt>
+                <small>{tz_list}</small>
+                <small>{calendar}</small>
+              </tt>
+            '';
           timezones = [
             "Europe/Istanbul"
             "America/New_York"
