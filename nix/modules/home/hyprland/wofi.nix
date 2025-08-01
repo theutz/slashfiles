@@ -1,16 +1,13 @@
 {
   config,
-  namespace,
   lib,
   ...
 }: let
-  mod = builtins.baseNameOf ./.;
-  cfg = config.${namespace}.${mod};
-
-  rp = lib.${namespace}.rose-pine.hex "main";
-  inherit (lib.${namespace}) font rose-pine;
+  inherit (lib.slashfiles.mkMod config ./.) mkConfig;
+  inherit (lib.slashfiles) font rose-pine;
+  rp = rose-pine.hex "main";
 in {
-  config = lib.mkIf cfg.enable {
+  config = mkConfig {
     programs.wofi = {
       enable = true;
       settings = {
