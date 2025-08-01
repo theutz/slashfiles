@@ -3,14 +3,10 @@
   pkgs,
   lib,
   ...
-} @ args: let
-  inherit (lib.slashfiles.mkMod config ./.) mkConfig mkOptions cfg;
+}: let
+  inherit (lib.slashfiles.mkMod config ./.) mkConfig mkOptions;
 in {
-  imports = [
-    ./waybar.nix
-    ./wofi.nix
-    ./settings.nix
-  ];
+  imports = lib.slashfiles.list-other-files ./.;
 
   options = mkOptions {
     monitor = lib.mkOption {

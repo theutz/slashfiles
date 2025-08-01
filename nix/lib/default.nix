@@ -16,4 +16,20 @@
     };
     mkConfig = lib.mkIf cfg.enable;
   };
+
+  list-other-files = path: let
+    inherit (lib.fileset) toList fileFilter;
+  in
+    toList (
+      fileFilter ({
+        name,
+        hasExt,
+        type,
+        ...
+      }:
+        (type == "regular")
+        && name != "default.nix"
+        && hasExt "nix")
+      path
+    );
 }
