@@ -8,10 +8,10 @@
     createHome = true;
     group = "michael";
     extraGroups = ["networkmanager" "wheel"];
-    # packages = with pkgs; [
-    #   sops
-    #   ssh-to-age
-    # ];
+    packages = with pkgs; [
+      sops
+      ssh-to-age
+    ];
     shell = pkgs.zsh;
   };
   users.groups.michael = {};
