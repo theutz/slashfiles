@@ -14,6 +14,8 @@ settings:
     global: palevioletred
   colors.statusbar.url.success.https.fg:
     global: black
+  content.cookies.accept:
+    '*://*.www.linode.com/*': all
   content.notifications.enabled:
     https://app.slack.com: true
     https://calendar.google.com: true
@@ -25,7 +27,7 @@ settings:
     global:
     - /home/michael/.nix-profile/bin/neovide
     - '{file}'
-    - '--'
+    - --
     - -c
     - normal {line}G{column0}l
   hints.uppercase:
