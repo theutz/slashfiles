@@ -9,19 +9,22 @@ mkShell {
   name = namespace;
   meta.description = "dotfiles everywhere";
 
-  EDITOR = lib.getExe pkgs.slashfiles.nvf;
+  EDITOR = lib.getExe pkgs.${namespace}.nvf;
 
-  packages = with pkgs; [
-    onefetch
-    git
-    watchexec
-    nh
-    slashfiles.nvf
-    gum
-    just
-    sops
-    ssh-to-age
-  ];
+  packages = with pkgs;
+    [
+      onefetch
+      git
+      watchexec
+      nh
+      gum
+      just
+      sops
+      ssh-to-age
+    ]
+    ++ (with pkgs.${namespace}; [
+      nvf
+    ]);
 
   shellHook =
     # bash

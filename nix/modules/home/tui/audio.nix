@@ -4,9 +4,10 @@
   inputs,
   system,
   config,
+  namespace,
   ...
 }: let
-  inherit (lib.slashfiles.mkMod config ./.) mkConfig;
+  inherit (lib.${namespace}.mkMod config ./.) mkConfig;
   wiremix = inputs.wiremix.packages.${system}.default;
   exe = lib.getExe' wiremix "wiremix";
 in {

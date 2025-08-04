@@ -2,9 +2,10 @@
   config,
   lib,
   pkgs,
+  namespace,
   ...
 }: let
-  inherit (lib.slashfiles.mkMod config ./.) mkOptions mkConfig;
+  inherit (lib.${namespace}.mkMod config ./.) mkOptions mkConfig;
 in {
   config = mkConfig {
     xdg.desktopEntries.spotify-player = {

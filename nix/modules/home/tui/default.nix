@@ -2,17 +2,18 @@
   config,
   lib,
   pkgs,
+  namespace,
   ...
 }: let
-  inherit (lib.slashfiles.mkMod config ./.) mkOptions mkConfig;
+  inherit (lib.${namespace}.mkMod config ./.) mkOptions mkConfig;
 in {
-  imports = lib.slashfiles.list-other-files ./.;
+  imports = lib.${namespace}.list-other-files ./.;
 
   options = mkOptions {};
 
   config = mkConfig {
-    home.packages = with pkgs; [
-      slashfiles.hygg
+    home.packages = with pkgs.${namespace}; [
+      hygg
     ];
   };
 }

@@ -2,6 +2,7 @@
   config,
   lib,
   pkgs,
+  namespace,
   ...
 }: let
   mod = builtins.baseNameOf ./.;
@@ -31,8 +32,8 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
-    home.packages = with pkgs; [
-      slashfiles.yatto
+    home.packages = with pkgs.${namespace}; [
+      yatto
     ];
 
     xdg.configFile."yatto/config.toml" = {

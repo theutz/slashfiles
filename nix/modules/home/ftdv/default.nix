@@ -2,6 +2,7 @@
   config,
   lib,
   pkgs,
+  namespace,
   ...
 }: let
   mod = baseNameOf ./.;
@@ -11,8 +12,8 @@ in {
 
   config = lib.mkIf cfg.enable (lib.mkMerge [
     {
-      home.packages = with pkgs; [
-        slashfiles.ftdv
+      home.packages = with pkgs.${namespace}; [
+        ftdv
       ];
     }
     (lib.mkIf config.programs.tealdeer.enable {

@@ -2,14 +2,15 @@
   config,
   lib,
   pkgs,
+  namespace,
   ...
 }: let
-  inherit (lib.slashfiles.mkMod config ./.) mkConfig mkOptions;
+  inherit (lib.${namespace}.mkMod config ./.) mkConfig mkOptions;
 in {
   options = mkOptions {};
 
   config = mkConfig {
-    home.packages = with pkgs.slashfiles; [
+    home.packages = with pkgs.${namespace}; [
       sesh
     ];
   };

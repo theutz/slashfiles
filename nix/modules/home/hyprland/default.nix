@@ -2,11 +2,12 @@
   config,
   pkgs,
   lib,
+  namespace,
   ...
 }: let
-  inherit (lib.slashfiles.mkMod config ./.) mkConfig mkOptions;
+  inherit (lib.${namespace}.mkMod config ./.) mkConfig mkOptions;
 in {
-  imports = lib.slashfiles.list-other-files ./.;
+  imports = lib.${namespace}.list-other-files ./.;
 
   options = mkOptions {
     monitor = lib.mkOption {

@@ -1,9 +1,10 @@
 {
   config,
   lib,
+  namespace,
   ...
 }: let
-  inherit (lib.slashfiles.mkMod config ./.) mkConfig cfg;
+  inherit (lib.${namespace}.mkMod config ./.) mkConfig cfg;
 in {
   config = mkConfig {
     wayland.windowManager.hyprland.settings = {

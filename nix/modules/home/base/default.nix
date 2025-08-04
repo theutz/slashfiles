@@ -2,23 +2,24 @@
   config,
   pkgs,
   lib,
+  namespace,
   ...
 }: let
   inherit (lib) mkEnableOption mkIf mkMerge;
-  inherit (lib.slashfiles.mkMod config ./.) mkOptions mkConfig cfg mod;
+  inherit (lib.${namespace}.mkMod config ./.) mkOptions mkConfig cfg mod;
 in {
   options = mkOptions {
     enableWorkstation = mkEnableOption "enable ${mod} workstation modules";
   };
 
   config = mkConfig {
-    slashfiles = mkMerge [
+    ${namespace} = mkMerge [
       {
         shells.enable = true;
         editors.enable = true;
         cli.enable = true;
         tui.enable = true;
-        slashfiles.enable = true;
+        ${namespace}.enable = true;
       }
 
       (mkIf cfg.enableWorkstation {

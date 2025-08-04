@@ -2,9 +2,10 @@
   lib,
   config,
   pkgs,
+  namespace,
   ...
 }: let
-  inherit (lib.slashfiles.mkMod config ./.) mkConfig;
+  inherit (lib.${namespace}.mkMod config ./.) mkConfig;
 in {
   config = mkConfig {
     home.packages = with pkgs; [

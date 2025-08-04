@@ -1,9 +1,10 @@
 {
   config,
   lib,
+  namespace,
   ...
 }: let
-  inherit (lib.slashfiles.mkMod config ./.) mkConfig;
+  inherit (lib.${namespace}.mkMod config ./.) mkConfig;
 in {
   config = mkConfig {
     programs.direnv.enable = true;

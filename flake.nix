@@ -1,5 +1,5 @@
 {
-  description = "slashfiles";
+  description = "/slashfiles: .dotfiles{everywhere}";
 
   inputs = {
     nixpkgs.url = "github:NixOs/nixpkgs/nixos-25.05";

@@ -1,10 +1,11 @@
 {
   config,
   lib,
+  namespace,
   ...
 }: let
-  inherit (lib.slashfiles.mkMod config ./.) mkConfig;
-  inherit (lib.slashfiles) font rose-pine;
+  inherit (lib.${namespace}.mkMod config ./.) mkConfig;
+  inherit (lib.${namespace}) font rose-pine;
   rp = rose-pine.hex "main";
 in {
   config = mkConfig {
