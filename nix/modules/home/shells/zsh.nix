@@ -9,47 +9,59 @@ let
 in
 {
   config = mkConfig {
-    programs.zsh = {
-      enable = true;
+    programs.zsh.enable = true;
 
-      prezto = {
-        enable = true;
-        editor.keymap = "vi";
-        extraModules = [
-          "attr"
-          "stat"
-        ];
-        pmodules = [
-          "environment"
-          "terminal"
-          "editor"
-          "history"
-          "directory"
-          "spectrum"
-          "utility"
-          "completion"
-          "syntax-highlighting"
-          "history-substring-search"
-          "autosuggestions"
-          # "prompt"
-        ];
-        syntaxHighlighting = {
-          highlighters = [
-            "main"
-            "brackets"
-            "pattern"
-            "line"
-            "cursor"
-            "root"
-          ];
-          pattern = {
-            "rm*-rf*" = "fg=white,bold,bg=red";
-          };
-        };
-        tmux = {
-          defaultSessionName = "home";
-        };
+    sops.secrets =
+      let
+        sopsFile = lib.snowfall.fs.get-file "secrets/api-keys.yaml";
+      in
+      {
+        gh_token = lib.traceValSeq { inherit sopsFile; };
       };
+
+    programs.zsh.envExtra = ''
+      export GH_TOKEN=''$(<${config.sops.secrets.gh_token.path})
+    '';
+
+    programs.zsh.prezto.enable = true;
+
+    programs.zsh.prezto.editor.keymap = "vi";
+
+    programs.zsh.prezto.extraModules = [
+      "attr"
+      "stat"
+    ];
+
+    programs.zsh.prezto.pmodules = [
+      "environment"
+      "terminal"
+      "editor"
+      "history"
+      "directory"
+      "spectrum"
+      "utility"
+      "completion"
+      "syntax-highlighting"
+      "history-substring-search"
+      "autosuggestions"
+      # "prompt"
+    ];
+
+    programs.zsh.prezto.syntaxHighlighting.highlighters = [
+      "main"
+      "brackets"
+      "pattern"
+      "line"
+      "cursor"
+      "root"
+    ];
+
+    programs.zsh.prezto.syntaxHighlighting.pattern = {
+      "rm*-rf*" = "fg=white,bold,bg=red";
+    };
+
+    programs.zsh.prezto.tmux = {
+      defaultSessionName = "home";
     };
   };
 }
