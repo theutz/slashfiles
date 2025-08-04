@@ -2,11 +2,12 @@
   pkgs,
   lib,
   ...
-}: {
+}:
+{
   programs.hyprland.enable = true;
   programs.hyprland.withUWSM = true;
   programs.hyprland.xwayland.enable = true;
-  security.pam.services.hyprlock = {};
+  security.pam.services.hyprlock = { };
   environment.sessionVariables.NIXOS_OZONE_WL = "1";
   environment.systemPackages = with pkgs; [
     kitty

@@ -2,17 +2,23 @@
   pkgs,
   lib,
   ...
-}: let
+}:
+let
   inherit (lib.nvim.binds) mkKeymap;
-  mkMove = key: dir: (mkKeymap ["n" "v"] key "<cmd>Treewalker ${dir}<cr>" {
-    desc = "Treewalker move ${dir}";
-    silent = true;
-  });
-  mkSwap = key: dir: (mkKeymap "n" key "<cmd>Treewalker Swap${dir}<cr>" {
-    desc = "Treewalker swap ${dir}";
-    silent = true;
-  });
-in {
+  mkMove =
+    key: dir:
+    (mkKeymap [ "n" "v" ] key "<cmd>Treewalker ${dir}<cr>" {
+      desc = "Treewalker move ${dir}";
+      silent = true;
+    });
+  mkSwap =
+    key: dir:
+    (mkKeymap "n" key "<cmd>Treewalker Swap${dir}<cr>" {
+      desc = "Treewalker swap ${dir}";
+      silent = true;
+    });
+in
+{
   config.vim = {
     lazy.plugins."treewalker.nvim" = {
       package = pkgs.vimPlugins.treewalker-nvim;

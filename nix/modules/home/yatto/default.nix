@@ -4,13 +4,15 @@
   pkgs,
   namespace,
   ...
-}: let
+}:
+let
   mod = builtins.baseNameOf ./.;
   cfg = config.programs.${mod};
 
-  settingsFormatter = pkgs.formats.toml {};
+  settingsFormatter = pkgs.formats.toml { };
   settingsFile = settingsFormatter.generate "config.toml" cfg.settings;
-in {
+in
+{
   options.programs.${mod} = {
     enable = lib.mkEnableOption "enable ${mod}";
 

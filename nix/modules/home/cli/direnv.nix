@@ -3,9 +3,11 @@
   lib,
   namespace,
   ...
-}: let
+}:
+let
   inherit (lib.${namespace}.mkMod config ./.) mkConfig;
-in {
+in
+{
   config = mkConfig {
     programs.direnv.enable = true;
     programs.direnv.mise.enable = true;

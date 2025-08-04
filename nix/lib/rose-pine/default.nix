@@ -1,4 +1,5 @@
-{...}: let
+{ ... }:
+let
   main = {
     base = "191724";
     surface = "1f1d2e";
@@ -25,8 +26,14 @@
 
   color = theme: name: themes.${theme}.${name};
   hex = theme: name: "#${color theme name}";
-in {
+in
+{
   rose-pine = {
-    inherit main themes hex color;
+    inherit
+      main
+      themes
+      hex
+      color
+      ;
   };
 }

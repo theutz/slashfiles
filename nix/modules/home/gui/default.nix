@@ -4,26 +4,30 @@
   pkgs,
   namespace,
   ...
-}: let
+}:
+let
   inherit (lib.${namespace}.mkMod config ./.) mkOptions mkConfig;
-in {
-  imports = [./xdg.nix];
+in
+{
+  imports = [ ./xdg.nix ];
 
-  options = mkOptions {};
+  options = mkOptions { };
 
   config = mkConfig {
-    home.packages = with pkgs; (lib.concatLists [
-      [
-        slack
-        zoom-us
-        signal-desktop
-        neovide
-      ]
+    home.packages =
+      with pkgs;
+      (lib.concatLists [
+        [
+          slack
+          zoom-us
+          signal-desktop
+          neovide
+        ]
 
-      (lib.optionals pkgs.stdenv.isLinux [
-        brightnessctl
-        playerctl
-      ])
-    ]);
+        (lib.optionals pkgs.stdenv.isLinux [
+          brightnessctl
+          playerctl
+        ])
+      ]);
   };
 }

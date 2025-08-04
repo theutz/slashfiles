@@ -4,10 +4,17 @@
   lib,
   namespace,
   ...
-}: let
+}:
+let
   inherit (lib) mkEnableOption mkIf mkMerge;
-  inherit (lib.${namespace}.mkMod config ./.) mkOptions mkConfig cfg mod;
-in {
+  inherit (lib.${namespace}.mkMod config ./.)
+    mkOptions
+    mkConfig
+    cfg
+    mod
+    ;
+in
+{
   options = mkOptions {
     enableWorkstation = mkEnableOption "enable ${mod} workstation modules";
   };

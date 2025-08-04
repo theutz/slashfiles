@@ -4,10 +4,12 @@
   pkgs,
   namespace,
   ...
-}: let
+}:
+let
   inherit (lib.${namespace}.mkMod config ./.) mkConfig mkOptions;
-in {
-  options = mkOptions {};
+in
+{
+  options = mkOptions { };
 
   config = mkConfig {
     home.packages = with pkgs; [

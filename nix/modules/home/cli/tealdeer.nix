@@ -3,9 +3,11 @@
   config,
   namespace,
   ...
-}: let
+}:
+let
   inherit (lib.${namespace}.mkMod config ./.) mkConfig;
-in {
+in
+{
   config = mkConfig {
     programs.tealdeer = {
       enable = true;

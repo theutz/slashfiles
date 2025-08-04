@@ -2,19 +2,23 @@
   pkgs,
   lib,
   ...
-}: {
+}:
+{
   users.users.michael = {
     isNormalUser = true;
     createHome = true;
     group = "michael";
-    extraGroups = ["networkmanager" "wheel"];
+    extraGroups = [
+      "networkmanager"
+      "wheel"
+    ];
     packages = with pkgs; [
       sops
       ssh-to-age
     ];
     shell = pkgs.zsh;
   };
-  users.groups.michael = {};
+  users.groups.michael = { };
 
   # Explicitly don't integrate Home Manager, so that
   # we can manage as standalone with `nh home switch`

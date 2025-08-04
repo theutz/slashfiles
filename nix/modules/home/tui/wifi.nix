@@ -3,9 +3,11 @@
   lib,
   namespace,
   ...
-}: let
+}:
+let
   inherit (lib.${namespace}.mkMod config ./.) mkConfig;
-in {
+in
+{
   config = mkConfig {
     xdg.desktopEntries.wifi = {
       name = "WiFi Controls";

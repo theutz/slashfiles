@@ -3,12 +3,14 @@
   lib,
   config,
   ...
-}: let
+}:
+let
   cfg = config.${namespace}.${mod};
   mod = baseNameOf ./.;
   rp = lib.${namespace}.rose-pine.hex "main";
   inherit (lib.${namespace}) font;
-in {
+in
+{
   config = lib.mkIf cfg.enable {
     programs.waybar.enable = true;
     programs.waybar.systemd.enable = true;
@@ -91,7 +93,11 @@ in {
             phone = "";
             portable = "";
             car = "";
-            default = ["" "" ""];
+            default = [
+              ""
+              ""
+              ""
+            ];
           };
           on-click = "wezterm start wiremix -v output";
           on-click-right = "wezterm start wiremix -v playback";

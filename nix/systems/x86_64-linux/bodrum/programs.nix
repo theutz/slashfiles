@@ -1,7 +1,8 @@
-{pkgs, ...}: {
+{ pkgs, ... }:
+{
   xdg.terminal-exec = {
     enable = true;
-    settings.default = ["org.wezfurlong.wezterm.desktop"];
+    settings.default = [ "org.wezfurlong.wezterm.desktop" ];
   };
 
   # Some programs need SUID wrappers, can be configured further or are

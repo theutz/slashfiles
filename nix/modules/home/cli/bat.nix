@@ -4,12 +4,14 @@
   pkgs,
   namespace,
   ...
-}: let
+}:
+let
   inherit (builtins) baseNameOf;
   inherit (lib) mkIf;
   mod = baseNameOf ./.;
   cfg = config.${namespace}.${mod};
-in {
+in
+{
   config = mkIf cfg.enable {
     programs.bat = {
       enable = true;
@@ -37,27 +39,29 @@ in {
         };
       };
 
-      themes = let
-        src = pkgs.fetchFromGitHub {
-          owner = "rose-pine";
-          repo = "tm-theme";
-          rev = "c4cab0c431f55a3c4f9897407b7bdad363bbb862";
-          sha256 = "sha256-maQp4QTJOlK24eid7mUsoS7kc8P0gerKcbvNaxO8Mic=";
+      themes =
+        let
+          src = pkgs.fetchFromGitHub {
+            owner = "rose-pine";
+            repo = "tm-theme";
+            rev = "c4cab0c431f55a3c4f9897407b7bdad363bbb862";
+            sha256 = "sha256-maQp4QTJOlK24eid7mUsoS7kc8P0gerKcbvNaxO8Mic=";
+          };
+        in
+        {
+          rose-pine = {
+            inherit src;
+            file = "dist/themes/rose-pine.tmTheme";
+          };
+          rose-pine-dawn = {
+            inherit src;
+            file = "dist/themes/rose-pine-dawn.tmTheme";
+          };
+          rose-pine-moon = {
+            inherit src;
+            file = "dist/themes/rose-pine-moon.tmTheme";
+          };
         };
-      in {
-        rose-pine = {
-          inherit src;
-          file = "dist/themes/rose-pine.tmTheme";
-        };
-        rose-pine-dawn = {
-          inherit src;
-          file = "dist/themes/rose-pine-dawn.tmTheme";
-        };
-        rose-pine-moon = {
-          inherit src;
-          file = "dist/themes/rose-pine-moon.tmTheme";
-        };
-      };
     };
   };
 }

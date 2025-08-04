@@ -3,9 +3,11 @@
   lib,
   namespace,
   ...
-}: let
+}:
+let
   inherit (lib.${namespace}.mkMod config ./.) mkConfig;
-in {
+in
+{
   config = mkConfig {
     programs.zsh = {
       enable = true;
@@ -13,7 +15,10 @@ in {
       prezto = {
         enable = true;
         editor.keymap = "vi";
-        extraModules = ["attr" "stat"];
+        extraModules = [
+          "attr"
+          "stat"
+        ];
         pmodules = [
           "environment"
           "terminal"

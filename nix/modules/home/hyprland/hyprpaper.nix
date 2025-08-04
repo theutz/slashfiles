@@ -3,9 +3,11 @@
   lib,
   namespace,
   ...
-}: let
+}:
+let
   inherit (lib.${namespace}.mkMod config ./.) mkConfig;
-in {
+in
+{
   config = mkConfig {
     services.hyprpaper.enable = true;
     services.hyprpaper.settings = {

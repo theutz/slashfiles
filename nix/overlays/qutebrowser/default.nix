@@ -1,9 +1,9 @@
-_: final: prev: {
+_: _final: prev: {
   qutebrowser =
-    if prev.stdenv.isLinux
-    then
+    if prev.stdenv.isLinux then
       prev.qutebrowser.override {
         enableWideVine = true;
       }
-    else prev.qutebrowser;
+    else
+      prev.qutebrowser;
 }

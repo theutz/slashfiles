@@ -4,9 +4,11 @@
   pkgs,
   namespace,
   ...
-}: let
-  inherit (lib.${namespace}.mkMod config ./.) mkOptions mkConfig;
-in {
+}:
+let
+  inherit (lib.${namespace}.mkMod config ./.) mkConfig;
+in
+{
   config = mkConfig {
     xdg.desktopEntries.spotify-player = {
       name = "Spotify Player";
@@ -20,10 +22,15 @@ in {
       spotify
     ];
 
-    sops.secrets = lib.genAttrs [
-      "spotify_client_id"
-      "spotify_password"
-    ] (_: {sopsFile = lib.snowfall.fs.get-file "secrets/api-keys.yaml";});
+    sops.secrets =
+      lib.genAttrs
+        [
+          "spotify_client_id"
+          "spotify_password"
+        ]
+        (_: {
+          sopsFile = lib.snowfall.fs.get-file "secrets/api-keys.yaml";
+        });
 
     programs.spotify-player = {
       enable = true;
@@ -65,18 +72,39 @@ in {
 
       keymaps =
         [
-          ["q" "Queue"]
-          ["C-s" "None"]
-          ["C-r" "None"]
-          ["h" "FocusPreviousWindow"]
-          ["l" "FocusNextWindow"]
-          ["H" "PreviousPage"]
+          [
+            "q"
+            "Queue"
+          ]
+          [
+            "C-s"
+            "None"
+          ]
+          [
+            "C-r"
+            "None"
+          ]
+          [
+            "h"
+            "FocusPreviousWindow"
+          ]
+          [
+            "l"
+            "FocusNextWindow"
+          ]
+          [
+            "H"
+            "PreviousPage"
+          ]
         ]
         |> lib.map (
           x:
-            x
-            |> lib.lists.zipListsWith (a: b: {"${a}" = b;}) ["key_sequence" "command"]
-            |> lib.mergeAttrsList
+          x
+          |> lib.lists.zipListsWith (a: b: { "${a}" = b; }) [
+            "key_sequence"
+            "command"
+          ]
+          |> lib.mergeAttrsList
         );
 
       actions = [

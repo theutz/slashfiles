@@ -4,9 +4,11 @@
   lib,
   namespace,
   ...
-}: let
+}:
+let
   inherit (lib.${namespace}.mkMod config ./.) mkConfig;
-in {
+in
+{
   config = mkConfig {
     programs.tmux = {
       enable = true;
@@ -16,8 +18,7 @@ in {
       customPaneNavigationAndResize = true;
       disableConfirmationPrompt = true;
       escapeTime = 10;
-      extraConfig = ''
-      '';
+      extraConfig = '''';
       focusEvents = true;
       historyLimit = 100000;
       keyMode = "vi";

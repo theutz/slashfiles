@@ -6,11 +6,13 @@
   config,
   namespace,
   ...
-}: let
+}:
+let
   inherit (lib.${namespace}.mkMod config ./.) mkConfig;
   wiremix = inputs.wiremix.packages.${system}.default;
   exe = lib.getExe' wiremix "wiremix";
-in {
+in
+{
   config = mkConfig {
     home.packages = with pkgs; [
       wiremix

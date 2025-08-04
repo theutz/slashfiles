@@ -4,7 +4,8 @@
   system,
   namespace,
   ...
-}: {
+}:
+{
   "${namespace}" = {
     pam.enable = true;
     pkgs.enable = true;
@@ -35,7 +36,8 @@
       hm = "man 5 home-configuration.nix";
     };
 
-    systemPackages = with pkgs;
+    systemPackages =
+      with pkgs;
       [
         nvf-man
       ]
@@ -59,9 +61,12 @@
     };
     linux-builder = {
       enable = true;
-      systems = ["x86_64-linux" "aarch64-linux"];
+      systems = [
+        "x86_64-linux"
+        "aarch64-linux"
+      ];
       ephemeral = true;
-      config.boot.binfmt.emulatedSystems = ["x86_64-linux"];
+      config.boot.binfmt.emulatedSystems = [ "x86_64-linux" ];
       maxJobs = 8;
       # config = {
       #   virtualisation = {
@@ -108,7 +113,7 @@
         "flakes"
         "pipe-operators"
       ];
-      trusted-users = ["@admin"];
+      trusted-users = [ "@admin" ];
     };
   };
 

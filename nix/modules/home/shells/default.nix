@@ -3,12 +3,14 @@
   lib,
   namespace,
   ...
-}: let
+}:
+let
   inherit (lib.${namespace}.mkMod config ./.) mkConfig mkOptions;
-in {
+in
+{
   imports = lib.${namespace}.list-other-files ./.;
 
-  options = mkOptions {};
+  options = mkOptions { };
 
   config = mkConfig {
     programs.starship = {

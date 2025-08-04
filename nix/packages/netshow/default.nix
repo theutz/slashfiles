@@ -4,7 +4,8 @@
   inputs,
   stdenv,
   ...
-}: let
+}:
+let
   inherit (inputs) pyproject-nix pyproject-build-systems uv2nix;
   # inherit (pkgs.callPackages pyproject-nix.build.util {}) mkApplication;
 
@@ -30,15 +31,17 @@
   };
 
   # 3. Placeholder for any necessary custom overrides
-  myCustomOverrides = final: prev: {
+  myCustomOverrides = _final: _prev: {
   };
 
   # 4. Construct the final python package set
-  pythonSet = (pkgs.callPackage pyproject-nix.build.packages {inherit python;}).overrideScope (lib.composeManyExtensions [
-    pyproject-build-systems.overlays.default # For any build tools
-    uvLockedOverlay
-    myCustomOverrides
-  ]);
+  pythonSet = (pkgs.callPackage pyproject-nix.build.packages { inherit python; }).overrideScope (
+    lib.composeManyExtensions [
+      pyproject-build-systems.overlays.default # For any build tools
+      uvLockedOverlay
+      myCustomOverrides
+    ]
+  );
 
   name = "netshow";
   p = pythonSet.${name}; # This project as a package
@@ -46,24 +49,27 @@
   # 5. Create the runtime environment
   appPythonEnv = pythonSet.mkVirtualEnv (p.pname + "-env") workspace.deps.default;
 in
-  stdenv.mkDerivation {
-    pname = p.pname;
-    version = p.version;
+stdenv.mkDerivation {
+  pname = p.pname;
+  version = p.version;
 
-    src = repo;
+  src = repo;
 
-    nativeBuildInputs = with pkgs; [makeWrapper lsof];
-    buildInputs = [appPythonEnv];
+  nativeBuildInputs = with pkgs; [
+    makeWrapper
+    lsof
+  ];
+  buildInputs = [ appPythonEnv ];
 
-    installPhase = ''
-      mkdir -p $out/bin
-      cp src/netshow/*.py $out/bin
-      makeWrapper ${appPythonEnv}/bin/python $out/bin/${p.pname} \
-        --add-flags "-m netshow.cli"
-    '';
+  installPhase = ''
+    mkdir -p $out/bin
+    cp src/netshow/*.py $out/bin
+    makeWrapper ${appPythonEnv}/bin/python $out/bin/${p.pname} \
+      --add-flags "-m netshow.cli"
+  '';
 
-    postFixup = ''
-      wrapProgram $out/bin/${p.pname} \
-        --set PATH ${lib.makeBinPath [pkgs.lsof]}
-    '';
-  }
+  postFixup = ''
+    wrapProgram $out/bin/${p.pname} \
+      --set PATH ${lib.makeBinPath [ pkgs.lsof ]}
+  '';
+}

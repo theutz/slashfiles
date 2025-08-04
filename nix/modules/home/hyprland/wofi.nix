@@ -3,11 +3,13 @@
   lib,
   namespace,
   ...
-}: let
+}:
+let
   inherit (lib.${namespace}.mkMod config ./.) mkConfig;
   inherit (lib.${namespace}) font rose-pine;
   rp = rose-pine.hex "main";
-in {
+in
+{
   config = mkConfig {
     programs.wofi = {
       enable = true;

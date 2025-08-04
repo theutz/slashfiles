@@ -1,4 +1,5 @@
-{lib, ...}: {
+{ lib, ... }:
+{
   config = {
     vim = {
       binds = {
@@ -21,15 +22,15 @@
           update_in_insert = true;
           signs.text =
             lib.generators.mkLuaInline
-            # lua
-            ''
-              {
-                [vim.diagnostic.severity.ERROR] = " ",
-                [vim.diagnostic.severity.WARN] = " ",
-                [vim.diagnostic.severity.HINT] = " ",
-                [vim.diagnostic.severity.INFO] = " "
-              }
-            '';
+              # lua
+              ''
+                {
+                  [vim.diagnostic.severity.ERROR] = " ",
+                  [vim.diagnostic.severity.WARN] = " ",
+                  [vim.diagnostic.severity.HINT] = " ",
+                  [vim.diagnostic.severity.INFO] = " "
+                }
+              '';
         };
       };
 

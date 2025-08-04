@@ -3,16 +3,20 @@
   config,
   lib',
   ...
-}: let
+}:
+let
   inherit (lib.nvim.binds) mkKeymap;
   inherit (lib.lists) optional;
   inherit (lib') flatConcat;
 
-  mkItem = key: cmd: desc: mkKeymap ["n"] "<leader>b${key}" "<cmd>${cmd}<cr>" {inherit desc;};
+  mkItem =
+    key: cmd: desc:
+    mkKeymap [ "n" ] "<leader>b${key}" "<cmd>${cmd}<cr>" { inherit desc; };
 
   hasFzf = config.vim.fzf-lua.enable;
   hasBufferline = config.vim.tabline.nvimBufferline.enable == true;
-in {
+in
+{
   config.vim = {
     binds.whichKey.register = {
       "<leader>b" = "buffers";
@@ -40,22 +44,16 @@ in {
           (mkItem "o" "BufferLineCloseOthers" "Close others")
           (mkItem "k" "BufferLineTogglePin" "Pin buffer")
         ]
-        (
-          optional hasFzf [
-            (mkItem "s" "FzfLua buffers" "Search buffers")
-          ]
-        )
+        (optional hasFzf [
+          (mkItem "s" "FzfLua buffers" "Search buffers")
+        ])
         [
-          (mkKeymap "n" "]b" (
-            if hasBufferline
-            then "<cmd>BufferLineCycleNext<cr>"
-            else "<cmd>bnext<cr>"
-          ) {desc = "Next buffer";})
-          (mkKeymap "n" "[b" (
-            if hasBufferline
-            then "<cmd>BufferLineCyclePrev<cr>"
-            else "<cmd>bprev<cr>"
-          ) {desc = "Previous buffer";})
+          (mkKeymap "n" "]b" (if hasBufferline then "<cmd>BufferLineCycleNext<cr>" else "<cmd>bnext<cr>") {
+            desc = "Next buffer";
+          })
+          (mkKeymap "n" "[b" (if hasBufferline then "<cmd>BufferLineCyclePrev<cr>" else "<cmd>bprev<cr>") {
+            desc = "Previous buffer";
+          })
         ]
       ]
       |> lib.concatLists

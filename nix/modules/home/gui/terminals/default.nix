@@ -4,7 +4,8 @@
   lib,
   namespace,
   ...
-}: let
+}:
+let
   inherit (builtins) baseNameOf;
   mod = baseNameOf ./.;
   cfg = config.${namespace}.${mod};
@@ -16,10 +17,9 @@
       rose-pine = "rose-pine";
       rose-pine-dawn = "rose-pine-dawn";
       rose-pine-moon = "rose-pine-moon";
-    }).${
-      theme.name
-    };
-in {
+    }).${theme.name};
+in
+{
   options.${namespace}.${mod}.enable = mkEnableOption "enable ${mod}";
 
   config = mkIf cfg.enable {

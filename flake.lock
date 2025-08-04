@@ -287,6 +287,7 @@
         "rust-overlay": "rust-overlay",
         "snowfall-lib": "snowfall-lib",
         "sops-nix": "sops-nix",
+        "treefmt-nix": "treefmt-nix",
         "unstable": "unstable",
         "uv2nix": "uv2nix",
         "wiremix": "wiremix"
@@ -396,6 +397,26 @@
       "original": {
         "owner": "nix-systems",
         "repo": "default-linux",
+        "type": "github"
+      }
+    },
+    "treefmt-nix": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1754061284,
+        "narHash": "sha256-ONcNxdSiPyJ9qavMPJYAXDNBzYobHRxw0WbT38lKbwU=",
+        "owner": "numtide",
+        "repo": "treefmt-nix",
+        "rev": "58bd4da459f0a39e506847109a2a5cfceb837796",
+        "type": "github"
+      },
+      "original": {
+        "owner": "numtide",
+        "repo": "treefmt-nix",
         "type": "github"
       }
     },

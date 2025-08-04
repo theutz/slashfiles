@@ -1,9 +1,9 @@
 {
   config,
-  pkgs,
   namespace,
   ...
-}: {
+}:
+{
   imports = [
     ./git.nix
     ./secrets.nix

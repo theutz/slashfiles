@@ -11,7 +11,8 @@ mkShell {
 
   EDITOR = lib.getExe pkgs.${namespace}.nvf;
 
-  packages = with pkgs;
+  packages =
+    with pkgs;
     [
       onefetch
       git

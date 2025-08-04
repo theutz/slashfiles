@@ -3,9 +3,11 @@
   pkgs,
   config,
   ...
-}: let
+}:
+let
   inherit (lib.nvim.binds) mkKeymap;
-in {
+in
+{
   config.vim = {
     git.enable = false;
 
@@ -55,10 +57,10 @@ in {
 
     keymaps = lib.concatLists [
       [
-        (mkKeymap ["t"] "<C-/>" "<cmd>ToggleTerm<cr>" {desc = "Close toggleterm";})
+        (mkKeymap [ "t" ] "<C-/>" "<cmd>ToggleTerm<cr>" { desc = "Close toggleterm"; })
       ]
-      (lib.optionals (! config.vim.terminal.toggleterm.lazygit.enable) [
-        (mkKeymap ["n"] "<leader>gg" "<cmd>Neogit<cr>" {desc = "Neogit";})
+      (lib.optionals (!config.vim.terminal.toggleterm.lazygit.enable) [
+        (mkKeymap [ "n" ] "<leader>gg" "<cmd>Neogit<cr>" { desc = "Neogit"; })
       ])
     ];
 

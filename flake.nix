@@ -66,18 +66,25 @@
         uv2nix.follows = "uv2nix";
       };
     };
+
+    treefmt-nix = {
+      url = "github:numtide/treefmt-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = inputs: let
-    lib = inputs.snowfall-lib.mkLib {
-      inherit inputs;
-      src = ./.;
-      snowfall = {
-        root = ./nix;
-        namespace = "slashfiles";
+  outputs =
+    inputs:
+    let
+      lib = inputs.snowfall-lib.mkLib {
+        inherit inputs;
+        src = ./.;
+        snowfall = {
+          root = ./nix;
+          namespace = "slashfiles";
+        };
       };
-    };
-  in
+    in
     lib.mkFlake {
       inherit lib inputs;
 
@@ -97,8 +104,21 @@
       channels-config = {
         allowUnfree = true;
         allowUnsupportedSystem = true;
-        permittedInsecurePackages = [];
-        config = {};
+        permittedInsecurePackages = [ ];
+        config = { };
       };
+
+      outputs-builder =
+        channels:
+        let
+          pkgs = channels.nixpkgs;
+          treefmt = inputs.treefmt-nix.lib.evalModule pkgs ./treefmt.nix;
+        in
+        {
+          formatter = treefmt.config.build.wrapper;
+          checks = {
+            formatting = treefmt.config.build.check inputs.self;
+          };
+        };
     };
 }

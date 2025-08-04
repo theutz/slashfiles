@@ -4,9 +4,11 @@
   pkgs,
   namespace,
   ...
-}: let
+}:
+let
   inherit (lib.${namespace}.mkMod config ./.) mkConfig;
-in {
+in
+{
   config = mkConfig {
     home.packages = with pkgs; [
       bluetui

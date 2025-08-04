@@ -1,6 +1,8 @@
-{lib, ...}: let
+{ lib, ... }:
+let
   inherit (lib.generators) mkLuaInline;
-in {
+in
+{
   config.vim = {
     globals = {
       mapleader = " ";
@@ -43,15 +45,24 @@ in {
       relativenumber = true;
       ruler = false;
       scrolloff = 4;
-      sessionoptions = lib.strings.concatStringsSep "," ["buffers" "curdir" "tabpages" "winsize" "help" "globals" "skiprtp" "folds"];
+      sessionoptions = lib.strings.concatStringsSep "," [
+        "buffers"
+        "curdir"
+        "tabpages"
+        "winsize"
+        "help"
+        "globals"
+        "skiprtp"
+        "folds"
+      ];
       shiftround = true;
       shiftwidth = 2;
       shortmess =
         mkLuaInline
-        # lua
-        ''
-          vim.opt.shortmess:append({ W = true, I = true, c = true, C = true })
-        '';
+          # lua
+          ''
+            vim.opt.shortmess:append({ W = true, I = true, c = true, C = true })
+          '';
       showmode = false;
       sidescrolloff = 8;
       signcolumn = "yes";
@@ -65,8 +76,8 @@ in {
       termguicolors = true;
       timeoutlen =
         mkLuaInline
-        # lua
-        ''vim.g.vscode and 1000 or 300'';
+          # lua
+          ''vim.g.vscode and 1000 or 300'';
       undofile = true;
       undolevels = 10000;
       updatetime = 200;

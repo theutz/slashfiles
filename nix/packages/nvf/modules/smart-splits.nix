@@ -5,18 +5,22 @@
   namespace,
   config,
   ...
-}: let
+}:
+let
   mod = "smart-splits";
   cfg = config.${namespace}.${mod};
 
   inherit (lib.nvim.binds) mkKeymap;
 
-  bind = key: func: (mkKeymap "n" key "function () require('smart-splits').${func}() end" {
-    desc = func |> builtins.replaceStrings ["_"] [" "] |> lib.toSentenceCase;
-    lua = true;
-    silent = true;
-  });
-in {
+  bind =
+    key: func:
+    (mkKeymap "n" key "function () require('smart-splits').${func}() end" {
+      desc = func |> builtins.replaceStrings [ "_" ] [ " " ] |> lib.toSentenceCase;
+      lua = true;
+      silent = true;
+    });
+in
+{
   options.${namespace}.${mod} = {
     enable = lib.mkEnableOption "enable smart-splits";
   };

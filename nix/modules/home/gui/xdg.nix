@@ -3,15 +3,17 @@
   namespace,
   lib,
   ...
-}: let
+}:
+let
   inherit (lib.${namespace}.mkMod config ./.) cfg;
-in {
+in
+{
   config = lib.mkIf cfg.enable {
     home.preferXdgDirectories = true;
 
     xdg.enable = true;
     xdg.mimeApps.defaultApplications = {
-      "x-scheme-handler/terminal" = ["org.wezfurlong.wezterm.desktop"];
+      "x-scheme-handler/terminal" = [ "org.wezfurlong.wezterm.desktop" ];
     };
 
     home.sessionVariables = {

@@ -1,10 +1,12 @@
-{lib, ...}: let
+{ lib, ... }:
+let
   inherit (lib.generators) mkLuaInline;
   inherit (lib.nvim.binds) mkKeymap;
-in {
+in
+{
   config.vim = {
     keymaps = [
-      (mkKeymap ["n"] "<leader>qq" "<cmd>xa<cr>" {desc = "Save all and quit";})
+      (mkKeymap [ "n" ] "<leader>qq" "<cmd>xa<cr>" { desc = "Save all and quit"; })
     ];
     binds.whichKey.register."<leader>q" = "quit/session";
 

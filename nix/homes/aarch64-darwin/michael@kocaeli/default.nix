@@ -3,7 +3,8 @@
   pkgs,
   namespace,
   ...
-}: {
+}:
+{
   "${namespace}" = {
     aerospace.enable = true;
     bash.enable = true;

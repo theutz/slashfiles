@@ -3,9 +3,11 @@
   lib,
   namespace,
   ...
-}: let
+}:
+let
   inherit (lib.${namespace}.mkMod config ./.) mkConfig cfg;
-in {
+in
+{
   config = mkConfig {
     wayland.windowManager.hyprland.settings = {
       inherit (cfg) monitor;
@@ -126,18 +128,19 @@ in {
       };
 
       bind =
-        (lib.concatLists (lib.genList (x: let
-            index = x + 1;
-            num = toString (
-              if index == 10
-              then 0
-              else (x + 1)
-            );
-          in [
-            "SUPER, ${num}, workspace, ${toString index}"
-            "SUPER SHIFT, ${num}, movetoworkspace, ${toString index}"
-          ])
-          cfg.workspaces))
+        (lib.concatLists (
+          lib.genList (
+            x:
+            let
+              index = x + 1;
+              num = toString (if index == 10 then 0 else (x + 1));
+            in
+            [
+              "SUPER, ${num}, workspace, ${toString index}"
+              "SUPER SHIFT, ${num}, movetoworkspace, ${toString index}"
+            ]
+          ) cfg.workspaces
+        ))
         ++ [
           ", XF86MonBrightnessUp, exec, brightnessctl set +10%"
           ", XF86MonBrightnessDown, exec, brightnessctl set 10%-"

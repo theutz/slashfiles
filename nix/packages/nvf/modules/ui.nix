@@ -2,9 +2,11 @@
   lib,
   config,
   ...
-}: let
+}:
+let
   inherit (lib.nvim.binds) mkKeymap;
-in {
+in
+{
   config.vim = {
     statusline.lualine = {
       enable = true;
@@ -27,8 +29,8 @@ in {
     };
 
     keymaps = lib.optionals config.vim.ui.noice.enable [
-      (mkKeymap ["n"] "<leader>vee" "<cmd>NoiceErrors<cr>" {desc = "Show errors";})
-      (mkKeymap ["n"] "<leader>ves" "<cmd>NoiceFzf<cr>" {desc = "Search errors";})
+      (mkKeymap [ "n" ] "<leader>vee" "<cmd>NoiceErrors<cr>" { desc = "Show errors"; })
+      (mkKeymap [ "n" ] "<leader>ves" "<cmd>NoiceFzf<cr>" { desc = "Search errors"; })
     ];
 
     ui = {
@@ -47,7 +49,9 @@ in {
           routes = [
             {
               view = "notify";
-              filter = {event = "msg_showmode";};
+              filter = {
+                event = "msg_showmode";
+              };
             }
           ];
         };

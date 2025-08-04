@@ -2,12 +2,14 @@
   pkgs,
   lib,
   ...
-}: let
+}:
+let
   inherit (lib.nvim.binds) mkKeymap;
-in {
+in
+{
   config.vim = {
     keymaps = [
-      (mkKeymap "n" "<leader>sR" "<cmd>GrugFar<cr>" {desc = "Search & Replace";})
+      (mkKeymap "n" "<leader>sR" "<cmd>GrugFar<cr>" { desc = "Search & Replace"; })
     ];
 
     lazy.plugins = {
