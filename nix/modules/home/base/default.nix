@@ -18,6 +18,7 @@ in {
         editors.enable = true;
         cli.enable = true;
         tui.enable = true;
+        slashfiles.enable = true;
       }
 
       (mkIf cfg.enableWorkstation {

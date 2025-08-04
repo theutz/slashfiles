@@ -1,0 +1,9 @@
+session_name: slashfiles
+global_options:
+  remain-on-exit: true
+  other-pane-width: 80
+windows:
+  - window_name: main
+    panes:
+      - focus: true
+      - just watch-homes
