@@ -14,13 +14,14 @@ settings:
     https://theutz.1password.com: access-paste
   content.notifications.enabled:
     https://app.fastmail.com: true
+    https://lemmy.world: true
     https://web.whatsapp.com: true
     https://www.youtube.com: false
   editor.command:
     global:
     - /home/michael/.nix-profile/bin/neovide
     - '{file}'
-    - '--'
+    - --
     - -c
     - normal {line}G{column0}l
   hints.uppercase:
