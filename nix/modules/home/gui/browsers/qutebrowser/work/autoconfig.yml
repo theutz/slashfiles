@@ -15,6 +15,7 @@ settings:
   colors.statusbar.url.success.https.fg:
     global: black
   content.cookies.accept:
+    '*://*.app.slack.com/*': all
     '*://*.www.linode.com/*': all
   content.notifications.enabled:
     https://app.slack.com: true
