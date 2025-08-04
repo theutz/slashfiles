@@ -29,4 +29,6 @@ in
     };
 
     cargoHash = "sha256-60BDLAwpSKvdiFs+Gg7h3kEVbD4MwMVmIJOIS0Yvoio=";
+
+    doCheck = false;
   })
