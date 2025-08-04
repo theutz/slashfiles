@@ -17,6 +17,8 @@ settings:
   content.cookies.accept:
     '*://*.app.slack.com/*': all
     '*://*.www.linode.com/*': all
+  content.javascript.clipboard:
+    https://app.raindrop.io: access-paste
   content.notifications.enabled:
     https://app.slack.com: true
     https://calendar.google.com: true
