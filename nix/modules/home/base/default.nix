@@ -2,20 +2,17 @@
   config,
   pkgs,
   lib,
-  namespace,
   ...
 }: let
-  mod = builtins.baseNameOf ./.;
-  cfg = config.${namespace}.${mod};
   inherit (lib) mkEnableOption mkIf mkMerge;
+  inherit (lib.slashfiles.mkMod config ./.) mkOptions mkConfig cfg mod;
 in {
-  options.${namespace}.${mod} = {
-    enable = mkEnableOption "enable ${mod} modules";
+  options = mkOptions {
     enableWorkstation = mkEnableOption "enable ${mod} workstation modules";
   };
 
-  config = mkIf cfg.enable {
-    ${namespace} = mkMerge [
+  config = mkConfig {
+    slashfiles = mkMerge [
       {
         shells.enable = true;
         editors.enable = true;
@@ -25,6 +22,7 @@ in {
 
       (mkIf cfg.enableWorkstation {
         qutebrowser.enable = true;
+        nyxt.enable = true;
         terminals.enable = true;
         media.enable = true;
         gui.enable = true;

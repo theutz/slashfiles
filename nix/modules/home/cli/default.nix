@@ -24,5 +24,7 @@ in {
     programs.zoxide.enable = true;
 
     programs.ftdv.enable = true;
+
+    programs.yatto.enable = true;
   };
 }
