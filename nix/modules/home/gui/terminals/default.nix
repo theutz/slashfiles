@@ -44,8 +44,8 @@ in {
             send_composed_key_when_right_alt_is_pressed = true,
 
             quick_select_patterns = {
-              '^sha256-[0-9A-Za-z+]{40,50}='
-            }
+              '^sha256-[0-9A-Za-z+]{40,50}=$',
+            },
 
             debug_key_events = false, -- make `true` to log keys when launching from terminal
           }
