@@ -1,22 +1,5 @@
-# Edit this configuration file to define what should be installed on
-# your system. Help is available in the configuration.nix(5) man page, on
-# https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
-{
-  config,
-  lib,
-  pkgs,
-  ...
-}: {
-  imports = [
-    # Include the results of the hardware scan.
-    ./hardware-configuration.nix
-    ./boot-loader.nix
-    ./networking.nix
-    ./bluetooth.nix
-    ./nix.nix
-    ./users.nix
-    ./programs
-  ];
+{lib, ...}: {
+  imports = lib.slashfiles.list-other-files ./.;
 
   # Set your time zone.
   time.timeZone = "Europe/Istanbul";
