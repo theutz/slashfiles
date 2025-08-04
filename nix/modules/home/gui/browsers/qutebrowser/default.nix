@@ -19,12 +19,12 @@ in {
     ];
 
     xdg.configFile."qutebrowser" = {
-      source = mkOutOfStoreSymlink "${config.home.homeDirectory}/${namespace}/nix/modules/home/browsers/qutebrowser/personal";
+      source = mkOutOfStoreSymlink "${config.home.homeDirectory}/${namespace}/nix/modules/home/gui/browsers/qutebrowser/personal";
       recursive = true;
     };
 
     xdg.configFile."qutebrowser-work/config" = {
-      source = mkOutOfStoreSymlink "${config.home.homeDirectory}/${namespace}/nix/modules/home/browsers/qutebrowser/work";
+      source = mkOutOfStoreSymlink "${config.home.homeDirectory}/${namespace}/nix/modules/home/gui/browsers/qutebrowser/work";
       recursive = true;
     };
 
