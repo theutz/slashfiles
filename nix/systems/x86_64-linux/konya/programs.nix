@@ -1,9 +1,4 @@
 {pkgs, ...}: {
-  imports = [
-    ./kanata.nix
-    ./hyprland.nix
-  ];
-
   xdg.terminal-exec = {
     enable = true;
     settings.default = ["org.wezfurlong.wezterm.desktop"];
@@ -17,28 +12,26 @@
   #   enableSSHSupport = true;
   # };
 
-  programs = {
-    firefox.enable = true;
+  programs.firefox.enable = true;
 
-    vim = {
-      enable = true;
-      defaultEditor = true;
-    };
-
-    tmux.enable = true;
-
-    zsh.enable = true;
-
-    nix-index = {
-      enable = true;
-      enableBashIntegration = true;
-    };
-
-    command-not-found.enable = false;
-
-    _1password.enable = true;
-    _1password-gui.enable = true;
+  programs.vim = {
+    enable = true;
+    defaultEditor = true;
   };
+
+  programs.tmux.enable = true;
+
+  programs.zsh.enable = true;
+
+  programs.nix-index = {
+    enable = true;
+    enableBashIntegration = true;
+  };
+
+  programs.command-not-found.enable = false;
+
+  programs._1password.enable = true;
+  programs._1password-gui.enable = true;
 
   # List packages installed in system profile.
   environment.systemPackages = with pkgs; [
