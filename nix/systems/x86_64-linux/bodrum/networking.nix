@@ -1,7 +1,4 @@
-{...}: let
-  name = builtins.baseNameOf ./.;
-in {
-  networking.hostName = name;
+{
   networking.networkmanager.enable = true;
 
   # Open ports in the firewall.

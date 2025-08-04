@@ -1,5 +1,5 @@
 {lib, ...}: {
-  imports = lib.slashfiles.list-other-files ./.;
+  imports = lib.snowfall.fs.get-non-default-nix-files ./.;
 
   # Set your time zone.
   time.timeZone = "Europe/Istanbul";
