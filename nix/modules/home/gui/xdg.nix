@@ -5,16 +5,25 @@
   ...
 }:
 let
-  inherit (lib.${namespace}.mkMod config ./.) cfg;
+  inherit (lib.${namespace}.mkMod config ./.) mkConfig;
 in
 {
-  config = lib.mkIf cfg.enable {
+  config = mkConfig {
     home.preferXdgDirectories = true;
 
     xdg.enable = true;
-    xdg.mimeApps.defaultApplications = {
-      "x-scheme-handler/terminal" = [ "org.wezfurlong.wezterm.desktop" ];
-    };
+    xdg.mimeApps.defaultApplications =
+      let
+        qtb = "org.qutebrowser.qutebrowser.desktop";
+      in
+      {
+        "text/html" = qtb;
+        "x-scheme-handler/http" = qtb;
+        "x-scheme-handler/https" = qtb;
+        "x-scheme-handler/about" = qtb;
+        "x-scheme-handler/unknown" = qtb;
+        "x-scheme-handler/terminal" = [ "org.wezfurlong.wezterm.desktop" ];
+      };
 
     home.sessionVariables = {
       XDG_DOWNLOAD_DIR = "${config.home.homeDirectory}/Downloads";
