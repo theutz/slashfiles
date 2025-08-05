@@ -49,10 +49,11 @@ in
       disableConfirmationPrompt = true;
       escapeTime = 10;
       extraConfig = ''
-        bind-key S 'switch-client -l'
-
+        set -g default-command ${lib.getExe pkgs.fish}
         set -g command-alias[100] x='resize-pane -x'
         set -g command-alias[101] y='resize-pane -y'
+
+        bind-key S 'switch-client -l'
       '';
       focusEvents = true;
       historyLimit = 100000;
