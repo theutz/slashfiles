@@ -42,7 +42,7 @@
   services.ssh-agent.enable = true;
 
   home.shellAliases = {
-    nhs = "nh home switch";
+    nhs = "nh home switch -b bak";
     nos = "nh os switch";
   };
 
