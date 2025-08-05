@@ -17,15 +17,6 @@
   # Enable CUPS to print documents.
   services.printing.enable = true;
 
-  # Enable sound.
-  services.pipewire = {
-    enable = true;
-    pulse.enable = true;
-    wireplumber.enable = true;
-  };
-  # Helps audio glitching by enabling realtime priority
-  security.rtkit.enable = true;
-
   services.libinput = {
     # Enable touchpad support (enabled default in most desktopManager).
     enable = true;
