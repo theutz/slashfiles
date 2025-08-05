@@ -3,8 +3,8 @@ _default:
 
 watch-nixos:
   watchexec \
+    --wrap-process=none \
     --watch nix/packages \
-    --watch nix/modules/nixos \
     --watch nix/systems \
     --postpone \
     --restart \
