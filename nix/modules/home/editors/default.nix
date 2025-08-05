@@ -8,22 +8,22 @@
   ...
 }:
 let
-  inherit (builtins) baseNameOf;
-  mod = baseNameOf ./.;
-  cfg = config.${namespace}.${mod};
-  inherit (lib) mkIf mkEnableOption;
-  inherit (pkgs.${namespace}) nvf;
-  nvim = lib.getExe nvf;
+  inherit (lib.${namespace}.mkMod config ./.) mkOptions mkConfig;
+  nvim = lib.getExe pkgs.${namespace}.nvf;
 in
 {
-  options.${namespace}.${mod}.enable = mkEnableOption "enable ${mod}";
+  options = mkOptions { };
 
-  config = mkIf cfg.enable {
-    home.packages = with pkgs; [
-      nvf
-      wl-clipboard
-      inputs.nvf.packages.${system}.docs-manpages
-    ];
+  config = mkConfig {
+    home.packages =
+      with pkgs;
+      [
+        wl-clipboard
+        inputs.nvf.packages.${system}.docs-manpages
+      ]
+      ++ (with pkgs.${namespace}; [
+        nvf
+      ]);
 
     home.sessionVariables = {
       VISUAL = nvim;

@@ -1,5 +1,4 @@
-{ pkgs, ... }:
-{
+{pkgs, ...}: {
   config.vim.lazy.plugins = {
     # FIXME: Find out why this isn't working
     # "vimplugin-treesitter-grammar-jinja" = {
@@ -45,7 +44,7 @@
 
     nix.enable = true;
     nix.extraDiagnostics.enable = true;
-    nix.extraDiagnostics.types = [ "deadnix" ];
+    nix.extraDiagnostics.types = ["deadnix"];
     nix.format.enable = true;
     nix.format.type = "nixfmt";
     nix.lsp.enable = true;

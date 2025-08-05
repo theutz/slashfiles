@@ -156,41 +156,36 @@ in
 
           "SUPER, E, exec, $fileManager"
 
-          "SUPER, F, setfloating"
-          "SUPER, F, resizeactive, exact 80% 80%"
-          "SUPER, F, centerwindow, 1"
+          "SUPER, F, fullscreen, 1"
+          "SUPER SHIFT, F, fullscreen, 0"
 
-          "SUPER, G, changegroupactive, f"
-          "SUPER SHIFT, G, changegroupactive, b"
-          "SUPER CTRL, G, togglegroup"
+          "SUPER SHIFT, G, togglegroup"
 
           "SUPER, H, movefocus, l"
-          "SUPER SHIFT, H, swapwindow, l"
-          "SUPER CTRL, H, movewindoworgroup, l"
-          "SUPER ALT, H, movewindow, l"
+          "SUPER ALT, H, swapwindow, l"
+          "SUPER SHIFT, H, movewindoworgroup, l"
 
           "SUPER, J, movefocus, d"
-          "SUPER SHIFT, J, swapwindow, d"
-          "SUPER CTRL, J, movewindoworgroup, d"
-          "SUPER ALT, J, movewindow, d"
+          "SUPER ALT, J, swapwindow, d"
+          "SUPER SHIFT, J, movewindoworgroup, d"
 
           "SUPER, K, movefocus, u"
-          "SUPER SHIFT, K, swapwindow, u"
-          "SUPER CTRL, K, movewindoworgroup, u"
-          "SUPER ALT, K, movewindow, u"
+          "SUPER ALT, K, swapwindow, u"
+          "SUPER SHIFT, K, movewindoworgroup, u"
 
           "SUPER, L, movefocus, r"
-          "SUPER SHIFT, L, swapwindow, r"
-          "SUPER CTRL, L, movewindoworgroup, r"
-          "SUPER ALT, L, movewindow, r"
+          "SUPER ALT, L, swapwindow, r"
+          "SUPER SHIFT, L, movewindoworgroup, r"
 
           "SUPER, M, exec, $terminal"
 
           "SUPER, N, workspace, +1"
-          "SUPER SHIFT, N, movetoworkspace, +1"
+          "SUPER ALT, N, movetoworkspace, +1"
+          "SUPER SHIFT, N, changegroupactive, f"
 
           "SUPER, P, workspace, -1"
-          "SUPER SHIFT, P, movetoworkspace, -1"
+          "SUPER ALT, P, movetoworkspace, -1"
+          "SUPER SHIFT, P, changegroupactive, b"
 
           "SUPER, Q, killactive,"
           "SUPER ALT CTRL, Q, exec, uwsm stop"
@@ -198,16 +193,16 @@ in
           "SUPER, R, layoutmsg, movetoroot"
 
           "SUPER, S, togglespecialworkspace, scratch"
-          "SUPER SHIFT, S, movetoworkspace, special:scratch"
+          "SUPER ALT, S, movetoworkspace, special:scratch"
 
           "SUPER, T, settiled"
           "SUPER, T, splitratio, exact 1.0"
+          "SUPER SHIFT, T, setfloating"
+          "SUPER SHIFT, T, resizeactive, exact 80% 80%"
+          "SUPER SHIFT, T, centerwindow, 1"
 
           "SUPER, V, togglesplit, # dwindle"
           "SUPER SHIFT, V, layoutmsg, swapsplit"
-
-          "SUPER, Z, fullscreen, 1"
-          "SUPER SHIFT, Z, fullscreen, 0"
 
           "SUPER, space, exec, $menu"
           "SUPER ALT, space, centerwindow, 1"
@@ -225,6 +220,7 @@ in
           "SUPER, mouse_down, workspace, e+1"
           "SUPER, mouse_up, workspace, e-1"
 
+          "SUPER, slash, movewindow, mon:+1"
           "Alt_R, slash, exec, playerctl play-pause"
           "Alt_R, period, exec, playerctl next"
           "Alt_R, comma, exec, playerctl previous"

@@ -97,7 +97,6 @@
       ];
 
       homes.modules = with inputs; [
-        nvf.homeManagerModules.default
         sops-nix.homeManagerModules.sops
       ];
 
