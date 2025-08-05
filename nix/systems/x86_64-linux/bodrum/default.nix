@@ -1,6 +1,6 @@
-{ lib, ... }:
+{ lib, namespace, ... }:
 {
-  imports = lib.snowfall.fs.get-non-default-nix-files ./.;
+  imports = lib.${namespace}.list-other-files ./.;
 
   # Set your time zone.
   time.timeZone = "Europe/Istanbul";

@@ -13,17 +13,9 @@ in
   options = mkOptions { };
 
   config = mkConfig {
-    programs.starship = {
-      enable = true;
-      settings = {
-        shell.disabled = false;
-      };
+    programs.starship.enable = true;
+    programs.starship.settings = {
+      shell.disabled = false;
     };
-
-    programs.bash.enable = true;
-
-    programs.fish.enable = true;
-
-    programs.nushell.enable = true;
   };
 }
