@@ -3,6 +3,7 @@
   lib,
   pkgs,
   namespace,
+  host,
   ...
 }:
 let
@@ -66,7 +67,7 @@ in
         enable_media_control = false;
         enable_streaming = "Always";
         enable_cover_image_cache = true;
-        # default_device = "kocaeli";
+        default_device = host;
         enable_notify = true;
       };
 

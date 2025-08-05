@@ -22,6 +22,7 @@ mkShell {
       just
       sops
       ssh-to-age
+      overmind
     ]
     ++ (with pkgs.${namespace}; [
       nvf
