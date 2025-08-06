@@ -6,7 +6,7 @@
   ...
 }:
 let
-  inherit (lib.${namespace}.mkMod config ./.) mkConfig;
+  inherit (lib.${namespace}.mkMod' config ./.) mkConfig;
   inherit (lib.${namespace}) theme font;
 
   color_scheme =

@@ -7,7 +7,7 @@
 }:
 let
   inherit (lib) mkEnableOption mkIf mkMerge;
-  inherit (lib.${namespace}.mkMod config ./.)
+  inherit (lib.${namespace}.mkMod' config ./.)
     mkOptions
     mkConfig
     cfg

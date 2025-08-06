@@ -19,17 +19,19 @@ let
     });
 in
 {
-  ${namespace} = lib.traceValSeq (enableMods ''
-    shells
-    gpg
-    editors
-    cli
-    tui
-    qutebrowser
-    terminals
-    media
-    gui
-  '');
+  ${namespace} = (
+    enableMods ''
+      shells
+      gpg
+      editors
+      cli
+      tui
+      qutebrowser
+      terminals
+      media
+      gui
+    ''
+  );
   # "${namespace}" = {
   #   aerospace.enable = true;
   #   bash.enable = true;

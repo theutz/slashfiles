@@ -8,7 +8,7 @@
   ...
 }:
 let
-  inherit (lib.${namespace}.mkMod config ./.) mkConfig;
+  inherit (lib.${namespace}.mkMod' config ./.) mkConfig;
   wiremix = inputs.wiremix.packages.${system}.default;
   exe = lib.getExe' wiremix "wiremix";
 in

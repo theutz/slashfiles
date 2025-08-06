@@ -4,7 +4,7 @@
   ...
 }:
 {
-  mkMod = config: path: rec {
+  mkMod' = config: path: rec {
     mod = builtins.baseNameOf path;
     cfg = config.${namespace}.${mod};
     mkEnableOption = lib.mkEnableOption "enable ${mod}";
@@ -21,6 +21,10 @@
       else
         assert lib.isList c;
         lib.mkMerge c;
+    mkMod = c: {
+      options = mkOptions { };
+      config = mkConfig c;
+    };
   };
 
   list-other-files =

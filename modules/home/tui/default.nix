@@ -6,7 +6,7 @@
   ...
 }:
 let
-  inherit (lib.${namespace}.mkMod config ./.) mkOptions mkConfig;
+  inherit (lib.${namespace}.mkMod' config ./.) mkOptions mkConfig;
 in
 {
   imports = lib.${namespace}.list-other-files ./.;

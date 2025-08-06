@@ -8,7 +8,7 @@
   ...
 }:
 let
-  inherit (lib.${namespace}.mkMod config ./.) mkOptions mkConfig;
+  inherit (lib.${namespace}.mkMod' config ./.) mkOptions mkConfig;
   nvim = lib.getExe pkgs.${namespace}.nvf;
 in
 {

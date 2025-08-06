@@ -7,7 +7,7 @@
   ...
 }:
 let
-  inherit (lib.${namespace}.mkMod config ./.) mkConfig;
+  inherit (lib.${namespace}.mkMod' config ./.) mkConfig;
 in
 {
   config = mkConfig [

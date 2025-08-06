@@ -5,7 +5,7 @@
   ...
 }:
 let
-  inherit (lib.${namespace}.mkMod config ./.) mkOptions mkConfig;
+  inherit (lib.${namespace}.mkMod' config ./.) mkOptions mkConfig;
 in
 {
   options = mkOptions { };
