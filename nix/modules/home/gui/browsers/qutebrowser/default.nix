@@ -14,6 +14,10 @@ in
 
   config = mkConfig [
     {
+      home.packages = with pkgs; [
+        qutebrowser
+      ];
+
       xdg.configFile."qutebrowser" = {
         source = mkOutOfStoreSymlink "${config.home.homeDirectory}/${namespace}/nix/modules/home/gui/browsers/qutebrowser/personal";
         recursive = true;
@@ -26,10 +30,6 @@ in
     }
 
     (lib.mkIf pkgs.stdenv.isLinux {
-      home.packages = with pkgs; [
-        qutebrowser
-      ];
-
       xdg.desktopEntries = {
         browser = {
           name = "Web Browser";

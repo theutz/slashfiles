@@ -65,5 +65,6 @@
 
   sops.age.keyFile = config.xdg.configHome + "/sops/age/keys.txt";
   slashfiles.base.enable = true;
+  slashfiles.base.enableWorkstation = true;
   home.stateVersion = "25.05";
 }

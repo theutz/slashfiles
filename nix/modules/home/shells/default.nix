@@ -13,6 +13,7 @@ in
   options = mkOptions { };
 
   config = mkConfig {
+    home.shell.enableShellIntegration = true;
     programs.starship.enable = true;
     programs.starship.settings = {
       shell.disabled = false;

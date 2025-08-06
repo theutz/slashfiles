@@ -13,21 +13,26 @@ in
 
   options = mkOptions { };
 
-  config = mkConfig {
-    home.packages =
-      with pkgs;
-      (lib.concatLists [
-        [
-          slack
-          zoom-us
-          signal-desktop
-          neovide
-        ]
+  config = mkConfig [
+    {
+      home.packages = with pkgs; [
+        slack
+        zoom-us
+        neovide
+      ];
+    }
 
-        (lib.optionals pkgs.stdenv.isLinux [
-          brightnessctl
-          playerctl
-        ])
-      ]);
-  };
+    (lib.mkIf pkgs.stdenv.isLinux {
+      home.packages = with pkgs; [
+        brightnessctl
+        playerctl
+        signal-desktop
+      ];
+    })
+
+    (lib.mkIf pkgs.stdenv.isDarwin {
+      home.packages = with pkgs; [
+      ];
+    })
+  ];
 }

@@ -14,13 +14,10 @@ mkShell {
   packages =
     with pkgs;
     [
-      bashInteractive
       onefetch
-      starship
       git
       watchexec
       nh
-      gum
       just
       sops
       ssh-to-age
@@ -34,7 +31,5 @@ mkShell {
     # bash
     ''
       onefetch
-      gum format "# ${namespace}"
-      eval $(starship init bash)
     '';
 }

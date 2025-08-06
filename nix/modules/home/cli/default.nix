@@ -3,8 +3,8 @@
   lib,
   pkgs,
   namespace,
-system,
-inputs,
+  system,
+  inputs,
   ...
 }:
 let
@@ -24,13 +24,6 @@ in
         ]
         (lib.optionals pkgs.stdenv.isLinux [ ])
       ]);
-
-    programs.nh = {
-      enable = true;
-      package = inputs.nh.packages.${system}.default;
-      clean.enable = true;
-      flake = lib.concatStringsSep "/" [config.home.homeDirectory namespace];
-    };
 
     programs.fd.enable = true;
 

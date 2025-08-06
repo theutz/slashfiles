@@ -1,25 +1,19 @@
 {
   system,
+  namespace,
+  lib,
   ...
 }:
 {
+  imports = lib.${namespace}.list-other-files ./.;
   # "${namespace}" = {
   #   pam.enable = true;
   #   pkgs.enable = true;
   #   secrets.enable = true;
   # };
-
-  snowfallorg.users.michael.home.enable = false;
-
-  # snowfallorg.users."michael@kocaeli" = {
-  #   create = true;
-  #   # FIXME: Figure out why this doesn't work
-  #   # admin = true;
-  #   home = {
-  #     enable = true;
-  #     path = "/Users/michael";
-  #   };
-  # };
+  "${namespace}" = {
+    shells.enable = true;
+  };
 
   # environment = {
   #   pathsToLink = [
@@ -116,15 +110,6 @@
   #   };
   # };
 
-  nix.settings.experimental-features = [
-    "nix-command"
-    "pipe-operators"
-    "flakes"
-  ];
-
-  #
-  # nixpkgs.config.allowUnfree = true;
-  #
   # programs = {
   #   fish.enable = true;
   #
@@ -171,11 +156,5 @@
   #   stateVersion = 5;
   # };
   #
-  # # users.users.michael = {
-  # #   description = "Michael Utz";
-  # #   home = "/Users/michael";
-  # #   shell = pkgs.zsh;
-  # #   uid = 501;
-  # # };
   system.stateVersion = 5;
 }
