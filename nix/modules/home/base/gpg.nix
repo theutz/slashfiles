@@ -24,10 +24,6 @@ in
       enable = true;
       defaultCacheTtl = 84000;
       maxCacheTtl = 84000;
-      enableZshIntegration = true;
-      enableBashIntegration = true;
-      enableFishIntegration = true;
-      enableNushellIntegration = true;
       # default-cache-ttl 84000
       # max-cache-ttl 84000
       # pinentry-program /opt/homebrew/bin/pinentry-mac
