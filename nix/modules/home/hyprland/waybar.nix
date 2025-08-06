@@ -7,6 +7,7 @@
 let
   inherit (lib.${namespace}.mkMod config ./.) mkConfig;
   rp = lib.${namespace}.rose-pine.hex "main";
+  inherit (lib.${namespace}) font;
 in
 {
   config = mkConfig {

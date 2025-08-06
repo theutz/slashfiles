@@ -13,21 +13,23 @@ let
   exe = lib.getExe' wiremix "wiremix";
 in
 {
-  config = mkConfig {
-    home.packages = with pkgs; [
-      wiremix
-    ];
+  config = mkConfig [
+    (lib.mkIf pkgs.stdenv.isLinux {
+      home.packages = with pkgs; [
+        wiremix
+      ];
 
-    xdg.desktopEntries.volume = {
-      name = "Volume Controls";
-      exec = "${exe} -v output";
-      terminal = true;
-      actions = {
-        mixer = {
-          name = "Application mixer";
-          exec = "${exe} -v playback";
+      xdg.desktopEntries.volume = {
+        name = "Volume Controls";
+        exec = "${exe} -v output";
+        terminal = true;
+        actions = {
+          mixer = {
+            name = "Application mixer";
+            exec = "${exe} -v playback";
+          };
         };
       };
-    };
-  };
+    })
+  ];
 }
