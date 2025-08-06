@@ -5,9 +5,11 @@
   ...
 }:
 let
-  inherit (lib.${namespace}.mkMod config ./.) mkConfig;
+  inherit (lib.${namespace}.mkMod config ./.) mkConfig mkOptions;
 in
 {
+  options = mkOptions { };
+
   config = mkConfig {
     programs.gpg = {
       enable = true;

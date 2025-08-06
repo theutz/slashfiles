@@ -1,9 +1,35 @@
 {
-  # osConfig,
   config,
+  lib,
+  namespace,
   ...
 }:
+let
+  enableMods =
+    list:
+    (
+      if lib.isString list then
+        list |> lib.trim |> lib.splitString "\n"
+      else
+        assert lib.isList list;
+        list
+    )
+    |> (lib.flip lib.genAttrs) (_: {
+      enable = true;
+    });
+in
 {
+  ${namespace} = lib.traceValSeq (enableMods ''
+    shells
+    gpg
+    editors
+    cli
+    tui
+    qutebrowser
+    terminals
+    media
+    gui
+  '');
   # "${namespace}" = {
   #   aerospace.enable = true;
   #   bash.enable = true;
@@ -53,8 +79,6 @@
   #     # Enables in all shells
   #     enableShellIntegration = true;
   #   };
-  #
-  #   stateVersion = "25.05";
   # };
   #
   # programs = {
@@ -64,7 +88,6 @@
   # };
 
   sops.age.keyFile = config.xdg.configHome + "/sops/age/keys.txt";
-  slashfiles.base.enable = true;
-  slashfiles.base.enableWorkstation = true;
+
   home.stateVersion = "25.05";
 }
