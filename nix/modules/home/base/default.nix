@@ -15,6 +15,8 @@ let
     ;
 in
 {
+  imports = lib.${namespace}.list-other-files ./.;
+
   options = mkOptions {
     enableWorkstation = mkEnableOption "enable ${mod} workstation modules";
   };
@@ -26,7 +28,6 @@ in
         editors.enable = true;
         cli.enable = true;
         tui.enable = true;
-        ${namespace}.enable = true;
       }
 
       (mkIf cfg.enableWorkstation {
