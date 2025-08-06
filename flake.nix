@@ -76,6 +76,11 @@
       url = "github:oxalica/nil";
       inputs.nixpkgs.follows = "unstable";
     };
+
+    nur = {
+      url = "github:nix-community/NUR";
+      inputs.nixpkgs.follows = "unstable";
+    };
   };
 
   outputs =
@@ -97,6 +102,7 @@
       inherit lib inputs;
 
       overlays = with inputs; [
+        nur.overlays.default
         rust-overlay.overlays.default
       ];
 
