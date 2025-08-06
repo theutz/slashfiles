@@ -3,17 +3,21 @@
   lib,
   namespace,
   ...
-}: let
+}:
+let
   inherit (lib.${namespace}.mkMod config ./.) mkConfig;
-in {
+in
+{
   config = mkConfig {
     programs.zsh.enable = true;
 
-    sops.secrets = let
-      sopsFile = lib.snowfall.fs.get-file "secrets/api-keys.yaml";
-    in {
-      gh_token = {inherit sopsFile;};
-    };
+    sops.secrets =
+      let
+        sopsFile = lib.snowfall.fs.get-file "secrets/api-keys.yaml";
+      in
+      {
+        gh_token = { inherit sopsFile; };
+      };
 
     programs.zsh.envExtra = ''
       export GH_TOKEN=''$(<${config.sops.secrets.gh_token.path})

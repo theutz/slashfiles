@@ -14,7 +14,13 @@
       }
       // opts;
     };
-    mkConfig = lib.mkIf cfg.enable;
+    mkConfig =
+      c:
+      if lib.isAttrs c then
+        lib.mkIf cfg.enable c
+      else
+        assert lib.isList c;
+        lib.mkMerge c;
   };
 
   list-other-files =

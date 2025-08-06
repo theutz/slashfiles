@@ -6,41 +6,40 @@
   ...
 }:
 let
-  inherit (builtins) baseNameOf;
-  mod = baseNameOf ./.;
-  cfg = config.${namespace}.${mod};
-  inherit (lib) mkIf mkEnableOption;
+  inherit (lib.${namespace}.mkMod config ./.) mkOptions mkConfig;
   inherit (config.lib.file) mkOutOfStoreSymlink;
 in
 {
-  options.${namespace}.${mod}.enable = mkEnableOption "enable ${mod}";
+  options = mkOptions { };
 
-  config = mkIf cfg.enable {
-    home.packages = with pkgs; [
-      qutebrowser
-    ];
+  config = mkConfig [
+    {
+      home.packages = with pkgs; [
+        qutebrowser
+      ];
 
-    xdg.configFile."qutebrowser" = {
-      source = mkOutOfStoreSymlink "${config.home.homeDirectory}/${namespace}/nix/modules/home/gui/browsers/qutebrowser/personal";
-      recursive = true;
-    };
+      xdg.configFile."qutebrowser" = {
+        source = mkOutOfStoreSymlink "${config.home.homeDirectory}/${namespace}/nix/modules/home/gui/browsers/qutebrowser/personal";
+        recursive = true;
+      };
 
-    xdg.configFile."qutebrowser-work/config" = {
-      source = mkOutOfStoreSymlink "${config.home.homeDirectory}/${namespace}/nix/modules/home/gui/browsers/qutebrowser/work";
-      recursive = true;
-    };
+      xdg.configFile."qutebrowser-work/config" = {
+        source = mkOutOfStoreSymlink "${config.home.homeDirectory}/${namespace}/nix/modules/home/gui/browsers/qutebrowser/work";
+        recursive = true;
+      };
 
-    xdg.desktopEntries = {
-      browser = {
-        name = "Web Browser";
-        exec = "qutebrowser";
-        actions = {
-          work = {
-            name = "Work Profile";
-            exec = "qutebrowser -B ${config.xdg.configHome}/qutebrowser-work";
+      xdg.desktopEntries = {
+        browser = {
+          name = "Web Browser";
+          exec = "qutebrowser";
+          actions = {
+            work = {
+              name = "Work Profile";
+              exec = "qutebrowser -B ${config.xdg.configHome}/qutebrowser-work";
+            };
           };
         };
       };
-    };
-  };
+    }
+  ];
 }

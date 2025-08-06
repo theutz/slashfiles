@@ -29,19 +29,21 @@ in
     };
   };
 
-  config = mkConfig {
-    home.packages = with pkgs; [
-      kitty
-      kdePackages.dolphin
-      playerctl
-      brightnessctl
-      wireplumber
-    ];
+  config = mkConfig [
+    (lib.mkIf pkgs.stdenv.isLinux {
+      home.packages = with pkgs; [
+        kitty
+        kdePackages.dolphin
+        playerctl
+        brightnessctl
+        wireplumber
+      ];
 
-    wayland.windowManager.hyprland.enable = true;
+      wayland.windowManager.hyprland.enable = true;
 
-    services.dunst.enable = true;
+      services.dunst.enable = true;
 
-    programs.hyprlock.enable = true;
-  };
+      programs.hyprlock.enable = true;
+    })
+  ];
 }
