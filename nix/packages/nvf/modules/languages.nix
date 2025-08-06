@@ -1,11 +1,8 @@
 {
   pkgs,
-  inputs,
-  system,
-lib,
-nil_ls,
+  nil_ls,
   ...
-} @ args:
+}:
 {
   config.vim.lazy.plugins = {
     # FIXME: Find out why this isn't working

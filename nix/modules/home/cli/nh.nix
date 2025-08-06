@@ -2,8 +2,6 @@
   config,
   lib,
   namespace,
-  inputs,
-  system,
   pkgs,
   ...
 }:

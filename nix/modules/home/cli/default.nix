@@ -3,8 +3,6 @@
   lib,
   pkgs,
   namespace,
-  system,
-  inputs,
   ...
 }:
 let
