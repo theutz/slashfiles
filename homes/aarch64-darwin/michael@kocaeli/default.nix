@@ -26,10 +26,10 @@ in
       editors
       cli
       tui
-      qutebrowser
       terminals
       media
       gui
+      firefox
     ''
   );
   # "${namespace}" = {

@@ -31,7 +31,6 @@ in
       }
 
       (mkIf cfg.enableWorkstation {
-        qutebrowser.enable = true;
         terminals.enable = true;
         media.enable = true;
         gui.enable = true;
