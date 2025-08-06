@@ -71,6 +71,11 @@
       url = "github:numtide/treefmt-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    nil_ls = {
+      url = "github:oxalica/nil";
+      inputs.nixpkgs.follows = "unstable";
+    };
   };
 
   outputs =
