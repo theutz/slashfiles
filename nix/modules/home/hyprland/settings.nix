@@ -220,7 +220,8 @@ in
           "SUPER, mouse_down, workspace, e+1"
           "SUPER, mouse_up, workspace, e-1"
 
-          "SUPER, slash, movewindow, mon:+1"
+          "SUPER, slash, focusmonitor, +1"
+          "SUPER SHIFT, slash, movewindow, mon:+1"
           "Alt_R, slash, exec, playerctl play-pause"
           "Alt_R, period, exec, playerctl next"
           "Alt_R, comma, exec, playerctl previous"
