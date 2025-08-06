@@ -14,7 +14,9 @@ mkShell {
   packages =
     with pkgs;
     [
+      bashInteractive
       onefetch
+      starship
       git
       watchexec
       nh
@@ -31,7 +33,8 @@ mkShell {
   shellHook =
     # bash
     ''
+      onefetch
       gum format "# ${namespace}"
-      echo
+      eval $(starship init bash)
     '';
 }
