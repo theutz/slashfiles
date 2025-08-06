@@ -38,6 +38,7 @@ in
       "editor"
       "history"
       "directory"
+      "git"
       "spectrum"
       "utility"
       "completion"
