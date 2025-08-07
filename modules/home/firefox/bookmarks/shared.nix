@@ -36,8 +36,16 @@
         ];
       }
       {
-        name = "Janky Borders";
+        name = "JankyBorders";
         url = "https://github.com/FelixKratz/JankyBorders";
+        tags = [
+          "macos"
+          "window managers"
+        ];
+      }
+      {
+        name = "SketchyBar";
+        url = "https://github.com/FelixKratz/Sketchybar";
         tags = [
           "macos"
           "window managers"
