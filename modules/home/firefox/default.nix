@@ -30,7 +30,6 @@ let
   ];
 
   settings = {
-
     "browser.aboutConfig.showWarning" = false;
     "browser.startup.homepage" = "https://kagi.com";
     "startup.homepage_override_url" = "https://kagi.com";
@@ -40,6 +39,7 @@ let
   extensions = {
     force = true;
     packages = with pkgs.nur.repos.rycee.firefox-addons; [
+      profile-switcher
       onepassword-password-manager
       consent-o-matic
       tridactyl
