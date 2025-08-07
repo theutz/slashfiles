@@ -36,6 +36,14 @@
         ];
       }
       {
+        name = "Janky Borders";
+        url = "https://github.com/FelixKratz/JankyBorders";
+        tags = [
+          "macos"
+          "window managers"
+        ];
+      }
+      {
         name = "NVF";
         url = "https://notashelf.github.io/nvf/";
         tags = [

@@ -8,5 +8,6 @@
   media
   gui
   aerospace
+  jankyborders
   firefox
 ''

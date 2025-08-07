@@ -26,6 +26,9 @@ let
 
   color = theme: name: themes.${theme}.${name};
   hex = theme: name: "#${color theme name}";
+  argb =
+    theme: name: opacity:
+    "0x${opacity}${color theme name}";
 in
 {
   rose-pine = {
@@ -34,6 +37,7 @@ in
       themes
       hex
       color
+      argb
       ;
   };
 }
