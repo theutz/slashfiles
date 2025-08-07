@@ -13,6 +13,37 @@
         url = "https://noogle.dev";
         tags = [ "nix" ];
       }
+
+    ];
+  }
+  {
+    name = "Manuals";
+    bookmarks = [
+      {
+        name = "Hyprland Wiki";
+        url = "https://wiki.hypr.land/";
+        tags = [
+          "window managers"
+          "linux"
+        ];
+      }
+      {
+        name = "AeroSpace";
+        url = "https://nikitabobko.github.io/AeroSpace/guide";
+        tags = [
+          "macos"
+          "window managers"
+        ];
+      }
+      {
+        name = "NVF";
+        url = "https://notashelf.github.io/nvf/";
+        tags = [
+          "nix"
+          "vim"
+          "neovim"
+        ];
+      }
     ];
   }
   {
