@@ -10,45 +10,30 @@ let
     mkMod
     ;
 
-  settings = {
-    "browser.aboutConfig.showWarning" = false;
-    "browser.startup.homepage" = "https://kagi.com";
-    "startup.homepage_override_url" = "https://kagi.com";
-    "browser.sessionstore.resume_session_once" = true;
-    "browser.sessionstore.resuming_after_os_restart" = true;
-    "browser.warnOnQuit" = false;
-
-    "extensions.autoDisableScopes" = 0; # Always enable all installed plugins
-    "extensions.autoUpdateDefault" = false;
-    "extensions.update.enabled" = false;
-
-    # https://kb.mozillazine.org/Browser.startup.page
-    "browser.startup.page" = 3; # means to restore previous session
-  };
-
-  extensions = {
-    force = true;
-    packages =
-      let
-        addons = pkgs.nur.repos.rycee.firefox-addons;
-      in
-      import ./extensions/shared.nix addons;
-  };
-  pkg = pkgs.firefox.override {
-    nativeMessagingHosts = [ pkgs.tridactyl-native ];
-  };
-  exe = "${pkg}/Applications/Firefox.app/Contents/MacOS/firefox";
+  exe =
+    # FIXME: Gotta get this working
+    lib.asserts.checkAssertWarn
+      [
+        {
+          assertion = pkgs.stdenv.isDarwin;
+          message = "Implement this for your platform!";
+        }
+      ]
+      [ "Firefox executable not defined yet for linux." ]
+      "${config.programs.firefox.package}/Applications/Firefox.app/Contents/MacOS/firefox";
 in
 mkMod {
-  home.shellAliases = lib.optionalAttrs pkgs.stdenv.isDarwin {
-    firefox = "${exe} -P 'default' -no-remote";
-    firefox-work = "${exe} -P 'work' -no-remote";
+  home.shellAliases = {
+    ff = "${exe} -P 'default' -no-remote";
+    ffw = "${exe} -P 'work' -no-remote";
   };
 
   programs.firefox = {
     enable = true;
 
-    package = pkg;
+    package = pkgs.firefox.override {
+      nativeMessagingHosts = [ pkgs.tridactyl-native ];
+    };
 
     nativeMessagingHosts = with pkgs; [
       tridactyl-native
@@ -87,10 +72,16 @@ mkMod {
 
     profiles = {
       default = {
-        inherit settings extensions;
-
         isDefault = true;
         id = 0;
+
+        settings = (import ./settings/shared.nix { });
+
+        extensions = {
+          force = true;
+          packages = import ./extensions/shared.nix pkgs.nur.repos.rycee.firefox-addons;
+        };
+
         bookmarks = {
           force = true;
           settings = (import ./bookmarks/shared.nix { }) ++ (import ./bookmarks/personal.nix { });
@@ -98,8 +89,15 @@ mkMod {
       };
 
       work = {
-        inherit settings extensions;
         id = 1;
+
+        settings = (import ./settings/shared.nix { });
+
+        extensions = {
+          force = true;
+          packages = import ./extensions/shared.nix pkgs.nur.repos.rycee.firefox-addons;
+        };
+
         bookmarks = {
           force = true;
           settings = (import ./bookmarks/shared.nix { }) ++ (import ./bookmarks/work.nix { });
