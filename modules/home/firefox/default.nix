@@ -28,16 +28,11 @@ let
 
   extensions = {
     force = true;
-    packages = with pkgs.nur.repos.rycee.firefox-addons; [
-      firefox-color
-      onepassword-password-manager
-      consent-o-matic
-      tridactyl
-      ublock-origin
-      sponsorblock
-      kagi-search
-      raindropio
-    ];
+    packages =
+      let
+        addons = pkgs.nur.repos.rycee.firefox-addons;
+      in
+      import ./extensions/shared.nix addons;
   };
   pkg = pkgs.firefox.override {
     nativeMessagingHosts = [ pkgs.tridactyl-native ];
