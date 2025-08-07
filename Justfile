@@ -1,6 +1,15 @@
 _default:
   just --list
 
+loop:
+  #!/usr/bin/env zsh
+  while true; do
+    nvim
+    lazygit
+    nh home switch -b $(date +%s).bak
+    read -q "continue?Restart?"
+  done
+
 watch:
   overmind start
 
