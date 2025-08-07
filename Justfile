@@ -16,9 +16,9 @@ watch:
 watch-nixos:
   watchexec \
     --wrap-process=none \
-    --watch nix/overlays \
-    --watch nix/packages \
-    --watch nix/systems \
+    --watch overlays \
+    --watch packages \
+    --watch systems \
     --watch flake.nix \
     --postpone \
     --restart \
@@ -28,10 +28,10 @@ watch-nixos:
 
 watch-home:
   watchexec \
-    --watch nix/packages \
-    --watch nix/overlays \
-    --watch nix/modules/home \
-    --watch nix/homes \
+    --watch packages \
+    --watch overlays \
+    --watch modules/home \
+    --watch homes \
     --watch flake.nix \
     --postpone \
     --restart \
