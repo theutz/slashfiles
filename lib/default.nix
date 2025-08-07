@@ -47,4 +47,17 @@
         (type == "regular") && name != "default.nix" && hasExt "nix"
       ) path
     );
+
+  genEnabledMods =
+    list:
+    (
+      if lib.isString list then
+        list |> lib.trim |> lib.splitString "\n"
+      else
+        assert lib.isList list;
+        list
+    )
+    |> (lib.flip lib.genAttrs) (_: {
+      enable = true;
+    });
 }

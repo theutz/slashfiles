@@ -1,0 +1,12 @@
+''
+  shells
+  gpg
+  editors
+  cli
+  tui
+  terminals
+  media
+  gui
+  aerospace
+  firefox
+''
