@@ -15,6 +15,7 @@ in
         recommit = "!git commit -eF $(git rev-parse --git-dir/COMMIT_EDITMSG)";
       };
       ignores = [
+        "nohup.out"
         "Session.vim*"
         ".scratch.vim"
         ".DS_Store"
