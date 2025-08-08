@@ -11,4 +11,6 @@
   jankyborders
   firefox
   crush
+  nix-index
+  pueue
 ''

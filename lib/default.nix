@@ -3,7 +3,24 @@
   namespace,
   ...
 }:
-{
+let
+  mkLaunchdAgent' =
+    mod: opts:
+    let
+      Label = "com.${namespace}.${mod}";
+    in
+    {
+      ${mod} = {
+        enable = true;
+        config = lib.recursiveUpdate {
+          inherit Label;
+          RunAtLoad = true;
+          StandardOutPath = "/tmp/${Label}/out.log";
+          StandardErrorPath = "/tmp/${Label}/err.log";
+        } opts;
+      };
+    };
+
   mkMod' = config: path: rec {
     mod = builtins.baseNameOf path;
     cfg = config.${namespace}.${mod};
@@ -29,7 +46,12 @@
       options = mkOptions { };
       config = mkConfig c;
     };
+
+    mkLaunchdAgent = mkLaunchdAgent' mod;
   };
+in
+{
+  inherit mkLaunchdAgent' mkMod';
 
   list-other-files =
     path:
