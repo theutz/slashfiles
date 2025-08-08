@@ -10,4 +10,5 @@
   aerospace
   jankyborders
   firefox
+  crush
 ''
