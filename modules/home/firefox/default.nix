@@ -10,7 +10,7 @@ let
     mkMod
     ;
 
-  exe =
+  getExe =
     # FIXME: Gotta get this working
     lib.asserts.checkAssertWarn
       [
@@ -23,9 +23,38 @@ let
       "${config.programs.firefox.package}/Applications/Firefox.app/Contents/MacOS/firefox";
 in
 mkMod {
+  lib.getFirefoxExe = getExe;
+
   home.shellAliases = {
-    ff = "${exe} -P 'default' -no-remote";
-    ffw = "${exe} -P 'work' -no-remote";
+    ff = "${getExe} -P 'default' -no-remote";
+    ffw = "${getExe} -P 'work' -no-remote";
+  };
+
+  xdg.dataFile."raycast/scripts/firefox.sh" = {
+    source =
+      pkgs.writeShellScript "firefox.sh" # bash
+        ''
+          # @raycast.schemaVersion 1
+          # @raycast.title Default Firefox Profile
+          # @raycast.mode silent
+          # @raycast.packageName Firefox Profiles
+          # @raycast.icon 🦊
+          ${getExe} -P 'default' -no-remote &
+        '';
+  };
+
+  xdg.dataFile."raycast/scripts/firefox-work.sh" = {
+    source =
+      pkgs.writeShellScript "firefox-work.sh"
+        # bash
+        ''
+          # @raycast.schemaVersion 1
+          # @raycast.title Work Firefox Profile
+          # @raycast.mode silent
+          # @raycast.packageName Firefox Profiles
+          # @raycast.icon 👨🏻‍💼
+          ${getExe} -P 'work' -no-remote &
+        '';
   };
 
   programs.firefox = {
