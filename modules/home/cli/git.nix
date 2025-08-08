@@ -2,6 +2,7 @@
   config,
   namespace,
   lib,
+  pkgs,
   ...
 }:
 let
@@ -9,6 +10,14 @@ let
 in
 {
   config = mkConfig {
+    home.packages = with pkgs; [
+      meteor-git
+    ];
+
+    home.sessionVariables = {
+      GIT_EDITOR = "${lib.getExe pkgs.meteor-git} --as-git-editor";
+    };
+
     programs.git = {
       enable = true;
       aliases = {
