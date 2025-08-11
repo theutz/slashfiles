@@ -9,21 +9,6 @@ let
       formatWorkspace = num: nameValuePair (format key num) (format action num);
     in
     range 1 9 |> map (formatWorkspace) |> listToAttrs;
-
-  bindPerDirection =
-    with lib;
-    key: action:
-    let
-      dirs = {
-        h = "left";
-        j = "down";
-        k = "up";
-        l = "right";
-      };
-      format = template: replacement: replaceString "%s" replacement template;
-      formatDirs = n: v: nameValuePair (format key n) (format action v);
-    in
-    mapAttrs' (formatDirs) dirs |> listToAttrs;
 in
 {
   after-startup-command = [ ];

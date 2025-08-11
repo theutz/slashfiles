@@ -1,5 +1,4 @@
 ''
-  aerospace
   cli
   crush
   editors
@@ -7,11 +6,9 @@
   git
   gpg
   gui
-  jankyborders
+  hyprland
   lazygit
   media
-  nix-index
-  pueue
   shells
   terminals
   tui

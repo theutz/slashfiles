@@ -19,7 +19,8 @@ in
       "$terminal" = "uwsm app -- wezterm";
       "$fileManager" = "uwsm app -- wezterm start yazi";
       "$menu" = "uwsm app -- wofi --show drun";
-      "$browser" = "uwsm app -- qutebrowser";
+      "$browser" = "uwsm app -- firefox -P 'default' -no-remote";
+      "$workBrowser" = "uwsm app -- firefox -P 'work' -no-remote";
 
       exec-once = [
         "$terminal"
@@ -152,7 +153,7 @@ in
           ", XF86AudioRaiseVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 10%+"
 
           "SUPER, B, exec, $browser"
-          "SUPER SHIFT, B, exec, ${config.xdg.desktopEntries.browser.actions.work.exec}"
+          "SUPER SHIFT, B, exec, $workBrowser"
 
           "SUPER, E, exec, $fileManager"
 

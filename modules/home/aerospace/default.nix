@@ -6,11 +6,11 @@
   ...
 }@args:
 let
-  inherit (lib.${namespace}.mkMod' config ./.) mkMod;
+  inherit (lib.${namespace}.mkMod' config ./.) mkMod cfg;
 in
 mkMod [
   {
-    warnings = lib.mkIf (!pkgs.stdenv.isDarwin) [
+    warnings = lib.mkIf (!pkgs.stdenv.isDarwin && cfg.enable) [
       ''
         AeroSpace is only available on MacOS. This module will not be enabled.
       ''

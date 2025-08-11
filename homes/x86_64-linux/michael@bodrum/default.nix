@@ -1,25 +1,24 @@
 {
   config,
   namespace,
+  lib,
   ...
 }:
+let
+  inherit (lib.${namespace}) genEnabledMods;
+in
 {
-  imports = [
-    ./git.nix
-    ./secrets.nix
+  imports = [ ./secrets.nix ];
+
+  ${namespace} = lib.mkMerge [
+    (genEnabledMods (import ./mods.nix))
+    {
+      hyprland.monitor = [
+        "DP-2, 2560x1440@59.95Hz, auto-left, auto"
+        "eDP-1, preferred, auto, 1"
+      ];
+    }
   ];
-
-  ${namespace} = {
-    base = {
-      enable = true;
-      enableWorkstation = true;
-    };
-
-    hyprland.monitor = [
-      "DP-2, 2560x1440@59.95Hz, auto-left, auto"
-      "eDP-1, preferred, auto, 1"
-    ];
-  };
 
   programs.wofi.enable = true;
 
@@ -40,11 +39,6 @@
   programs.nix-index.enable = true;
 
   services.ssh-agent.enable = true;
-
-  home.shellAliases = {
-    nhs = "nh home switch -b bak";
-    nos = "nh os switch";
-  };
 
   home.stateVersion = "25.05";
 }

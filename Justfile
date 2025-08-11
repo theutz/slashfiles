@@ -1,6 +1,20 @@
 _default:
   just --list
 
+fmt:
+  nix fmt
+
+test: fmt
+  nix flake check --all-systems
+
+build: test
+  nh os build
+  nh home build
+
+install: build
+  nh os swtich
+  nh home switch
+
 loop:
   #!/usr/bin/env zsh
   while true; do

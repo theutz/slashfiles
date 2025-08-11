@@ -4,7 +4,7 @@
   lib,
   pkgs,
   ...
-} @args:
+}@args:
 let
   inherit (lib.${namespace}.mkMod' config ./.) mkMod;
 in

@@ -6,13 +6,13 @@
   ...
 }:
 let
-  inherit (lib.${namespace}.mkMod' config ./.) mkMod;
+  inherit (lib.${namespace}.mkMod' config ./.) mkMod cfg;
   inherit (lib.${namespace}.rose-pine) argb;
   clr = argb "main";
 in
 mkMod [
   {
-    warnings = lib.optionals (!pkgs.stdenv.isDarwin) [
+    warnings = lib.optionals (!pkgs.stdenv.isDarwin && cfg.enable) [
       ''
         JankyBorders is only available on MacOS.
         This module will be disabled.

@@ -11,16 +11,10 @@ let
     ;
 
   getExe =
-    # FIXME: Gotta get this working
-    lib.asserts.checkAssertWarn
-      [
-        {
-          assertion = pkgs.stdenv.isDarwin;
-          message = "Implement this for your platform!";
-        }
-      ]
-      [ "Firefox executable not defined yet for linux." ]
-      "${config.programs.firefox.package}/Applications/Firefox.app/Contents/MacOS/firefox";
+    if pkgs.stdenv.isDarwin then
+      "${config.programs.firefox.package}/Applications/Firefox.app/Contents/MacOS/firefox"
+    else
+      lib.getExe config.programs.firefox.package;
 in
 mkMod {
   lib.getFirefoxExe = getExe;

@@ -6,7 +6,7 @@
   ...
 }:
 let
-  inherit (lib.${namespace}.mkMod' config ./.) mkConfig;
+  inherit (lib.${namespace}.mkMod' config ./.) mkMod;
   inherit (lib.${namespace}) theme font;
 
   color_scheme =
@@ -111,18 +111,16 @@ let
     ];
   };
 in
-{
-  config = mkConfig {
-    home.packages = [
-      (lib.getAttrFromPath font.pkg pkgs)
-    ];
+mkMod {
+  home.packages = [
+    (lib.getAttrFromPath font.pkg pkgs)
+  ];
 
-    programs.wezterm = {
-      enable = true;
+  programs.wezterm = {
+    enable = true;
 
-      extraConfig =
-        # lua
-        ''return ${toLua { } settings}'';
-    };
+    extraConfig =
+      # lua
+      ''return ${toLua { } settings}'';
   };
 }
