@@ -118,5 +118,6 @@ in
     esc = "mode main";
     f13 = "mode main";
   }
-  // (bindPerWorkspace "%d" "workspace %d");
+  // (bindPerWorkspace "%d" "workspace %d")
+  // (bindPerWorkspace "shift-%d" "move-node-to-workspace %d");
 }

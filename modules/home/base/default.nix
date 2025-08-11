@@ -31,7 +31,6 @@ in
       }
 
       (mkIf cfg.enableWorkstation {
-        terminals.enable = true;
         media.enable = true;
         gui.enable = true;
       })
