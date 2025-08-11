@@ -2,12 +2,17 @@
   config,
   lib,
   namespace,
+  pkgs,
   ...
 }:
 let
   inherit (lib.${namespace}.mkMod' config ./.) mkMod;
 in
 mkMod {
+  home.packages = with pkgs; [
+    wayprompt
+  ];
+
   programs.gpg = {
     enable = true;
     settings = {
@@ -23,8 +28,10 @@ mkMod {
     enable = true;
     defaultCacheTtl = 84000;
     maxCacheTtl = 84000;
-    # default-cache-ttl 84000
-    # max-cache-ttl 84000
+    pinentry = {
+      package = pkgs.wayprompt;
+      program = "pinentry-wayprompt";
+    };
     # pinentry-program /opt/homebrew/bin/pinentry-mac
   };
 }
