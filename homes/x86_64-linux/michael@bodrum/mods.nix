@@ -9,8 +9,11 @@
   hyprland
   lazygit
   media
+  pueue
   secrets
   shells
+  slack
   tui
   wezterm
+  zoom
 ''

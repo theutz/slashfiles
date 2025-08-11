@@ -13,8 +13,10 @@
   media
   nix-index
   pueue
+  secrets
   shells
+  slack
   tui
   wezterm
-  secrets
+  zoom
 ''

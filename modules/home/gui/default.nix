@@ -16,8 +16,6 @@ in
   config = mkConfig [
     {
       home.packages = with pkgs; [
-        slack
-        zoom-us
         neovide
       ];
     }

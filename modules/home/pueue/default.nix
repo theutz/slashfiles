@@ -9,18 +9,50 @@ let
   inherit (lib.${namespace}.mkMod' config ./.) mkMod mkLaunchdAgent;
 
   # https://github.com/Nukesor/pueue/wiki/Configuration
-  settings = { };
+  settings = {
+    shared = {
+      unix_socket_path = lib.concatStringsSep "/" [
+        config.xdg.dataHome
+        "pueue"
+        "pueue_${config.home.username}.socket"
+      ];
+      runtime_directory = config.home.homeDirectory;
+    };
+  };
 in
 mkMod [
+  {
+    home.sessionVariables.PUEUE_CONFIG_PATH = lib.concatStringsSep "/" [
+      config.home.homeDirectory
+      config.xdg.configFile."pueue/pueue.yaml".target
+    ];
+  }
+
   (lib.mkIf pkgs.stdenv.isDarwin {
     home.packages = with pkgs; [
       pueue
     ];
 
+    home.activation.pueueDirs =
+      config.lib.dag.entryBefore [ "setupLaunchAgents" ] # bash
+        ''
+          RUNTIME_DIR="''$(dirname ${settings.shared.unix_socket_path})"
+          verboseEcho "RUNTIME_DIR: ''${RUNTIME_DIR}"
+          if [[ -d "$RUNTIME_DIR" ]]; then
+            verboseEcho "$RUNTIME_DIR exists"
+          else
+            echo "Creating ''$RUNTIME_DIR"
+            run mkdir -p ''$RUNTIME_DIR
+            echo "Success"
+          fi
+        '';
+
     launchd.agents = mkLaunchdAgent {
+      KeepAlive = true;
       ProgramArguments = [
         "${pkgs.pueue}/bin/pueued"
-        "--daemonize"
+        "-c"
+        config.home.sessionVariables.PUEUE_CONFIG_PATH
       ];
     };
 

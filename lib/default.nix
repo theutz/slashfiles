@@ -15,6 +15,7 @@ let
         config = lib.recursiveUpdate {
           inherit Label;
           RunAtLoad = true;
+          KeepAlive = true;
           StandardOutPath = "/tmp/${Label}/out.log";
           StandardErrorPath = "/tmp/${Label}/err.log";
         } opts;
