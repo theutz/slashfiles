@@ -52,3 +52,9 @@ watch-home:
     --notify \
     -- \
     nh home switch
+
+nvim:
+  nom build .#nvf && result/bin/nvim
+
+nvim-inspect:
+  nom build .#nvf && result/bin/nvf-print-config | bat -l lua
