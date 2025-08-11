@@ -11,9 +11,11 @@
   #   pkgs.enable = true;
   #   secrets.enable = true;
   # };
-  "${namespace}" = {
-    shells.enable = true;
-  };
+
+  ${namespace} = lib.${namespace}.genEnabledMods ''
+    shells
+    tailscale
+  '';
 
   # environment = {
   #   pathsToLink = [
@@ -156,5 +158,7 @@
   #   stateVersion = 5;
   # };
   #
+
+  system.primaryUser = lib.${namespace}.primaryUser;
   system.stateVersion = 5;
 }

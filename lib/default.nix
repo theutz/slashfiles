@@ -82,4 +82,6 @@ in
     |> (lib.flip lib.genAttrs) (_: {
       enable = true;
     });
+
+  primaryUser = "michael";
 }

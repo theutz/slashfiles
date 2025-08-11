@@ -7,6 +7,7 @@
   git
   gpg
   gui
+  homebrew
   jankyborders
   lazygit
   media

@@ -9,9 +9,11 @@ let
   inherit (lib.${namespace}.mkMod' config ./.) mkMod;
 in
 mkMod {
-  home.packages = with pkgs; [
-    wayprompt
-  ];
+  home.packages =
+    with pkgs;
+    lib.optionals pkgs.stdenv.isLinux [
+      wayprompt
+    ];
 
   programs.gpg = {
     enable = true;
@@ -28,7 +30,7 @@ mkMod {
     enable = true;
     defaultCacheTtl = 84000;
     maxCacheTtl = 84000;
-    pinentry = {
+    pinentry = lib.mkIf pkgs.stdenv.isLinux {
       package = pkgs.wayprompt;
       program = "pinentry-wayprompt";
     };
