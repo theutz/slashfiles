@@ -29,7 +29,7 @@ mkMod {
     extraConfig = {
       user.name = "Michael Utz";
       user.email = "michael@theutz.com";
-      user.signingkey = "F73C931E48B95546!";
+      user.signingkey = config.sops.secrets."id_ed25519/pub".path;
       pull.rebase = true;
       rerere.enabled = true;
       rerere.autoupdate = true;
@@ -39,6 +39,7 @@ mkMod {
       rebase.autoStash = true;
       rebase.autoSquash = true;
       rebase.updateRefs = true;
+      gpg.format = "ssh";
       commit.gpgSign = true;
       commit.verbose = true;
       push.gpgSign = false;

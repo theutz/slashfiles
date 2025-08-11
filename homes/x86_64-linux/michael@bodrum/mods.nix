@@ -9,8 +9,8 @@
   hyprland
   lazygit
   media
+  secrets
   shells
-  terminals
   tui
   wezterm
 ''

@@ -8,8 +8,6 @@ let
   inherit (lib.${namespace}) genEnabledMods;
 in
 {
-  imports = [ ./secrets.nix ];
-
   ${namespace} = lib.mkMerge [
     (genEnabledMods (import ./mods.nix))
     {

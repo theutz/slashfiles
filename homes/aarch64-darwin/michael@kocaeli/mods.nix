@@ -13,7 +13,6 @@
   nix-index
   pueue
   shells
-  terminals
   tui
   wezterm
   secrets
