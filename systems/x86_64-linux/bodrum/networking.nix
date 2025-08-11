@@ -1,3 +1,4 @@
+{ namespace, lib, ... }:
 {
   networking.networkmanager.enable = true;
 
@@ -6,4 +7,8 @@
   # networking.firewall.allowedUDPPorts = [ ... ];
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
+
+  ${namespace} = lib.${namespace}.genEnabledMods ''
+    tailscale
+  '';
 }
