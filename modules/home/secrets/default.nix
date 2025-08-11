@@ -1,9 +1,12 @@
 {
   config,
   lib,
+  namespace,
   ...
 }:
 let
+  inherit (lib.${namespace}.mkMod' config ./.) mkMod;
+
   mkSshKeyPair =
     name:
     let
@@ -21,7 +24,7 @@ let
       };
     };
 in
-{
+mkMod {
   sops.age.keyFile = "${config.xdg.configHome}/sops/age/keys.txt";
   sops.secrets = lib.attrsets.mergeAttrsList [
     (mkSshKeyPair "id_ed25519")

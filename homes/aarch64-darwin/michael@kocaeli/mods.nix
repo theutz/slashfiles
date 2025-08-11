@@ -16,4 +16,5 @@
   terminals
   tui
   wezterm
+  secrets
 ''
