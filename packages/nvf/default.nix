@@ -14,5 +14,10 @@
     nil_ls = inputs.nil_ls.outputs.packages.${pkgs.system}.nil;
   };
 
-  modules = lib.filesystem.listFilesRecursive ./modules;
+  modules =
+    with lib.fileset;
+    [ ./default.nix ] # Exceptions
+    |> unions
+    |> difference ./.
+    |> toList;
 }).neovim
