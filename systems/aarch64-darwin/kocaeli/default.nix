@@ -5,17 +5,22 @@
   ...
 }:
 {
-  imports = lib.${namespace}.list-other-files ./.;
-  # "${namespace}" = {
-  #   pam.enable = true;
-  #   pkgs.enable = true;
-  #   secrets.enable = true;
-  # };
+  imports =
+    with lib.fileset;
+    unions [
+      ./default.nix
+      ./mods.nix
+    ]
+    |> difference ./.
+    |> toList;
 
-  ${namespace} = lib.${namespace}.genEnabledMods ''
-    shells
-    tailscale
-  '';
+  # # "${namespace}" = {
+  # #   pam.enable = true;
+  # #   pkgs.enable = true;
+  # #   secrets.enable = true;
+  # # };
+
+  ${namespace} = lib.${namespace}.genEnabledMods (import ./mods.nix);
 
   # environment = {
   #   pathsToLink = [
