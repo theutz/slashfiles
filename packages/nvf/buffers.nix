@@ -1,13 +1,11 @@
 {
   lib,
   config,
-  lib',
   ...
 }:
 let
   inherit (lib.nvim.binds) mkKeymap;
   inherit (lib.lists) optional;
-  inherit (lib') flatConcat;
 
   mkItem =
     key: cmd: desc:
