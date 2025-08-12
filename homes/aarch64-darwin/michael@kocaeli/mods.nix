@@ -11,10 +11,12 @@
   jankyborders
   lazygit
   media
+  neovide
   nix-index
   pueue
   secrets
   shells
+  signal
   slack
   tui
   wezterm

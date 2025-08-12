@@ -24,7 +24,6 @@ in
       home.packages = with pkgs; [
         brightnessctl
         playerctl
-        signal-desktop
       ];
     })
 

@@ -9,9 +9,11 @@
   hyprland
   lazygit
   media
+  neovide
   pueue
   secrets
   shells
+  signal
   slack
   tui
   wezterm
