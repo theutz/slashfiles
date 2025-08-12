@@ -1,4 +1,5 @@
 ''
+  nix
   pam
   shells
   signal
