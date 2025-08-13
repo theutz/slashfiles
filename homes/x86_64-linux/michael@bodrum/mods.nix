@@ -10,6 +10,7 @@
   lazygit
   media
   neovide
+  nushell
   pueue
   secrets
   shells

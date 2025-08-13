@@ -12,6 +12,7 @@
   lazygit
   media
   neovide
+  nushell
   nix-index
   pueue
   secrets
