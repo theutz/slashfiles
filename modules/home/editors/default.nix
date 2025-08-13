@@ -8,34 +8,28 @@
   ...
 }:
 let
-  inherit (lib.${namespace}.mkMod' config ./.) mkOptions mkConfig;
+  inherit (lib.${namespace}.mkMod' config ./.) mkMod;
   nvim = lib.getExe pkgs.${namespace}.nvf;
 in
-{
-  options = mkOptions { };
+mkMod {
+  home.packages = [
+    pkgs.${namespace}.nvf
+    inputs.nvf.packages.${system}.docs-manpages
+  ]
+  ++ (lib.optionals pkgs.stdenv.isLinux [
+    pkgs.wl-clipboard
+  ]);
 
-  config = mkConfig {
-    home.packages =
-      with pkgs;
-      [
-        wl-clipboard
-        inputs.nvf.packages.${system}.docs-manpages
-      ]
-      ++ (with pkgs.${namespace}; [
-        nvf
-      ]);
+  home.sessionVariables = {
+    VISUAL = nvim;
+    EDITOR = nvim;
+    MANPAGER = "${nvim} +Man!";
+    MANWIDTH = 999;
+  };
 
-    home.sessionVariables = {
-      VISUAL = nvim;
-      EDITOR = nvim;
-      MANPAGER = "${nvim} +Man!";
-      MANWIDTH = 999;
-    };
-
-    home.shellAliases = {
-      vi = nvim;
-      vim = nvim;
-      vimdiff = "${nvim} -d";
-    };
+  home.shellAliases = {
+    vi = nvim;
+    vim = nvim;
+    vimdiff = "${nvim} -d";
   };
 }
