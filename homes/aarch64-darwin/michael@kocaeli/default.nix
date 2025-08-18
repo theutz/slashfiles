@@ -8,7 +8,7 @@ let
   inherit (lib.${namespace}) genEnabledMods;
 in
 {
-  ${namespace} = (genEnabledMods (import ./mods.nix));
+  # ${namespace} = (genEnabledMods (import ./mods.nix));
 
   # home = {
   #   sessionPath = [

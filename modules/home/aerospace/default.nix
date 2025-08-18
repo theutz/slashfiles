@@ -17,7 +17,7 @@ mkMod [
     ];
   }
 
-  (lib.mkIf pkgs.stdenv.isDarwin {
+  (lib.mkIf (pkgs.stdenv.isDarwin && cfg.enable) {
     home.activation.reloadAerospace =
       let
         exe = lib.getExe config.programs.aerospace.package;
