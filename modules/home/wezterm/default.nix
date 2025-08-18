@@ -60,6 +60,8 @@ let
       (mkBind [ "leader" ] "n" "ActivateTabRelative" 1)
       (mkBind [ "leader" ] "p" "ActivateTabRelative" (-1))
       (mkBind [ "leader" ] "c" "SpawnTab" "CurrentPaneDomain")
+      (mkBind [ "leader" ] "x" "CloseCurrentPane" { confirm = true; })
+      (mkBind [ "leader" "shift" ] "X" "CloseCurrentTab" { confirm = true; })
       (mkBind [ "leader" ] "v" "SplitPane" {
         direction = "Right";
         size = {

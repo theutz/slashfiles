@@ -1,7 +1,8 @@
 ''
-  cli
+  bat
   crush
-  editors
+  direnv
+  fd
   firefox
   git
   gpg
@@ -9,14 +10,21 @@
   hyprland
   lazygit
   media
+  mise
   neovide
+  nh
+  nix-index
   nushell
   pueue
   secrets
+  ripgrep
   shells
   signal
   slack
+  sops
+  tldr
   tui
   wezterm
   zoom
+  zoxide
 ''

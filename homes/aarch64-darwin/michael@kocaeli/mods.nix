@@ -1,8 +1,9 @@
 ''
   aerospace
-  cli
+  bat
   crush
-  editors
+  direnv
+  fd
   firefox
   git
   gpg
@@ -11,15 +12,21 @@
   jankyborders
   lazygit
   media
+  mise
   neovide
+  nh
   nushell
   nix-index
   pueue
+  ripgrep
   secrets
   shells
   signal
   slack
+  sops
+  tldr
   tui
   wezterm
   zoom
+  zoxide
 ''

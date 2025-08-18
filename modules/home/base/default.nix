@@ -25,8 +25,6 @@ in
     ${namespace} = mkMerge [
       {
         shells.enable = true;
-        editors.enable = true;
-        cli.enable = true;
         tui.enable = true;
       }
 
