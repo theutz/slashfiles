@@ -24,6 +24,17 @@
                 }
               '';
           }
+          {
+            trigger = "unstable";
+            body =
+              # nix
+              ''
+                { channels, ... }:
+                _: _: {
+                  inherit (channels.unstable) ''$0;
+                }
+              '';
+          }
         ];
       };
     };
