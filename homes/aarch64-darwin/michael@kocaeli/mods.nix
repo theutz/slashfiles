@@ -14,15 +14,17 @@
   media
   mise
   neovide
+  nix-index
   nh
   nushell
-  nix-index
+  nvf
   pueue
   ripgrep
   secrets
   shells
   signal
   slack
+  sketchybar
   sops
   tldr
   tui

@@ -15,6 +15,7 @@
   nh
   nix-index
   nushell
+  nvf
   pueue
   secrets
   ripgrep
