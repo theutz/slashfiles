@@ -2,12 +2,22 @@
   config,
   lib,
   namespace,
+  pkgs,
   ...
 }:
 let
   inherit (lib.${namespace}) genEnabledMods;
 in
 {
+  home.packages = with pkgs; [
+    neovim
+    chezmoi
+  ];
+
+  programs.nh = {
+    enable = true;
+  };
+
   # ${namespace} = (genEnabledMods (import ./mods.nix));
 
   # home = {
